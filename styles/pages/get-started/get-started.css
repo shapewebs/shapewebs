@@ -1,0 +1,180 @@
+/* Get Started page styles */
+.get-started-page__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.get-started-page__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 16px; /* py-12 px-4 */
+  box-sizing: border-box; /* Ensure padding doesn't add to total width */
+}
+
+.get-started-page__logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px; /* mb-8 */
+}
+
+.get-started-page__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px; /* Space between logo, calculator/form, and legal text */
+  width: 100%;
+  max-width: 380px; /* max-w-md for the content area */
+  margin: 0 auto; /* Center the content block */
+}
+
+.get-started__container__Q7j3s {
+  width: 100%;
+}
+
+.get-started__header__P8k4q {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-inline: var(--system-padding);
+  margin-inline: auto;
+  max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
+}
+
+.get-started__title__Z5m8r {
+  font-size: 3rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.get-started__subtitle__B3n7p {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  color: rgba(var(--color-text-secondary), 1);
+}
+
+.get-started__content__K9j6q {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-inline: var(--system-padding);
+}
+
+.get-started__steps__L7p3s {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.get-started__step__H5k8q {
+  display: flex;
+  gap: 1.5rem;
+  padding: 2rem;
+  background-color: rgba(var(--color-bg-secondary), 1);
+  border: 1px solid rgba(var(--color-border-primary), 1);
+  border-radius: 12px;
+}
+
+.get-started__step-number__Q3j7q {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background-color: rgba(var(--color-bg-tertiary), 1);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: rgba(var(--color-text-primary), 1);
+  flex-shrink: 0;
+}
+
+.get-started__step-content__P5k8p {
+  flex: 1;
+}
+
+.get-started__step-title__Z7j3s {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: 0.75rem;
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.get-started__step-description__B9k6p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  color: rgba(var(--color-text-secondary), 1);
+}
+
+.get-started__step-action__L3j7q {
+  margin-top: 1rem;
+}
+
+.get-started__section-title__Q3j7q {
+  font-size: 1.75rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 1.5rem;
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.get-started__resources-grid__P5k8p {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .get-started__resources-grid__P5k8p {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.get-started__resource-card__Z7j3s {
+  padding: 1.5rem;
+  background-color: rgba(var(--color-bg-secondary), 1);
+  border: 1px solid rgba(var(--color-border-primary), 1);
+  border-radius: 8px;
+}
+
+.get-started__resource-title__B9k6p {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: 0.75rem;
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.get-started__resource-description__L3j7q {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  color: rgba(var(--color-text-secondary), 1);
+}
+
+.signup-form__logo-container {
+  margin-bottom: 0; /* Reset previous margin */
+}
+
+.get-started-page__legal-text {
+  text-align: center;
+  font-size: 14px; /* text-sm */
+  color: rgba(var(--color-text-tertiary), 1);
+  line-height: 1.5;
+  max-width: 480px; /* Align with content width */
+}
+
+.get-started-page__legal-text a {
+  color: rgba(var(--color-text-primary), 1);
+  text-decoration: none;
+}
+
+.get-started-page__legal-text a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,73 @@
+/* README page styles */
+.readme__container__L7j3s {
+  width: 100%;
+}
+
+.readme__header__P8k4q {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-inline: var(--system-padding);
+  margin-inline: auto;
+  max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
+}
+
+.readme__title__Z5m8r {
+  font-size: 3rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.readme__subtitle__B3n7p {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  color: rgba(var(--color-text-secondary), 1);
+}
+
+.readme__content__K9j6q {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-inline: var(--system-padding);
+}
+
+.readme__section__H7p3s {
+  margin-bottom: 3rem;
+}
+
+.readme__section-title__Q5k8q {
+  font-size: 1.75rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 1.5rem;
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.readme__paragraph__L3j7q {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  color: rgba(var(--color-text-secondary), 1);
+}
+
+.readme__code-block__P5k8p {
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.readme__code__Z7j3s {
+  padding: 1.5rem;
+  background-color: rgba(var(--color-bg-tertiary), 1);
+  border: 1px solid rgba(var(--color-border-secondary), 1);
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.readme__code__Z7j3s code {
+  white-space: pre;
+}

@@ -1,0 +1,173 @@
+/* Calculator Container */
+.website-calculator__container {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px !important; /* Adjusted gap for overall spacing */
+}
+
+/* Question Section */
+.website-calculator__question-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* Space between question and options */
+}
+
+.website-calculator__question {
+  font-size: 1.125rem; /* text-lg */
+  font-weight: var(--font-weight-medium);
+  color: rgba(var(--color-text-primary), 1);
+  text-align: center; /* Centered text */
+  line-height: 1.4;
+}
+
+.website-calculator__question-text {
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-normal);
+  color: rgba(var(--color-text-primary), 1);
+  text-align: center;
+}
+
+/* Options */
+.website-calculator__options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.website-calculator__options .button__root__ZxcvB {
+  width: 100%
+}
+
+.website-calculator__option-label {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border: 1px solid rgba(var(--color-border-tertiary), 1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s var(--ease-out-quad), border-color 0.2s var(--ease-out-quad);
+  background-color: rgba(var(--color-bg-quaternary), 1);
+}
+
+.website-calculator__option-label:hover {
+  background-color: rgba(var(--color-bg-quinary), 1);
+  border-color: var(--color-blue);
+}
+
+.website-calculator__option-label--selected {
+  border-color: var(--color-blue);
+  background-color: rgba(var(--color-blue), 0.1);
+}
+
+.website-calculator__radio-input {
+  /* Hide default radio button */
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.website-calculator__option-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 0.9375rem;
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.website-calculator__option-label-text {
+  font-weight: var(--font-weight-normal);
+}
+
+.website-calculator__option-cost {
+  font-weight: var(--font-weight-medium);
+  color: rgba(var(--color-text-secondary), 1);
+}
+
+.website-calculator__option-button {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Navigation Buttons */
+.website-calculator__navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px; /* Space between buttons */
+  margin-top: 16px; /* Space above navigation buttons */
+}
+
+.website-calculator__navigation .button__root__ZxcvB {
+  flex: 1; /* Allow buttons to take equal width */
+  justify-content: center;
+}
+
+/* Progress Indicator */
+.website-calculator__progress-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 8px; /* Space between dots */
+  margin-top: 24px; /* Space above progress dots */
+}
+
+.website-calculator__progress-dot {
+  width: 10px; /* Width of the dot */
+  height: 10px; /* Height of the dot */
+  border-radius: 50%; /* Rounded dot */
+  background-color: rgba(var(--color-border-secondary), 1); /* Inactive dot color */
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.website-calculator__progress-dot--active {
+  background-color: rgba(var(--color-primary-inverted),0.55); /* Active dot color */
+}
+
+.website-calculator__progress-dot--selected {
+  background-color: rgba(var(--color-brand-primary), 0.1); /* Selected option's dot color */
+}
+
+/* Error Message */
+.website-calculator__error-message {
+  color: var(--color-red);
+  font-size: 0.875rem;
+  text-align: center;
+  margin-top: 8px;
+  padding: 0 16px; /* Add horizontal padding */
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .website-calculator__option-label {
+    padding: 10px 12px;
+  }
+
+  .website-calculator__option-content {
+    font-size: 0.875rem;
+  }
+}
+
+/* Dark mode adjustments */
+.dark .website-calculator__question {
+  color: rgba(var(--color-text-inverted), 1);
+}
+
+.dark .website-calculator__progress-dot {
+  background-color: rgba(var(--color-border-tertiary), 1);
+}
+
+.dark .website-calculator__progress-dot--active {
+  background-color: rgba(var(--color-primary-inverted),0.55);
+}
+
+.signup-form__legal-text {
+    text-align: center;
+    color: rgba(var(--color-text-tertiary), 1);
+    margin-top: 16px !important;
+    font-size: 12px !important;
+    line-height: 1.5;
+}

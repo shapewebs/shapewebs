@@ -1,0 +1,260 @@
+/* Form elements */
+.form__container__H8j3p {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.form__group__K7p2s {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 8px; /* Equivalent to space-y-2 */
+  margin-bottom: 1rem;
+}
+
+.form__label__B9f4k {
+  display: block;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: rgba(var(--color-text-secondary), 1);
+}
+
+.input__wrapper__Z3n7q {
+  padding: 2px;
+  margin: -2px;
+  border-radius: 10px;
+}
+
+.form__input__Z3n7q,
+.form__textarea__Q6p3f,
+.form__select__P9j2k {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: var(--font-size-regular);
+  line-height: 1.5;
+  color: rgba(var(--color-text-primary), 1);
+  background-color: rgba(var(--color-bg-secondary), 1);
+  border: 1px solid rgba(var(--color-border-secondary), 1);
+  border-radius: 8px;
+  transition: border-color 0.2s var(--ease-out-quad), box-shadow 0.2s var(--ease-out-quad);
+  height: 40px;
+}
+
+.form__input__Z3n7q:focus,
+.form__textarea__Q6p3f:focus,
+.form__select__P9j2k:focus {
+  outline: none;
+  border-color: var(--color-blue);
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+.form__textarea__Q6p3f {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form__select__P9j2k {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6L8 10L12 6' stroke='%2386848D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 16px;
+  padding-right: 2.5rem;
+}
+
+.form__error__L5j8p {
+  margin-top: 0.25rem;
+  font-size: var(--font-size-small);
+  color: var(--color-red);
+}
+
+.form__helper__H2k9s {
+  margin-top: 0.25rem;
+  font-size: var(--font-size-small);
+  color: rgba(var(--color-text-tertiary), 1);
+}
+
+.form__checkbox__B4p7z,
+.form__radio__Z8j3l {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.form__checkbox-input__K9d2p,
+.form__radio-input__Q3n7s {
+  margin-right: 0.5rem;
+}
+
+.form__checkbox-label__P2j8k,
+.form__radio-label__T7p3s {
+  font-size: var(--font-size-small);
+  color: rgba(var(--color-text-secondary), 1);
+}
+
+/* Signup Form Specific Styles */
+.signup-form__wrapper {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.signup-form__logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px; /* Adjust as needed */
+}
+
+.signup-form__logo {
+  width: 80px; /* Adjust size as needed */
+  height: 80px; /* Adjust size as needed */
+  color: var(--color-brand-primary); /* Set color if the SVG uses currentColor */
+}
+
+.signup-form__heading {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 24px; /* Equivalent to text-xl */
+  font-weight: 700; /* Equivalent to font-bold */
+  color: rgba(var(--color-text-primary), 1); /* Equivalent to text-neutral-800 */
+}
+
+.signup-form__form {
+  margin-top: 32px; /* Equivalent to my-8, taking form-specific top margin */
+}
+
+.signup-form__input-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Equivalent to space-y-2 */
+  margin-bottom: 16px; /* Equivalent to mb-4 */
+}
+
+@media (min-width: 768px) {
+  /* Equivalent to md: */
+  .signup-form__input-row {
+    flex-direction: row;
+    gap: 16px; /* Equivalent to md:space-x-2 */
+    margin-bottom: 0; /* Reset for md */
+  }
+}
+
+.signup-form__label-input-container {
+  margin-bottom: 16px; /* Equivalent to mb-4 */
+}
+
+.signup-form__legal-text {
+  text-align: center;
+  font-size: 14px; /* Equivalent to text-sm */
+  color: rgba(var(--color-text-tertiary), 1); /* Equivalent to color-text-secondary, but specified as color-text-primary */
+  margin-top: 32px; /* Equivalent to my-8 */
+  line-height: 1.5; /* Added for readability */
+}
+
+.signup-form__legal-text a {
+  color: rgba(var(--color-text-primary), 1); /* Link color matches primary text */
+  text-decoration: none; /* Remove underline */
+}
+
+.signup-form__legal-text a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
+/* Input Component Specific Styles */
+.input__wrapper {
+  position: relative;
+  border-radius: 8px; /* rounded-lg */
+  padding: 2px; /* p-[2px] */
+  transition: all 0.3s ease; /* duration-300 */
+}
+
+.input__wrapper:hover {
+  /* This part is dynamically handled by useMotionTemplate in the JS component */
+  /* Replicate the motion effect with static CSS for visual reference if needed */
+}
+
+.input__root {
+  box-shadow: 0px 2px 3px -1px rgba(0, 0, 0, 0.1), 0px 1px 0px 0px rgba(25, 28, 33, 0.02), 0px 0px 0px 1px
+    rgba(25, 28, 33, 0.08);
+  display: flex;
+  height: 40px; /* h-10 */
+  width: 100%; /* w-full */
+  border-radius: 6px; /* rounded-md */
+  border: none; /* border-none */
+  background-color: rgba(var(--color-background-secondary), 1); /* bg-gray-50 */
+  padding: 8px 12px; /* px-3 py-2 */
+  font-size: 14px; /* text-sm */
+  color: rgba(var(--color-text-primary), 1); /* text-black */
+  transition: all 0.4s ease; /* duration-400 */
+  outline: none; /* focus-visible:outline-none */
+}
+
+.input__root::placeholder {
+  color: rgba(var(--color-text-secondary), 1); /* placeholder:text-neutral-400 */
+}
+
+.input__root::-webkit-file-upload-button {
+  border: 0;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.input__root:focus-visible {
+  box-shadow: 0 0 0 2px rgba(var(--color-brand-primary), 0.6); /* focus-visible:ring-[2px] focus-visible:ring-neutral-400 */
+}
+
+.input__root:disabled {
+  cursor: not-allowed; /* disabled:cursor-not-allowed */
+  opacity: 0.5; /* disabled:opacity-50 */
+}
+
+.dark .input__root {
+  background-color: rgba(var(--color-background-tertiary), 1); /* dark:bg-zinc-800 */
+  color: rgba(var(--color-text-inverted), 1); /* dark:text-white */
+  box-shadow: 0px 0px 1px 1px rgba(64, 64, 64, 1); /* dark:shadow-[0px_0px_1px_1px_#404040] */
+}
+
+.dark .input__root::placeholder {
+  color: rgba(var(--color-text-secondary-dark), 1); /* dark:placeholder-text-neutral-600 */
+}
+
+.dark .input__root:focus-visible {
+  box-shadow: 0 0 0 2px rgba(var(--color-brand-accent), 0.6); /* dark:focus-visible:ring-neutral-600 */
+}
+
+.dark .form__input__Z3n7q,
+.dark .form__textarea__Q6p3f,
+.dark .dark .form__select__P9j2k {
+  background-color: rgba(var(--color-bg-tertiary), 1) !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px rgba(var(--color-bg-secondary), 1) inset !important;
+  -webkit-text-fill-color: inherit !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px rgba(var(--color-bg-tertiary), 1) inset !important;
+  -webkit-text-fill-color: inherit !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+.signup-form__submission-message {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+}
+
+.signup-form__submission-message--success {
+  color: var(--color-green);
+}
+
+.signup-form__submission-message--error {
+  color: var(--color-red);
+}

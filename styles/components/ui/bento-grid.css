@@ -1,0 +1,84 @@
+.bento-grid__container {
+  margin: 0 auto;
+  display: grid;
+  max-width: 80rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .bento-grid__container {
+    grid-auto-rows: 18rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+  }
+}
+
+.bento-grid-item__root {
+  grid-row: span 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(var(--color-border-primary), 1);
+  background-color: rgba(var(--color-bg-secondary), 1);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-grid-item__root::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(var(--color-blue), 0.05) 0%, rgba(var(--color-purple), 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dark .bento-grid-item__root {
+  border-color: rgba(var(--color-border-secondary), 1);
+  background-color: rgba(var(--color-bg-tertiary), 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+
+.bento-grid-item__content {
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+
+.bento-grid-item__title {
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-family-sans);
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: rgba(var(--color-text-primary), 1);
+  line-height: 1.4;
+}
+
+.dark .bento-grid-item__title {
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.bento-grid-item__description {
+  font-family: var(--font-family-sans);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: rgba(var(--color-text-secondary), 1);
+  line-height: 1.5;
+}
+
+.dark .bento-grid-item__description {
+  color: rgba(var(--color-text-secondary), 1);
+}

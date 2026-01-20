@@ -1,0 +1,181 @@
+/* Contact page styles */
+.contact__container__Q7j3s {
+  width: 100%;
+}
+
+.contact__header__P8k4q {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-inline: var(--system-padding);
+  margin-inline: auto;
+  max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
+}
+
+.contact__title__Z5m8r {
+  font-size: 3rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.contact__subtitle__B3n7p {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  color: rgba(var(--color-text-secondary), 1);
+}
+
+.contact__content__K9j6q {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-inline: var(--system-padding);
+}
+
+.contact__grid__L7p3s {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .contact__grid__L7p3s {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.contact__section-title__Q3j7q {
+  font-size: 2.5rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 0.5rem;
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.contact__info-container__H5k8q {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.contact__info-item__M8k5p {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.contact__checkmark__N9j6q {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgba(var(--color-text-primary), 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: rgba(var(--color-bg-primary), 1);
+}
+
+.contact__info-item__M8k5p h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: var(--font-weight-regular);
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.contact__form-container__H5k8q {
+  padding: 1.5rem;
+  background-color: rgba(var(--color-bg-secondary), 1);
+  border: 1px solid rgba(var(--color-border-primary), 1);
+  border-radius: 12px;
+}
+
+.contact__form__P5k8p {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact__form-group__Z7j3s {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.contact__form-label__B9k6p {
+  display: block;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: rgba(var(--color-text-secondary), 1);
+}
+
+.contact__form-input__L3j7q,
+.contact__form-textarea__K5j8q {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: var(--font-size-regular);
+  line-height: 1.5;
+  color: rgba(var(--color-text-primary), 1);
+  background-color: rgba(var(--color-bg-secondary), 1);
+  border: 1px solid rgba(var(--color-border-secondary), 1);
+  border-radius: 8px;
+  transition: border-color 0.2s var(--ease-out-quad), box-shadow 0.2s var(--ease-out-quad);
+  height: 40px;
+}
+
+.contact__form-input__L3j7q:focus,
+.contact__form-textarea__K5j8q:focus {
+  outline: none;
+  border-color: var(--color-blue);
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+.contact__form-textarea__K5j8q {
+  resize: vertical;
+  min-height: 120px;
+  height: auto;
+}
+
+.contact__form-input__L3j7q::placeholder,
+.contact__form-textarea__K5j8q::placeholder {
+  color: rgba(var(--color-text-secondary), 1);
+}
+
+.dark .contact__form-input__L3j7q,
+.dark .contact__form-textarea__K5j8q {
+  background-color: rgba(var(--color-bg-tertiary), 1) !important;
+}
+
+.contact__form-submit__Q7p3s {
+  margin-top: 1rem;
+}
+
+.contact__info-group__P5k8p {
+  margin-bottom: 4px;
+}
+
+.contact__info-title__Z7j3s {
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: 0.5rem;
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.contact__info-text__B9k6p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(var(--color-text-secondary), 1);
+}
+
+.contact__info-link__L3j7q {
+  color: rgba(var(--color-link-primary), 1);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact__info-link__L3j7q:hover {
+  color: rgba(var(--color-link-hover), 1);
+  text-decoration: underline;
+}
