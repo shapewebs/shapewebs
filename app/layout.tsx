@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   },
   description: "ShapeWebs builds magical, high-performance web applications using modern technologies for growing businesses.",
   icons: {
-    icon: "public/favicon.svg",   // modern browsers
-    apple: "public/favicon.png",  // iOS devices
+    icon: "/favicon.svg",   // modern browsers
+    apple: "/favicon.png",  // iOS devices
   },
     generator: 'v0.app'
 }
