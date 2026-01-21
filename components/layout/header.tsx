@@ -374,9 +374,11 @@ export function Header() {
               aria-expanded={mobileMenuOpen}
               aria-label="Toggle menu"
             >
+            <div className="header__hamburger__content__Q7p3s">
               <span className="header__hamburger-line__Z9j4p"></span>
               <span className="header__hamburger-line__Z9j4p"></span>
               <span className="header__hamburger-line__Z9j4p"></span>
+              </div>
             </button>
           </div>
         </div>

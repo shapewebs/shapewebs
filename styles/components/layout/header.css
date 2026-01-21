@@ -3,15 +3,24 @@
 /* Hamburger menu */
 .header__hamburger__Q7p3s {
   display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 16px;
-  height: 12px;
   background: transparent;
   border: none;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  height: 32px;
+  width: 32px;
   padding: 0;
   z-index: 10;
+}
+
+.header__hamburger__content__Q7p3s {
+  width: 16px;
+  height: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .header__hamburger-line__Z9j4p {

@@ -373,6 +373,14 @@
     padding-top: 8px;
   }
 
+  .hero__titleWrapper__Q7p3s {
+    font-size: 40px;
+  }
+
+  .hero__subtitleText__Z5j8q {
+    font-size: 17px;
+  }
+
   .hero__browser__K8j4p {
     transform: scale(.7) rotateX(47deg) rotateY(21deg) rotate(330deg);
     margin-top: 300px;
