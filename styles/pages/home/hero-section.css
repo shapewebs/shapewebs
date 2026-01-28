@@ -173,6 +173,7 @@
   justify-content: space-between;
   transform-style: preserve-3d;
   background-color: rgba(var(--color-bg-secondary), 0.7);
+  border-top-left-radius: 7px;
 }
 
 .hero__sidebarTop__H5k8q {
