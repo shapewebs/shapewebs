@@ -9,10 +9,10 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: {
-    default: "ShapeWebs | Introduce the magic back into software",
-    template: "%s | ShapeWebs",
+    default: "Shapewebs | Introduce the magic back into software",
+    template: "%s | Shapewebs",
   },
-  description: "ShapeWebs builds magical, high-performance web applications using modern technologies for growing businesses.",
+  description: "Shapewebs builds magical, high-performance web applications using modern technologies for growing businesses.",
   icons: {
     icon: "/favicon.svg",   // modern browsers
     apple: "/favicon.png",  // iOS devices
