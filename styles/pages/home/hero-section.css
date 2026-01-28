@@ -158,8 +158,6 @@
   transform-origin: top left;
   backface-visibility: hidden;
   transform-style: preserve-3d;
-  mask-image: linear-gradient(to right,var(--mask-on)80%,var(--mask-off)calc(100% - 3%));
-  -webkit-mask-image: linear-gradient(to right,var(--mask-on)80%,var(--mask-off)calc(100% - 3%));
 }
 
 .hero__sidebar__Q7p3s {
