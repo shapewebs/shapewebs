@@ -201,7 +201,7 @@ export function Header() {
         },
         {
           label: "README",
-          description: "The story of ShapeWebs",
+          description: "The story of Shapewebs",
           href: "/readme",
         },
       ],

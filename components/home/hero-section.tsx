@@ -157,7 +157,7 @@ export function HeroSection() {
           <h1>
             <span className="hero__title__B9j6p">
               <span className="hero__titleWrapper__Q7p3s">
-                {["ShapeWebs", "introduce", "the", "magic", "back", "into", "software"].map((word, i) => (
+                {["Shapewebs", "introduce", "the", "magic", "back", "into", "software"].map((word, i) => (
                   <motion.span
                     key={i}
                     className="hero__titleSpan__H5k8q"

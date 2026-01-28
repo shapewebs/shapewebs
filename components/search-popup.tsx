@@ -35,7 +35,7 @@ const pages: SearchItem[] = [
     path: "/",
     type: "page",
     content:
-      "Welcome to ShapeWebs. Our platform helps you create magical web solutions. Discover the platform where magical web solutions are developed. We deliver custom solutions, creating the perfect tool for your business. Professional mastery of programming languages and development tools for both client-side and server-side.",
+      "Welcome to Shapewebs. Our platform helps you create magical web solutions. Discover the platform where magical web solutions are developed. We deliver custom solutions, creating the perfect tool for your business. Professional mastery of programming languages and development tools for both client-side and server-side.",
   },
   {
     id: "page2",

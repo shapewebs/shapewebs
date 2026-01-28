@@ -98,7 +98,7 @@ const items = [
     description: "Driving digital transformation for enterprises.",
     header: (
       <TestimonialCard
-        quote="ShapeWebs transformed our workflow. Highly recommend!"
+        quote="Shapewebs transformed our workflow. Highly recommend!"
         author="Jane Doe"
         company="Innovate Solutions"
       />

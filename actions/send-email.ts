@@ -22,7 +22,7 @@ export async function sendWebsiteQuoteEmail(userInfo: UserInfo, calculatorResult
   // await resend.emails.send({
   //   from: 'onboarding@resend.dev',
   //   to: userInfo.email,
-  //   subject: 'Your Website Design Quote from ShapeWebs',
+  //   subject: 'Your Website Design Quote from Shapewebs',
   //   html: `
   //     <p>Hello ${userInfo.firstName},</p>
   //     <p>Thank you for using our website price calculator. Here's a summary of your estimated quote:</p>
@@ -34,7 +34,7 @@ export async function sendWebsiteQuoteEmail(userInfo: UserInfo, calculatorResult
   //     </ul>
   //     <p>We will be in touch shortly to discuss your project in more detail.</p>
   //     <p>Best regards,</p>
-  //     <p>The ShapeWebs Team</p>
+  //     <p>The Shapewebs Team</p>
   //   `,
   // });
 
