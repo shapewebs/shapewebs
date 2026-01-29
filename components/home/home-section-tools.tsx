@@ -7,10 +7,10 @@ export function HomeSectionTools() {
     <section className="section__8NC91">
       <div className="section__content__0KLF3">
         <span className="hide-tablet">
-          <p className="typography__body__K4n7p">Tools at the leading edge of web development. Trusted by leading companies including OpenAI, Netflix, and Nike.</p>
+          <p className="typography__body__K4n7p" style={{margin: "0";}}>Tools at the leading edge of web development. Trusted by leading companies including OpenAI, Netflix, and Nike.</p>
         </span>
         <span className="show-tablet">
-          <p className="typography__body__K4n7p">Tools at the leading edge of web development. Trusted by leading companies including OpenAI, Netflix, and Nike.</p>
+          <p className="typography__body__K4n7p" style={{margin: "0";}}>Tools at the leading edge of web development. Trusted by leading companies including OpenAI, Netflix, and Nike.</p>
         </span>
         <div className="HomeSectionTools__container__Z9k4p">
           <div className="HomeSectionTools__item__L7j3s">
