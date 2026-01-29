@@ -21,14 +21,6 @@
   max-width: 750px;
 }
 
-.hero__title__B9j6p {
-  display: block;
-  text-wrap: balance;
-  text-align: start;
-  font-size: 4rem;
-  line-height: 1.2;
-}
-
 .hero__titleWrapper__Q7p3s {
   display: inline-block;
   vertical-align: top;
@@ -348,10 +340,6 @@
   .hero__text__P5k8q {
     align-items: center;
     gap: 32px;
-  }
-
-  .hero__title__B9j6p {
-    text-align: center;
   }
 
   .hero__actions__Q6j9s {
