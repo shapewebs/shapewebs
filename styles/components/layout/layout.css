@@ -71,3 +71,19 @@
     margin-left: calc(var(--width, 0px) - 1px);
     display: block;
 }
+
+.hide-mobile {
+  @media (max-width: 640px) {
+    [data-hide=mobile], .hide-mobile {
+      display: none !important;
+    }
+  }
+}
+
+.show-mobile {
+  @media (min-width: 641px) {
+    [data-show=mobile], .show-mobile {
+      display: none !important;
+    }
+  }
+}
