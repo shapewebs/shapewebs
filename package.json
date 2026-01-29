@@ -2,12 +2,6 @@
   "name": "my-v0-project",
   "version": "0.1.0",
   "private": true,
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@vercel/speed-insights",
-      "sharp"
-    ]
-  },
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -77,5 +71,11 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@vercel/speed-insights",
+      "sharp"
+    ]
   }
 }
