@@ -5,7 +5,7 @@ import "@/styles/pages/home/home-section-tools.css"
 export function HomeSectionTools() {
   return (
     <div className="HomeSectionTools__container__Z9k4p">
-            <span className="typography__subtitleText__Z5j8q">
+        <span className="typography__subtitleText__Z5j8q">
           Using proven modern technologies to build fast, resilient websites
         </span>
       </span>
