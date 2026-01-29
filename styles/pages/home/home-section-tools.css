@@ -90,11 +90,6 @@
   display: contents;
 }
 
-/* Pause on hover (works mainly on desktop) */
-.HomeSectionTools__container__Z9k4p:hover .logos-slide {
-  animation-play-state: paused;
-}
-
 /* MOBILE: convert container to the carousel frame at <=640px */
 @media (max-width: 640px) {
   .HomeSectionTools__container__Z9k4p {
