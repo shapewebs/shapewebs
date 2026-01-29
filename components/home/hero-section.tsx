@@ -9,48 +9,36 @@ export function HeroSection() {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const controls = useAnimation()
-  const heroImageRefs = useRef<{
-    overviewNav: HTMLDivElement | null
-    firstNavItem: HTMLDivElement | null
-    navItems: (HTMLDivElement | null)[]
-    page: HTMLDivElement | null
-  }>({ 
-    overviewNav: null,
-    firstNavItem: null,
-    navItems: [],
-    page: null,
+
+  // Decide immediately on first client render (no flash)
+  const [shouldAnimate] = useState(() => {
+    if (typeof window === "undefined") return true
+    return sessionStorage.getItem("heroAnimated") !== "1"
   })
 
-  // Define the image URLs
-  const darkThemeUrl = "https://i.ibb.co/8gnVqXb3/hero-image-sw-dark.png"
-  const lightThemeUrl = "https://i.ibb.co/5X8mW9nS/hero-image-sw-light.png"
+  useEffect(() => {
+    setMounted(true)
 
-  // Set mounted state and preload images
-useEffect(() => {
-  setMounted(true)
+    // preload
+    const darkImage = new Image()
+    darkImage.src = "https://i.ibb.co/8gnVqXb3/hero-image-sw-dark.png"
+    darkImage.crossOrigin = "anonymous"
 
-  const darkImage = new Image()
-  darkImage.src = darkThemeUrl
-  darkImage.crossOrigin = "anonymous"
+    const lightImage = new Image()
+    lightImage.src = "https://i.ibb.co/5X8mW9nS/hero-image-sw-light.png"
+    lightImage.crossOrigin = "anonymous"
 
-  const lightImage = new Image()
-  lightImage.src = lightThemeUrl
-  lightImage.crossOrigin = "anonymous"
+    if (shouldAnimate) {
+      controls.start("visible")
+      sessionStorage.setItem("heroAnimated", "1")
+    } else {
+      // ensure we're visible immediately (and stay there)
+      controls.set("visible")
+    }
+  }, [controls, shouldAnimate])
 
-  const key = "heroAnimated"
-  const hasAnimated = sessionStorage.getItem(key) === "1"
-
-  if (hasAnimated) {
-    controls.set("visible") // jump to end state
-  } else {
-    controls.start("visible")
-    sessionStorage.setItem(key, "1")
-  }
-}, [controls])
-  
-  // Determine which theme to show - default to light if not mounted yet
   const currentTheme = mounted ? resolvedTheme : "light"
-
+  
   // Animation variants
   const titleVariants: Variants = {
     hidden: {
