@@ -50,7 +50,7 @@
   margin-bottom: 2rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 641px) {
   .career__benefits-grid__L3j7q {
     grid-template-columns: repeat(2, 1fr);
   }
