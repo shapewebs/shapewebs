@@ -126,7 +126,7 @@ html[data-theme="dark"] .customers__subtitle {
   gap: 2rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 641px) {
   .customers__logos-grid__Q5k8q {
     grid-template-columns: repeat(3, 1fr);
   }

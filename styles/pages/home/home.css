@@ -1,8 +1,3 @@
-/* Home page styles */
-.home__container__B8j4p {
-  width: 100%;
-}
-
 /* Features section */
 .home__features__H7p4s {
   margin-bottom: 3rem;
@@ -34,7 +29,7 @@
   gap: 2rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 641px) {
   .home__features-grid__P3j7q {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -118,23 +113,8 @@
   color: rgba(var(--color-text-secondary), 1);
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .hero__root__Z9k4p h1 {
-    max-width: unset;
-  }
-
-  .hero__subtitle__K3n7p {
-    max-width: unset;
-  }
-}
 
 @media (max-width: 640px) {
-  .hero__text__P5k8q {
-    align-items: center;
-    gap: 32px;
-  }
-
   .hero__actions__Q6j9s {
     flex-direction: column;
     gap: 16px;

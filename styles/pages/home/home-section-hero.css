@@ -1,32 +1,19 @@
-/* Hero section styles */
-.hero__root__Z9k4p {
-  position: relative;
-  padding-inline: var(--system-padding);
-  margin-inline: auto;
-  max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
+.section__B8j4p {
+  width: 100%;
 }
 
-.hero__content__L7j3s {
+.section__content__L7i39 {
   max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
   padding-inline: var(--system-padding);
   margin-inline: auto;
   position: relative; 
 }
 
-.hero__text__P5k8q {
+.Flex-module__P5k8q {
   display: flex;
   flex-direction: column;
-  gap: 24px;
   width: 100%;
   max-width: 750px;
-}
-
-.hero__title__B9j6p {
-  display: block;
-  text-wrap: balance;
-  text-align: start;
-  font-size: 4rem;
-  line-height: 1.2;
 }
 
 .hero__titleWrapper__Q7p3s {
@@ -42,9 +29,6 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 4rem;
-  font-weight: var(--font-weight-medium);
-  line-height: 1.2;
 }
 
 .hero__titleSpan__H5k8q {
@@ -58,18 +42,8 @@
 }
 
 .hero__subtitle__K3n7p {
-  font-size: 19px;
   line-height: 27px;
-  max-width: 70%;
-}
-
-.hero__subtitleText__Z5j8q {
-  display: inline-block;
-  vertical-align: top;
-  text-decoration: inherit;
-  text-wrap: balance;
-  font-weight: var(--font-weight-normal);
-  color: rgba(var(--color-text-secondary), 1);
+  max-width: 50%;
 }
 
 .hero__actions__Q6j9s {
@@ -120,7 +94,7 @@
 .hero__image__L5k8q::before {
   content: "";
   display: block;
-  margin-top: -180px;
+  margin-top: -160px;
 }
 
 .hero__imageContainer__P7j3s {
@@ -344,41 +318,24 @@
 
 /* Responsive styles */
 @media (max-width: 768px) {
-  .hero__root__Z9k4p h1 {
-    max-width: unset;
+  .hero__subtitle__K3n7p {
+    max-width: 80%;
+    text-align: center;
   }
 
-  .hero__subtitle__K3n7p {
-    max-width: 100%;
+    .Flex-module__P5k8q {
+    align-items: center;
   }
 }
 
 @media (max-width: 640px) {
-  .hero__text__P5k8q {
-    align-items: center;
-    gap: 32px;
-  }
-
-  .hero__title__B9j6p,
-  .hero__subtitleText__Z5j8q {
-    text-align: center;
+  .hero__image__L5k8q::before {
+    margin-top: -200px;
   }
 
   .hero__actions__Q6j9s {
     flex-direction: column;
     gap: 16px;
-  }
-
-  .hero__root__Z9k4p {
-    padding-top: 8px;
-  }
-
-  .hero__titleWrapper__Q7p3s {
-    font-size: 40px;
-  }
-
-  .hero__subtitleText__Z5j8q {
-    font-size: 17px;
   }
 
   .hero__browser__K8j4p {

@@ -95,7 +95,7 @@
   gap: 1.5rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 641px) {
   .docs__articles__Q3j7q {
     grid-template-columns: repeat(2, 1fr);
   }

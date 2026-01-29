@@ -47,6 +47,21 @@
   color: rgba(var(--color-text-primary), 1);
 }
 
+.typography__subtitle__R6m2x {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-light);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  color: rgba(var(--color-text-tertiary), 1);
+}
+
+.typography__emphasize__M9J2o {
+  font-size: var(--font-size-title3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.33;
+  color: rgba(var(--color-text-tertiary), 1);
+}
+
 .typography__body__K4n7p {
   font-size: var(--font-size-regular);
   font-weight: var(--font-weight-normal);
@@ -78,4 +93,20 @@
 .typography__link__B7s3m:hover {
   color: rgba(var(--color-link-hover), 1);
   text-decoration: underline;
+}
+
+.bitCO {
+  color: rgba(var(--color-text-secondary), 1);
+}
+
+@media (max-width: 768px) {
+  .typography__heading1__T3m8s,
+  .typography__heading2__B5x9t,
+  .typography__heading3__V1c8r,
+  .typography__heading4__Z7p4s,
+  .typography__heading5__J8d3k,
+  .typography__heading6__H5j9s,
+  .typography__subtitle__R6m2x {
+    text-align: center;
+  }
 }

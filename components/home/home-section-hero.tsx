@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from "react"
 import { useTheme } from "next-themes"
 import { motion, useAnimation, type Variants } from "framer-motion"
-import "@/styles/pages/home/hero-section.css"
+import "@/styles/pages/home/home-section-hero.css"
 
-export function HeroSection() {
+export function HomeSectionHero() {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const controls = useAnimation()
@@ -70,7 +70,7 @@ export function HeroSection() {
       filter: "blur(10px)",
     },
     visible: {
-      opacity: 0.8,
+      opacity: 1,
       y: 0,
       filter: "blur(0px)",
       transition: {
@@ -152,37 +152,70 @@ export function HeroSection() {
   }
 
   return (
-      <div className="hero__content__L7j3s">
-        <div className="hero__text__P5k8q">
-          <h1>
-            <span className="hero__title__B9j6p">
-              <span className="hero__titleWrapper__Q7p3s">
-                {["Shapewebs", "introduce", "the", "magic", "back", "into", "software"].map((word, i) => (
-                  <motion.span
-                    key={i}
-                    className="hero__titleSpan__H5k8q"
-                    custom={i}
-                    initial="hidden"
-                    animate={controls}
-                    variants={titleVariants}
-                  >
-                    {word}
-                  </motion.span>
-                ))}
-              </span>
+    <section className="section__B8j4p">
+      <div className="section__content__L7i39">
+        <div className="Flex-module__P5k8q">
+          <h1 
+            className="hide-mobile typography__heading1__T3m8s" 
+            style={{margin: 0}}>
+            <span className="hero__titleWrapper__Q7p3s">
+              {["Shapewebs", "introduce", "the", "magic", "back", "into", "software"].map((word, i) => (
+                <motion.span
+                  key={i}
+                  className="hero__titleSpan__H5k8q"
+                  custom={i}
+                  initial="hidden"
+                  animate={controls}
+                  variants={titleVariants}
+                >
+                  {word}
+                </motion.span>
+              ))}
             </span>
           </h1>
-          <h2 className="hero__subtitle__K3n7p">
-            <motion.span
-              className="hero__subtitleText__Z5j8q"
-              initial="hidden"
-              animate={controls}
-              variants={subtitleVariants}
-            >
-              Discover the platform where magical web solutions are developed. We deliver custom solutions, creating the
-              perfect tool for your business.
-            </motion.span>
-          </h2>
+          <h1 
+            className="show-mobile typography__heading1__T3m8s" 
+            style={{margin: 0}}>
+            <span className="hero__titleWrapper__Q7p3s">
+              {["Bring", "magic", "to", "your", "software"].map((word, i) => (
+                <motion.span
+                  key={i}
+                  className="hero__titleSpan__H5k8q"
+                  custom={i}
+                  initial="hidden"
+                  animate={controls}
+                  variants={titleVariants}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </span>
+          </h1>
+          <div
+            className="Spacer-module__root__NM019"
+            style={{ '--height': '20px' }}
+          >
+          </div>
+          <motion.p 
+            className="hero__subtitle__K3n7p"
+            initial="hidden"
+            animate={controls}
+            variants={subtitleVariants}
+           >
+            <span className="typography__subtitle__R6m2x">
+              Beautiful, fast websites built with intention. Designed to feel alive, intuitive, and human.
+            </span>
+          </motion.p>
+          <div
+            className="Spacer-module__root__NM019 hide-mobile"
+            style={{ '--height': '28px' }}
+          >
+          </div>
+          <div
+            className="Spacer-module__root__NM019 show-mobile"
+            style={{ '--height': '24px' }}
+          >
+          </div>
           <div className="hero__actions__Q6j9s">
             <motion.a
               href="/sign-up/"
@@ -192,7 +225,7 @@ export function HeroSection() {
               animate={controls}
               variants={buttonVariants}
             >
-              <span>Calculate website price</span>
+              <span>Calculate price</span>
             </motion.a>
             <motion.a
               href="/contact/support/"
@@ -478,5 +511,6 @@ export function HeroSection() {
           </div>
         </div>
       </div>
+    </section>
   )
 }
