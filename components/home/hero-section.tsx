@@ -172,7 +172,7 @@ export function HeroSection() {
               </span>
             </span>
           </h1>
-          <h2 className="hero__subtitle__K3n7p">
+          <p className="hero__subtitle__K3n7p">
             <motion.span
               className="hero__subtitleText__Z5j8q"
               initial="hidden"
@@ -186,7 +186,7 @@ export function HeroSection() {
               Discover the platform where magical web solutions are developed. We deliver custom solutions, creating the
               perfect tool for your business.
             </motion.span>
-          </h2>
+          </p>
           <div className="hero__actions__Q6j9s">
             <motion.a
               href="/sign-up/"
