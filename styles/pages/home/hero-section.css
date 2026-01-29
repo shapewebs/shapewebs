@@ -359,8 +359,7 @@
     gap: 32px;
   }
 
-  .hero__title__B9j6p,
-  .hero__subtitleText__Z5j8q {
+  .hero__title__B9j6p {
     text-align: center;
   }
 
@@ -375,10 +374,6 @@
 
   .hero__titleWrapper__Q7p3s {
     font-size: 40px;
-  }
-
-  .hero__subtitleText__Z5j8q {
-    font-size: 17px;
   }
 
   .hero__browser__K8j4p {
