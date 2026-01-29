@@ -192,7 +192,11 @@ export function HomeSectionHero() {
           </h1>
           <div
             className="Spacer-module__root__NM019 hide-mobile"
-            style={{ '--height': '30px' }}
+            style={{ '--height': '20px' }}
+          >
+          <div
+            className="Spacer-module__root__NM019 show-mobile"
+            style={{ '--height': '20px' }}
           >
           </div>
           <motion.p 
@@ -208,6 +212,10 @@ export function HomeSectionHero() {
           <div
             className="Spacer-module__root__NM019 hide-mobile"
             style={{ '--height': '30px' }}
+          >
+          <div
+            className="Spacer-module__root__NM019 show-mobile"
+            style={{ '--height': '24px' }}
           >
           </div>
           <div className="hero__actions__Q6j9s">
