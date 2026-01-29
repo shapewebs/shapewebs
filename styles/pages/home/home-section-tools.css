@@ -113,7 +113,7 @@
     display: inline-flex;
     align-items: center;
     flex-wrap: nowrap;
-    animation: 15s slide infinite linear; /* mobile speed */
+    animation: 20s slide infinite linear; /* mobile speed */
   }
 
   .HomeSectionTools__item__L7j3s {
