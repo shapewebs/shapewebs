@@ -4,6 +4,12 @@ import "@/styles/pages/home/tech-showcase.css"
 
 export function TechShowcase() {
   return (
+          <div className="typography__subtitle__K3n7p">
+        <span className="typography__subtitleText__Z5j8q">
+            Using proven modern technologies to build fast, resilient websites
+          </span>
+        </span>
+      </div>
     <div className="tech-showcase__container__Z9k4p">
       <div className="tech-showcase__item__L7j3s">
         <span className="tech-showcase__icon__P5k8q">
