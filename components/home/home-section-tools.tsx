@@ -51,7 +51,7 @@ export function HomeSectionTools() {
     <section className="section__8NC91">
       <div className="section__content__0KLF3">
         <span className="hide-tablet">
-          <p className="typography__body__K4n7p" style={{ margin: 0, textAlign: "center" }}>
+          <p className="typography__emphasize__M9J2o" style={{ margin: 0, textAlign: "center" }}>
             Tools at the leading edge of web development. Trusted by leading companies including OpenAI, Netflix, and Nike.
           </p>
         </span>
