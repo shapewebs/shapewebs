@@ -4,8 +4,8 @@ import "@/styles/pages/home/home-section-tools.css"
 
 export function HomeSectionTools() {
   return (
-    <section class="section__8NC91">
-      <div class="section__content__0KLF3">
+    <section className="section__8NC91">
+      <div className="section__content__0KLF3">
         <div className="HomeSectionTools__container__Z9k4p">
           <div className="HomeSectionTools__item__L7j3s">
             <span className="HomeSectionTools__icon__P5k8q">
