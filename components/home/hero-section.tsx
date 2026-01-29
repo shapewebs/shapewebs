@@ -172,7 +172,7 @@ export function HeroSection() {
               ))}
             </span>
           </h1>
-          <div className="Spacer-module__root__NM019" style="--height: 20px;"></div>
+          <div className="Spacer-module__root__NM019" style={{--height: 20px;}}></div>
           <motion.p 
             className="hero__subtitle__K3n7p"
             initial="hidden"
@@ -183,7 +183,7 @@ export function HeroSection() {
               Beautiful, fast websites built with intention. Designed to feel alive, intuitive, and human.
             </span>
           </motion.p>
-          <div className="Spacer-module__root__NM019" style="--height: 30px;"></div>
+          <div className="Spacer-module__root__NM019" style={{--height: 30px;}}></div>
           <div className="hero__actions__Q6j9s">
             <motion.a
               href="/sign-up/"
