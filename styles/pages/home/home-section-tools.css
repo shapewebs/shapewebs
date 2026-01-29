@@ -65,70 +65,69 @@
   to { transform: translateX(-100%); }
 }
 
-/* Default (>= 641px): keep your current grid-like layout */
-.HomeSectionTools__carousel__frame {
-  /* no-op by default */
+/* Keep your existing desktop styles as-is */
+.HomeSectionTools__container__Z9k4p {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+  padding-inline: var(--system-padding);
+  margin-inline: auto;
+  max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
+  scrollbar-width: none;
 }
 
-/* Mobile carousel at 640px */
+.HomeSectionTools__container__Z9k4p::-webkit-scrollbar {
+  display: none;
+}
+
+/* Desktop: make the slide wrappers "invisible" to the layout */
+.HomeSectionTools__container__Z9k4p .logos-slide {
+  display: contents;
+}
+
+/* Pause on hover (works mainly on desktop) */
+.HomeSectionTools__container__Z9k4p:hover .logos-slide {
+  animation-play-state: paused;
+}
+
+/* MOBILE: convert container to the carousel frame at <=640px */
 @media (max-width: 640px) {
-  /* This is your ".logos" frame adapted */
-  .HomeSectionTools__carousel__frame {
+  .HomeSectionTools__container__Z9k4p {
     overflow: hidden;
     white-space: nowrap;
     position: relative;
-    padding: 12px 0;
-    /* background: white;  // keep/remove depending on your page */
+
+    /* from your frame */
+    padding: 30px 0;
+
+    /* override desktop flex/wrap */
+    display: block;
   }
 
-  /* Optional fade edges like many logo carousels */
-  .HomeSectionTools__carousel__frame::before,
-  .HomeSectionTools__carousel__frame::after {
-    position: absolute;
-    top: 0;
-    width: 48px;
-    height: 100%;
-    content: "";
-    z-index: 2;
-    pointer-events: none;
-  }
-  .HomeSectionTools__carousel__frame::before {
-    left: 0;
-    background: linear-gradient(to right, rgba(0,0,0,0.08), rgba(0,0,0,0));
-  }
-  .HomeSectionTools__carousel__frame::after {
-    right: 0;
-    background: linear-gradient(to left, rgba(0,0,0,0.08), rgba(0,0,0,0));
-  }
-
-  /* Turn your existing container into the "logos-slide" track */
-  .HomeSectionTools__container__Z9k4p.HomeSectionTools__carousel__slide {
+  .HomeSectionTools__container__Z9k4p .logos-slide {
     display: inline-flex;
-    flex-wrap: nowrap;         /* important: single row */
-    justify-content: flex-start;
     align-items: center;
-    gap: 1rem;
-    margin: 0;                 /* remove mobile margins that can cause jumps */
-    padding: 0;
-    max-width: none;           /* allow it to be wider than viewport */
-    width: max-content;        /* shrink-to-fit its content */
+    flex-wrap: nowrap;
     animation: 15s slide infinite linear; /* mobile speed */
-    will-change: transform;
   }
 
-  /* Pause on hover (desktop) / touch-hold (some mobile browsers) */
-  .HomeSectionTools__carousel__frame:hover .HomeSectionTools__carousel__slide {
-    animation-play-state: paused;
-  }
-
-  /* Prevent items from shrinking */
   .HomeSectionTools__item__L7j3s {
-    flex: 0 0 auto;
-    margin-right: 1rem; /* keep your spacing */
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-right: 1rem; /* keep spacing in the stream */
   }
 }
 
-/* Optional: if you also want a slower speed for larger "tablet mobile" sizes */
-@media (min-width: 641px) and (max-width: 768px) {
-  /* keep your existing layout, or if you want carousel here too, move the rules up */
+/* Optional: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .HomeSectionTools__container__Z9k4p .logos-slide {
+    animation: none !important;
+  }
 }
