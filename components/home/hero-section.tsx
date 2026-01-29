@@ -3,23 +3,32 @@
 import { useEffect, useRef, useState } from "react"
 import { useTheme } from "next-themes"
 import { motion, useAnimation, type Variants } from "framer-motion"
-// import { usePathname } from "next/navigation" // optional
 import "@/styles/pages/home/hero-section.css"
-
-const HERO_ANIM_KEY = "heroAnimationPlayed"
 
 export function HeroSection() {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const controls = useAnimation()
+  const heroImageRefs = useRef<{
+    overviewNav: HTMLDivElement | null
+    firstNavItem: HTMLDivElement | null
+    navItems: (HTMLDivElement | null)[]
+    page: HTMLDivElement | null
+  }>({ 
+    overviewNav: null,
+    firstNavItem: null,
+    navItems: [],
+    page: null,
+  })
 
+  // Define the image URLs
+  const darkThemeUrl = "https://i.ibb.co/8gnVqXb3/hero-image-sw-dark.png"
+  const lightThemeUrl = "https://i.ibb.co/5X8mW9nS/hero-image-sw-light.png"
+
+  // Set mounted state and preload images
   useEffect(() => {
     setMounted(true)
-
-    // preload images (fine to do every time)
-    const darkThemeUrl = "https://i.ibb.co/8gnVqXb3/hero-image-sw-dark.png"
-    const lightThemeUrl = "https://i.ibb.co/5X8mW9nS/hero-image-sw-light.png"
-
+    
     const darkImage = new Image()
     darkImage.src = darkThemeUrl
     darkImage.crossOrigin = "anonymous"
@@ -28,18 +37,10 @@ export function HeroSection() {
     lightImage.src = lightThemeUrl
     lightImage.crossOrigin = "anonymous"
 
-    // ✅ only animate once per tab/session
-    const hasPlayed = sessionStorage.getItem(HERO_ANIM_KEY) === "1"
-
-    if (hasPlayed) {
-      // jump straight to end state, no animation
-      controls.set("visible")
-    } else {
-      sessionStorage.setItem(HERO_ANIM_KEY, "1")
-      controls.start("visible")
-    }
+    // Start the animation sequence
+    controls.start("visible")
   }, [controls])
-    
+  
   // Determine which theme to show - default to light if not mounted yet
   const currentTheme = mounted ? resolvedTheme : "light"
 
