@@ -5,10 +5,10 @@ export default function NotFound() {
     <section className="notfound__root__K7p3s">
       <div className="notfound__content__L7j3s">
         <div className="notfound__text__P5k8q">
-          <h1 className="typography__heading1__T3m8s">
+          <h1 className="typography__heading2__B5x9t">
             The page you're looking for can't be found
           </h1>
-          <p className="notfound__description__Q8k4p">
+          <p className="typography__subtitle__R6m2x">
             It seems this page doesn't exist or has been moved to another location.
           </p>
           <a
