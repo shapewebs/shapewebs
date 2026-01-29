@@ -1,6 +1,6 @@
 "use client"
 
-import "@/styles/pages/home/home-section-tools.css"
+import "@/styles/pages/home/tech-showcase.css"
 
 export function HomeSectionTools() {
   return (
