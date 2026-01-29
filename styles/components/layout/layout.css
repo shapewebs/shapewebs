@@ -137,29 +137,3 @@
   color: rgba(var(--color-text-primary), 1) !important;
   background-color: rgba(var(--color-bg-tertiary), 0.5) !important;
 }
-
-/* Universal subtitle styles */
-.typography__subtitle__K3n7p {
-  font-size: 19px;
-  line-height: 27px;
-  max-width: 70%;
-  text-align: center;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
-  margin-inline: auto;
-}
-
-.typography__subtitleText__Z5j8q {
-  display: inline-block;
-  vertical-align: top;
-  text-decoration: inherit;
-  text-wrap: balance;
-  font-weight: var(--font-weight-normal);
-  color: rgba(var(--color-text-secondary), 1);
-}
-
-@media (max-width: 768px) {
-  .typography__subtitle__K3n7p {
-    max-width: 100%;
-  }
-}
