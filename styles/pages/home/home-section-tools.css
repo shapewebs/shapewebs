@@ -56,15 +56,3 @@
   color: rgba(var(--color-text-tertiary), 1);
   flex-shrink: 0;
 }
-
-/* Responsive styles */
-@media (min-width: 768px) {
-  .HomeSectionTools__icon__P5k8q svg {
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-
-  .HomeSectionTools__label__B9k6p {
-    font-size: var(--font-size-regular);
-  }
-}
