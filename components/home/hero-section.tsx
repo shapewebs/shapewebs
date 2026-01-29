@@ -179,8 +179,7 @@ export function HeroSection() {
             variants={subtitleVariants}
            >
             <span className="typography__subtitle__R6m2x">
-              Discover the platform where magical web solutions are developed. We deliver custom solutions, creating the
-              perfect tool for your business.
+              Beautiful, fast websites built with care and intention. <br> Designed to feel alive, usable, and distinctly human.
             </span>
           </motion.p>
           <div className="hero__actions__Q6j9s">
