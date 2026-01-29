@@ -58,7 +58,7 @@ export function HomeSectionTools() {
           </p>
         </span>
         <span className="show-tablet">
-          <p className="typography__body__K4n7p" style={{ margin: 0, textAlign: "center", textWrap: balance }}>
+          <p className="typography__body__K4n7p" style={{ margin: 0, textAlign: "center", textWrap: "balance" }}>
             Tools at the leading edge of web development. Trusted by leading companies including OpenAI, Netflix, and Nike.
           </p>
         </span>
