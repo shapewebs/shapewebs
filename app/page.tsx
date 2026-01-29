@@ -1,6 +1,6 @@
 "use client"
 
-import { HomeSectionHero } from "@/components/home/hero-section"
+import { HomeSectionHero } from "@/components/home/home-section-hero"
 import { TechShowcase } from "@/components/home/home-section-hero"
 import "@/styles/pages/home/home.css"
 
