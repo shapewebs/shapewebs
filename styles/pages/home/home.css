@@ -130,10 +130,6 @@
 }
 
 @media (max-width: 640px) {
-  .Flex-module__P5k8q {
-    align-items: center;
-  }
-
   .hero__actions__Q6j9s {
     flex-direction: column;
     gap: 16px;
