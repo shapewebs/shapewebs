@@ -11,10 +11,7 @@ export default function HomePage() {
 
       <div className="typography__subtitle__K3n7p">
         <span className="typography__subtitleText__Z5j8q">
-          Professional mastery of programming languages and development tools
-          <br />
-          <span style={{ color: "rgba(var(--color-text-tertiary), 1)" }}>
-            for both client-side and server-side
+            Using proven modern technologies to build fast, resilient websites
           </span>
         </span>
       </div>
