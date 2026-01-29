@@ -158,7 +158,7 @@ export function HeroSection() {
             className="typography__heading1__T3m8s" 
             style={{margin: 0}}>
             <span className="hero__titleWrapper__Q7p3s">
-              {["Shapewebs", "introduce", "the", "magic", "back", "into", "software"].ma((word, i) => (
+              {["Shapewebs", "introduce", "the", "magic", "back", "into", "software"].map((word, i) => (
                 <motion.span
                   key={i}
                   className="hero__titleSpan__H5k8q"
