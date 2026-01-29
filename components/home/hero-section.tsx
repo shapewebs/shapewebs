@@ -26,20 +26,29 @@ export function HeroSection() {
   const lightThemeUrl = "https://i.ibb.co/5X8mW9nS/hero-image-sw-light.png"
 
   // Set mounted state and preload images
-  useEffect(() => {
-    setMounted(true)
-    
-    const darkImage = new Image()
-    darkImage.src = darkThemeUrl
-    darkImage.crossOrigin = "anonymous"
+useEffect(() => {
+  setMounted(true)
 
-    const lightImage = new Image()
-    lightImage.src = lightThemeUrl
-    lightImage.crossOrigin = "anonymous"
+  const darkImage = new Image()
+  darkImage.src = darkThemeUrl
+  darkImage.crossOrigin = "anonymous"
 
-    // Start the animation sequence
+  const lightImage = new Image()
+  lightImage.src = lightThemeUrl
+  lightImage.crossOrigin = "anonymous"
+
+  const key = "heroAnimated"
+
+  const hasAnimated = sessionStorage.getItem(key) === "1"
+
+  if (hasAnimated) {
+    // Skip animation: render final state immediately
+    controls.set("visible")
+  } else {
     controls.start("visible")
-  }, [controls])
+    sessionStorage.setItem(key, "1")
+  }
+}, [controls])
   
   // Determine which theme to show - default to light if not mounted yet
   const currentTheme = mounted ? resolvedTheme : "light"
