@@ -33,38 +33,42 @@ const tools = [
   )},
 ]
 
+function ToolRow() {
+  return (
+    <>
+      {tools.map((t) => (
+        <div className="HomeSectionTools__item__L7j3s" key={t.label}>
+          <span className="HomeSectionTools__icon__P5k8q">{t.icon}</span>
+          <span className="HomeSectionTools__label__B9k6p">{t.label}</span>
+        </div>
+      ))}
+    </>
+  )
+}
+
 export function HomeSectionTools() {
   return (
     <section className="section__8NC91">
       <div className="section__content__0KLF3">
         <span className="hide-tablet">
-          <p className="typography__body__K4n7p" style={{ margin: "0", textAlign: "center" }}>
+          <p className="typography__body__K4n7p" style={{ margin: 0, textAlign: "center" }}>
             Tools at the leading edge of web development. Trusted by leading companies including OpenAI, Netflix, and Nike.
           </p>
         </span>
         <span className="show-tablet">
-          <p className="typography__body__K4n7p" style={{ margin: "0", textAlign: "center" }}>
+          <p className="typography__body__K4n7p" style={{ margin: 0, textAlign: "center" }}>
             Tools at the leading edge of web development. Trusted by leading companies including OpenAI, Netflix, and Nike.
           </p>
         </span>
 
-        {/* Mobile carousel frame (only affects layout at <=640px via CSS) */}
-        <div className="HomeSectionTools__carousel__frame">
-          <div className="HomeSectionTools__container__Z9k4p HomeSectionTools__carousel__slide" aria-label="Tool carousel">
-            {/* First set */}
-            {tools.map((t) => (
-              <div className="HomeSectionTools__item__L7j3s" key={t.label}>
-                <span className="HomeSectionTools__icon__P5k8q">{t.icon}</span>
-                <span className="HomeSectionTools__label__B9k6p">{t.label}</span>
-              </div>
-            ))}
-            {/* Duplicate set for seamless loop */}
-            {tools.map((t) => (
-              <div className="HomeSectionTools__item__L7j3s" key={`${t.label}-dup`} aria-hidden="true">
-                <span className="HomeSectionTools__icon__P5k8q">{t.icon}</span>
-                <span className="HomeSectionTools__label__B9k6p">{t.label}</span>
-              </div>
-            ))}
+        {/* Desktop: same flex wrap layout
+            Mobile (<=640px): becomes infinite carousel */}
+        <div className="HomeSectionTools__container__Z9k4p logos">
+          <div className="logos-slide">
+            <ToolRow />
+          </div>
+          <div className="logos-slide" aria-hidden="true">
+            <ToolRow />
           </div>
         </div>
       </div>
