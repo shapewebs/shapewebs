@@ -155,7 +155,7 @@ export function HeroSection() {
       <div className="hero__content__L7j3s">
         <div className="Flex-module__P5k8q">
           <h1 
-            className="typography__heading1__T3m8s" 
+            className="hide-mobile typography__heading1__T3m8s" 
             style={{margin: 0}}>
             <span className="hero__titleWrapper__Q7p3s">
               {["Shapewebs", "introduce", "the", "magic", "back", "into", "software"].map((word, i) => (
@@ -173,7 +173,7 @@ export function HeroSection() {
             </span>
           </h1>
           <h1 
-            className="typography__heading1__T3m8s" 
+            className="show-mobile typography__heading1__T3m8s" 
             style={{margin: 0}}>
             <span className="hero__titleWrapper__Q7p3s">
               {["Bring", "magic", "to", "your", "software"].map((word, i) => (
