@@ -5,7 +5,7 @@ import { useTheme } from "next-themes"
 import { motion, useAnimation, type Variants } from "framer-motion"
 import "@/styles/pages/home/hero-section.css"
 
-export function HeroSection() {
+export function HomeSectionHero() {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const controls = useAnimation()
