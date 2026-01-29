@@ -49,7 +49,7 @@
 
 .typography__subtitle__R6m2x {
   font-size: var(--font-size-large);
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-light);
   line-height: 1.2;
   margin-bottom: 0.75rem;
   color: rgba(var(--color-text-tertiary), 1);
