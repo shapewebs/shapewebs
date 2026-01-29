@@ -59,3 +59,49 @@
   color: rgba(var(--color-text-tertiary), 1);
   flex-shrink: 0;
 }
+
+/* NEW: track wrapper (no effect on desktop unless you want it) */
+.HomeSectionTools__track__a1b2c {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Optional: remove the extra spacing that fights with gap */
+.HomeSectionTools__item__L7j3s {
+  margin-right: 0; /* <-- was 1rem; gap already handles spacing */
+}
+
+/* NEW: mobile carousel behavior */
+@media (max-width: 640px) {
+  .HomeSectionTools__container__Z9k4p {
+    overflow: hidden;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
+  .HomeSectionTools__track__a1b2c {
+    width: max-content;
+    flex-wrap: nowrap;
+    will-change: transform;
+    animation: HomeSectionToolsMarquee 18s linear infinite;
+  }
+
+  @keyframes HomeSectionToolsMarquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      /* Move by half the track because we rendered the list twice */
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .HomeSectionTools__track__a1b2c {
+      animation: none;
+      transform: none;
+    }
+  }
+}
