@@ -49,6 +49,7 @@
     /* Typography */
     --font-monospace: ui-monospace, "SF Mono", "Menlo", monospace;
     --font-regular: apple-system-body, BlinkMacSystemFont, sans-serif;
+    --font-weight-light: 340;
     --font-weight-normal: 400;
     --font-weight-medium: 460;
     --font-weight-semibold: 520;
