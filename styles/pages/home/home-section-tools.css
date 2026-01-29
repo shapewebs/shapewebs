@@ -80,7 +80,7 @@
   margin-top: 2rem;
   padding-inline: var(--system-padding);
   margin-inline: auto;
-  max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
+  max-width: 850px;
   scrollbar-width: none;
 }
 
