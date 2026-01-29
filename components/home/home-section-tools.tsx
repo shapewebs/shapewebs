@@ -52,7 +52,7 @@ export function HomeSectionTools() {
       <div className="section__content__0KLF3">
         <span className="hide-tablet">
           <p className="typography__emphasize__M9J2o" style={{ margin: 0, textAlign: "center" }}>
-            <span className="bitCO ">Tools at the leading edge of web development.</span>
+            <span className="bitCO">Tools at the leading edge of web development.</span>
             <br aria-hidden="true"></br>
             <span>Trusted by leading companies including OpenAI, Netflix, and Nike.</span>
           </p>
