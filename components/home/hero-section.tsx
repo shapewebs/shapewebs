@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { useTheme } from "next-themes"
 import { motion, useAnimation, type Variants } from "framer-motion"
-import "@/styles/pages/home/hero-section.css"
+import "@/styles/pages/home/home-section-hero.css"
 
 export function HomeSectionHero() {
   const { resolvedTheme } = useTheme()
