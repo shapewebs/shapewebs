@@ -1,3 +1,11 @@
+"use client"
+
+import { useEffect, useRef, useState } from "react"
+import { useTheme } from "next-themes"
+import { motion, useAnimation, type Variants } from "framer-motion"
+import "@/styles/pages/home/hero-section.css"
+
+
 export function HeroSection() {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
