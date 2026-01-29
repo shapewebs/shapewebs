@@ -24,7 +24,6 @@ export function HomeSectionTools() {
         </span>
         <span className="HomeSectionTools__label__B9k6p">Next.js</span>
       </div>
-
       <div className="HomeSectionTools__item__L7j3s">
         <span className="HomeSectionTools__icon__P5k8q">
           <svg
