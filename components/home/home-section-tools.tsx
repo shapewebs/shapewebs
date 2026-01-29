@@ -98,7 +98,18 @@ export function HomeSectionTools() {
           </p>
         </span>
 
-        <div className="HomeSectionTools__container__Z9k4p">
+        {/* Desktop / tablet: normal layout (single list) */}
+        <div className="HomeSectionTools__container__Z9k4p HomeSectionTools__containerDesktop__d1">
+          {TOOLS.map((tool) => (
+            <div className="HomeSectionTools__item__L7j3s" key={tool.label}>
+              <span className="HomeSectionTools__icon__P5k8q">{tool.icon}</span>
+              <span className="HomeSectionTools__label__B9k6p">{tool.label}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile: marquee carousel (duplicated list for seamless loop) */}
+        <div className="HomeSectionTools__container__Z9k4p HomeSectionTools__containerMobile__m1">
           <div className="HomeSectionTools__track__a1b2c" aria-hidden="true">
             {[...TOOLS, ...TOOLS].map((tool, idx) => (
               <div className="HomeSectionTools__item__L7j3s" key={`${tool.label}-${idx}`}>
