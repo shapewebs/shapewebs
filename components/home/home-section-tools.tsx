@@ -6,6 +6,7 @@ export function HomeSectionTools() {
   return (
     <section className="section__8NC91">
       <div className="section__content__0KLF3">
+        <span>
         <div className="HomeSectionTools__container__Z9k4p">
           <div className="HomeSectionTools__item__L7j3s">
             <span className="HomeSectionTools__icon__P5k8q">
