@@ -107,6 +107,12 @@
     display: block;
   }
 
+  .section__content__0KLF3:before {
+    content: "";
+    display: block;
+    margin-top: -20px;
+}
+
   .HomeSectionTools__container__Z9k4p .HomeSectionTools__carousell__Z9k4p {
     display: inline-flex;
     align-items: center;
