@@ -172,6 +172,7 @@ export function HeroSection() {
               ))}
             </span>
           </h1>
+          <div className="Spacer-module__root__NM019"></div>
           <motion.p 
             className="hero__subtitle__K3n7p"
             initial="hidden"
