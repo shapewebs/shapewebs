@@ -190,7 +190,6 @@ export function HeroSection() {
               ))}
             </span>
           </h1>
-
           <div
             className="Spacer-module__root__NM019"
             style={{ '--height': '30px' }}
