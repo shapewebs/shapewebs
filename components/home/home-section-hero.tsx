@@ -153,7 +153,7 @@ export function HomeSectionHero() {
 
   return (
     <section className="section__B8j4p">
-      <div className="hero__content__L7j3s">
+      <div className="section__content__L7i39">
         <div className="Flex-module__P5k8q">
           <h1 
             className="hide-mobile typography__heading1__T3m8s" 
