@@ -8,9 +8,9 @@ export function HomeSectionTools() {
           Using proven modern technologies to build fast, resilient websites
         </span>
       </span>
-    <div className="tech-showcase__container__Z9k4p">
-      <div className="tech-showcase__item__L7j3s">
-        <span className="tech-showcase__icon__P5k8q">
+    <div className="HomeSectionTools__container__Z9k4p">
+      <div className="HomeSectionTools__item__L7j3s">
+        <span className="HomeSectionTools__icon__P5k8q">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -26,11 +26,11 @@ export function HomeSectionTools() {
             <path d="M15 12v-3"></path>
           </svg>
         </span>
-        <span className="tech-showcase__label__B9k6p">Next.js</span>
+        <span className="HomeSectionTools__label__B9k6p">Next.js</span>
       </div>
 
-      <div className="tech-showcase__item__L7j3s">
-        <span className="tech-showcase__icon__P5k8q">
+      <div className="HomeSectionTools__item__L7j3s">
+        <span className="HomeSectionTools__icon__P5k8q">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -51,11 +51,11 @@ export function HomeSectionTools() {
             <path d="M11.5 12.866a1 1 0 1 0 1 -1.732a1 1 0 0 0 -1 1.732z"></path>
           </svg>
         </span>
-        <span className="tech-showcase__label__B9k6p">React</span>
+        <span className="HomeSectionTools__label__B9k6p">React</span>
       </div>
 
-      <div className="tech-showcase__item__L7j3s">
-        <span className="tech-showcase__icon__P5k8q">
+      <div className="HomeSectionTools__item__L7j3s">
+        <span className="HomeSectionTools__icon__P5k8q">
           <svg
             stroke="currentColor"
             fill="currentColor"
@@ -68,11 +68,11 @@ export function HomeSectionTools() {
             <path d="M18.5 9.51a4.22 4.22 0 0 1-1.91-1.34A5.77 5.77 0 0 0 12 6a4.72 4.72 0 0 0-5 4 3.23 3.23 0 0 1 3.5-1.49 4.32 4.32 0 0 1 1.91 1.35A5.77 5.77 0 0 0 17 12a4.72 4.72 0 0 0 5-4 3.2 3.2 0 0 1-3.5 1.51zm-13 4.98a4.22 4.22 0 0 1 1.91 1.34A5.77 5.77 0 0 0 12 18a4.72 4.72 0 0 0 5-4 3.23 3.23 0 0 1-3.5 1.49 4.32 4.32 0 0 1-1.91-1.35A5.8 5.8 0 0 0 7 12a4.72 4.72 0 0 0-5 4 3.2 3.2 0 0 1 3.5-1.51z"></path>
           </svg>
         </span>
-        <span className="tech-showcase__label__B9k6p">Tailwind CSS</span>
+        <span className="HomeSectionTools__label__B9k6p">Tailwind CSS</span>
       </div>
 
-      <div className="tech-showcase__item__L7j3s">
-        <span className="tech-showcase__icon__P5k8q">
+      <div className="HomeSectionTools__item__L7j3s">
+        <span className="HomeSectionTools__icon__P5k8q">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -88,7 +88,7 @@ export function HomeSectionTools() {
             <path d="M20 12l-8 8l-4 -4"></path>
           </svg>
         </span>
-        <span className="tech-showcase__label__B9k6p">Motion</span>
+        <span className="HomeSectionTools__label__B9k6p">Motion</span>
       </div>
     </div>
   )
