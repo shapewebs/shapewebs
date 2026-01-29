@@ -8,6 +8,10 @@
   position: relative; 
 }
 
+.content__content__0MS9O {
+  padding-inline: var(--system-padding);
+}
+
 .HomeSectionTools__container__Z9k4p {
   position: relative;
   z-index: 20;
