@@ -55,6 +55,15 @@
   color: rgba(var(--color-text-tertiary), 1);
 }
 
+.typography__emphasize__M9J2o {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-light);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  color: rgba(var(--color-text-tertiary), 1);
+
+}
+
 .typography__body__K4n7p {
   font-size: var(--font-size-regular);
   font-weight: var(--font-weight-normal);
