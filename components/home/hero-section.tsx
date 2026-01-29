@@ -201,7 +201,7 @@ export function HeroSection() {
               animate={controls}
               variants={buttonVariants}
             >
-              <span>Calculate website price</span>
+              <span>Calculate price</span>
             </motion.a>
             <motion.a
               href="/contact/support/"
