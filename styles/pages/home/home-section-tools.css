@@ -118,7 +118,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    margin-right: 1rem; /* keep spacing in the stream */
+    margin-right: 4rem; /* keep spacing in the stream */
   }
 }
 
