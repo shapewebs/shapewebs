@@ -118,16 +118,6 @@
   color: rgba(var(--color-text-secondary), 1);
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .hero__root__Z9k4p h1 {
-    max-width: unset;
-  }
-
-  .hero__subtitle__K3n7p {
-    max-width: unset;
-  }
-}
 
 @media (max-width: 640px) {
   .hero__actions__Q6j9s {
