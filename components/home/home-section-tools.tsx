@@ -60,9 +60,6 @@ export function HomeSectionTools() {
             Tools at the leading edge of web development. Trusted by leading companies including OpenAI, Netflix, and Nike.
           </p>
         </span>
-
-        {/* Desktop: same flex wrap layout
-            Mobile (<=640px): becomes infinite carousel */}
         <div className="HomeSectionTools__container__Z9k4p">
           <div className="HomeSectionTools__carousell__Z9k4p">
             <ToolRow />
