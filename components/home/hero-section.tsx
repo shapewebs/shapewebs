@@ -174,12 +174,11 @@ export function HeroSection() {
           </h1>
           <motion.p 
             className="hero__subtitle__K3n7p"
-            className="typography__subtitle__R6m2x"
             initial="hidden"
             animate={controls}
             variants={subtitleVariants}
            >
-            <span>
+            <span className="typography__subtitle__R6m2x">
               Discover the platform where magical web solutions are developed. We deliver custom solutions, creating the
               perfect tool for your business.
             </span>
