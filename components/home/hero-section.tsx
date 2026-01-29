@@ -70,7 +70,7 @@ export function HeroSection() {
       filter: "blur(10px)",
     },
     visible: {
-      opacity: 0.8,
+      opacity: 1,
       y: 0,
       filter: "blur(0px)",
       transition: {
