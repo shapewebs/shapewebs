@@ -60,5 +60,14 @@
 }
 
 .Spacer-module__root__NM019 {
-
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    width: 1px;
+    min-width: 1px;
+    height: 1px;
+    min-height: 1px;
+    margin-top: calc(var(--height, 0px) - 1px);
+    margin-left: calc(var(--width, 0px) - 1px);
+    display: block;
 }
