@@ -63,15 +63,6 @@
   max-width: 70%;
 }
 
-.hero__subtitleText__Z5j8q {
-  display: inline-block;
-  vertical-align: top;
-  text-decoration: inherit;
-  text-wrap: balance;
-  font-weight: var(--font-weight-normal);
-  color: rgba(var(--color-text-secondary), 1);
-}
-
 .hero__actions__Q6j9s {
   display: flex;
   align-items: center;
