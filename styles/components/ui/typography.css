@@ -56,10 +56,9 @@
 }
 
 .typography__emphasize__M9J2o {
-  font-size: var(--font-size-large);
-  font-weight: var(--font-weight-light);
-  line-height: 1.2;
-  margin-bottom: 0.75rem;
+  font-size: var(--font-size-title3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.33;
   color: rgba(var(--color-text-tertiary), 1);
 }
 
