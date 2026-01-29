@@ -195,7 +195,6 @@ export function HomeSectionHero() {
             style={{ '--height': '20px' }}
           >
           </div>
-          </div>
           <motion.p 
             className="hero__subtitle__K3n7p"
             initial="hidden"
