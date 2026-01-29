@@ -178,10 +178,12 @@ export function HeroSection() {
               initial="hidden"
               animate={controls}
               variants={subtitleVariants}
-              lineHeight={1.4}
-              textWrap="balance"
-              display="inlineBlock"
-              margin={0}
+              style={{
+                lineHeight: 1.4,
+                textWrap: "balance",
+                display: "inline-block",
+                margin: 0,
+              }}
             >
               Discover the platform where magical web solutions are developed. We deliver custom solutions, creating the
               perfect tool for your business.
