@@ -72,18 +72,15 @@
     display: block;
 }
 
-.hide-mobile {
-  @media (max-width: 640px) {
-    [data-hide=mobile], .hide-mobile {
-      display: none !important;
-    }
+@media (max-width: 640px) {
+  [data-hide=mobile], .hide-mobile {
+    display: none !important;
   }
 }
 
-.show-mobile {
-  @media (min-width: 641px) {
-    [data-show=mobile], .show-mobile {
-      display: none !important;
-    }
+
+@media (min-width: 641px) {
+  [data-show=mobile], .show-mobile {
+    display: none !important;
   }
 }
