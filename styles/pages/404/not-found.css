@@ -43,10 +43,6 @@
     padding-bottom: 40px;
   }
 
-  .notfound__text__P5k8q h1 {
-    font-size: 2.5rem;
-  }
-
   .notfound__description__Q8k4p {
     font-size: 16px;
   }
@@ -57,13 +53,5 @@
     min-height: calc(100vh - 60px);
     padding-top: 32px;
     padding-bottom: 32px;
-  }
-
-  .notfound__text__P5k8q h1 {
-    font-size: 2rem;
-  }
-
-  .notfound__description__Q8k4p {
-    font-size: 15px;
   }
 }
