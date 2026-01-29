@@ -105,3 +105,52 @@
     }
   }
 }
+
+.HomeSectionTools__containerMobile__m1 {
+  display: none;
+}
+
+/* Keep desktop visible by default */
+.HomeSectionTools__containerDesktop__d1 {
+  display: flex;
+}
+
+/* Mobile behavior */
+@media (max-width: 640px) {
+  .HomeSectionTools__containerDesktop__d1 {
+    display: none;
+  }
+
+  .HomeSectionTools__containerMobile__m1 {
+    display: flex;
+    overflow: hidden;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
+  .HomeSectionTools__track__a1b2c {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: max-content;
+    will-change: transform;
+    animation: HomeSectionToolsMarquee 18s linear infinite;
+  }
+
+  @keyframes HomeSectionToolsMarquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .HomeSectionTools__track__a1b2c {
+      animation: none;
+      transform: none;
+    }
+  }
+}
+
+/* Optional: avoid double-spacing since gap is used */
+.HomeSectionTools__item__L7j3s {
+  margin-right: 0; /* remove your old margin-right: 1rem; */
+}
