@@ -1,156 +1,72 @@
-.section__8NC91 {
-  width: 100%;
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
 }
 
-.section__content__0KLF3 {
-  max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
-  padding-inline: var(--system-padding);
-  margin-inline: auto;
-  position: relative; 
+/* Default (>= 641px): keep your current grid-like layout */
+.HomeSectionTools__carousel__frame {
+  /* no-op by default */
 }
 
-.HomeSectionTools__container__Z9k4p {
-  position: relative;
-  z-index: 20;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  margin-top: 2rem;
-  padding-inline: var(--system-padding);
-  margin-inline: auto;
-  max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
-  scrollbar-width: none;
-}
-
-.HomeSectionTools__container__Z9k4p::-webkit-scrollbar {
-  display: none;
-}
-
-.HomeSectionTools__item__L7j3s {
-  display: flex;
-  align-items: center;
-  margin-right: 1rem;
-  gap: 0.5rem;
-}
-
-.HomeSectionTools__icon__P5k8q {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--font-size-regular);
-}
-
-.HomeSectionTools__icon__P5k8q svg {
-  width: 1rem;
-  height: 1rem;
-  flex-shrink: 0;
-  stroke-width: 1;
-  color: rgba(var(--color-text-tertiary), 1);
-  width: 2.5rem;
-  height: 2.5rem;
-}
-
-.HomeSectionTools__label__B9k6p {
-  font-size: var(--font-size-small);
-  font-weight: var(--font-weight-semibold);
-  color: rgba(var(--color-text-tertiary), 1);
-  flex-shrink: 0;
-}
-
-/* NEW: track wrapper (no effect on desktop unless you want it) */
-.HomeSectionTools__track__a1b2c {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-/* Optional: remove the extra spacing that fights with gap */
-.HomeSectionTools__item__L7j3s {
-  margin-right: 0; /* <-- was 1rem; gap already handles spacing */
-}
-
-/* NEW: mobile carousel behavior */
+/* Mobile carousel at 640px */
 @media (max-width: 640px) {
-  .HomeSectionTools__container__Z9k4p {
+  /* This is your ".logos" frame adapted */
+  .HomeSectionTools__carousel__frame {
     overflow: hidden;
-    flex-wrap: nowrap;
+    white-space: nowrap;
+    position: relative;
+    padding: 12px 0;
+    /* background: white;  // keep/remove depending on your page */
+  }
+
+  /* Optional fade edges like many logo carousels */
+  .HomeSectionTools__carousel__frame::before,
+  .HomeSectionTools__carousel__frame::after {
+    position: absolute;
+    top: 0;
+    width: 48px;
+    height: 100%;
+    content: "";
+    z-index: 2;
+    pointer-events: none;
+  }
+  .HomeSectionTools__carousel__frame::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.08), rgba(0,0,0,0));
+  }
+  .HomeSectionTools__carousel__frame::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(0,0,0,0.08), rgba(0,0,0,0));
+  }
+
+  /* Turn your existing container into the "logos-slide" track */
+  .HomeSectionTools__container__Z9k4p.HomeSectionTools__carousel__slide {
+    display: inline-flex;
+    flex-wrap: nowrap;         /* important: single row */
     justify-content: flex-start;
-  }
-
-  .HomeSectionTools__track__a1b2c {
-    width: max-content;
-    flex-wrap: nowrap;
-    will-change: transform;
-    animation: HomeSectionToolsMarquee 18s linear infinite;
-  }
-
-  @keyframes HomeSectionToolsMarquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      /* Move by half the track because we rendered the list twice */
-      transform: translateX(-50%);
-    }
-  }
-
-  /* Respect reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    .HomeSectionTools__track__a1b2c {
-      animation: none;
-      transform: none;
-    }
-  }
-}
-
-.HomeSectionTools__containerMobile__m1 {
-  display: none;
-}
-
-/* Keep desktop visible by default */
-.HomeSectionTools__containerDesktop__d1 {
-  display: flex;
-}
-
-/* Mobile behavior */
-@media (max-width: 640px) {
-  .HomeSectionTools__containerDesktop__d1 {
-    display: none;
-  }
-
-  .HomeSectionTools__containerMobile__m1 {
-    display: flex;
-    overflow: hidden;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-  }
-
-  .HomeSectionTools__track__a1b2c {
-    display: flex;
     align-items: center;
     gap: 1rem;
-    width: max-content;
+    margin: 0;                 /* remove mobile margins that can cause jumps */
+    padding: 0;
+    max-width: none;           /* allow it to be wider than viewport */
+    width: max-content;        /* shrink-to-fit its content */
+    animation: 15s slide infinite linear; /* mobile speed */
     will-change: transform;
-    animation: HomeSectionToolsMarquee 18s linear infinite;
   }
 
-  @keyframes HomeSectionToolsMarquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+  /* Pause on hover (desktop) / touch-hold (some mobile browsers) */
+  .HomeSectionTools__carousel__frame:hover .HomeSectionTools__carousel__slide {
+    animation-play-state: paused;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .HomeSectionTools__track__a1b2c {
-      animation: none;
-      transform: none;
-    }
+  /* Prevent items from shrinking */
+  .HomeSectionTools__item__L7j3s {
+    flex: 0 0 auto;
+    margin-right: 1rem; /* keep your spacing */
   }
 }
 
-/* Optional: avoid double-spacing since gap is used */
-.HomeSectionTools__item__L7j3s {
-  margin-right: 0; /* remove your old margin-right: 1rem; */
+/* Optional: if you also want a slower speed for larger "tablet mobile" sizes */
+@media (min-width: 641px) and (max-width: 768px) {
+  /* keep your existing layout, or if you want carousel here too, move the rules up */
 }
