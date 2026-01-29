@@ -11,7 +11,7 @@ export function HomeSectionTools() {
     <div className="HomeSectionTools__container__Z9k4p">
       <div className="HomeSectionTools__item__L7j3s">
         <span className="HomeSectionTools__icon__P5k8q">
-          <svg
+          <svg 
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
