@@ -179,7 +179,7 @@ export function HeroSection() {
             variants={subtitleVariants}
            >
             <span className="typography__subtitle__R6m2x">
-              Beautiful, fast websites built with care and intention. Designed to feel alive, usable, and distinctly human.
+              Beautiful, fast websites built with intention. Designed to feel alive, intuitive, and human.
             </span>
           </motion.p>
           <div className="hero__actions__Q6j9s">
