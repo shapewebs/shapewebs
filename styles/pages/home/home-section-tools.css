@@ -1,4 +1,14 @@
-/* Tech showcase styles */
+.section__8NC91 {
+  width: 100%;
+}
+
+.section__content__0KLF3 {
+  max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
+  padding-inline: var(--system-padding);
+  margin-inline: auto;
+  position: relative; 
+}
+
 .HomeSectionTools__container__Z9k4p {
   position: relative;
   z-index: 20;
