@@ -4,7 +4,6 @@
   padding-inline: var(--system-padding);
   margin-inline: auto;
   max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,13 +27,6 @@
   align-items: center; 
 }
 
-.notfound__description__Q8k4p {
-  font-size: 18px;
-  line-height: 1.6;
-  color: rgba(var(--color-text-secondary), 1);
-  margin: 0;
-}
-
 /* Responsive styles */
 @media (max-width: 768px) {
   .notfound__root__K7p3s {
@@ -44,13 +36,5 @@
 
   .notfound__description__Q8k4p {
     font-size: 16px;
-  }
-}
-
-@media (max-width: 640px) {
-  .notfound__root__K7p3s {
-    min-height: calc(100vh - 60px);
-    padding-top: 32px;
-    padding-bottom: 32px;
   }
 }
