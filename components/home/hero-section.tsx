@@ -158,6 +158,7 @@ export function HeroSection() {
                   custom={i}
                   initial="hidden"
                   animate={controls}
+                  initial={shouldAnimate ? "hidden" : false}
                   variants={titleVariants}
                 >
                   {word}
@@ -170,6 +171,7 @@ export function HeroSection() {
               className="typography__subtitle__R6m2x"
               initial="hidden"
               animate={controls}
+              initial={shouldAnimate ? "hidden" : false}
               variants={subtitleVariants}
               style={{
                 lineHeight: 1.4,
@@ -189,6 +191,7 @@ export function HeroSection() {
               custom={0}
               initial="hidden"
               animate={controls}
+              initial={shouldAnimate ? "hidden" : false}
               variants={buttonVariants}
             >
               <span>Calculate website price</span>
@@ -199,6 +202,7 @@ export function HeroSection() {
               custom={1}
               initial="hidden"
               animate={controls}
+              initial={shouldAnimate ? "hidden" : false}
               variants={buttonVariants}
             >
               <span>Arrange a meeting now</span>
@@ -216,6 +220,7 @@ export function HeroSection() {
           fill="none"
           initial="hidden"
           animate={controls}
+          initial={shouldAnimate ? "hidden" : false}
           variants={spotlightVariants}
         >
           <g filter="url(#filter)">
@@ -255,6 +260,7 @@ export function HeroSection() {
                         custom={6}
                         initial="hidden"
                         animate={controls}
+                        initial={shouldAnimate ? "hidden" : false}
                         variants={browserElementVariants}
                       >
                         <div className="hero__overviewNavLeft__P5k8q">
@@ -299,6 +305,7 @@ export function HeroSection() {
                         custom={5}
                         initial="hidden"
                         animate={controls}
+                        initial={shouldAnimate ? "hidden" : false}
                         variants={browserElementVariants}
                       >
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -372,6 +379,7 @@ export function HeroSection() {
                         custom={4}
                         initial="hidden"
                         animate={controls}
+                        initial={shouldAnimate ? "hidden" : false}
                         variants={browserElementVariants}
                       >
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -390,6 +398,7 @@ export function HeroSection() {
                         custom={3}
                         initial="hidden"
                         animate={controls}
+                        initial={shouldAnimate ? "hidden" : false}
                         variants={browserElementVariants}
                       >
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -409,6 +418,7 @@ export function HeroSection() {
                         className="hero__historySection__H5k8q"
                         custom={2}
                         initial="hidden"
+                        initial={shouldAnimate ? "hidden" : false}
                         animate={controls}
                         variants={browserElementVariants}
                       >
@@ -425,6 +435,7 @@ export function HeroSection() {
                         custom={1}
                         initial="hidden"
                         animate={controls}
+                        initial={shouldAnimate ? "hidden" : false}
                         variants={browserElementVariants}
                       >
                         <span>Yesterday</span>
@@ -440,6 +451,7 @@ export function HeroSection() {
                         custom={0}
                         initial="hidden"
                         animate={controls}
+                        initial={shouldAnimate ? "hidden" : false}
                         variants={browserElementVariants}
                       >
                         <span>Last 7 days</span>
@@ -456,6 +468,7 @@ export function HeroSection() {
                       className="hero__page__P5k8q"
                       initial="hidden"
                       animate={controls}
+                      initial={shouldAnimate ? "hidden" : false}
                       variants={pageVariants}
                     >
                       <img
