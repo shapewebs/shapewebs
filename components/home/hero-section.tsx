@@ -38,12 +38,10 @@ useEffect(() => {
   lightImage.crossOrigin = "anonymous"
 
   const key = "heroAnimated"
-
   const hasAnimated = sessionStorage.getItem(key) === "1"
 
   if (hasAnimated) {
-    // Skip animation: render final state immediately
-    controls.set("visible")
+    controls.set("visible") // jump to end state
   } else {
     controls.start("visible")
     sessionStorage.setItem(key, "1")
@@ -165,7 +163,7 @@ useEffect(() => {
         <div className="hero__text__P5k8q">
           <h1 className="typography__heading1__T3m8s">
             <span className="hero__titleWrapper__Q7p3s">
-              {["Shapewebs", "introduce", "the", "magic", "back", "into", "software"].ma((word, i) => (
+              {["Shapewebs", "introduce", "the", "magic", "back", "into", "software"].map((word, i) => (
                 <motion.span
                   key={i}
                   className="hero__titleSpan__H5k8q"
