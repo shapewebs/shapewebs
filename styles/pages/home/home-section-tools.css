@@ -107,7 +107,7 @@
     display: block;
   }
 
-  .section__content__0KLF3:before {
+  .section__content__0KLF3::before {
     content: "";
     display: block;
     margin-top: -20px;
