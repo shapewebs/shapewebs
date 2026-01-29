@@ -1,8 +1,8 @@
 "use client"
 
-import "@/styles/pages/home/home-section-tools"
+import "@/styles/pages/home/tech-showcase.css"
 
-export function TechShowcase() {
+export function HomeSectionTools() {
   return (
       <span className="typography__subtitleText__Z5j8q">
           Using proven modern technologies to build fast, resilient websites
