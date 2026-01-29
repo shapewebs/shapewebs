@@ -13,7 +13,7 @@
   position: relative; 
 }
 
-.hero__text__P5k8q {
+.Flex-module__P5k8q {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -333,7 +333,7 @@
 }
 
 @media (max-width: 640px) {
-  .hero__text__P5k8q {
+  .Flex-module__P5k8q {
     align-items: center;
     gap: 32px;
   }

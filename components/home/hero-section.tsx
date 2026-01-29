@@ -153,7 +153,7 @@ export function HeroSection() {
 
   return (
       <div className="hero__content__L7j3s">
-        <div className="hero__text__P5k8q">
+        <div className="Flex-module__P5k8q">
           <h1 
             className="typography__heading1__T3m8s" 
             style={{margin: 0}}>
