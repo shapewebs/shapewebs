@@ -7,7 +7,7 @@ export function HomeSectionTools() {
     <section className="section__8NC91">
       <div className="section__content__0KLF3">
         <span className="hide-tablet">
-          <p className=""></p>
+          <p className="typography__body__K4n7p"></p>
         </span>
         <span className="show-tablet"></span>
         <div className="HomeSectionTools__container__Z9k4p">
