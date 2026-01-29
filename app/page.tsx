@@ -6,7 +6,9 @@ import "@/styles/pages/home/home.css"
 
 export default function HomePage() {
   return (
-    <HomeSectionHero />
-    <HomeSectionTools />
+    <>
+      <HomeSectionHero />
+      <HomeSectionTools />
+    </>
   )
 }
