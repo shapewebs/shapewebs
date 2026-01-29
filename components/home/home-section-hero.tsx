@@ -194,6 +194,7 @@ export function HomeSectionHero() {
             className="Spacer-module__root__NM019 hide-mobile"
             style={{ '--height': '20px' }}
           >
+          </div>
           <div
             className="Spacer-module__root__NM019 show-mobile"
             style={{ '--height': '20px' }}
