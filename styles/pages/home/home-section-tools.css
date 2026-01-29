@@ -86,7 +86,7 @@
 }
 
 /* Desktop: make the slide wrappers "invisible" to the layout */
-.HomeSectionTools__container__Z9k4p .logos-slide {
+.HomeSectionTools__container__Z9k4p .HomeSectionTools__carousell__Z9k4p {
   display: contents;
 }
 
@@ -104,7 +104,7 @@
     display: block;
   }
 
-  .HomeSectionTools__container__Z9k4p .logos-slide {
+  .HomeSectionTools__container__Z9k4p .HomeSectionTools__carousell__Z9k4p {
     display: inline-flex;
     align-items: center;
     flex-wrap: nowrap;
@@ -121,7 +121,7 @@
 
 /* Optional: respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .HomeSectionTools__container__Z9k4p .logos-slide {
+  .HomeSectionTools__container__Z9k4p .HomeSectionTools__carousell__Z9k4p {
     animation: none !important;
   }
 }

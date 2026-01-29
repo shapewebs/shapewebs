@@ -63,11 +63,11 @@ export function HomeSectionTools() {
 
         {/* Desktop: same flex wrap layout
             Mobile (<=640px): becomes infinite carousel */}
-        <div className="HomeSectionTools__container__Z9k4p logos">
-          <div className="logos-slide">
+        <div className="HomeSectionTools__container__Z9k4p">
+          <div className="HomeSectionTools__carousell__Z9k4p">
             <ToolRow />
           </div>
-          <div className="logos-slide show-mobile" aria-hidden="true">
+          <div className="HomeSectionTools__carousell__Z9k4p show-mobile" aria-hidden="true">
             <ToolRow />
           </div>
         </div>
