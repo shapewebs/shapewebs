@@ -67,7 +67,7 @@ export function HomeSectionTools() {
           <div className="logos-slide">
             <ToolRow />
           </div>
-          <div className="logos-slide" aria-hidden="true">
+          <div className="logos-slide show-mobile" aria-hidden="true">
             <ToolRow />
           </div>
         </div>
