@@ -50,14 +50,14 @@ export function HomeSectionTools() {
   return (
     <section className="section__8NC91">
       <div className="section__content__0KLF3">
-        <span className="hide-tablet content__content__0MS9O">
+        <span className="hide-tablet">
           <p className="typography__emphasize__M9J2o" style={{ margin: 0, textAlign: "center" }}>
             <span className="bitCO">Tools at the leading edge of web development.</span>
             <br aria-hidden="true"></br>
             <span>Trusted by leading companies including OpenAI, Netflix, and Nike.</span>
           </p>
         </span>
-        <span className="show-tablet">
+        <span className="show-tablet content__content__0MS9O">
           <p className="typography__body__K4n7p" style={{ margin: 0, textAlign: "center", textWrap: "balance" }}>
             Tools at the leading edge of web development. Trusted by leading companies including OpenAI, Netflix, and Nike.
           </p>
