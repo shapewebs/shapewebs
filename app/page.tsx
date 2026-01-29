@@ -1,7 +1,7 @@
 "use client"
 
 import { HomeSectionHero } from "@/components/home/hero-section"
-import { TechShowcase } from "@/components/home/tech-showcase"
+import { TechShowcase } from "@/components/home/home-section-hero"
 import "@/styles/pages/home/home.css"
 
 export default function HomePage() {
