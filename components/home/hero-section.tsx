@@ -172,6 +172,25 @@ export function HeroSection() {
               ))}
             </span>
           </h1>
+          <h1 
+            className="typography__heading1__T3m8s" 
+            style={{margin: 0}}>
+            <span className="hero__titleWrapper__Q7p3s">
+              {["Bring", "magic", "to", "your", "software"].map((word, i) => (
+                <motion.span
+                  key={i}
+                  className="hero__titleSpan__H5k8q"
+                  custom={i}
+                  initial="hidden"
+                  animate={controls}
+                  variants={titleVariants}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </span>
+          </h1>
+
           <div
             className="Spacer-module__root__NM019"
             style={{ '--height': '30px' }}
