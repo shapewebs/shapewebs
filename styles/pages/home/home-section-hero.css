@@ -337,6 +337,10 @@
 }
 
 @media (max-width: 640px) {
+  .hero__image__L5k8q::before {
+    margin-top: -200px;
+  }
+
   .hero__actions__Q6j9s {
     flex-direction: column;
     gap: 16px;
