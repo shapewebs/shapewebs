@@ -1,16 +1,12 @@
-"use client"
-
-import { useEffect, useRef, useState } from "react"
-import { useTheme } from "next-themes"
-import { motion, useAnimation, type Variants } from "framer-motion"
-import "@/styles/pages/home/hero-section.css"
-
 export function HeroSection() {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const controls = useAnimation()
 
-  // Decide immediately on first client render (no flash)
+  // ✅ define once, at component scope
+  const darkThemeUrl = "https://i.ibb.co/8gnVqXb3/hero-image-sw-dark.png"
+  const lightThemeUrl = "https://i.ibb.co/5X8mW9nS/hero-image-sw-light.png"
+
   const [shouldAnimate] = useState(() => {
     if (typeof window === "undefined") return true
     return sessionStorage.getItem("heroAnimated") !== "1"
@@ -19,23 +15,21 @@ export function HeroSection() {
   useEffect(() => {
     setMounted(true)
 
-    // preload
     const darkImage = new Image()
-    darkImage.src = "https://i.ibb.co/8gnVqXb3/hero-image-sw-dark.png"
+    darkImage.src = darkThemeUrl
     darkImage.crossOrigin = "anonymous"
 
     const lightImage = new Image()
-    lightImage.src = "https://i.ibb.co/5X8mW9nS/hero-image-sw-light.png"
+    lightImage.src = lightThemeUrl
     lightImage.crossOrigin = "anonymous"
 
     if (shouldAnimate) {
       controls.start("visible")
       sessionStorage.setItem("heroAnimated", "1")
     } else {
-      // ensure we're visible immediately (and stay there)
       controls.set("visible")
     }
-  }, [controls, shouldAnimate])
+  }, [controls, shouldAnimate, darkThemeUrl, lightThemeUrl])
 
   const currentTheme = mounted ? resolvedTheme : "light"
   
