@@ -4,11 +4,11 @@ import "@/styles/pages/home/home-section-tools.css"
 
 export function HomeSectionTools() {
   return (
-      <span className="typography__subtitleText__Z5j8q">
+    <div className="HomeSectionTools__container__Z9k4p">
+            <span className="typography__subtitleText__Z5j8q">
           Using proven modern technologies to build fast, resilient websites
         </span>
       </span>
-    <div className="HomeSectionTools__container__Z9k4p">
       <div className="HomeSectionTools__item__L7j3s">
         <span className="HomeSectionTools__icon__P5k8q">
           <svg 
