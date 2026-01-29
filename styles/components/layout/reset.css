@@ -96,9 +96,12 @@ video {
   box-sizing: border-box;
 }
 
-*::selection,
-:after::selection,
-:before::selection {
+*::-moz-selection {
+  background: rgba(var(--color-bg-selection), 1);
+  color: rgba(var(--color-text-selection), 1);
+}
+
+*::selection {
   background: rgba(var(--color-bg-selection), 1);
   color: rgba(var(--color-text-selection), 1);
 }
