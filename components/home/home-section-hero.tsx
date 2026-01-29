@@ -206,7 +206,7 @@ export function HomeSectionHero() {
             </span>
           </motion.p>
           <div
-            className="Spacer-module__root__NM019"
+            className="hide-mobile Spacer-module__root__NM019"
             style={{ '--height': '30px' }}
           >
           </div>
