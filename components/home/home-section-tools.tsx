@@ -9,7 +9,9 @@ export function HomeSectionTools() {
         <span className="hide-tablet">
           <p className="typography__body__K4n7p">Tools at the leading edge of web development. Trusted by leading companies including OpenAI, Netflix, and Nike.</p>
         </span>
-        <span className="show-tablet"></span>
+        <span className="show-tablet">
+          <p className="typography__body__K4n7p">Tools at the leading edge of web development. Trusted by leading companies including OpenAI, Netflix, and Nike.</p>
+        </span>
         <div className="HomeSectionTools__container__Z9k4p">
           <div className="HomeSectionTools__item__L7j3s">
             <span className="HomeSectionTools__icon__P5k8q">
