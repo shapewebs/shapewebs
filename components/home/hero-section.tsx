@@ -154,22 +154,22 @@ export function HeroSection() {
   return (
       <div className="hero__content__L7j3s">
         <div className="hero__text__P5k8q">
-          <h1>
-            <span className="hero__title__B9j6p">
-              <span className="hero__titleWrapper__Q7p3s">
-                {["Shapewebs", "introduce", "the", "magic", "back", "into", "software"].map((word, i) => (
-                  <motion.span
-                    key={i}
-                    className="hero__titleSpan__H5k8q"
-                    custom={i}
-                    initial="hidden"
-                    animate={controls}
-                    variants={titleVariants}
-                  >
-                    {word}
-                  </motion.span>
-                ))}
-              </span>
+          <h1 
+            className="typography__heading1__T3m8s" 
+            style={{margin: 0}}>
+            <span className="hero__titleWrapper__Q7p3s">
+              {["Shapewebs", "introduce", "the", "magic", "back", "into", "software"].ma((word, i) => (
+                <motion.span
+                  key={i}
+                  className="hero__titleSpan__H5k8q"
+                  custom={i}
+                  initial="hidden"
+                  animate={controls}
+                  variants={titleVariants}
+                >
+                  {word}
+                </motion.span>
+              ))}
             </span>
           </h1>
           <p className="hero__subtitle__K3n7p">
