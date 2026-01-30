@@ -64,6 +64,10 @@
   box-shadow: var(--shadow-stack-medium);
 }
 
+.module__card__H5k8q:not(:first-child) {
+  border-left: 0;
+}
+
 .module__card__H5k8q[data-highlighted="true"]:hover {
   box-shadow: var(--shadow-stack-high);
 }
