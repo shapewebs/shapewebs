@@ -317,10 +317,10 @@ export default function ContactPage() {
                     <p className="typography__body__K4n7p" style={{ margin: 0 }}>Technical question or issue? Think you can find the answer yourself?</p>
                     <div className="Spacer-module__root__NM019" style={{ '--height' : '16px' }}>
                     </div>
-                    <a href="/docs" className="button__root__ZxcvB button__kind-tertiary__R5j2s button__size-small__L9d7h"   style={{
-    margin: 0,
-    "--button-font-size": "var(--font-size-regular)",
-  }}>Find it in docs</a>
+                    <a href="/docs" className="button__root__ZxcvB button__kind-tertiary__R5j2s button__size-small__L9d7h" style={{
+                      margin: 0,
+                      "--button-font-size": "var(--font-size-regular)",
+                    }}>Find it in docs</a>
                     
                 </div>
                 <div className="form__container__H8j3p">
