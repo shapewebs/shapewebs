@@ -100,6 +100,11 @@
   box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
 }
 
+.form__select__P9j2k.is-placeholder {
+  color: rgba(var(--color-text-tertiary), 1);
+}
+
+
 .form__textarea__Q6p3f {
   min-height: 160px;
   resize: vertical;
