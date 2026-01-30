@@ -332,7 +332,7 @@ input:-webkit-autofill:focus {
   font-size: var(--font-size-regular);
   justify-content: center;
   align-items: center;
-  box-shadow: 1px 0 0 0 rgba(var(--color-border-secondary), 1);
+  border-right: 1px solid rgba(var(--color-border-secondary), 1);
 }
 
 .form__inputPhoneNR__select__H5k8q {
@@ -380,7 +380,7 @@ input:-webkit-autofill:focus {
 
 .form__inputPhoneNR__H5k8q:focus-within {
   border-color: var(--color-blue);
-  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(51, 76, 102, 0.1);
 }
 
 .form__inputPhoneNR__H5k8q:focus-within .form__inputPhoneNRFlag__H5k8q {
