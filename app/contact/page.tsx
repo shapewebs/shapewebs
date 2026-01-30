@@ -313,7 +313,7 @@ export default function ContactPage() {
                         <span>From idea to launch, you can learn about our <a href="/method"
                                 className="typography__link__B7s3m">method</a> or talk to sales.</span>
                     </p>
-                    <p className="typography__body__K4n7p">Technical question or issue? Do you think you can find the answer yourself?</p>
+                    <p className="typography__body__K4n7p">Technical question or issue? Think you can find the answer yourself?</p>
                     <a href="/docs" className="button__root__ZxcvB button__kind-tertiary__R5j2s button__size-small__L9d7h">Find it in docs</a>
                 </div>
                 <div className="form__container__H8j3p">
