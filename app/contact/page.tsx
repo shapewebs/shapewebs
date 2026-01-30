@@ -325,8 +325,7 @@ export default function ContactPage() {
                                 viewBox="-0.0002 -0.0003 16.0005 15.9996" width="16.0005px" height="15.9996px">
                                 <path
                                     d="M 11.778 7.435 C 12.09 7.748 12.09 8.255 11.778 8.568 L 6.978 13.368 C 6.665 13.68 6.158 13.68 5.845 13.368 C 5.533 13.055 5.533 12.548 5.845 12.235 L 10.08 8 L 5.848 3.765 C 5.535 3.453 5.535 2.945 5.848 2.633 C 6.16 2.32 6.668 2.32 6.98 2.633 L 11.78 7.433 L 11.778 7.435 Z"
-                                    style={{ fill: "none" , paintOrder: "fill" , stroke: "currentColor" ,
-                                    strokeWidth: "1.25px" , }} transform="matrix(1, 0, 0, 1, 0, -1.7763568394002505e-15)" />
+                                    style={{ fill: "cuttentColor" , paintOrder: "fill" }} transform="matrix(1, 0, 0, 1, 0, -1.7763568394002505e-15)" />
                             </svg>
                     </a>
                 </div>
