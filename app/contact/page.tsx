@@ -365,7 +365,7 @@ export default function ContactPage() {
               </div>
 
               {/* Line 2: Name and Phone Number with Country Selector */}
-              <div className="contact__form-row__N7k3s">
+              <div className="form__group--row__M93j8">
                 <div className="form__group__K7p2s">
                   <label htmlFor="name" className="form__label__B9f4k">
                     Your name
@@ -446,7 +446,7 @@ export default function ContactPage() {
               </div>
 
               {/* Line 4: Company Size and Website */}
-              <div className="contact__form-row__N7k3s">
+              <div className="form__group--row__M93j8">
                 <div className="form__group__K7p2s">
                   <label htmlFor="companySize" className="form__label__B9f4k">
                     Company size
