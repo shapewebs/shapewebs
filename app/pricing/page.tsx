@@ -99,8 +99,6 @@ export default function PricingPage() {
                   <h3 className="typography__heading4__Z7p4s" style={{ margin: 0 }}>
                     {plan.name}
                   </h3>
-
-                  {plan.highlighted ? <span className="pricing__badge__B9k6p">Most popular</span> : <span className="pricing__badge--ghost__B9k6p" aria-hidden="true" />}
                 </div>
 
                 <div className="Spacer-module__root__NM019" style={{ "--height": "12px" } as React.CSSProperties} />
