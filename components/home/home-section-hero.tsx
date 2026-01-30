@@ -9,57 +9,49 @@ export function HomeSectionHero() {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const controls = useAnimation()
-  const heroImageRefs = useRef<{
-    overviewNav: HTMLDivElement | null
-    firstNavItem: HTMLDivElement | null
-    navItems: (HTMLDivElement | null)[]
-    page: HTMLDivElement | null
-  }>({ 
-    overviewNav: null,
-    firstNavItem: null,
-    navItems: [],
-    page: null,
-  })
 
   // Define the image URLs
   const darkThemeUrl = "https://i.ibb.co/8gnVqXb3/hero-image-sw-dark.png"
   const lightThemeUrl = "https://i.ibb.co/5X8mW9nS/hero-image-sw-light.png"
 
-const hasAnimated = useRef(false)
+  // ✅ survives re-renders; prevents replaying animation within the same component instance
+  const hasAnimated = useRef(false)
 
-useEffect(() => {
-  if (hasAnimated.current) return
-  hasAnimated.current = true
+  // ✅ Always set mounted on each mount (don’t gate this)
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
-  setMounted(true)
+  // ✅ Only run the expensive one-time stuff once
+  useEffect(() => {
+    if (hasAnimated.current) return
+    hasAnimated.current = true
 
-  const darkImage = new Image()
-  darkImage.src = darkThemeUrl
-  darkImage.crossOrigin = "anonymous"
+    // Preload images
+    const darkImage = new Image()
+    darkImage.crossOrigin = "anonymous"
+    darkImage.src = darkThemeUrl
 
-  const lightImage = new Image()
-  lightImage.src = lightThemeUrl
-  lightImage.crossOrigin = "anonymous"
+    const lightImage = new Image()
+    lightImage.crossOrigin = "anonymous"
+    lightImage.src = lightThemeUrl
 
-  controls.start("visible")
-}, [controls])
-  
+    // Start animations
+    controls.start("visible")
+  }, [controls, darkThemeUrl, lightThemeUrl])
+
   const currentTheme = mounted ? resolvedTheme : "light"
 
   const titleVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      y: "20%",
-      filter: "blur(10px)",
-    },
+    hidden: { opacity: 0, y: "20%", filter: "blur(10px)" },
     visible: (i) => ({
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
       transition: {
         duration: 1,
-        ease: [0.26, 0.49, 0.42, 0.95], // var(--ease-out-quad)
-        delay: 0.6 + i * 0.08, // Added 0.5 to the original 0.1
+        ease: [0.26, 0.49, 0.42, 0.95],
+        delay: 0.6 + i * 0.08,
       },
     }),
   }
