@@ -378,7 +378,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                 >
-                  <option value="">Select your country</option>
+                  <option value="" disabled hidden>Select your country</option>
                   {countries.map((country) => (
                     <option key={country.code} value={country.code}>
                       {country.name}
@@ -401,7 +401,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                   >
-                    <option value="">Select company size</option>
+                    <option value="" disabled hidden>Select company size</option>
                     {companySizes.map((size) => (
                       <option key={size} value={size}>
                         {size} employees
@@ -439,7 +439,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                 >
-                  <option value="">Select a website type</option>
+                  <option value="" disabled hidden>Select a website type</option>
                   {productInterests.map((interest) => (
                     <option key={interest} value={interest}>
                       {interest}
