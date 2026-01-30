@@ -68,10 +68,9 @@ export default function ContactPage() {
     { code: "CO", name: "Colombia", flag: "🇨🇴" },
     { code: "KM", name: "Comoros", flag: "🇰🇲" },
     { code: "CG", name: "Congo", flag: "🇨🇬" },
-    { code: "CD", name: "Congo Democratic Republic", flag: "🇨🇩" },
+    { code: "CD", name: "Congo (Democratic Republic of the)", flag: "🇨🇩" },
     { code: "CK", name: "Cook Islands", flag: "🇨🇰" },
     { code: "CR", name: "Costa Rica", flag: "🇨🇷" },
-    { code: "CI", name: "Côte d'Ivoire", flag: "🇨🇮" },
     { code: "HR", name: "Croatia", flag: "🇭🇷" },
     { code: "CU", name: "Cuba", flag: "🇨🇺" },
     { code: "CW", name: "Curaçao", flag: "🇨🇼" },
@@ -113,6 +112,7 @@ export default function ContactPage() {
     { code: "GW", name: "Guinea-Bissau", flag: "🇬🇼" },
     { code: "GY", name: "Guyana", flag: "🇬🇾" },
     { code: "HT", name: "Haiti", flag: "🇭🇹" },
+    { code: "HM", name: "Heard Island and McDonald Islands", flag: "🇭🇲" },
     { code: "HN", name: "Honduras", flag: "🇭🇳" },
     { code: "HK", name: "Hong Kong", flag: "🇭🇰" },
     { code: "HU", name: "Hungary", flag: "🇭🇺" },
@@ -132,7 +132,8 @@ export default function ContactPage() {
     { code: "KZ", name: "Kazakhstan", flag: "🇰🇿" },
     { code: "KE", name: "Kenya", flag: "🇰🇪" },
     { code: "KI", name: "Kiribati", flag: "🇰🇮" },
-    { code: "XK", name: "Kosovo", flag: "🇽🇰" },
+    { code: "KP", name: "Korea (Democratic People's Republic of)", flag: "🇰🇵" },
+    { code: "KR", name: "Korea (Republic of)", flag: "🇰🇷" },
     { code: "KW", name: "Kuwait", flag: "🇰🇼" },
     { code: "KG", name: "Kyrgyzstan", flag: "🇰🇬" },
     { code: "LA", name: "Laos", flag: "🇱🇦" },
@@ -157,7 +158,7 @@ export default function ContactPage() {
     { code: "MU", name: "Mauritius", flag: "🇲🇺" },
     { code: "YT", name: "Mayotte", flag: "🇾🇹" },
     { code: "MX", name: "Mexico", flag: "🇲🇽" },
-    { code: "FM", name: "Micronesia", flag: "🇫🇲" },
+    { code: "FM", name: "Micronesia (Federated States of)", flag: "🇫🇲" },
     { code: "MD", name: "Moldova", flag: "🇲🇩" },
     { code: "MC", name: "Monaco", flag: "🇲🇨" },
     { code: "MN", name: "Mongolia", flag: "🇲🇳" },
@@ -176,13 +177,12 @@ export default function ContactPage() {
     { code: "NG", name: "Nigeria", flag: "🇳🇬" },
     { code: "NU", name: "Niue", flag: "🇳🇺" },
     { code: "NF", name: "Norfolk Island", flag: "🇳🇫" },
-    { code: "KP", name: "North Korea", flag: "🇰🇵" },
     { code: "MP", name: "Northern Mariana Islands", flag: "🇲🇵" },
     { code: "NO", name: "Norway", flag: "🇳🇴" },
     { code: "OM", name: "Oman", flag: "🇴🇲" },
     { code: "PK", name: "Pakistan", flag: "🇵🇰" },
     { code: "PW", name: "Palau", flag: "🇵🇼" },
-    { code: "PS", name: "Palestine", flag: "🇵🇸" },
+    { code: "PS", name: "Palestine, State of", flag: "🇵🇸" },
     { code: "PA", name: "Panama", flag: "🇵🇦" },
     { code: "PG", name: "Papua New Guinea", flag: "🇵🇬" },
     { code: "PY", name: "Paraguay", flag: "🇵🇾" },
@@ -220,16 +220,16 @@ export default function ContactPage() {
     { code: "SO", name: "Somalia", flag: "🇸🇴" },
     { code: "ZA", name: "South Africa", flag: "🇿🇦" },
     { code: "GS", name: "South Georgia and the South Sandwich Islands", flag: "🇬🇸" },
-    { code: "KR", name: "South Korea", flag: "🇰🇷" },
     { code: "SS", name: "South Sudan", flag: "🇸🇸" },
     { code: "ES", name: "Spain", flag: "🇪🇸" },
     { code: "LK", name: "Sri Lanka", flag: "🇱🇰" },
     { code: "SD", name: "Sudan", flag: "🇸🇩" },
     { code: "SR", name: "Suriname", flag: "🇸🇷" },
     { code: "SJ", name: "Svalbard and Jan Mayen", flag: "🇸🇯" },
+    { code: "SZ", name: "Eswatini", flag: "🇸🇿" },
     { code: "SE", name: "Sweden", flag: "🇸🇪" },
     { code: "CH", name: "Switzerland", flag: "🇨🇭" },
-    { code: "SY", name: "Syria", flag: "🇸🇾" },
+    { code: "SY", name: "Syrian Arab Republic", flag: "🇸🇾" },
     { code: "TW", name: "Taiwan", flag: "🇹🇼" },
     { code: "TJ", name: "Tajikistan", flag: "🇹🇯" },
     { code: "TZ", name: "Tanzania", flag: "🇹🇿" },
@@ -249,13 +249,14 @@ export default function ContactPage() {
     { code: "AE", name: "United Arab Emirates", flag: "🇦🇪" },
     { code: "GB", name: "United Kingdom", flag: "🇬🇧" },
     { code: "US", name: "United States", flag: "🇺🇸" },
+    { code: "UM", name: "United States Minor Outlying Islands", flag: "🇺🇲" },
     { code: "UY", name: "Uruguay", flag: "🇺🇾" },
     { code: "UZ", name: "Uzbekistan", flag: "🇺🇿" },
     { code: "VU", name: "Vanuatu", flag: "🇻🇺" },
     { code: "VE", name: "Venezuela", flag: "🇻🇪" },
     { code: "VN", name: "Vietnam", flag: "🇻🇳" },
     { code: "VG", name: "Virgin Islands (British)", flag: "🇻🇬" },
-    { code: "VI", name: "Virgin Islands (US)", flag: "🇻🇮" },
+    { code: "VI", name: "Virgin Islands (U.S.)", flag: "🇻🇮" },
     { code: "WF", name: "Wallis and Futuna", flag: "🇼🇫" },
     { code: "EH", name: "Western Sahara", flag: "🇪🇭" },
     { code: "YE", name: "Yemen", flag: "🇾🇪" },
@@ -267,7 +268,6 @@ export default function ContactPage() {
   const productInterests = ["Marketing Website", "E-Commerce Store", "Web Application", "Mobile App", "Other"]
 
   const [showCountryDropdown, setShowCountryDropdown] = useState(false)
-  const [showPhoneCountryDropdown, setShowPhoneCountryDropdown] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target
@@ -275,14 +275,6 @@ export default function ContactPage() {
       ...prev,
       [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
     }))
-  }
-
-  const handlePhoneCountrySelect = (code: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      phoneCountry: code,
-    }))
-    setShowPhoneCountryDropdown(false)
   }
 
   const handleCountrySelect = (code: string) => {
@@ -298,7 +290,6 @@ export default function ContactPage() {
     console.log("Form submitted:", formData)
   }
 
-  const selectedPhoneCountry = countries.find((c) => c.code === formData.phoneCountry)
   const selectedCountry = countries.find((c) => c.code === formData.country)
 
   return (
@@ -409,30 +400,19 @@ export default function ContactPage() {
                     Phone Number <span className="contact__optional__K5j8q">(optional)</span>
                   </label>
                   <div className="contact__phone-input-wrapper__M8k5p">
-                    <div className="contact__phone-country-selector__B9k6p">
-                      <button
-                        type="button"
-                        className="contact__country-selector-button__L7p3s"
-                        onClick={() => setShowPhoneCountryDropdown(!showPhoneCountryDropdown)}
-                      >
-                        <span className="contact__flag__K5j8q">{selectedPhoneCountry?.flag}</span>
-                      </button>
-                      {showPhoneCountryDropdown && (
-                        <div className="contact__country-dropdown__P5k8p">
-                          {countries.map((country) => (
-                            <button
-                              key={country.code}
-                              type="button"
-                              className="contact__country-option__Q7j3s"
-                              onClick={() => handlePhoneCountrySelect(country.code)}
-                            >
-                              <span className="contact__flag__K5j8q">{country.flag}</span>
-                              <span>{country.name}</span>
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                    </div>
+                    <select
+                      id="phoneCountry"
+                      name="phoneCountry"
+                      className="contact__phone-country-select__B9k6p"
+                      value={formData.phoneCountry}
+                      onChange={handleChange}
+                    >
+                      {countries.map((country) => (
+                        <option key={country.code} value={country.code}>
+                          {country.flag} {country.name}
+                        </option>
+                      ))}
+                    </select>
                     <input
                       type="tel"
                       id="phoneNumber"

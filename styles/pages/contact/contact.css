@@ -177,51 +177,31 @@
   display: flex;
   gap: 0;
   align-items: stretch;
-  border: 1px solid rgba(var(--color-border-secondary), 1);
-  border-radius: 8px;
+}
+
+.contact__phone-country-select__B9k6p {
+  padding: 0.75rem 0.5rem;
+  font-size: var(--font-size-regular);
+  color: rgba(var(--color-text-primary), 1);
   background-color: rgba(var(--color-bg-secondary), 1);
-  overflow: hidden;
+  border: 1px solid rgba(var(--color-border-secondary), 1);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  font-family: inherit;
+  min-width: 60px;
+}
+
+.contact__phone-country-select__B9k6p:focus {
+  outline: none;
+  border-color: var(--color-blue);
 }
 
 .contact__phone-input__H5k8q {
   flex: 1;
-  border: none !important;
-  border-radius: 0 !important;
-  border-left: 1px solid rgba(var(--color-border-secondary), 1) !important;
-  padding: 0.75rem !important;
-}
-
-.contact__phone-country-selector__B9k6p {
-  position: relative;
-  display: flex;
-}
-
-.contact__country-selector-button__L7p3s {
-  width: 50px;
-  height: 40px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  font-size: 1.25rem;
-  flex-shrink: 0;
-}
-
-.contact__country-selector-button__L7p3s:hover {
-  background-color: rgba(var(--color-bg-tertiary), 0.5);
-}
-
-.contact__country-selector-button__L7p3s:focus {
-  outline: none;
-}
-
-.contact__phone-input-wrapper__M8k5p:focus-within {
-  border-color: var(--color-blue);
-  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+  border-radius: 0 8px 8px 0;
+  border-left: none;
 }
 
 /* Country input wrapper */
@@ -320,6 +300,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  width: 100%;
 }
 
 .contact__consent-label__B9k6p {
