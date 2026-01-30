@@ -311,3 +311,10 @@ input:-webkit-autofill:focus {
 .signup-form__submission-message--error {
   color: var(--color-red);
 }
+
+/* Phone number input */
+.form__inputPhoneNR__H5k8q {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+}

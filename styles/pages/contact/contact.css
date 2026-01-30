@@ -76,12 +76,6 @@
 }
 
 /* Phone number input wrapper */
-.contact__phone-input-wrapper__M8k5p {
-  display: flex;
-  gap: 0;
-  align-items: stretch;
-}
-
 .contact__phone-country-wrapper__Z9k3s {
   background-color: rgba(var(--color-bg-tertiary), 1);
   border-right: none;
