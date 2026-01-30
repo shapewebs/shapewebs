@@ -288,6 +288,7 @@ export default function ContactPage() {
           <p className="contact__reasons-intro__Q4n6s">
             Reach out to see what Shapewebs can build for your team, and what it can do for your business.
           </p>
+        </div>
         <p className="typography__subtitle__R6m2x">
         <span className="bitCO">Start with a custom demo</span>
         <span>Discover the value of a carefully crafted web presence by Shapewebs.</span>
