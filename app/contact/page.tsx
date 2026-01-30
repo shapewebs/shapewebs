@@ -281,282 +281,192 @@ export default function ContactPage() {
 
   return (
     <section className="contact__container__Q7j3s">
-      <div className="contact__content__K9j6q">
-        <div className="contact__grid__L7p3s">
-          <div className="contact__info-container__H5k8q">
-            <h3 className="typography__heading3__V1c8r" style={{ margin: "0px" }}>Contact sales</h3>
-            <div
-            className="Spacer-module__root__NM019"
-            style={{ '--height': '32px' }}
-          >
-          </div>
-            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
-              <span className="Text-regular-bitC bitCO"><svg
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="-0.0002 -0.0003 16.0005 15.9996"
-  width="16.0005px"
-  height="15.9996px"
->
-  <path
-    d="M 5.605 2.225 C 5.408 1.753 4.893 1.503 4.403 1.635 L 4.265 1.673 C 2.65 2.113 1.27 3.678 1.673 5.583 C 2.6 9.958 6.043 13.4 10.418 14.328 C 12.325 14.733 13.888 13.35 14.328 11.735 L 14.365 11.598 C 14.5 11.105 14.248 10.59 13.778 10.395 L 11.345 9.383 C 10.933 9.21 10.455 9.33 10.17 9.678 L 9.205 10.858 C 7.448 9.985 6.033 8.525 5.22 6.733 L 6.325 5.833 C 6.673 5.55 6.79 5.073 6.62 4.658 L 5.605 2.225 Z"
-    style={{
-      fill: "none",
-      paintOrder: "fill",
-      stroke: "currentColor",
-      strokeWidth: "1.25px",
-    }}
-    transform="matrix(1, 0, 0, 1, 0, -1.7763568394002505e-15)"
-  />
-</svg>
- Start with a custom demo. </span>
-              <span>Discover the value of a carefully crafted web presence by Shapewebs.</span>
-            </p>
-                      <div
-            className="Spacer-module__root__NM019"
-            style={{ '--height': '24px' }}
-          >
-          </div>
-
-            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
-              <span className="Text-regular-bitC bitCO"><svg
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="-0.0002 -0.0003 16.0005 15.9996"
-  width="16.0005px"
-  height="15.9996px"
->
-  <path
-    d="M 1.6 3.6 C 1.6 2.938 2.138 2.4 2.8 2.4 L 5.2 2.4 C 5.863 2.4 6.4 2.938 6.4 3.6 L 6.4 4 L 9.6 4 L 9.6 3.6 C 9.6 2.938 10.138 2.4 10.8 2.4 L 13.2 2.4 C 13.863 2.4 14.4 2.938 14.4 3.6 L 14.4 6 C 14.4 6.663 13.863 7.2 13.2 7.2 L 10.8 7.2 C 10.138 7.2 9.6 6.663 9.6 6 L 9.6 5.6 L 6.4 5.6 L 6.4 6 C 6.4 6.183 6.358 6.358 6.285 6.513 L 8 8.8 L 10 8.8 C 10.663 8.8 11.2 9.338 11.2 10 L 11.2 12.4 C 11.2 13.063 10.663 13.6 10 13.6 L 7.6 13.6 C 6.938 13.6 6.4 13.063 6.4 12.4 L 6.4 10 C 6.4 9.818 6.443 9.643 6.515 9.488 L 4.8 7.2 L 2.8 7.2 C 2.138 7.2 1.6 6.663 1.6 6 L 1.6 3.6 Z"
-    style={{
-      fill: "none",
-      paintOrder: "fill",
-      stroke: "currentColor",
-      strokeWidth: "1.25px",
-    }}
-    transform="matrix(1, 0, 0, 1, 0, -1.7763568394002505e-15)"
-  />
-</svg>
-See the process in action. </span>
-              <span>From idea to launch, you can learn about our <a href="/method" className="typography__link__B7s3m">method</a> or talk to sales.</span>
-            </p>
-          </div>
-          <div className="form__container__H8j3p">
-            <form className="contact__form__P5k8p" onSubmit={handleSubmit}>
-              {/* Line 1: Company Email */}
-              <div className="form__group__K7p2s">
-                <label htmlFor="companyEmail" className="form__label__B9f4k">
-                  Company email
-                </label>
-                <input
-                  type="email"
-                  id="companyEmail"
-                  name="companyEmail"
-                  className="form__input__Z3n7q"
-                  placeholder="tyler@company.com"
-                  value={formData.companyEmail}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              {/* Line 2: Name and Phone Number with Country Selector */}
-              <div className="form__group--row__M93j8">
-                <div className="form__group__K7p2s">
-                  <label htmlFor="name" className="form__label__B9f4k">
-                    Your name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    className="form__input__Z3n7q"
-                    placeholder="Tyler Durden"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="form__group__K7p2s">
-                  <label htmlFor="phoneNumber" className="form__label__B9f4k">
-                    Phone number <span className="contact__optional__K5j8q">(optional)</span>
-                  </label>
-                  <div className="form__inputPhoneNR__H5k8q">
-                    <div className="form__inputPhoneNRFlag__H5k8q">
-                      <select
-                        id="phoneCountry"
-                        name="phoneCountry"
-                        className="form__inputPhoneNR__select__H5k8q"
-                        value={formData.phoneCountry}
-                        onChange={handleChange}
-                        title="Select country"
-                      >
-                        {countries.map((country) => (
-                          <option key={country.code} value={country.code}>
-                            {country.name}
-                          </option>
-                        ))}
-                      </select>
-                      <div aria-hidden="true" className="form__inputPhoneNR__img--wrapper__H5k8q">
-                        <img
-                          className="form__inputPhoneNR__img__H5k8q"
-                          alt={countries.find((c) => c.code === formData.phoneCountry)?.name || "Country"}
-                          src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${formData.phoneCountry}.svg`}
-                        />
-                      </div>
+        <div className="contact__content__K9j6q">
+            <div className="contact__grid__L7p3s">
+                <div className="contact__info-container__H5k8q">
+                    <h3 className="typography__heading3__V1c8r" style={{ margin: "0px" }}>Contact sales</h3>
+                    <div className="Spacer-module__root__NM019" style={{ '--height' : '32px' }}>
                     </div>
-                    <input
-                      type="tel"
-                      id="phoneNumber"
-                      name="phoneNumber"
-                      className="form__input__Z3n7q"
-                      placeholder="Phone number"
-                      value={formData.phoneNumber}
-                      onChange={handleChange}
-                    />
-                  </div>
+                    <p className="typography__body__K4n7p" style={{ margin: 0 }}>
+                        <span className="Text-regular-bitC bitCO"><svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="-0.0002 -0.0003 16.0005 15.9996" width="16.0005px" height="15.9996px">
+                                <path
+                                    d="M 5.605 2.225 C 5.408 1.753 4.893 1.503 4.403 1.635 L 4.265 1.673 C 2.65 2.113 1.27 3.678 1.673 5.583 C 2.6 9.958 6.043 13.4 10.418 14.328 C 12.325 14.733 13.888 13.35 14.328 11.735 L 14.365 11.598 C 14.5 11.105 14.248 10.59 13.778 10.395 L 11.345 9.383 C 10.933 9.21 10.455 9.33 10.17 9.678 L 9.205 10.858 C 7.448 9.985 6.033 8.525 5.22 6.733 L 6.325 5.833 C 6.673 5.55 6.79 5.073 6.62 4.658 L 5.605 2.225 Z"
+                                    style={{ fill: "none" , paintOrder: "fill" , stroke: "currentColor" ,
+                                    strokeWidth: "1.25px" , }} transform="matrix(1, 0, 0, 1, 0, -1.7763568394002505e-15)" />
+                            </svg>
+                            Start with a custom demo. </span>
+                        <span>Discover the value of a carefully crafted web presence by Shapewebs.</span>
+                    </p>
+                    <div className="Spacer-module__root__NM019" style={{ '--height' : '24px' }}>
+                    </div>
+
+                    <p className="typography__body__K4n7p" style={{ margin: 0 }}>
+                        <span className="Text-regular-bitC bitCO"><svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="-0.0002 -0.0003 16.0005 15.9996" width="16.0005px" height="15.9996px">
+                                <path
+                                    d="M 1.6 3.6 C 1.6 2.938 2.138 2.4 2.8 2.4 L 5.2 2.4 C 5.863 2.4 6.4 2.938 6.4 3.6 L 6.4 4 L 9.6 4 L 9.6 3.6 C 9.6 2.938 10.138 2.4 10.8 2.4 L 13.2 2.4 C 13.863 2.4 14.4 2.938 14.4 3.6 L 14.4 6 C 14.4 6.663 13.863 7.2 13.2 7.2 L 10.8 7.2 C 10.138 7.2 9.6 6.663 9.6 6 L 9.6 5.6 L 6.4 5.6 L 6.4 6 C 6.4 6.183 6.358 6.358 6.285 6.513 L 8 8.8 L 10 8.8 C 10.663 8.8 11.2 9.338 11.2 10 L 11.2 12.4 C 11.2 13.063 10.663 13.6 10 13.6 L 7.6 13.6 C 6.938 13.6 6.4 13.063 6.4 12.4 L 6.4 10 C 6.4 9.818 6.443 9.643 6.515 9.488 L 4.8 7.2 L 2.8 7.2 C 2.138 7.2 1.6 6.663 1.6 6 L 1.6 3.6 Z"
+                                    style={{ fill: "none" , paintOrder: "fill" , stroke: "currentColor" ,
+                                    strokeWidth: "1.25px" , }} transform="matrix(1, 0, 0, 1, 0, -1.7763568394002505e-15)" />
+                            </svg>
+                            See the process in action. </span>
+                        <span>From idea to launch, you can learn about our <a href="/method"
+                                className="typography__link__B7s3m">method</a> or talk to sales.</span>
+                    </p>
                 </div>
-              </div>
+                <div className="form__container__H8j3p">
+                    <form className="contact__form__P5k8p" onSubmit={handleSubmit}>
+                        {/* Line 1: Company Email */}
+                        <div className="form__group__K7p2s">
+                            <label htmlFor="companyEmail" className="form__label__B9f4k">
+                                Company email
+                            </label>
+                            <input type="email" id="companyEmail" name="companyEmail" className="form__input__Z3n7q"
+                                placeholder="tyler@company.com" value={formData.companyEmail} onChange={handleChange}
+                                required />
+                        </div>
 
-              {/* Line 3: Country */}
-              <div className="form__group__K7p2s">
-                <label htmlFor="country" className="form__label__B9f4k">
-                  Country
-                </label>
-                <select
-                  id="country"
-                  name="country"
-                  className={`form__select__P9j2k ${formData.country === "" ? "is-placeholder" : ""}`}
-                  value={formData.country}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="" disabled hidden>Select your country</option>
-                  {countries.map((country) => (
-                    <option key={country.code} value={country.code}>
-                      {country.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                        {/* Line 2: Name and Phone Number with Country Selector */}
+                        <div className="form__group--row__M93j8">
+                            <div className="form__group__K7p2s">
+                                <label htmlFor="name" className="form__label__B9f4k">
+                                    Your name
+                                </label>
+                                <input type="text" id="name" name="name" className="form__input__Z3n7q"
+                                    placeholder="Tyler Durden" value={formData.name} onChange={handleChange} required />
+                            </div>
 
-              {/* Line 4: Company Size and Website */}
-              <div className="form__group--row__M93j8">
-                <div className="form__group__K7p2s">
-                  <label htmlFor="companySize" className="form__label__B9f4k">
-                    Company size
-                  </label>
-                  <select
-                    id="companySize"
-                    name="companySize"
-                    className={`form__select__P9j2k ${formData.country === "" ? "is-placeholder" : ""}`}
-                    value={formData.companySize}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="" disabled hidden>Select company size</option>
-                    {companySizes.map((size) => (
-                      <option key={size} value={size}>
-                        {size} employees
-                      </option>
-                    ))}
-                  </select>
+                            <div className="form__group__K7p2s">
+                                <label htmlFor="phoneNumber" className="form__label__B9f4k">
+                                    Phone number <span className="contact__optional__K5j8q">(optional)</span>
+                                </label>
+                                <div className="form__inputPhoneNR__H5k8q">
+                                    <div className="form__inputPhoneNRFlag__H5k8q">
+                                        <select id="phoneCountry" name="phoneCountry"
+                                            className="form__inputPhoneNR__select__H5k8q" value={formData.phoneCountry}
+                                            onChange={handleChange} title="Select country">
+                                            {countries.map((country) => (
+                                            <option key={country.code} value={country.code}>
+                                                {country.name}
+                                            </option>
+                                            ))}
+                                        </select>
+                                        <div aria-hidden="true" className="form__inputPhoneNR__img--wrapper__H5k8q">
+                                            <img className="form__inputPhoneNR__img__H5k8q" alt={countries.find((c)=> c.code
+                                            === formData.phoneCountry)?.name || "Country"}
+                                            src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${formData.phoneCountry}.svg`}
+                                            />
+                                        </div>
+                                    </div>
+                                    <input type="tel" id="phoneNumber" name="phoneNumber" className="form__input__Z3n7q"
+                                        placeholder="Phone number" value={formData.phoneNumber} onChange={handleChange} />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Line 3: Country */}
+                        <div className="form__group__K7p2s">
+                            <label htmlFor="country" className="form__label__B9f4k">
+                                Country
+                            </label>
+                            <select id="country" name="country" className={`form__select__P9j2k ${formData.country===""
+                                ? "is-placeholder" : "" }`} value={formData.country} onChange={handleChange} required>
+                                <option value="" disabled hidden>Select your country</option>
+                                {countries.map((country) => (
+                                <option key={country.code} value={country.code}>
+                                    {country.name}
+                                </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        {/* Line 4: Company Size and Website */}
+                        <div className="form__group--row__M93j8">
+                            <div className="form__group__K7p2s">
+                                <label htmlFor="companySize" className="form__label__B9f4k">
+                                    Company size
+                                </label>
+                                <select id="companySize" name="companySize" className={`form__select__P9j2k
+                                    ${formData.country==="" ? "is-placeholder" : "" }`} value={formData.companySize}
+                                    onChange={handleChange} required>
+                                    <option value="" disabled hidden>Select company size</option>
+                                    {companySizes.map((size) => (
+                                    <option key={size} value={size}>
+                                        {size} employees
+                                    </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div className="form__group__K7p2s">
+                                <label htmlFor="website" className="form__label__B9f4k">
+                                    Company website <span className="contact__optional__K5j8q">(optional)</span>
+                                </label>
+                                <input type="url" id="website" name="website" className="form__input__Z3n7q"
+                                    placeholder="https://address.com" value={formData.website} onChange={handleChange} />
+                            </div>
+                        </div>
+
+                        {/* Line 5: Primary Product Interest */}
+                        <div className="form__group__K7p2s">
+                            <label htmlFor="productInterest" className="form__label__B9f4k">
+                                Primary product interest
+                            </label>
+                            <select id="productInterest" name="productInterest" className={`form__select__P9j2k
+                                ${formData.country==="" ? "is-placeholder" : "" }`} value={formData.productInterest}
+                                onChange={handleChange} required>
+                                <option value="" disabled hidden>Select a value</option>
+                                {productInterests.map((interest) => (
+                                <option key={interest} value={interest}>
+                                    {interest}
+                                </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        {/* Line 6: How can we help? */}
+                        <div className="form__group__K7p2s">
+                            <label htmlFor="message" className="form__label__B9f4k">
+                                How can we help?
+                            </label>
+                            <textarea id="message" name="message" className="form__textarea__Q6p3f"
+                                placeholder="Tell us about your project..." value={formData.message} onChange={handleChange}
+                                required></textarea>
+                        </div>
+
+                        {/* Consent Checkbox */}
+                        <div className="contact__form-consent__R5j2s">
+                            <div className="contact__consent-content__P5k8p">
+                                <label htmlFor="consentMarketing" className="contact__consent-label__B9k6p">
+                                    Yes, I agree to receive marketing communications from Shapewebs as described in your{"
+                                    "}
+                                    <a href="/privacy-policy" className="typography__link__B7s3m">
+                                        Privacy Policy
+                                    </a>
+                                    . I can withdraw my consent at any time by clicking the unsubscribe link in the emails.
+                                </label>
+
+                                {/* iOS toggle */}
+                                <div className="contact__toggle-wrapper__T7g2m">
+                                    <input required className="contact__toggle__T7g2m contact__toggle--ios__T7g2m"
+                                        id="consentMarketing" name="consentMarketing" type="checkbox"
+                                        checked={formData.consentMarketing} onChange={handleChange} />
+                                    <label className="contact__toggle-btn__T7g2m" htmlFor="consentMarketing" />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Submit Button */}
+                        <div className="contact__form-submit__Q7p3s">
+                            <button className="button__root__ZxcvB button__kind-primary__R5j2s button__size-medium__L9d7h"
+                                type="submit" style={{ width: "100%" , justifyContent: "center" }}>
+                                Talk to Shapewebs
+                            </button>
+                        </div>
+                    </form>
                 </div>
-
-                <div className="form__group__K7p2s">
-                  <label htmlFor="website" className="form__label__B9f4k">
-                    Company website <span className="contact__optional__K5j8q">(optional)</span>
-                  </label>
-                  <input
-                    type="url"
-                    id="website"
-                    name="website"
-                    className="form__input__Z3n7q"
-                    placeholder="https://address.com"
-                    value={formData.website}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-
-              {/* Line 5: Primary Product Interest */}
-              <div className="form__group__K7p2s">
-                <label htmlFor="productInterest" className="form__label__B9f4k">
-                  Primary product interest
-                </label>
-                <select
-                  id="productInterest"
-                  name="productInterest"
-                  className={`form__select__P9j2k ${formData.country === "" ? "is-placeholder" : ""}`}
-                  value={formData.productInterest}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="" disabled hidden>Select a value</option>
-                  {productInterests.map((interest) => (
-                    <option key={interest} value={interest}>
-                      {interest}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Line 6: How can we help? */}
-              <div className="form__group__K7p2s">
-                <label htmlFor="message" className="form__label__B9f4k">
-                  How can we help?
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  className="form__textarea__Q6p3f"
-                  placeholder="Tell us about your project..."
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                ></textarea>
-              </div>
-
-              {/* Consent Checkbox */} 
-              <div className="contact__form-consent__R5j2s">
-                <div className="contact__consent-content__P5k8p">
-                  <label htmlFor="consentMarketing" className="contact__consent-label__B9k6p">
-                    Yes, I agree to receive marketing communications from Shapewebs as described in your{" "}
-                    <a href="/privacy-policy" className="typography__link__B7s3m">
-                      Privacy Policy
-                    </a>
-                    . I can withdraw my consent at any time by clicking the unsubscribe link in the emails.
-                  </label>
-
-                  {/* iOS toggle */}
-                  <div className="contact__toggle-wrapper__T7g2m">
-                    <input
-                      required
-                      className="contact__toggle__T7g2m contact__toggle--ios__T7g2m"
-                      id="consentMarketing"
-                      name="consentMarketing"
-                      type="checkbox"
-                      checked={formData.consentMarketing}
-                      onChange={handleChange}
-                    />
-                    <label className="contact__toggle-btn__T7g2m" htmlFor="consentMarketing" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Submit Button */}
-              <div className="contact__form-submit__Q7p3s">
-                <button
-                  className="button__root__ZxcvB button__kind-primary__R5j2s button__size-medium__L9d7h"
-                  type="submit"
-                  style={{ width: "100%", justifyContent: "center" }}
-                >
-                  Talk to Shapewebs
-                </button>
-              </div>
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
     </section>
   )
 }
