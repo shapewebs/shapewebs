@@ -116,81 +116,23 @@
     grid-template-columns: 1fr 1fr;
   }
 
-  .module__card__H5k8q + .module__card__H5k8q {
-    border-top: 1px solid rgba(var(--color-border-primary), 1);
-  }
-  .module__card__H5k8q[data-highlighted="true"] + .module__card__H5k8q {
-    border-top: 1px solid rgba(var(--color-border-primary), 1);
-  }
-
-  .module__card__H5k8q:nth-child(even) {
-    border-left: 0;
-  }
-
-  /* remove double border between rows (items 3 and 4 only) */
-  .module__card__H5k8q:nth-child(3),
-  .module__card__H5k8q:nth-child(4) {
-    border-top: 0;
-  }
-
-  /* Outer corners for 2x2 block */
-  .module__card__H5k8q {
-    border-radius: 0;
-  }
-  .module__card__H5k8q:nth-child(1) {
-    border-top-left-radius: 16px;
-  }
-  .module__card__H5k8q:nth-child(2) {
-    border-top-right-radius: 16px;
-  }
-  .module__card__H5k8q:nth-child(3) {
-    border-bottom-left-radius: 16px;
-  }
-  .module__card__H5k8q:nth-child(4) {
-    border-bottom-right-radius: 16px;
-  }
-
-  /* Highlighted overrides corners */
   .module__card__H5k8q[data-highlighted="true"] {
     border-radius: 16px !important;
   }
 }
 
-/* =========================
-   4-column connected layout
-   ========================= */
 @media (min-width: 1024px) {
   .pricing__grid__L7p3s {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  /* ✅ FIX: restore top border for ALL cards in the row */
-  .module__card__H5k8q {
-    border-top: 1px solid rgba(var(--color-border-primary), 1);
-  }
-
-  /* remove double border between columns */
-  .module__card__H5k8q:nth-child(n + 2) {
-    border-left: 0;
-  }
-
-  /* Outer corners only on the row */
   .module__card__H5k8q:first-child {
     border-radius: 16px 0 0 16px;
   }
   .module__card__H5k8q:last-child {
     border-radius: 0 16px 16px 0;
   }
-
-  /* Highlighted full radius */
-  .module__card__H5k8q[data-highlighted="true"] {
-    border-radius: 16px !important;
-  }
 }
-
-/* =========================
-   Internal padding moved inward
-   ========================= */
 
 .pricing__card-top__A1b2c {
   display: flex;
