@@ -9,8 +9,8 @@ type Plan = {
   description: string
   features: string[]
   highlighted?: boolean
-  ctaPrimary: { label: string; href: string }
-  ctaSecondary?: { label: string; href: string }
+  cta: { label: string; href: string }
+  showAltSalesLink?: boolean
 }
 
 const plans: Plan[] = [
@@ -19,15 +19,8 @@ const plans: Plan[] = [
     name: "Hobby",
     priceYearly: "$1,499",
     description: "Perfect for a simple, fast marketing site or landing page.",
-    features: [
-      "Next.js + Vercel deployment",
-      "Performance-focused build",
-      "Basic SEO setup",
-      "1–3 pages",
-      "Email support",
-    ],
-    ctaPrimary: { label: "Get Started", href: "/get-started" },
-    ctaSecondary: { label: "Contact sales", href: "/contact" },
+    features: ["Next.js + Vercel deployment", "Performance-focused build", "Basic SEO setup", "1–3 pages", "Email support"],
+    cta: { label: "Get Started", href: "/get-started" },
   },
   {
     key: "plus",
@@ -41,9 +34,9 @@ const plans: Plan[] = [
       "Content structure + conversion guidance",
       "Priority support",
     ],
-    highlighted: true, // ✅ highlighted plan
-    ctaPrimary: { label: "Get Started", href: "/get-started" },
-    ctaSecondary: { label: "Calculate price", href: "/sign-up/" },
+    highlighted: true,
+    cta: { label: "Get Started", href: "/get-started" },
+    showAltSalesLink: true, // ✅ adds “or Talk to sales” under the button
   },
   {
     key: "business",
@@ -57,8 +50,7 @@ const plans: Plan[] = [
       "Integrations (forms, CRM, tracking)",
       "Technical SEO improvements",
     ],
-    ctaPrimary: { label: "Contact sales", href: "/contact" },
-    ctaSecondary: { label: "Calculate price", href: "/sign-up/" },
+    cta: { label: "Get Started", href: "/get-started" },
   },
   {
     key: "enterprise",
@@ -72,8 +64,7 @@ const plans: Plan[] = [
       "Security + best practices",
       "Dedicated onboarding",
     ],
-    ctaPrimary: { label: "Talk to Shapewebs", href: "/contact" },
-    ctaSecondary: { label: "View method", href: "/method" },
+    cta: { label: "Talk to sales", href: "/contact" }, // ✅ final plan button
   },
 ]
 
@@ -107,11 +98,7 @@ export default function PricingPage() {
                     {plan.name}
                   </h3>
 
-                  {plan.highlighted ? (
-                    <span className="pricing__badge__B9k6p">Most popular</span>
-                  ) : (
-                    <span className="pricing__badge--ghost__B9k6p" aria-hidden="true" />
-                  )}
+                  {plan.highlighted ? <span className="pricing__badge__B9k6p">Most popular</span> : <span className="pricing__badge--ghost__B9k6p" aria-hidden="true" />}
                 </div>
 
                 <div className="Spacer-module__root__NM019" style={{ "--height": "12px" } as React.CSSProperties} />
@@ -154,21 +141,20 @@ export default function PricingPage() {
 
               <div className="pricing__actions__Q6z2k">
                 <a
-                  href={plan.ctaPrimary.href}
+                  href={plan.cta.href}
                   className="button__root__ZxcvB button__kind-primary__R5j2s button__size-medium__L9d7h pricing__cta__X1y2z"
                   style={{ width: "100%", justifyContent: "center" }}
                 >
-                  <span>{plan.ctaPrimary.label}</span>
+                  <span>{plan.cta.label}</span>
                 </a>
 
-                {plan.ctaSecondary ? (
-                  <a
-                    href={plan.ctaSecondary.href}
-                    className="button__root__ZxcvB button__kind-secondary__R5j2s button__size-small__L9d7h pricing__cta-secondary__X1y2z"
-                    style={{ width: "100%", justifyContent: "center" }}
-                  >
-                    {plan.ctaSecondary.label}
-                  </a>
+                {plan.showAltSalesLink ? (
+                  <p className="typography__small__Q9j2p pricing__alt__P5k8p" style={{ margin: 0 }}>
+                    or{" "}
+                    <a href="/contact" className="typography__link__B7s3m">
+                      Talk to sales
+                    </a>
+                  </p>
                 ) : null}
               </div>
             </article>
