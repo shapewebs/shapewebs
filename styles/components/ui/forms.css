@@ -358,9 +358,12 @@ input:-webkit-autofill:focus {
 }
 
 .form__inputPhoneNR__img--wrapper__H5k8q {
-  border-right: 1px solid rgba(var(--color-border-secondary),1);
-  width: 18px;
-  height: 12px;
+  border: 1px solid rgba(var(--color-border-secondary),1);
+  width: 20px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .form__inputPhoneNR__img__H5k8q {
