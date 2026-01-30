@@ -95,6 +95,12 @@
   text-decoration: underline;
 }
 
+.Text-regular-bit svg {
+  display: inline;
+  transform: translateY(-0.5px);
+  margin-right: 6px;
+}
+
 .bitCO {
   color: rgba(var(--color-text-secondary), 1);
 }
