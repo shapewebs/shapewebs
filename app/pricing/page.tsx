@@ -96,7 +96,7 @@ export default function PricingPage() {
           >
               <div className="pricing__card-top__A1b2c">
                 <div className="pricing__plan-row__V2c3d">
-                  <h3 className="typography__heading5__J8d3k pricing__plan-name__N1m2p" style={{ margin: 0 }}>
+                  <h3 className="typography__heading4__Z7p4s pricing__plan-name__N1m2p" style={{ margin: 0 }}>
                     {plan.name}
                   </h3>
 
