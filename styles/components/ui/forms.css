@@ -321,13 +321,12 @@ input:-webkit-autofill:focus {
 
 .form__inputPhoneNRFlag__H5k8q {
   background-color: rgba(var(--color-bg-tertiary), 1);
-  border-right: none;
-  border: 1px solid rgba(var(--color-border-secondary), 1);
-  border-radius: 8px 0 0 8px;
-  align-items: center;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
   display: flex;
   position: relative;
   width: 48px;
   font-size: var(--font-size-regular);
   justify-content: center;
+  align-items: center;
 }
