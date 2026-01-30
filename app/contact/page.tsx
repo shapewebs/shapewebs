@@ -539,6 +539,7 @@ export default function ContactPage() {
                     className="contact__consent-checkbox__M8k5p"
                     checked={formData.consentMarketing}
                     onChange={handleChange}
+                    required
                   />
                 </div>
               </div>
