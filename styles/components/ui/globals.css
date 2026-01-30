@@ -79,8 +79,7 @@
   --font-size-largePlus: clamp(1rem, calc(0.79167rem + 0.52083vw), 1.125rem);
 
   /* Title3: 20px → 24px */
-  --font-size-title3: clamp(1.25rem, calc(0.83333rem + 1.04167vw), 1.5rem);
-
+--font-size-title3: clamp(1.25rem, calc(0.83333rem + 1.04167vw), 2.5rem);
   /* Title2: 32px → 56px */
   --font-size-title2: clamp(2rem, calc(-0.5rem + 6.25vw), 3.5rem);
 
