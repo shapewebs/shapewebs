@@ -4,6 +4,9 @@ import { useEffect, useRef, useState } from "react"
 import { useTheme } from "next-themes"
 import { motion, useAnimation, type Variants } from "framer-motion"
 import "@/styles/pages/home/home-section-hero.css"
+import { motion, useAnimationControls } from "framer-motion"
+
+const controls = useAnimationControls()
 
 export function HomeSectionHero() {
   const { resolvedTheme } = useTheme()
