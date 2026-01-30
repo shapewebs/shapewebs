@@ -216,3 +216,74 @@
   opacity: 0;
   pointer-events: none;
 }
+
+
+/* Reasons under Contact sales */
+.contact__reasons__X2m7p {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.contact__reasons-intro__Q4n6s {
+  margin: 0;
+  font-size: var(--font-size-regularPlus);
+  line-height: 1.6;
+  color: rgba(var(--color-text-secondary), 1);
+  max-width: 46ch;
+}
+
+.contact__reasons-list__J8k3d {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contact__reason-item__P3d8k {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(var(--color-border-secondary), 1);
+  background-color: rgba(var(--color-bg-tertiary), 0.35);
+}
+
+.contact__reason-icon__L6q2b {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-blue);
+  background-color: rgba(0, 122, 255, 0.12);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.contact__reason-content__N5t7v {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.contact__reason-title__C7p2m {
+  margin: 0;
+  font-size: var(--font-size-largePlus);
+  line-height: 1.35;
+  font-weight: var(--font-weight-medium);
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.contact__reason-text__B9k6p {
+  margin: 0;
+  font-size: var(--font-size-regular);
+  line-height: 1.55;
+  color: rgba(var(--color-text-secondary), 1);
+}
