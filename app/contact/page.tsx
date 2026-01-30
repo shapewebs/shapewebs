@@ -346,7 +346,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="contact__form-container__H5k8q">
+          <div className="form__container__H8j3p">
             <form className="contact__form__P5k8p" onSubmit={handleSubmit}>
               {/* Line 1: Company Email */}
               <div className="form__group__K7p2s">
