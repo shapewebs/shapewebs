@@ -338,7 +338,7 @@ export default function ContactPage() {
                   <label htmlFor="phoneNumber" className="form__label__B9f4k">
                     Phone number <span className="contact__optional__K5j8q">(optional)</span>
                   </label>
-                  <div className="contact__phone-input-wrapper__M8k5p">
+                  <div className="form__inputPhoneNR__H5k8q">
                     <div className="contact__phone-country-wrapper__Z9k3s">
                       <select
                         id="phoneCountry"
