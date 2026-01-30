@@ -523,25 +523,14 @@ export default function ContactPage() {
                 ></textarea>
               </div>
 
-              {/* Consent Checkbox */}
-              <div className="contact__checkbox-wrapper__A7k2p">
-                <input
-                  type="checkbox"
-                  id="consentMarketing"
-                  name="consentMarketing"
-                  className="contact__checkbox-input__A7k2p"
-                  checked={formData.consentMarketing}
-                  onChange={handleChange}
-                  required
-                />
-
-                <label htmlFor="consentMarketing" className="contact__checkbox-label__A7k2p">
-                  <span className="contact__checkbox-box__A7k2p" />
-                  Yes, I agree to receive marketing communications from Shapewebs as described in your{" "}
-                  <a href="/privacy-policy" className="contact__link__Z7j3s">
-                    Privacy Policy
-                  </a>.
-                </label>
+              {/* Consent Checkbox */} 
+              <div className="contact__form-consent__R5j2s"> 
+                <div className="contact__consent-content__P5k8p"> 
+                  <label htmlFor="consentMarketing" className="contact__consent-label__B9k6p"> Yes, I agree to receive marketing communications from Shapewebs as described in your{" "} 
+                    <a href="/privacy-policy" className="contact__link__Z7j3s"> Privacy Policy </a> . I can withdraw my consent at any time by clicking the unsubscribe link in the emails. 
+                  </label> 
+                  <input type="checkbox" id="consentMarketing" name="consentMarketing" className="contact__consent-checkbox__M8k5p" checked={formData.consentMarketing} onChange={handleChange} /> 
+                </div>
               </div>
 
               {/* Submit Button */}
