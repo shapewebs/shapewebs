@@ -297,7 +297,6 @@ export default function ContactPage() {
               <span>From idea to launch, you can learn about our <a href="/method" className="typography__link__B7s3m">method</a> or talk to sales.</span>
             </p>
           </div>
-        </div>
           <div className="form__container__H8j3p">
             <form className="contact__form__P5k8p" onSubmit={handleSubmit}>
               {/* Line 1: Company Email */}
