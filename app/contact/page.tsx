@@ -284,7 +284,7 @@ export default function ContactPage() {
       <section className="contact__content__K9j6q">
         <div className="contact__grid__L7p3s">
           <div className="contact__info-container__H5k8q">
-          <h3 className="typography__heading3__V1c8r">Contact sales</h3>
+          <h3 className="typography__heading3__V1c8r" style={{ margin: "0px" }}>Contact sales</h3>
           </div>
           <div className="form__container__H8j3p">
             <form className="contact__form__P5k8p" onSubmit={handleSubmit}>
