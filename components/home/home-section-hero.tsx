@@ -25,13 +25,7 @@ export function HomeSectionHero() {
   const darkThemeUrl = "https://i.ibb.co/8gnVqXb3/hero-image-sw-dark.png"
   const lightThemeUrl = "https://i.ibb.co/5X8mW9nS/hero-image-sw-light.png"
 
-  // Set mounted state and preload images
-const hasAnimated = useRef(false)
-
 useEffect(() => {
-  if (hasAnimated.current) return
-  hasAnimated.current = true
-
   setMounted(true)
 
   const darkImage = new Image()
@@ -45,10 +39,8 @@ useEffect(() => {
   controls.start("visible")
 }, [controls])
   
-  // Determine which theme to show - default to light if not mounted yet
   const currentTheme = mounted ? resolvedTheme : "light"
 
-  // Animation variants
   const titleVariants: Variants = {
     hidden: {
       opacity: 0,
