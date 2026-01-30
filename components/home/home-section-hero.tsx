@@ -5,40 +5,43 @@ import { useTheme } from "next-themes"
 import { motion, useAnimation, type Variants } from "framer-motion"
 import "@/styles/pages/home/home-section-hero.css"
 
+const ANIM_KEY = "home_hero_animated_v1"
+
 export function HomeSectionHero() {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const controls = useAnimation()
 
-  // Define the image URLs
   const darkThemeUrl = "https://i.ibb.co/8gnVqXb3/hero-image-sw-dark.png"
   const lightThemeUrl = "https://i.ibb.co/5X8mW9nS/hero-image-sw-light.png"
 
-  // ✅ survives re-renders; prevents replaying animation within the same component instance
-  const hasAnimated = useRef(false)
+  // Keep this if you want, but it only helps within the same mount
+  const hasAnimatedThisMount = useRef(false)
 
-  // ✅ Always set mounted on each mount (don’t gate this)
+  // ✅ Always set mounted (theme hydration)
   useEffect(() => {
     setMounted(true)
   }, [])
 
-useEffect(() => {
-  console.log("effect: mounted")
-  setMounted(true)
-}, [])
-
-useEffect(() => {
-  console.log("effect: animation", hasAnimated.current)
-  if (hasAnimated.current) return
-  hasAnimated.current = true
-  controls.start("visible")
-}, [controls])
-
-
-  // ✅ Only run the expensive one-time stuff once
+  // ✅ Run animation only once per tab session (survives route changes)
   useEffect(() => {
-    if (hasAnimated.current) return
-    hasAnimated.current = true
+    // Safety: sessionStorage only exists in browser
+    if (typeof window === "undefined") return
+
+    // If we've already animated in this tab, don't animate again
+    const alreadyAnimated = sessionStorage.getItem(ANIM_KEY) === "true"
+    if (alreadyAnimated) {
+      // Optional: make sure final state is applied instantly
+      controls.set("visible")
+      return
+    }
+
+    // If effect double-runs in dev (Strict Mode), avoid replaying in same mount
+    if (hasAnimatedThisMount.current) return
+    hasAnimatedThisMount.current = true
+
+    // Mark as animated for future navigations in this tab
+    sessionStorage.setItem(ANIM_KEY, "true")
 
     // Preload images
     const darkImage = new Image()
@@ -49,7 +52,6 @@ useEffect(() => {
     lightImage.crossOrigin = "anonymous"
     lightImage.src = lightThemeUrl
 
-    // Start animations
     controls.start("visible")
   }, [controls, darkThemeUrl, lightThemeUrl])
 
@@ -68,7 +70,7 @@ useEffect(() => {
       },
     }),
   }
-
+  
   const subtitleVariants: Variants = {
     hidden: {
       opacity: 0,
