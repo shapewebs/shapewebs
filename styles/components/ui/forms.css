@@ -317,6 +317,8 @@ input:-webkit-autofill:focus {
   display: flex;
   gap: 0;
   align-items: stretch;
+  border: 1px solid rgba(var(--color-border-secondary));
+  border-radius: 8px;
 }
 
 .form__inputPhoneNRFlag__H5k8q {
