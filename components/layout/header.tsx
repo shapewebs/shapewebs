@@ -301,7 +301,7 @@ export function Header() {
 <Link href="/" className="header__logo-link__B5m7s">
 <svg
   xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 5.625 1039.7 174.875"
+  viewBox="0 2.8125 1084 174.875"
   height={32}
   style={{ width: "auto", display: "block" }}
 >
