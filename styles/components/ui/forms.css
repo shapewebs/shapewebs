@@ -331,7 +331,7 @@ input:-webkit-autofill:focus {
   align-items: center;
 }
 
-.contact__phone-country-select__B9k6p {
+.form__inputPhoneNR__select__H5k8q {
     z-index: 1;
     opacity: 0;
     cursor: pointer;
@@ -343,11 +343,11 @@ input:-webkit-autofill:focus {
     left: 0;
 }
 
-.contact__phone-country-select__B9k6p option {
+.form__inputPhoneNR__select__H5k8q option {
   color: rgba(var(--color-text-primary), 1);
   background-color: rgba(var(--color-bg-secondary), 1);
 }
 
-.contact__phone-country-select__B9k6p:focus {
+.form__inputPhoneNR__select__H5k8q:focus {
   outline: none;
 }
