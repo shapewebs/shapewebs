@@ -363,6 +363,6 @@ input:-webkit-autofill:focus {
   border-radius: 0px 8px 8px 0;
 }
 
-.form__inputPhoneNR__H5k8q input {
+.form__inputPhoneNR__H5k8q:focus input {
   box-shadow: none:
 }
