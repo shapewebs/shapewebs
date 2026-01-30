@@ -70,10 +70,6 @@
   .pricing__grid__L7p3s {
     grid-template-columns: 1fr 1fr;
   }
-
-  .module__card__H5k8q[data-highlighted="true"] {
-    border-radius: 12px !important;
-  }
 }
 
 @media (min-width: 1024px) {
