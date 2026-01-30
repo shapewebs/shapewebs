@@ -286,6 +286,7 @@ export default function ContactPage() {
         <div className="contact__grid__L7p3s">
           <div className="contact__info-container__H5k8q">
           <h2 className="typography__heading2__B5x9t">Talk to our sales team</h2>
+          </div>
           <div className="form__container__H8j3p">
             <form className="contact__form__P5k8p" onSubmit={handleSubmit}>
               {/* Line 1: Company Email */}
