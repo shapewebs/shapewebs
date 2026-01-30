@@ -402,5 +402,6 @@ input:-webkit-autofill:focus {
 @media (max-width: 640px) {
   .form__group--row__M93j8 {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
