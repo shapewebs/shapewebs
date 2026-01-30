@@ -21,7 +21,7 @@
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1rem;
-  margin-top: 2rem;
+  margin-top: 4rem;
   padding-inline: var(--system-padding);
   margin-inline: auto;
   max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
