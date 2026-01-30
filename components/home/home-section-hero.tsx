@@ -26,20 +26,24 @@ export function HomeSectionHero() {
   const lightThemeUrl = "https://i.ibb.co/5X8mW9nS/hero-image-sw-light.png"
 
   // Set mounted state and preload images
-  useEffect(() => {
-    setMounted(true)
-    
-    const darkImage = new Image()
-    darkImage.src = darkThemeUrl
-    darkImage.crossOrigin = "anonymous"
+const hasAnimated = useRef(false)
 
-    const lightImage = new Image()
-    lightImage.src = lightThemeUrl
-    lightImage.crossOrigin = "anonymous"
+useEffect(() => {
+  if (hasAnimated.current) return
+  hasAnimated.current = true
 
-    // Start the animation sequence
-    controls.start("visible")
-  }, [controls])
+  setMounted(true)
+
+  const darkImage = new Image()
+  darkImage.src = darkThemeUrl
+  darkImage.crossOrigin = "anonymous"
+
+  const lightImage = new Image()
+  lightImage.src = lightThemeUrl
+  lightImage.crossOrigin = "anonymous"
+
+  controls.start("visible")
+}, [controls])
   
   // Determine which theme to show - default to light if not mounted yet
   const currentTheme = mounted ? resolvedTheme : "light"
@@ -228,7 +232,7 @@ export function HomeSectionHero() {
               <span>Calculate price</span>
             </motion.a>
             <motion.a
-              href="/contact/support/"
+              href="/contact"
               className="button__root__ZxcvB button__kind-ghost__R5j2s button__size-medium__L9d7h hero__gradientButton__H5j8q"
               custom={1}
               initial="hidden"

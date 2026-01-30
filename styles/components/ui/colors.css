@@ -24,7 +24,7 @@
   --color-text-tertiary: 134, 132, 141;
   --color-text-quaternary: 89, 90, 92;
   --color-overlay-primary: 255, 255, 255, 0.6;
-  --color-link-primary: 0, 122, 255; /* Updated to match --color-blue */
+  --color-link-primary: 0, 122, 255; 
   --color-link-hover: 66, 81, 222;
   --color-bg-brand: 100, 103, 197;
   --color-brand-text: 255, 255, 255;
@@ -50,8 +50,8 @@
   --color-text-tertiary: 138, 143, 152;
   --color-text-quaternary: 89, 90, 92;
   --color-overlay-primary: 0, 0, 0, 0.6;
-  --color-link-primary: 0, 122, 255; /* Updated to match --color-blue */
-  --color-link-hover: 255, 255, 255;
+  --color-link-primary: 0, 122, 255;
+  --color-link-hover: 66, 81, 222;
   --color-bg-brand: 100, 103, 197;
   --color-brand-text: 255, 255, 255;
 }

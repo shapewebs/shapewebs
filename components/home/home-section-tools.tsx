@@ -52,14 +52,14 @@ export function HomeSectionTools() {
       <div className="section__content__0KLF3">
         <span className="hide-tablet">
           <p className="typography__emphasize__M9J2o" style={{ margin: 0, textAlign: "center" }}>
-            <span className="bitCO">Tools at the leading edge of web development.</span>
+            <span className="bitCO">Tools at the bleeding edge of web development.</span>
             <br aria-hidden="true"></br>
             <span>Trusted by leading companies including OpenAI, Netflix, and Nike.</span>
           </p>
         </span>
         <span className="show-tablet content__content__0MS9O">
           <p className="typography__body__K4n7p" style={{ margin: 0, textAlign: "center", textWrap: "balance" }}>
-            Tools at the leading edge of web development. Trusted by leading companies including OpenAI, Netflix, and Nike.
+            Tools at the bleeding edge of web development. Trusted by leading companies including OpenAI, Netflix, and Nike.
           </p>
         </span>
         <div className="HomeSectionTools__container__Z9k4p">

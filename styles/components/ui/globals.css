@@ -52,8 +52,8 @@
     --font-weight-light: 340;
     --font-weight-normal: 400;
     --font-weight-medium: 460;
-    --font-weight-semibold: 520;
-    --font-weight-bold: 580;
+    --font-weight-semibold: 500;
+    --font-weight-bold: 540;
 
     /* Colors */
     --color-blue: #007aff;
@@ -64,27 +64,14 @@
     --mask-off: transparent;
 
     /* Font sizes */
-
   --font-size-small: clamp(0.78125rem, calc(0.72917rem + 0.13021vw), 0.8125rem);
   --font-size-smallPlus: clamp(0.78125rem, calc(0.72917rem + 0.13021vw), 0.8125rem);
-
-  /* Regular: 13.5px → 14px */
   --font-size-regular: clamp(0.84375rem, calc(0.79167rem + 0.13021vw), 0.875rem);
-
-  /* RegularPlus: 14px → 15px */
   --font-size-regularPlus: clamp(0.875rem, calc(0.77083rem + 0.26042vw), 0.9375rem);
-
-  /* Large / LargePlus: 16px → 18px */
   --font-size-large: clamp(1rem, calc(0.79167rem + 0.52083vw), 1.125rem);
-  --font-size-largePlus: clamp(1rem, calc(0.79167rem + 0.52083vw), 1.125rem);
-
-  /* Title3: 20px → 24px */
-  --font-size-title3: clamp(1.25rem, calc(0.83333rem + 1.04167vw), 1.5rem);
-
-  /* Title2: 32px → 56px */
+  --font-size-largePlus: clamp(1.125rem, calc(0.9375rem + 0.46875vw), 1.3125rem);
+  --font-size-title3: clamp(1.5rem, calc(0.5rem + 3.125vw), 2.5rem);
   --font-size-title2: clamp(2rem, calc(-0.5rem + 6.25vw), 3.5rem);
-
-  /* Title1: 40px → 68px */
   --font-size-title1: clamp(2.5rem, calc(-0.41667rem + 7.29167vw), 4.25rem);
 
 

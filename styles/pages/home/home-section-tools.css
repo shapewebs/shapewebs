@@ -12,26 +12,6 @@
   padding-inline: var(--system-padding);
 }
 
-.HomeSectionTools__container__Z9k4p {
-  position: relative;
-  z-index: 20;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  margin-top: 2rem;
-  padding-inline: var(--system-padding);
-  margin-inline: auto;
-  max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
-  scrollbar-width: none;
-}
-
-.HomeSectionTools__container__Z9k4p::-webkit-scrollbar {
-  display: none;
-}
-
 .HomeSectionTools__item__L7j3s {
   display: flex;
   align-items: center;
@@ -77,7 +57,7 @@
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1rem;
-  margin-top: 2rem;
+  margin-top: 3rem;
   padding-inline: var(--system-padding);
   margin-inline: auto;
   max-width: 750px;
@@ -99,11 +79,7 @@
     overflow: hidden;
     white-space: nowrap;
     position: relative;
-
-    /* from your frame */
     padding: 30px 0;
-
-    /* override desktop flex/wrap */
     display: block;
   }
 
