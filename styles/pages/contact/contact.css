@@ -170,17 +170,6 @@
   flex-shrink: 0;
 }
 
-.contact__link__Z7j3s {
-  color: var(--color-blue);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.contact__link__Z7j3s:hover {
-  text-decoration: underline;
-  color: rgba(var(--color-blue), 0.8);
-}
-
 .contact__info-title__Z7j3s {
   font-size: 1.125rem;
   font-weight: var(--font-weight-medium);
