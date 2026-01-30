@@ -343,7 +343,7 @@ export default function ContactPage() {
                       <select
                         id="phoneCountry"
                         name="phoneCountry"
-                        className="contact__phone-country-select__B9k6p"
+                        className="form__inputPhoneNR__select__H5k8q"
                         value={formData.phoneCountry}
                         onChange={handleChange}
                         title="Select country"
