@@ -116,8 +116,6 @@
     grid-template-columns: 1fr 1fr;
   }
 
-  /* ✅ FIX: ensure cards 2-4 have a top border,
-     then remove duplicates for the second row only */
   .module__card__H5k8q + .module__card__H5k8q {
     border-top: 1px solid rgba(var(--color-border-primary), 1);
   }
@@ -125,7 +123,6 @@
     border-top: 1px solid rgba(var(--color-border-primary), 1);
   }
 
-  /* remove double border between columns */
   .module__card__H5k8q:nth-child(even) {
     border-left: 0;
   }
