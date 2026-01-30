@@ -160,8 +160,3 @@
 .contact__toggle-wrapper__T7g2m .contact__toggle--ios__T7g2m:checked + .contact__toggle-btn__T7g2m:active:after {
   margin-left: -10px;
 }
-
-/* keyboard focus */
-.contact__toggle-wrapper__T7g2m .contact__toggle--ios__T7g2m:focus-visible + .contact__toggle-btn__T7g2m {
-  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.25);
-}
