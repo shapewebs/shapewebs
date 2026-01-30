@@ -309,7 +309,23 @@ export default function ContactPage() {
               <span>Discover the value of a carefully crafted web presence by Shapewebs.</span>
             </p>
             <p className="typography__body__K4n7p">
-              <span className="bitCO">See the process in action. </span>
+              <span className="Text-regular-bitC bitCO"><svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="-0.0002 -0.0003 16.0005 15.9996"
+  width="16.0005px"
+  height="15.9996px"
+>
+  <path
+    d="M 1.6 3.6 C 1.6 2.938 2.138 2.4 2.8 2.4 L 5.2 2.4 C 5.863 2.4 6.4 2.938 6.4 3.6 L 6.4 4 L 9.6 4 L 9.6 3.6 C 9.6 2.938 10.138 2.4 10.8 2.4 L 13.2 2.4 C 13.863 2.4 14.4 2.938 14.4 3.6 L 14.4 6 C 14.4 6.663 13.863 7.2 13.2 7.2 L 10.8 7.2 C 10.138 7.2 9.6 6.663 9.6 6 L 9.6 5.6 L 6.4 5.6 L 6.4 6 C 6.4 6.183 6.358 6.358 6.285 6.513 L 8 8.8 L 10 8.8 C 10.663 8.8 11.2 9.338 11.2 10 L 11.2 12.4 C 11.2 13.063 10.663 13.6 10 13.6 L 7.6 13.6 C 6.938 13.6 6.4 13.063 6.4 12.4 L 6.4 10 C 6.4 9.818 6.443 9.643 6.515 9.488 L 4.8 7.2 L 2.8 7.2 C 2.138 7.2 1.6 6.663 1.6 6 L 1.6 3.6 Z"
+    style={{
+      fill: "none",
+      paintOrder: "fill",
+      stroke: "currentColor",
+    }}
+    transform="matrix(1, 0, 0, 1, 0, -1.7763568394002505e-15)"
+  />
+</svg>
+See the process in action. </span>
               <span>From idea to launch, you can learn about our <a href="/method" className="typography__link__B7s3m">method</a> or talk to sales.</span>
             </p>
           </div>
