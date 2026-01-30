@@ -357,3 +357,8 @@ input:-webkit-autofill:focus {
   height: 14px;
   display: block;
 }
+
+.form__inputPhoneNR__H5k8q {
+  border: none;
+  border-radius: 0px 8px 8px 0;
+}
