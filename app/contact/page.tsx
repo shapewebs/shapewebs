@@ -431,7 +431,7 @@ export default function ContactPage() {
                 <select
                   id="country"
                   name="country"
-                  className="form__select__P9j2k"
+                  className={`form__select__P9j2k ${formData.country === "" ? "is-placeholder" : ""}`}
                   value={formData.country}
                   onChange={handleChange}
                   required
@@ -454,7 +454,7 @@ export default function ContactPage() {
                   <select
                     id="companySize"
                     name="companySize"
-                    className="form__select__P9j2k"
+                    className={`form__select__P9j2k ${formData.country === "" ? "is-placeholder" : ""}`}
                     value={formData.companySize}
                     onChange={handleChange}
                     required
@@ -492,7 +492,7 @@ export default function ContactPage() {
                 <select
                   id="productInterest"
                   name="productInterest"
-                  className="form__select__P9j2k"
+                  className={`form__select__P9j2k ${formData.country === "" ? "is-placeholder" : ""}`}
                   value={formData.productInterest}
                   onChange={handleChange}
                   required
