@@ -170,6 +170,57 @@
   left: 50%;
 }
 
+/* iOS toggle (consent) */
+.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m {
+  display: none;
+}
+
+.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m,
+.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m:after,
+.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m:before,
+.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m *,
+.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m *:after,
+.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m *:before,
+.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m {
+  box-sizing: border-box;
+}
+
+.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m::selection,
+.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m::selection {
+  background: none;
+}
+
+.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m {
+  outline: 0;
+  display: block;
+  width: 44px;
+  height: 24px;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m:after,
+.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m:before {
+  position: relative;
+  display: block;
+  content: "";
+  width: 50%;
+  height: 100%;
+}
+
+.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m:after {
+  left: 0;
+}
+
+.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m:before {
+  display: none;
+}
+
+.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m:checked + .contact__toggle-btn__T7g2m:after {
+  left: 50%;
+}
+
 /* iOS styling */
 .contact__toggle-wrapper__T7g2m .contact__toggle--ios__T7g2m + .contact__toggle-btn__T7g2m {
   background: rgba(var(--color-bg-secondary), 1);
@@ -183,6 +234,9 @@
   border-radius: 999px;
   background: rgba(var(--color-bg-secondary), 1);
   transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 6px 14px rgba(0, 0, 0, 0.12);
 }
 
 /* hover */
