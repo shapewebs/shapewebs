@@ -349,7 +349,7 @@ export default function ContactPage() {
             <form className="contact__form__P5k8p" onSubmit={handleSubmit}>
               {/* Line 1: Company Email */}
               <div className="contact__form-group__Z7j3s">
-                <label htmlFor="companyEmail" className="contact__form-label__B9k6p">
+                <label htmlFor="companyEmail" className="form__label__B9f4k">
                   Company email
                 </label>
                 <input
@@ -367,7 +367,7 @@ export default function ContactPage() {
               {/* Line 2: Name and Phone Number with Country Selector */}
               <div className="contact__form-row__N7k3s">
                 <div className="contact__form-group__Z7j3s">
-                  <label htmlFor="name" className="contact__form-label__B9k6p">
+                  <label htmlFor="name" className="form__label__B9f4k">
                     Your name
                   </label>
                   <input
@@ -383,7 +383,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="contact__form-group__Z7j3s">
-                  <label htmlFor="phoneNumber" className="contact__form-label__B9k6p">
+                  <label htmlFor="phoneNumber" className="form__label__B9f4k">
                     Phone number <span className="contact__optional__K5j8q">(optional)</span>
                   </label>
                   <div className="contact__phone-input-wrapper__M8k5p">
@@ -425,7 +425,7 @@ export default function ContactPage() {
 
               {/* Line 3: Country */}
               <div className="contact__form-group__Z7j3s">
-                <label htmlFor="country" className="contact__form-label__B9k6p">
+                <label htmlFor="country" className="form__label__B9f4k">
                   Country
                 </label>
                 <select
@@ -448,13 +448,13 @@ export default function ContactPage() {
               {/* Line 4: Company Size and Website */}
               <div className="contact__form-row__N7k3s">
                 <div className="contact__form-group__Z7j3s">
-                  <label htmlFor="companySize" className="contact__form-label__B9k6p">
+                  <label htmlFor="companySize" className="form__label__B9f4k">
                     Company size
                   </label>
                   <select
                     id="companySize"
                     name="companySize"
-                    className="form__input__Z3n7q"
+                    className="form__select__P9j2k"
                     value={formData.companySize}
                     onChange={handleChange}
                     required
@@ -469,7 +469,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="contact__form-group__Z7j3s">
-                  <label htmlFor="website" className="contact__form-label__B9k6p">
+                  <label htmlFor="website" className="form__label__B9f4k">
                     Company website <span className="contact__optional__K5j8q">(optional)</span>
                   </label>
                   <input
@@ -486,13 +486,13 @@ export default function ContactPage() {
 
               {/* Line 5: Primary Product Interest */}
               <div className="contact__form-group__Z7j3s">
-                <label htmlFor="productInterest" className="contact__form-label__B9k6p">
+                <label htmlFor="productInterest" className="form__label__B9f4k">
                   Primary product interest
                 </label>
                 <select
                   id="productInterest"
                   name="productInterest"
-                  className="form__input__Z3n7q"
+                  className="form__select__P9j2k"
                   value={formData.productInterest}
                   onChange={handleChange}
                   required
@@ -508,7 +508,7 @@ export default function ContactPage() {
 
               {/* Line 6: How can we help? */}
               <div className="contact__form-group__Z7j3s">
-                <label htmlFor="message" className="contact__form-label__B9k6p">
+                <label htmlFor="message" className="form__label__B9f4k">
                   How can we help?
                 </label>
                 <textarea
