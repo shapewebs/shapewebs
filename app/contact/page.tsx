@@ -290,9 +290,7 @@ export default function ContactPage() {
             </p>
             <p className="typography__body__K4n7p">
               <span>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.0002 -0.0003 16.0005 15.9996" width="16.0005px" height="15.9996px">
-  <path d="M 5.004 0.782 C 4.757 0.191 4.113 -0.122 3.501 0.044 L 3.329 0.091 C 1.31 0.641 -0.415 2.597 0.088 4.979 C 1.248 10.448 5.551 14.751 11.02 15.91 C 13.405 16.417 15.358 14.689 15.908 12.67 L 15.955 12.498 C 16.124 11.882 15.808 11.238 15.22 10.995 L 12.18 9.729 C 11.664 9.513 11.067 9.663 10.711 10.098 L 9.504 11.573 C 7.307 10.482 5.539 8.657 4.523 6.416 L 5.904 5.291 C 6.339 4.938 6.485 4.341 6.273 3.822 L 5.004 0.782 Z" style="fill: none; paint-order: fill; stroke: rgb(0, 0, 0);" transform="matrix(1, 0, 0, 1, 0, -1.7763568394002505e-15)"/>
-</svg>        
+       
 </span>
               <span className="bitCO">Start with a custom demo. </span>
               <span>Discover the value of a carefully crafted web presence by Shapewebs.</span>
