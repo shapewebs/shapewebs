@@ -286,9 +286,9 @@ export default function ContactPage() {
           <div className="contact__info-container__H5k8q">
             <h3 className="typography__heading3__V1c8r" style={{ margin: "0px" }}>Contact sales</h3>
             <p className="typography__body__K4n7p bitC1">
-              <svg direction='ltr' xmlns='http://www.w3.org/2000/svg' version='1.1'>
+              <svg direction="ltr" xmlns="http://www.w3.org/2000/svg" version="1.1">
                 <g fill-rule='nonzero' transform='scale(1,-1) translate(0,-45.740234375)'>
-                <path fill='black' stroke='black' fill-opacity='1.0' stroke-width='1.0' d='
+                <path fill="black" stroke="black" fill-opacity="1.0" stroke-width="1.0" d="
                     M 33.6875,3.6953125
                     C 36.501953125,3.6953125 39.080078125,4.5546875 41.25,6.724609375
                     C 41.29296875,6.767578125 41.357421875,6.83203125 41.37890625,6.853515625
@@ -333,7 +333,7 @@ export default function ContactPage() {
                     C 40.455078125,7.626953125 40.412109375,7.60546875 40.369140625,7.541015625
                     C 38.5,5.671875 36.22265625,4.876953125 33.6875,4.876953125
                     Z
-                ' />
+                "/>
                 </g>
               </svg>
               Reach out to see what Shapewebs can build for your team, and what it can do for your business.
