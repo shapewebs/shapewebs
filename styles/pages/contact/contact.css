@@ -190,14 +190,15 @@ select.contact__form-input__L3j7q {
 }
 
 .contact__phone-country-wrapper__Z9k3s {
-  border-right: none;
-  border-radius: 8px 0 0 8px;
-  align-items: center;
-  position: relative;
-  display: flex;
-  align-items: center;
   background-color: rgba(var(--color-bg-tertiary), 1);
-  border: 1px solid rgba(var(--color-border-secondary), 1);
+    border-right: none;
+    border: 1px solid rgba(var(--color-border-secondary), 1);
+    border-radius: 8px 0 0 8px;
+    align-items: center;
+    display: flex;
+    position: relative;
+    width: 48px;
+    justify-content: center;
 }
 
 .contact__phone-country-select__B9k6p {
