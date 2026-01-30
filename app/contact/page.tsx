@@ -349,7 +349,7 @@ export default function ContactPage() {
           <div className="contact__form-container__H5k8q">
             <form className="contact__form__P5k8p" onSubmit={handleSubmit}>
               {/* Line 1: Company Email */}
-              <div className="contact__form-group__Z7j3s">
+              <div className="form__group__K7p2s">
                 <label htmlFor="companyEmail" className="contact__form-label__B9k6p">
                   Company Email
                 </label>
@@ -357,7 +357,7 @@ export default function ContactPage() {
                   type="email"
                   id="companyEmail"
                   name="companyEmail"
-                  className="contact__form-input__L3j7q"
+                  className="form__select__P9j2k"
                   placeholder="your@company.com"
                   value={formData.companyEmail}
                   onChange={handleChange}
@@ -366,8 +366,8 @@ export default function ContactPage() {
               </div>
 
               {/* Line 2: Name and Phone Number with Country Selector */}
-              <div className="contact__form-row__N7k3s">
-                <div className="contact__form-group__Z7j3s">
+              <div className="form__group--row__M93j8">
+                <div className="form__group__K7p2s">
                   <label htmlFor="name" className="contact__form-label__B9k6p">
                     Your Name
                   </label>
@@ -375,7 +375,7 @@ export default function ContactPage() {
                     type="text"
                     id="name"
                     name="name"
-                    className="contact__form-input__L3j7q"
+                    className="form__select__P9j2k"
                     placeholder="Your full name"
                     value={formData.name}
                     onChange={handleChange}
@@ -383,7 +383,7 @@ export default function ContactPage() {
                   />
                 </div>
 
-                <div className="contact__form-group__Z7j3s">
+                <div className="form__group__K7p2s">
                   <label htmlFor="phoneNumber" className="contact__form-label__B9k6p">
                     Phone Number <span className="contact__optional__K5j8q">(optional)</span>
                   </label>
@@ -415,7 +415,7 @@ export default function ContactPage() {
                       type="tel"
                       id="phoneNumber"
                       name="phoneNumber"
-                      className="contact__form-input__L3j7q contact__phone-input__H5k8q"
+                      className="form__select__P9j2k contact__phone-input__H5k8q"
                       placeholder="+1 (555) 000-0000"
                       value={formData.phoneNumber}
                       onChange={handleChange}
@@ -425,14 +425,14 @@ export default function ContactPage() {
               </div>
 
               {/* Line 3: Country */}
-              <div className="contact__form-group__Z7j3s">
+              <div className="form__group__K7p2s">
                 <label htmlFor="country" className="contact__form-label__B9k6p">
                   Country
                 </label>
                 <select
                   id="country"
                   name="country"
-                  className="contact__form-input__L3j7q"
+                  className="form__select__P9j2k"
                   value={formData.country}
                   onChange={handleChange}
                   required
@@ -447,15 +447,15 @@ export default function ContactPage() {
               </div>
 
               {/* Line 4: Company Size and Website */}
-              <div className="contact__form-row__N7k3s">
-                <div className="contact__form-group__Z7j3s">
+              <div className="form__group--row__M93j8">
+                <div className="form__group__K7p2s">
                   <label htmlFor="companySize" className="contact__form-label__B9k6p">
                     Company Size
                   </label>
                   <select
                     id="companySize"
                     name="companySize"
-                    className="contact__form-input__L3j7q"
+                    className="form__select__P9j2k"
                     value={formData.companySize}
                     onChange={handleChange}
                     required
@@ -469,7 +469,7 @@ export default function ContactPage() {
                   </select>
                 </div>
 
-                <div className="contact__form-group__Z7j3s">
+                <div className="form__group__K7p2s">
                   <label htmlFor="website" className="contact__form-label__B9k6p">
                     Company Website <span className="contact__optional__K5j8q">(optional)</span>
                   </label>
@@ -477,7 +477,7 @@ export default function ContactPage() {
                     type="url"
                     id="website"
                     name="website"
-                    className="contact__form-input__L3j7q"
+                    className="form__select__P9j2k"
                     placeholder="https://example.com"
                     value={formData.website}
                     onChange={handleChange}
@@ -486,14 +486,14 @@ export default function ContactPage() {
               </div>
 
               {/* Line 5: Primary Product Interest */}
-              <div className="contact__form-group__Z7j3s">
+              <div className="form__group__K7p2s">
                 <label htmlFor="productInterest" className="contact__form-label__B9k6p">
                   Primary Product Interest
                 </label>
                 <select
                   id="productInterest"
                   name="productInterest"
-                  className="contact__form-input__L3j7q"
+                  className="form__select__P9j2k"
                   value={formData.productInterest}
                   onChange={handleChange}
                   required
@@ -508,7 +508,7 @@ export default function ContactPage() {
               </div>
 
               {/* Line 6: How can we help? */}
-              <div className="contact__form-group__Z7j3s">
+              <div className="form__group__K7p2s">
                 <label htmlFor="message" className="contact__form-label__B9k6p">
                   How can we help?
                 </label>
