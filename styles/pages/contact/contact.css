@@ -35,7 +35,7 @@
 .contact__grid__L7p3s {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: 64px;
 }
 
 @media (min-width: 768px) {
