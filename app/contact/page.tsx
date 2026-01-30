@@ -280,8 +280,8 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="contact__container__Q7j3s">
-      <section className="contact__content__K9j6q">
+    <section className="contact__container__Q7j3s">
+      <div className="contact__content__K9j6q">
         <div className="contact__grid__L7p3s">
           <div className="contact__info-container__H5k8q">
             <h3 className="typography__heading3__V1c8r" style={{ margin: "0px" }}>Contact sales</h3>
@@ -514,7 +514,7 @@ export default function ContactPage() {
             </form>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   )
 }
