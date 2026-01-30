@@ -289,8 +289,7 @@ export default function ContactPage() {
               Reach out to see what Shapewebs can build for your team, and what it can do for your business.
             </p>
             <p className="typography__body__K4n7p">
-              <span>
-<svg
+              <span className="bitCO"><svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="-0.0002 -0.0003 16.0005 15.9996"
   width="16.0005px"
@@ -306,8 +305,7 @@ export default function ContactPage() {
     transform="matrix(1, 0, 0, 1, 0, -1.7763568394002505e-15)"
   />
 </svg>
-</span>
-              <span className="bitCO">Start with a custom demo. </span>
+ Start with a custom demo. </span>
               <span>Discover the value of a carefully crafted web presence by Shapewebs.</span>
             </p>
             <p className="typography__body__K4n7p">
