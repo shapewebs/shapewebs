@@ -99,12 +99,9 @@
     overflow: hidden;
     white-space: nowrap;
     position: relative;
-
-    /* from your frame */
     padding: 30px 0;
-
-    /* override desktop flex/wrap */
     display: block;
+    margin-top: 3rem;
   }
 
   .section__content__0KLF3::before {
