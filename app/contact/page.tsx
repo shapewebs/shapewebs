@@ -315,7 +315,7 @@ export default function ContactPage() {
                     <div className="Spacer-module__root__NM019" style={{ '--height' : '64px' }}>
                     </div>
                     <p className="typography__body__K4n7p" style={{ margin: 0 }}>Technical question or issue? </p>
-                    <div className="Spacer-module__root__NM019" style={{ '--height' : '8px' }}>
+                    <div className="Spacer-module__root__NM019" style={{ '--height' : '4px' }}>
                     </div>
                     <a href="/docs" className="button__root__ZxcvB button__kind-tertiary__R5j2s button__size-small__L9d7h" style={{
                       margin: 0,
