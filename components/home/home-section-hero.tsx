@@ -5,72 +5,60 @@ import { useTheme } from "next-themes"
 import { motion, useAnimation, type Variants } from "framer-motion"
 import "@/styles/pages/home/home-section-hero.css"
 
-const ANIM_KEY = "home_hero_animated_v1"
-
 export function HomeSectionHero() {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const controls = useAnimation()
+  const heroImageRefs = useRef<{
+    overviewNav: HTMLDivElement | null
+    firstNavItem: HTMLDivElement | null
+    navItems: (HTMLDivElement | null)[]
+    page: HTMLDivElement | null
+  }>({ 
+    overviewNav: null,
+    firstNavItem: null,
+    navItems: [],
+    page: null,
+  })
 
+  // Define the image URLs
   const darkThemeUrl = "https://i.ibb.co/8gnVqXb3/hero-image-sw-dark.png"
   const lightThemeUrl = "https://i.ibb.co/5X8mW9nS/hero-image-sw-light.png"
 
-  // Keep this if you want, but it only helps within the same mount
-  const hasAnimatedThisMount = useRef(false)
+useEffect(() => {
+  setMounted(true)
 
-  // ✅ Always set mounted (theme hydration)
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const darkImage = new Image()
+  darkImage.src = darkThemeUrl
+  darkImage.crossOrigin = "anonymous"
 
-  // ✅ Run animation only once per tab session (survives route changes)
-  useEffect(() => {
-    // Safety: sessionStorage only exists in browser
-    if (typeof window === "undefined") return
+  const lightImage = new Image()
+  lightImage.src = lightThemeUrl
+  lightImage.crossOrigin = "anonymous"
 
-    // If we've already animated in this tab, don't animate again
-    const alreadyAnimated = sessionStorage.getItem(ANIM_KEY) === "true"
-    if (alreadyAnimated) {
-      // Optional: make sure final state is applied instantly
-      controls.set("visible")
-      return
-    }
-
-    // If effect double-runs in dev (Strict Mode), avoid replaying in same mount
-    if (hasAnimatedThisMount.current) return
-    hasAnimatedThisMount.current = true
-
-    // Mark as animated for future navigations in this tab
-    sessionStorage.setItem(ANIM_KEY, "true")
-
-    // Preload images
-    const darkImage = new Image()
-    darkImage.crossOrigin = "anonymous"
-    darkImage.src = darkThemeUrl
-
-    const lightImage = new Image()
-    lightImage.crossOrigin = "anonymous"
-    lightImage.src = lightThemeUrl
-
-    controls.start("visible")
-  }, [controls, darkThemeUrl, lightThemeUrl])
-
+  controls.start("visible")
+}, [controls])
+  
   const currentTheme = mounted ? resolvedTheme : "light"
 
   const titleVariants: Variants = {
-    hidden: { opacity: 0, y: "20%", filter: "blur(10px)" },
+    hidden: {
+      opacity: 0,
+      y: "20%",
+      filter: "blur(10px)",
+    },
     visible: (i) => ({
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
       transition: {
         duration: 1,
-        ease: [0.26, 0.49, 0.42, 0.95],
-        delay: 0.6 + i * 0.08,
+        ease: [0.26, 0.49, 0.42, 0.95], // var(--ease-out-quad)
+        delay: 0.6 + i * 0.08, // Added 0.5 to the original 0.1
       },
     }),
   }
-  
+
   const subtitleVariants: Variants = {
     hidden: {
       opacity: 0,
