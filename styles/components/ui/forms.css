@@ -374,5 +374,22 @@ input:-webkit-autofill:focus {
 }
 
 .form__inputPhoneNR__H5k8q:focus input {
-  box-shadow: none:
+  box-shadow: none;
+}
+
+/* Phone number input wrapper focus (select OR input) */
+.form__inputPhoneNR__H5k8q:focus-within {
+  border-color: var(--color-blue);
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+/* Prevent double focus styles on the inner input */
+.form__inputPhoneNR__H5k8q input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Also ensure the hidden select doesn't show an outline (some browsers) */
+.form__inputPhoneNR__select__H5k8q:focus {
+  outline: none;
 }
