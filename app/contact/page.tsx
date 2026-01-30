@@ -339,7 +339,7 @@ export default function ContactPage() {
                     Phone number <span className="contact__optional__K5j8q">(optional)</span>
                   </label>
                   <div className="form__inputPhoneNR__H5k8q">
-                    <div className="contact__phone-country-wrapper__Z9k3s">
+                    <div className="form__inputPhoneNRFlag__H5k8q">
                       <select
                         id="phoneCountry"
                         name="phoneCountry"
