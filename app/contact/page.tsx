@@ -281,7 +281,7 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="contact__container__Q7j3s">
+    <div className="form__container__H8j3p">
       <section className="contact__content__K9j6q">
         <div className="contact__grid__L7p3s">
           <div className="contact__info-container__H5k8q">
@@ -515,7 +515,7 @@ export default function ContactPage() {
                 <textarea
                   id="message"
                   name="message"
-                  className="contact__form-textarea__K5j8q"
+                  className="form__textarea__Q6p3f"
                   placeholder="Tell us about your project..."
                   value={formData.message}
                   onChange={handleChange}
