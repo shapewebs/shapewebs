@@ -298,7 +298,7 @@ export default function ContactPage() {
   ariaHidden="true"
   focusable="false"
 >
-  <g fill-rule="nonzero" transform="matrix(-1, 0, 0, -1, 43.26953125, 44.00391006469725)">
+  <g fillRule="nonzero" transform="matrix(-1, 0, 0, -1, 43.26953125, 44.00391006469725)">
     <path
       fill="currentColor"
       stroke="currentColor"
