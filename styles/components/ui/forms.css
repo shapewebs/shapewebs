@@ -319,6 +319,7 @@ input:-webkit-autofill:focus {
   align-items: stretch;
   border: 1px solid rgba(var(--color-border-secondary));
   border-radius: 8px;
+  transition: border-color 0.2s var(--ease-out-quad), box-shadow 0.2s var(--ease-out-quad);
 }
 
 .form__inputPhoneNRFlag__H5k8q {
@@ -377,19 +378,16 @@ input:-webkit-autofill:focus {
   box-shadow: none;
 }
 
-/* Phone number input wrapper focus (select OR input) */
 .form__inputPhoneNR__H5k8q:focus-within {
   border-color: var(--color-blue);
   box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
 }
 
-/* Prevent double focus styles on the inner input */
 .form__inputPhoneNR__H5k8q input:focus {
   outline: none;
   box-shadow: none;
 }
 
-/* Also ensure the hidden select doesn't show an outline (some browsers) */
 .form__inputPhoneNR__select__H5k8q:focus {
   outline: none;
 }
