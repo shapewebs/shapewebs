@@ -184,3 +184,119 @@
 .pricing__cta-secondary__X1y2z {
   box-shadow: var(--shadow-stack-low);
 }
+
+/* Card (connected) */
+.pricing__card__H5k8q {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: rgba(var(--color-bg-secondary), 1);
+
+  /* connected borders */
+  border: 1px solid rgba(var(--color-border-primary), 1);
+  border-radius: 0;
+
+  padding: 18px;
+  box-shadow: none;
+
+  transition: transform 0.16s var(--ease-out-quad), box-shadow 0.16s var(--ease-out-quad),
+    border-color 0.16s var(--ease-out-quad);
+}
+
+/* No “lift” on hover when connected */
+.pricing__card__H5k8q:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* MOBILE (stacked): single divider line between cards */
+.pricing__card__H5k8q + .pricing__card__H5k8q {
+  border-top: 0;
+}
+
+/* DESKTOP/TABLET (side-by-side): single divider line between columns */
+@media (min-width: 640px) {
+  .pricing__card__H5k8q + .pricing__card__H5k8q {
+    border-top: 1px solid rgba(var(--color-border-primary), 1); /* reset stacking rule */
+  }
+}
+
+@media (min-width: 1024px) {
+  .pricing__card__H5k8q + .pricing__card__H5k8q {
+    border-top: 1px solid rgba(var(--color-border-primary), 1);
+  }
+
+  .pricing__card__H5k8q {
+    border-right: 0; /* avoid double borders */
+  }
+
+  .pricing__card__H5k8q:last-child {
+    border-right: 1px solid rgba(var(--color-border-primary), 1);
+  }
+}
+/* Outer radius only (mobile stack) */
+.pricing__card__H5k8q:first-child {
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+.pricing__card__H5k8q:last-child {
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+/* Outer radius only (desktop row) */
+@media (min-width: 1024px) {
+  .pricing__card__H5k8q:first-child {
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 0;
+  }
+
+  .pricing__card__H5k8q:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+  }
+
+  /* Middle cards have no radius */
+  .pricing__card__H5k8q:not(:first-child):not(:last-child) {
+    border-radius: 0;
+  }
+}
+
+/* Highlighted */
+.pricing__card--highlighted__R5j2s {
+  position: relative;
+  z-index: 2;
+
+  border: 1px solid rgba(0, 122, 255, 0.45);
+  border-radius: 16px !important;
+
+  background:
+    linear-gradient(180deg, rgba(0, 122, 255, 0.08), rgba(0, 122, 255, 0.02)),
+    rgba(var(--color-bg-secondary), 1);
+
+  box-shadow: var(--shadow-stack-medium);
+
+  /* make it taller from top and bottom */
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+
+/* When connected on desktop, ensure highlighted still shows its own borders */
+@media (min-width: 1024px) {
+  .pricing__card--highlighted__R5j2s {
+    border-right: 1px solid rgba(0, 122, 255, 0.45);
+  }
+}
+
+.pricing__billing__C2d3e {
+  opacity: 0.9;
+
+  margin-top: 12px;
+  padding: 10px 0;
+
+  border-top: 1px solid rgba(var(--color-border-primary), 1);
+  border-bottom: 1px solid rgba(var(--color-border-primary), 1);
+}
