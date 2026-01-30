@@ -438,7 +438,7 @@ export default function ContactPage() {
                         <div className="contact__form-consent__R5j2s">
                             <div className="contact__consent-content__P5k8p">
                                 <label htmlFor="consentMarketing" className="contact__consent-label__B9k6p">
-                                    Yes, I agree to receive marketing communications from Shapewebs as described in your
+                                    Yes, I agree to receive marketing communications from Shapewebs as described in your 
                                     <a href="/privacy-policy" className="typography__link__B7s3m">
                                         Privacy Policy
                                     </a>
