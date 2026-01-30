@@ -44,10 +44,8 @@ useEffect(() => {
   controls.start("visible")
 }, [controls])
   
-  // Determine which theme to show - default to light if not mounted yet
   const currentTheme = mounted ? resolvedTheme : "light"
 
-  // Animation variants
   const titleVariants: Variants = {
     hidden: {
       opacity: 0,
