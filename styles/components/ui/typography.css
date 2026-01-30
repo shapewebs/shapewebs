@@ -24,11 +24,11 @@
 }
 
 .typography__heading4__Z7p4s {
-  font-size: var(--font-size-regular);
-  font-weight: var(--font-weight-medium);
-  line-height: 1.5;
+  font-size: var(--font-size-title4);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
   margin-bottom: 0.5rem;
-  color: rgba(var(--color-text-tertiary), 1);
+  color: rgba(var(--color-text-primary), 1);
 }
 
 .typography__heading5__J8d3k {
