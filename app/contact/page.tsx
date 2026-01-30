@@ -18,7 +18,6 @@ export default function ContactPage() {
   })
 
   const countries = [
-    { code: "ZZ", name: "International" },
     { code: "AF", name: "Afghanistan" },
     { code: "AL", name: "Albania" },
     { code: "DZ", name: "Algeria" },
