@@ -99,6 +99,7 @@
   display: inline;
   transform: translateY(-0.5px);
   margin-right: 6px;
+  stroke-width: 1.5px;
 }
 
 .bitCO {
