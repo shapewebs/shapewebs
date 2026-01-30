@@ -166,6 +166,11 @@
 .pricing__feature-text__Q9j2p {
   color: rgba(var(--color-text-tertiary), 1);
 }
+.pricing__alt__P5k8p {
+  text-align: center;
+  color: rgba(var(--color-text-tertiary), 1);
+  opacity: 0.95;
+}
 
 /* Actions */
 .pricing__actions__Q6z2k {
