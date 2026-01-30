@@ -285,7 +285,7 @@ export default function ContactPage() {
         <div className="contact__grid__L7p3s">
           <div className="contact__info-container__H5k8q">
             <h3 className="typography__heading3__V1c8r" style={{ margin: "0px" }}>Contact sales</h3>
-            <p className="contact__reasons-intro__Q4n6s">
+            <p className="typography__body__K4n7p bitC1">
               Reach out to see what Shapewebs can build for your team, and what it can do for your business.
             </p>
             <p className="typography__subtitle__R6m2x">
