@@ -129,10 +129,6 @@
   box-shadow: var(--shadow-stack-low);
 }
 
-.pricing__plan-name__N1m2p {
-  color: rgba(var(--color-text-primary), 1);
-}
-
 /* Badge */
 .pricing__badge__B9k6p {
   display: inline-flex;
