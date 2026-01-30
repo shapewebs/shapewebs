@@ -366,7 +366,7 @@ export default function ContactPage() {
                       type="tel"
                       id="phoneNumber"
                       name="phoneNumber"
-                      className="form__input__Z3n7q contact__phone-input__H5k8q"
+                      className="form__input__Z3n7q"
                       placeholder="Phone number"
                       value={formData.phoneNumber}
                       onChange={handleChange}
