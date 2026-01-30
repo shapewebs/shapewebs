@@ -289,7 +289,7 @@ export default function ContactPage() {
               Reach out to see what Shapewebs can build for your team, and what it can do for your business.
             </p>
             <p className="typography__body__K4n7p">
-              <span className="Text-regular-bit bitCO"><svg
+              <span className="Text-regular-bitC bitCO"><svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="-0.0002 -0.0003 16.0005 15.9996"
   width="16.0005px"
