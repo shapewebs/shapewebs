@@ -290,7 +290,6 @@ export default function ContactPage() {
             </p>
             <p className="typography__body__K4n7p">
               <span>
-<?xml version="1.0" encoding="utf-8"?>
 <svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="-38.3281 -40.3086 38.3281 38.3086"
