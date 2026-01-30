@@ -226,7 +226,7 @@
   background: rgba(var(--color-bg-secondary), 1);
   border-radius: 999px;
   padding: 2px;
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
   border: 1px solid rgba(var(--color-border-secondary), 1);
 }
 
