@@ -1,4 +1,7 @@
-/* Pricing page styles */
+/* =========================
+   Pricing page styles
+   ========================= */
+
 .pricing__container__Q7j3s {
   width: 100%;
 }
@@ -23,56 +26,41 @@
   opacity: 0.9;
 }
 
-/* Grid (connected cards) */
+/* =========================
+   Grid -> "connected cards"
+   Mobile: stacked connected
+   Tablet: 2-column connected
+   Desktop: 4-column connected
+   ========================= */
+
 .pricing__grid__L7p3s {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0;
+  gap: 0; /* connected */
+  margin-inline: auto;
 }
 
-@media (min-width: 640px) {
-  .pricing__grid__L7p3s {
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-  }
-}
-
-@media (min-width: 1024px) {
-  .pricing__grid__L7p3s {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 0;
-  }
-}
-
-/* Card (connected) */
+/* Base card (connected look) */
 .pricing__card__H5k8q {
   display: flex;
   flex-direction: column;
   height: 100%;
   background-color: rgba(var(--color-bg-secondary), 1);
-
   border: 1px solid rgba(var(--color-border-primary), 1);
-  border-radius: 0;
-
+  border-radius: 0; /* radius controlled by position */
   padding: 18px;
   box-shadow: none;
-
   transition: transform 0.16s var(--ease-out-quad), box-shadow 0.16s var(--ease-out-quad),
-    border-color 0.16s var(--ease-out-quad);
+    border-color 0.16s var(--ease-out-quad), background 0.16s var(--ease-out-quad);
+  position: relative;
 }
 
-/* No “lift” hover when connected */
-.pricing__card__H5k8q:hover {
-  transform: none;
-  box-shadow: none;
-}
-
-/* MOBILE (stacked): single divider line between cards */
+/* Single column: remove double borders between stacked cards */
 .pricing__card__H5k8q + .pricing__card__H5k8q {
   border-top: 0;
 }
 
-/* Outer radius only (mobile stack) */
+/* Outer corners only (mobile stack) */
 .pricing__card__H5k8q:first-child {
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
@@ -82,41 +70,86 @@
   border-bottom-right-radius: 16px;
 }
 
-/* TABLET+ (2 columns): restore top border between rows (since we removed it above) */
+/* Hover: subtle lift, keep connected feeling */
+.pricing__card__H5k8q:hover {
+  z-index: 1;
+  box-shadow: var(--shadow-stack-low);
+}
+
+/* =========================
+   2-column connected layout
+   ========================= */
 @media (min-width: 640px) {
+  .pricing__grid__L7p3s {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Reset mobile border joining */
   .pricing__card__H5k8q + .pricing__card__H5k8q {
     border-top: 1px solid rgba(var(--color-border-primary), 1);
   }
-}
 
-/* DESKTOP (4 columns): make a single vertical divider line */
-@media (min-width: 1024px) {
+  /* Remove double borders: between columns */
+  .pricing__card__H5k8q:nth-child(even) {
+    border-left: 0;
+  }
+
+  /* Remove double borders: between rows (items 3+) */
+  .pricing__card__H5k8q:nth-child(n + 3) {
+    border-top: 0;
+  }
+
+  /* Outer corner rounding for the 2x2 block */
   .pricing__card__H5k8q {
-    border-right: 0; /* avoid double borders between cards */
-  }
-
-  .pricing__card__H5k8q:last-child {
-    border-right: 1px solid rgba(var(--color-border-primary), 1);
-  }
-
-  /* Outer corners only */
-  .pricing__card__H5k8q:first-child {
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 0;
-  }
-
-  .pricing__card__H5k8q:last-child {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 16px;
-    border-bottom-right-radius: 16px;
-  }
-
-  .pricing__card__H5k8q:not(:first-child):not(:last-child) {
     border-radius: 0;
   }
+  .pricing__card__H5k8q:nth-child(1) {
+    border-top-left-radius: 16px;
+  }
+  .pricing__card__H5k8q:nth-child(2) {
+    border-top-right-radius: 16px;
+  }
+  .pricing__card__H5k8q:nth-child(3) {
+    border-bottom-left-radius: 16px;
+  }
+  .pricing__card__H5k8q:nth-child(4) {
+    border-bottom-right-radius: 16px;
+  }
 }
+
+/* =========================
+   4-column connected layout
+   ========================= */
+@media (min-width: 1024px) {
+  .pricing__grid__L7p3s {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Remove any row joining rules */
+  .pricing__card__H5k8q:nth-child(n + 3) {
+    border-top: 1px solid rgba(var(--color-border-primary), 1);
+  }
+
+  /* Single row: no top joins needed; remove double borders between columns */
+  .pricing__card__H5k8q {
+    border-top: 1px solid rgba(var(--color-border-primary), 1);
+  }
+  .pricing__card__H5k8q:nth-child(n + 2) {
+    border-left: 0;
+  }
+
+  /* Outer corners only on the row */
+  .pricing__card__H5k8q:first-child {
+    border-radius: 16px 0 0 16px;
+  }
+  .pricing__card__H5k8q:last-child {
+    border-radius: 0 16px 16px 0;
+  }
+}
+
+/* =========================
+   Card internal layout
+   ========================= */
 
 .pricing__card-top__A1b2c {
   display: flex;
@@ -174,13 +207,14 @@
   color: rgba(var(--color-text-tertiary), 1);
 }
 
-/* Billed yearly separator (top & bottom borders) */
+/* ✅ "Billed yearly" gets a top + bottom border */
 .pricing__billing__C2d3e {
-  opacity: 0.9;
-  margin-top: 12px;
+  margin-top: 10px;
   padding: 10px 0;
   border-top: 1px solid rgba(var(--color-border-primary), 1);
   border-bottom: 1px solid rgba(var(--color-border-primary), 1);
+  color: rgba(var(--color-text-tertiary), 1);
+  opacity: 0.95;
 }
 
 .pricing__desc__K4n7p {
@@ -226,38 +260,47 @@
 }
 
 .pricing__cta__X1y2z {
+  width: 100%;
+  justify-content: center;
   box-shadow: var(--shadow-stack-low);
 }
 
-/* Under-button alt link on highlighted plan */
+/* Under-button alt link (highlighted plan only) */
 .pricing__alt__P5k8p {
   text-align: center;
   color: rgba(var(--color-text-tertiary), 1);
   opacity: 0.95;
 }
 
-/* Highlighted */
+/* =========================
+   Highlighted card behavior
+   - Slightly taller (top+bottom)
+   - Fully rounded corners
+   - Sits above neighbors
+   - Keeps connection lines visible around it
+   ========================= */
+
 .pricing__card--highlighted__R5j2s {
-  position: relative;
-  z-index: 2;
-
+  z-index: 3;
+  transform: translateY(-8px);
+  margin-bottom: -8px; /* makes it taller overall without breaking layout spacing */
+  border-radius: 16px !important; /* full corners */
   border: 1px solid rgba(0, 122, 255, 0.45);
-  border-radius: 16px !important;
-
   background:
     linear-gradient(180deg, rgba(0, 122, 255, 0.08), rgba(0, 122, 255, 0.02)),
     rgba(var(--color-bg-secondary), 1);
-
   box-shadow: var(--shadow-stack-medium);
-
-  /* make it taller from top and bottom */
-  margin-top: -10px;
-  margin-bottom: -10px;
 }
 
-/* Ensure highlighted shows its own borders in connected desktop row */
-@media (min-width: 1024px) {
-  .pricing__card--highlighted__R5j2s {
-    border-right: 1px solid rgba(0, 122, 255, 0.45);
+/* When highlighted is adjacent in a connected row, make sure its border isn't "double-stacked" */
+@media (min-width: 640px) {
+  /* If highlighted is on the right, keep the separator from the left card clean */
+  .pricing__card__H5k8q:not(.pricing__card--highlighted__R5j2s) + .pricing__card--highlighted__R5j2s {
+    border-left: 1px solid rgba(0, 122, 255, 0.45);
+  }
+
+  /* If highlighted is on the left and the next card removes its left border, preserve separation */
+  .pricing__card--highlighted__R5j2s + .pricing__card__H5k8q {
+    border-left: 0;
   }
 }
