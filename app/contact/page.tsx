@@ -312,10 +312,10 @@ export default function ContactPage() {
                         <span>From idea to launch, you can learn about our <a href="/method"
                                 className="typography__link__B7s3m">method</a> or talk to sales.</span>
                     </p>
-                    <div className="Spacer-module__root__NM019" style={{ '--height' : '48px' }}>
+                    <div className="Spacer-module__root__NM019" style={{ '--height' : '64px' }}>
                     </div>
                     <p className="typography__body__K4n7p" style={{ margin: 0 }}>Technical question or issue? </p>
-                    <div className="Spacer-module__root__NM019" style={{ '--height' : '16px' }}>
+                    <div className="Spacer-module__root__NM019" style={{ '--height' : '8px' }}>
                     </div>
                     <a href="/docs" className="button__root__ZxcvB button__kind-tertiary__R5j2s button__size-small__L9d7h" style={{
                       margin: 0,
