@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32px" height="32px">
-  <path style="fill: rgb(8, 9, 10);" d="M 24 0 C 29 0 32 3 32 8 C 32 12.879 32 19.119 32 24 C 32 29 29 32 24 32 C 19.116 32 12.882 32 8 32 C 3 32 0 29 0 24 L 0 8 C 0 2 3 0 8 0 C 12.879 0 19.118 0 24 0 Z" transform="matrix(1, 0, 0, 1, 0, -7.105427357601002e-15)"/>
-  <path style="paint-order: fill; fill-rule: nonzero; fill: rgb(251, 251, 251);" d="M 25.75 5.5 L 15.917 26.5 L 4 26.5 L 4 14.5 C 4 8.5 6.979 5.5 12.938 5.5 L 25.75 5.5 Z" transform="matrix(1, 0, 0, 1, 0, -7.105427357601002e-15)"/>
-  <ellipse style="fill: rgb(251, 251, 251);" cx="24.25" cy="22.75" rx="3.75" ry="3.75" transform="matrix(1, 0, 0, 1, 0, -7.105427357601002e-15)"/>
-</svg>
