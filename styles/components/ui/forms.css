@@ -351,3 +351,9 @@ input:-webkit-autofill:focus {
 .form__inputPhoneNR__select__H5k8q:focus {
   outline: none;
 }
+
+.PhoneInputCountryIconImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
