@@ -356,7 +356,7 @@ export default function ContactPage() {
                       </select>
                       <div aria-hidden="true">
                         <img
-                          className="PhoneInputCountryIconImg"
+                          className="form__inputPhoneNR__img__H5k8q"
                           alt={countries.find((c) => c.code === formData.phoneCountry)?.name || "Country"}
                           src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${formData.phoneCountry}.svg`}
                         />
