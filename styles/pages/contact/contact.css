@@ -190,34 +190,26 @@ select.contact__form-input__L3j7q {
 }
 
 .contact__phone-country-wrapper__Z9k3s {
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  align-items: center;
   position: relative;
   display: flex;
   align-items: center;
-  background-color: rgba(var(--color-bg-secondary), 1);
+  background-color: rgba(var(--color-bg-tertiary), 1);
   border: 1px solid rgba(var(--color-border-secondary), 1);
-  border-right: none;
-  border-radius: 8px 0 0 8px;
 }
 
 .contact__phone-country-select__B9k6p {
-  padding: 0.75rem 0.5rem;
-  font-size: var(--font-size-regular);
-  color: transparent;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  transition: border-color 0.2s ease;
-  font-family: inherit;
-  width: 60px;
-  flex-shrink: 0;
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/csvg%3e");
-  background-repeat: no-repeat;
-  background-position: right 2px center;
-  background-size: 16px;
-  padding-right: 18px;
-  position: relative;
-  z-index: 2;
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .contact__phone-country-select__B9k6p option {
@@ -230,14 +222,8 @@ select.contact__form-input__L3j7q {
 }
 
 .PhoneInputCountryIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 24px;
-  margin-left: 4px;
-  margin-right: 4px;
-  flex-shrink: 0;
+  width: 21px;
+  height: 14px;
 }
 
 .PhoneInputCountryIcon--border {
@@ -248,8 +234,7 @@ select.contact__form-input__L3j7q {
 .PhoneInputCountryIconImg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 2px;
+  display: block;
 }
 
 .contact__phone-input__H5k8q {
