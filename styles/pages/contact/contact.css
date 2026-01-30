@@ -84,13 +84,6 @@
   color: rgba(var(--color-text-primary), 1);
 }
 
-.contact__form-container__H5k8q {
-  padding: 1.5rem;
-  background-color: rgba(var(--color-bg-secondary), 1);
-  border: 1px solid rgba(var(--color-border-primary), 1);
-  border-radius: 12px;
-}
-
 .contact__form__P5k8p {
   display: flex;
   flex-direction: column;
