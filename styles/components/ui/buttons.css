@@ -148,10 +148,6 @@
   border-color: var(--color-blue);
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle--ios__T7g2m:checked + .contact__toggle-btn__T7g2m:active {
-  box-shadow: none;
-}
-
 .contact__toggle-wrapper__T7g2m .contact__toggle--ios__T7g2m:checked + .contact__toggle-btn__T7g2m:active:after {
   margin-left: -10px;
 }
