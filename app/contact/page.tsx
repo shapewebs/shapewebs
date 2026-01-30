@@ -301,7 +301,7 @@ export default function ContactPage() {
       fill: "none",
       paintOrder: "fill",
       stroke: "currentColor",
-      strokeWidth: "1px",
+      strokeWidth: "1.25px",
     }}
     transform="matrix(1, 0, 0, 1, 0, -1.7763568394002505e-15)"
   />
@@ -322,7 +322,7 @@ export default function ContactPage() {
       fill: "none",
       paintOrder: "fill",
       stroke: "currentColor",
-      strokeWidth: "1px",
+      strokeWidth: "1.25px",
     }}
     transform="matrix(1, 0, 0, 1, 0, -1.7763568394002505e-15)"
   />
