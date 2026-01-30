@@ -289,12 +289,12 @@ export default function ContactPage() {
               Reach out to see what Shapewebs can build for your team, and what it can do for your business.
             </p>
             <p className="typography__subtitle__R6m2x">
-            <span className="bitCO">Start with a custom demo. </span>
-            <span>Discover the value of a carefully crafted web presence by Shapewebs.</span>
+              <span className="bitCO">Start with a custom demo. </span>
+              <span>Discover the value of a carefully crafted web presence by Shapewebs.</span>
             </p>
             <p className="typography__subtitle__R6m2x">
-            <span className="bitCO">See the process in action. </span>
-            <span>From idea to launch, you can learn about our <a href="/method" className="typography__link__B7s3m">method</a> or talk to sales.</span>
+              <span className="bitCO">See the process in action. </span>
+              <span>From idea to launch, you can learn about our <a href="/method" className="typography__link__B7s3m">method</a> or talk to sales.</span>
             </p>
           </div>
         </div>
