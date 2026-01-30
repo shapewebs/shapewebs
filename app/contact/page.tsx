@@ -388,20 +388,29 @@ export default function ContactPage() {
                     Phone Number <span className="contact__optional__K5j8q">(optional)</span>
                   </label>
                   <div className="contact__phone-input-wrapper__M8k5p">
-                    <select
-                      id="phoneCountry"
-                      name="phoneCountry"
-                      className="contact__phone-country-select__B9k6p"
-                      value={formData.phoneCountry}
-                      onChange={handleChange}
-                      title="Select country"
-                    >
-                      {countries.map((country) => (
-                        <option key={country.code} value={country.code}>
-                          {country.name}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="contact__phone-country-wrapper__Z9k3s">
+                      <select
+                        id="phoneCountry"
+                        name="phoneCountry"
+                        className="contact__phone-country-select__B9k6p"
+                        value={formData.phoneCountry}
+                        onChange={handleChange}
+                        title="Select country"
+                      >
+                        {countries.map((country) => (
+                          <option key={country.code} value={country.code}>
+                            {country.code}
+                          </option>
+                        ))}
+                      </select>
+                      <div aria-hidden="true" className="PhoneInputCountryIcon PhoneInputCountryIcon--border">
+                        <img
+                          className="PhoneInputCountryIconImg"
+                          alt={countries.find((c) => c.code === formData.phoneCountry)?.name || "Country"}
+                          src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${formData.phoneCountry}.svg`}
+                        />
+                      </div>
+                    </div>
                     <input
                       type="tel"
                       id="phoneNumber"
