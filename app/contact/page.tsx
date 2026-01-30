@@ -514,7 +514,7 @@ export default function ContactPage() {
                 <textarea
                   id="message"
                   name="message"
-                  className="contact__form-textarea__K5j8q"
+                  className="form__textarea__Q6p3f"
                   placeholder="Your company needs Shapewebs for..."
                   value={formData.message}
                   onChange={handleChange}
