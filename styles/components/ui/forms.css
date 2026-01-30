@@ -176,15 +176,6 @@
   margin-bottom: 16px; /* Equivalent to mb-4 */
 }
 
-@media (min-width: 768px) {
-  /* Equivalent to md: */
-  .signup-form__input-row {
-    flex-direction: row;
-    gap: 16px; /* Equivalent to md:space-x-2 */
-    margin-bottom: 0; /* Reset for md */
-  }
-}
-
 .signup-form__label-input-container {
   margin-bottom: 16px; /* Equivalent to mb-4 */
 }
@@ -397,4 +388,19 @@ input:-webkit-autofill:focus {
 
 .form__inputPhoneNR__select__H5k8q:focus {
   outline: none;
+}
+
+@media (min-width: 768px) {
+  /* Equivalent to md: */
+  .signup-form__input-row {
+    flex-direction: row;
+    gap: 16px; /* Equivalent to md:space-x-2 */
+    margin-bottom: 0; /* Reset for md */
+  }
+}
+
+@media (max-width: 640px) {
+  .form__group--row__M93j8 {
+    grid-template-columns: 1fr;
+  }
 }
