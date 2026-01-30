@@ -232,7 +232,7 @@
 
 .contact__toggle-wrapper__T7g2m .contact__toggle--ios__T7g2m + .contact__toggle-btn__T7g2m:after {
   border-radius: 999px;
-  background: rgba(var(--color-bg-secondary), 1);
+  background: rgba(251, 251, 251, 1);
   transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
   box-shadow:
     0 0 0 1px rgba(0, 0, 0, 0.08),
