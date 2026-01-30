@@ -33,7 +33,6 @@
   fill: currentColor;
   width: var(--button-icon-size, var(--icon-size-default));
   height: var(--button-icon-size, var(--icon-size-default));
-  transition: .16s var(--ease-in-quad);
   transition-property: color, opacity, transform;
 }
 
