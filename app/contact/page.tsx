@@ -356,7 +356,7 @@ export default function ContactPage() {
                   type="email"
                   id="companyEmail"
                   name="companyEmail"
-                  className="contact__form-input__L3j7q"
+                  className="form__input__Z3n7q"
                   placeholder="tyler@business.co"
                   value={formData.companyEmail}
                   onChange={handleChange}
@@ -374,7 +374,7 @@ export default function ContactPage() {
                     type="text"
                     id="name"
                     name="name"
-                    className="contact__form-input__L3j7q"
+                    className="form__input__Z3n7q"
                     placeholder="Tyler Durden"
                     value={formData.name}
                     onChange={handleChange}
@@ -414,7 +414,7 @@ export default function ContactPage() {
                       type="tel"
                       id="phoneNumber"
                       name="phoneNumber"
-                      className="contact__form-input__L3j7q contact__phone-input__H5k8q"
+                      className="form__input__Z3n7q contact__phone-input__H5k8q"
                       placeholder="Enter phone number"
                       value={formData.phoneNumber}
                       onChange={handleChange}
@@ -431,7 +431,7 @@ export default function ContactPage() {
                 <select
                   id="country"
                   name="country"
-                  className="contact__form-input__L3j7q"
+                  className="form__input__Z3n7q"
                   value={formData.country}
                   onChange={handleChange}
                   required
@@ -454,7 +454,7 @@ export default function ContactPage() {
                   <select
                     id="companySize"
                     name="companySize"
-                    className="contact__form-input__L3j7q"
+                    className="form__input__Z3n7q"
                     value={formData.companySize}
                     onChange={handleChange}
                     required
@@ -476,7 +476,7 @@ export default function ContactPage() {
                     type="url"
                     id="website"
                     name="website"
-                    className="contact__form-input__L3j7q"
+                    className="form__input__Z3n7q"
                     placeholder="https://address.com"
                     value={formData.website}
                     onChange={handleChange}
@@ -492,7 +492,7 @@ export default function ContactPage() {
                 <select
                   id="productInterest"
                   name="productInterest"
-                  className="contact__form-input__L3j7q"
+                  className="form__input__Z3n7q"
                   value={formData.productInterest}
                   onChange={handleChange}
                   required

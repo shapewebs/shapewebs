@@ -130,15 +130,6 @@
   font-size: 0.85em;
 }
 
-
-/* Select dropdown with custom icon */
-.contact__form-textarea__K5j8q {
-  resize: vertical;
-  min-height: 160px;
-  height: auto;
-  padding: 0.75rem;
-}
-
 /* Phone number input wrapper */
 .contact__phone-input-wrapper__M8k5p {
   display: flex;
