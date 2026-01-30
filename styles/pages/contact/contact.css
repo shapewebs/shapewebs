@@ -45,10 +45,9 @@
 }
 
 .contact__info-container__H5k8q {
-  padding: 0;
-  background-color: transparent;
-  border: none;
-  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .contact__form__P5k8p {
