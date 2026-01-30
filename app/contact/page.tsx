@@ -313,6 +313,7 @@ export default function ContactPage() {
                         <span>From idea to launch, you can learn about our <a href="/method"
                                 className="typography__link__B7s3m">method</a> or talk to sales.</span>
                     </p>
+                    <a href="/docs" className="button__root__ZxcvB button__kind-tertiary__R5j2s button__size-small__L9d7h"
                 </div>
                 <div className="form__container__H8j3p">
                     <form className="contact__form__P5k8p" onSubmit={handleSubmit}>
