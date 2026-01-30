@@ -285,6 +285,11 @@ export default function ContactPage() {
         <div className="contact__grid__L7p3s">
           <div className="contact__info-container__H5k8q">
             <h3 className="typography__heading3__V1c8r" style={{ margin: "0px" }}>Contact sales</h3>
+            <div
+            className="Spacer-module__root__NM019"
+            style={{ '--height': '32px' }}
+          >
+          </div>
             <p className="typography__body__K4n7p" style={{ margin: 0 }}>
               <span className="Text-regular-bitC bitCO"><svg
   xmlns="http://www.w3.org/2000/svg"
@@ -306,6 +311,12 @@ export default function ContactPage() {
  Start with a custom demo. </span>
               <span>Discover the value of a carefully crafted web presence by Shapewebs.</span>
             </p>
+                      <div
+            className="Spacer-module__root__NM019"
+            style={{ '--height': '24px' }}
+          >
+          </div>
+
             <p className="typography__body__K4n7p" style={{ margin: 0 }}>
               <span className="Text-regular-bitC bitCO"><svg
   xmlns="http://www.w3.org/2000/svg"
