@@ -90,10 +90,10 @@ export default function PricingPage() {
 
         <div className="pricing__grid__L7p3s">
           {plans.map((plan) => (
-            <article
-              key={plan.key}
-              className={`pricing__card__H5k8q ${plan.highlighted ? "pricing__card--highlighted__R5j2s" : ""}`}
-            >
+          <article
+            className="module__card__H5k8q"
+            data-highlighted={plan.highlighted ? "true" : "false"}
+          >
               <div className="pricing__card-top__A1b2c">
                 <div className="pricing__plan-row__V2c3d">
                   <h3 className="typography__heading5__J8d3k pricing__plan-name__N1m2p" style={{ margin: 0 }}>
