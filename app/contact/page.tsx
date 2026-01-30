@@ -357,7 +357,7 @@ export default function ContactPage() {
                   id="companyEmail"
                   name="companyEmail"
                   className="contact__form-input__L3j7q"
-                  placeholder="tyler@shapewebs.com"
+                  placeholder="tyler@business.co"
                   value={formData.companyEmail}
                   onChange={handleChange}
                   required
