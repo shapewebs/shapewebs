@@ -321,7 +321,6 @@ export default function ContactPage() {
                       margin: 0,
                       "--button-font-size": "var(--font-size-regular)",
                     }}>Find it in docs</a>
-                    
                 </div>
                 <div className="form__container__H8j3p">
                     <form className="contact__form__P5k8p" onSubmit={handleSubmit}>
