@@ -529,7 +529,7 @@ export default function ContactPage() {
                   <label htmlFor="consentMarketing" className="contact__consent-label__B9k6p"> Yes, I agree to receive marketing communications from Shapewebs as described in your{" "} 
                     <a href="/privacy-policy" className="contact__link__Z7j3s"> Privacy Policy </a> . I can withdraw my consent at any time by clicking the unsubscribe link in the emails. 
                   </label> 
-                  <input type="checkbox" id="consentMarketing" name="consentMarketing" className="contact__consent-checkbox__M8k5p" checked={formData.consentMarketing} onChange={handleChange} /> 
+                  <input required type="checkbox" id="consentMarketing" name="consentMarketing" className="contact__consent-checkbox__M8k5p" checked={formData.consentMarketing} onChange={handleChange} /> 
                 </div>
               </div>
 
