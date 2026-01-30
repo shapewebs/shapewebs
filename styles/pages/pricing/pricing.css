@@ -209,9 +209,3 @@
   opacity: 0.95;
   padding-inline: 18px;
 }
-
-@media (min-width: 640px) {
-  .module__card__H5k8q[data-highlighted="true"] + .module__card__H5k8q {
-    border-left: 0;
-  }
-}
