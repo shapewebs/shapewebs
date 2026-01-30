@@ -385,7 +385,6 @@ input:-webkit-autofill:focus {
 
 .form__inputPhoneNR__H5k8q:focus-within .form__inputPhoneNRFlag__H5k8q {
   border-right-color: var(--color-blue);
-  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
 }
 
 .form__inputPhoneNR__H5k8q input:focus {
