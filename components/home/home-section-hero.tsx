@@ -25,7 +25,6 @@ export function HomeSectionHero() {
   const darkThemeUrl = "https://i.ibb.co/8gnVqXb3/hero-image-sw-dark.png"
   const lightThemeUrl = "https://i.ibb.co/5X8mW9nS/hero-image-sw-light.png"
 
-  // Set mounted state and preload images
 const hasAnimated = useRef(false)
 
 useEffect(() => {
