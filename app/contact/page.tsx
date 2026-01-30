@@ -476,12 +476,29 @@ export default function ContactPage() {
               </div>
 
               {/* Consent Checkbox */} 
-              <div className="contact__form-consent__R5j2s"> 
-                <div className="contact__consent-content__P5k8p"> 
-                  <label htmlFor="consentMarketing" className="contact__consent-label__B9k6p"> Yes, I agree to receive marketing communications from Shapewebs as described in your{" "} 
-                    <a href="/privacy-policy" className="typography__link__B7s3m"> Privacy Policy </a> . I can withdraw my consent at any time by clicking the unsubscribe link in the emails. 
-                  </label> 
-                  <input required type="checkbox" id="consentMarketing" name="consentMarketing" className="contact__consent-checkbox__M8k5p" checked={formData.consentMarketing} onChange={handleChange} /> 
+              <div className="contact__form-consent__R5j2s">
+                <div className="contact__consent-content__P5k8p">
+                  <label htmlFor="consentMarketing" className="contact__consent-label__B9k6p">
+                    Yes, I agree to receive marketing communications from Shapewebs as described in your{" "}
+                    <a href="/privacy-policy" className="typography__link__B7s3m">
+                      Privacy Policy
+                    </a>
+                    . I can withdraw my consent at any time by clicking the unsubscribe link in the emails.
+                  </label>
+
+                  {/* iOS toggle */}
+                  <div className="contact__toggle-wrapper__T7g2m">
+                    <input
+                      required
+                      className="contact__toggle__T7g2m contact__toggle--ios__T7g2m"
+                      id="consentMarketing"
+                      name="consentMarketing"
+                      type="checkbox"
+                      checked={formData.consentMarketing}
+                      onChange={handleChange}
+                    />
+                    <label className="contact__toggle-btn__T7g2m" htmlFor="consentMarketing" />
+                  </div>
                 </div>
               </div>
 
