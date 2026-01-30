@@ -1,5 +1,6 @@
 /* =========================
    Pricing page styles
+   (single connected card group + highlighted “sticks out”)
    ========================= */
 
 .pricing__container__Q7j3s {
@@ -27,10 +28,7 @@
 }
 
 /* =========================
-   Grid -> "connected cards"
-   Mobile: stacked connected
-   Tablet: 2-column connected
-   Desktop: 4-column connected
+   Connected grid
    ========================= */
 
 .pricing__grid__L7p3s {
@@ -38,39 +36,41 @@
   grid-template-columns: 1fr;
   gap: 0; /* connected */
   margin-inline: auto;
+  --pricing-card-radius: 16px;
+  --pricing-card-pad: 18px; /* internal padding */
 }
 
-/* Base card (connected look) */
+/* Base card (NO padding; padding is applied to inner elements) */
 .pricing__card__H5k8q {
   display: flex;
   flex-direction: column;
   height: 100%;
   background-color: rgba(var(--color-bg-secondary), 1);
   border: 1px solid rgba(var(--color-border-primary), 1);
-  border-radius: 0; /* radius controlled by position */
-  padding: 18px;
+  border-radius: 0; /* set by position */
+  padding: 0; /* IMPORTANT: moved to children */
   box-shadow: none;
+  position: relative;
   transition: transform 0.16s var(--ease-out-quad), box-shadow 0.16s var(--ease-out-quad),
     border-color 0.16s var(--ease-out-quad), background 0.16s var(--ease-out-quad);
-  position: relative;
 }
 
-/* Single column: remove double borders between stacked cards */
+/* Join borders (mobile stacked) */
 .pricing__card__H5k8q + .pricing__card__H5k8q {
   border-top: 0;
 }
 
 /* Outer corners only (mobile stack) */
 .pricing__card__H5k8q:first-child {
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  border-top-left-radius: var(--pricing-card-radius);
+  border-top-right-radius: var(--pricing-card-radius);
 }
 .pricing__card__H5k8q:last-child {
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: var(--pricing-card-radius);
+  border-bottom-right-radius: var(--pricing-card-radius);
 }
 
-/* Hover: subtle lift, keep connected feeling */
+/* Subtle hover without breaking the connected look */
 .pricing__card__H5k8q:hover {
   z-index: 1;
   box-shadow: var(--shadow-stack-low);
@@ -84,36 +84,36 @@
     grid-template-columns: 1fr 1fr;
   }
 
-  /* Reset mobile border joining */
+  /* Reset stacked rule */
   .pricing__card__H5k8q + .pricing__card__H5k8q {
     border-top: 1px solid rgba(var(--color-border-primary), 1);
   }
 
-  /* Remove double borders: between columns */
+  /* Remove double borders between columns */
   .pricing__card__H5k8q:nth-child(even) {
     border-left: 0;
   }
 
-  /* Remove double borders: between rows (items 3+) */
+  /* Remove double borders between rows (items 3+) */
   .pricing__card__H5k8q:nth-child(n + 3) {
     border-top: 0;
   }
 
-  /* Outer corner rounding for the 2x2 block */
+  /* Outer corners for the 2x2 block */
   .pricing__card__H5k8q {
     border-radius: 0;
   }
   .pricing__card__H5k8q:nth-child(1) {
-    border-top-left-radius: 16px;
+    border-top-left-radius: var(--pricing-card-radius);
   }
   .pricing__card__H5k8q:nth-child(2) {
-    border-top-right-radius: 16px;
+    border-top-right-radius: var(--pricing-card-radius);
   }
   .pricing__card__H5k8q:nth-child(3) {
-    border-bottom-left-radius: 16px;
+    border-bottom-left-radius: var(--pricing-card-radius);
   }
   .pricing__card__H5k8q:nth-child(4) {
-    border-bottom-right-radius: 16px;
+    border-bottom-right-radius: var(--pricing-card-radius);
   }
 }
 
@@ -125,35 +125,29 @@
     grid-template-columns: repeat(4, 1fr);
   }
 
-  /* Remove any row joining rules */
-  .pricing__card__H5k8q:nth-child(n + 3) {
-    border-top: 1px solid rgba(var(--color-border-primary), 1);
-  }
-
-  /* Single row: no top joins needed; remove double borders between columns */
-  .pricing__card__H5k8q {
-    border-top: 1px solid rgba(var(--color-border-primary), 1);
-  }
+  /* Single row: remove double borders between columns */
   .pricing__card__H5k8q:nth-child(n + 2) {
     border-left: 0;
   }
 
-  /* Outer corners only on the row */
+  /* Outer corners only on ends */
   .pricing__card__H5k8q:first-child {
-    border-radius: 16px 0 0 16px;
+    border-radius: var(--pricing-card-radius) 0 0 var(--pricing-card-radius);
   }
   .pricing__card__H5k8q:last-child {
-    border-radius: 0 16px 16px 0;
+    border-radius: 0 var(--pricing-card-radius) var(--pricing-card-radius) 0;
   }
 }
 
 /* =========================
-   Card internal layout
+   Inner spacing
+   (padding moved inside so billing borders reach the edges)
    ========================= */
 
 .pricing__card-top__A1b2c {
   display: flex;
   flex-direction: column;
+  padding: var(--pricing-card-pad) var(--pricing-card-pad) 0 var(--pricing-card-pad);
 }
 
 .pricing__plan-row__V2c3d {
@@ -207,10 +201,10 @@
   color: rgba(var(--color-text-tertiary), 1);
 }
 
-/* ✅ "Billed yearly" gets a top + bottom border */
+/* ✅ Billing: full-width borders edge-to-edge */
 .pricing__billing__C2d3e {
-  margin-top: 10px;
-  padding: 10px 0;
+  margin-top: 12px;
+  padding: 10px var(--pricing-card-pad);
   border-top: 1px solid rgba(var(--color-border-primary), 1);
   border-bottom: 1px solid rgba(var(--color-border-primary), 1);
   color: rgba(var(--color-text-tertiary), 1);
@@ -218,13 +212,14 @@
 }
 
 .pricing__desc__K4n7p {
+  margin-top: 14px;
   opacity: 0.95;
 }
 
-/* Features */
+/* Features block gets its own padding */
 .pricing__features__M93j8 {
   list-style: none;
-  padding: 0;
+  padding: 18px var(--pricing-card-pad) 0 var(--pricing-card-pad);
   margin: 0;
   display: grid;
   gap: 10px;
@@ -251,12 +246,13 @@
   color: rgba(var(--color-text-tertiary), 1);
 }
 
-/* Actions */
+/* Actions block gets its own padding */
 .pricing__actions__Q6z2k {
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-top: auto;
+  padding: 18px var(--pricing-card-pad) var(--pricing-card-pad) var(--pricing-card-pad);
 }
 
 .pricing__cta__X1y2z {
@@ -273,33 +269,38 @@
 }
 
 /* =========================
-   Highlighted card behavior
-   - Slightly taller (top+bottom)
-   - Fully rounded corners
-   - Sits above neighbors
-   - Keeps connection lines visible around it
+   Highlighted card
+   - sticks out BOTH top and bottom
+   - full border radius on all corners
+   - uses its own border color (no var(--color-border-primary))
    ========================= */
 
 .pricing__card--highlighted__R5j2s {
   z-index: 3;
-  transform: translateY(-8px);
-  margin-bottom: -8px; /* makes it taller overall without breaking layout spacing */
-  border-radius: 16px !important; /* full corners */
-  border: 1px solid rgba(0, 122, 255, 0.45);
+  border-radius: var(--pricing-card-radius) !important;
+
+  /* stick out both ends */
+  margin-top: -12px;
+  margin-bottom: -12px;
+
+  /* keep its own border color (override base) */
+  border-color: rgba(0, 122, 255, 0.45);
+
   background:
     linear-gradient(180deg, rgba(0, 122, 255, 0.08), rgba(0, 122, 255, 0.02)),
     rgba(var(--color-bg-secondary), 1);
+
   box-shadow: var(--shadow-stack-medium);
 }
 
-/* When highlighted is adjacent in a connected row, make sure its border isn't "double-stacked" */
+/* Because it overlaps, make sure neighbors don't draw a "double" line beside it */
 @media (min-width: 640px) {
-  /* If highlighted is on the right, keep the separator from the left card clean */
+  /* if highlighted follows a normal card, keep separator clean */
   .pricing__card__H5k8q:not(.pricing__card--highlighted__R5j2s) + .pricing__card--highlighted__R5j2s {
     border-left: 1px solid rgba(0, 122, 255, 0.45);
   }
 
-  /* If highlighted is on the left and the next card removes its left border, preserve separation */
+  /* if a normal card follows highlighted, rely on highlighted edge */
   .pricing__card--highlighted__R5j2s + .pricing__card__H5k8q {
     border-left: 0;
   }

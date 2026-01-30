@@ -74,7 +74,7 @@ export default function PricingPage() {
       <div className="pricing__content__K9j6q">
         <header className="pricing__header__P8k4q">
           <h1 className="typography__heading1__T3m8s pricing__title__Z5m8r" style={{ margin: 0 }}>
-            Pricing that scales with your website
+            Pricing
           </h1>
 
           <div className="Spacer-module__root__NM019" style={{ "--height": "16px" } as React.CSSProperties} />
