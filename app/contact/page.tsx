@@ -286,7 +286,7 @@ export default function ContactPage() {
           <div className="contact__info-container__H5k8q">
             <h3 className="typography__heading3__V1c8r" style={{ margin: "0px" }}>Contact sales</h3>
             <p className="typography__body__K4n7p bitC1">
-              <svg width='48.2109375px' height='45.740234375px' direction='ltr' xmlns='http://www.w3.org/2000/svg' version='1.1'>
+              <svg direction='ltr' xmlns='http://www.w3.org/2000/svg' version='1.1'>
                 <g fill-rule='nonzero' transform='scale(1,-1) translate(0,-45.740234375)'>
                 <path fill='black' stroke='black' fill-opacity='1.0' stroke-width='1.0' d='
                     M 33.6875,3.6953125
