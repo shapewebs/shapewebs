@@ -285,6 +285,82 @@ export default function ContactPage() {
         <div className="contact__grid__L7p3s">
           <div className="contact__info-container__H5k8q">
           <h3 className="typography__heading3__V1c8r" style={{ margin: "0px" }}>Contact sales</h3>
+          <div className="contact__reasons__X2m7p">
+  <p className="contact__reasons-intro__Q4n6s">
+    Reach out to see what Shapewebs can build for your team — and what it can do for your business.
+  </p>
+
+  <ul className="contact__reasons-list__J8k3d">
+    <li className="contact__reason-item__P3d8k">
+      <span className="contact__reason-icon__L6q2b" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M13.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.793l6.646-6.647a.5.5 0 0 1 .708 0z"
+            fill="currentColor"
+          />
+        </svg>
+      </span>
+      <div className="contact__reason-content__N5t7v">
+        <p className="contact__reason-title__C7p2m">Start with a custom demo</p>
+        <p className="contact__reason-text__B9k6p">
+          Discover the value of a carefully crafted web presence, built for performance and longevity.
+        </p>
+      </div>
+    </li>
+
+    <li className="contact__reason-item__P3d8k">
+      <span className="contact__reason-icon__L6q2b" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M13.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.793l6.646-6.647a.5.5 0 0 1 .708 0z"
+            fill="currentColor"
+          />
+        </svg>
+      </span>
+      <div className="contact__reason-content__N5t7v">
+        <p className="contact__reason-title__C7p2m">See the process in action</p>
+        <p className="contact__reason-text__B9k6p">
+          From idea to launch, with intention at every step.
+        </p>
+      </div>
+    </li>
+
+    <li className="contact__reason-item__P3d8k">
+      <span className="contact__reason-icon__L6q2b" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M13.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.793l6.646-6.647a.5.5 0 0 1 .708 0z"
+            fill="currentColor"
+          />
+        </svg>
+      </span>
+      <div className="contact__reason-content__N5t7v">
+        <p className="contact__reason-title__C7p2m">Get a clear recommendation</p>
+        <p className="contact__reason-text__B9k6p">
+          We’ll map your goals to the right approach — timelines, scope, and the best next step.
+        </p>
+      </div>
+    </li>
+
+    <li className="contact__reason-item__P3d8k">
+      <span className="contact__reason-icon__L6q2b" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M13.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.793l6.646-6.647a.5.5 0 0 1 .708 0z"
+            fill="currentColor"
+          />
+        </svg>
+      </span>
+      <div className="contact__reason-content__N5t7v">
+        <p className="contact__reason-title__C7p2m">Plan for what’s next</p>
+        <p className="contact__reason-text__B9k6p">
+          Launch is just the beginning — we design for iteration, scalability, and long-term maintenance.
+        </p>
+      </div>
+    </li>
+  </ul>
+</div>
+
           </div>
           <div className="form__container__H8j3p">
             <form className="contact__form__P5k8p" onSubmit={handleSubmit}>
