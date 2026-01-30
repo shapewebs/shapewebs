@@ -86,21 +86,13 @@
 
 .module__card__H5k8q[data-highlighted="true"] {
   z-index: 3;
-
-  /* ✅ sticks out both ends */
   margin-top: -14px;
   margin-bottom: -14px;
-
-  /* ✅ fully rounded */
   border-radius: 16px !important;
-
-  /* ✅ custom border color (no border-primary) */
   border: 1px solid rgba(0, 122, 255, 0.45);
-
   background:
     linear-gradient(180deg, rgba(0, 122, 255, 0.08), rgba(0, 122, 255, 0.02)),
     rgba(var(--color-bg-secondary), 1);
-
   box-shadow: var(--shadow-stack-medium);
 }
 
