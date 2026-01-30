@@ -348,7 +348,7 @@ export default function ContactPage() {
           <div className="contact__form-container__H5k8q">
             <form className="contact__form__P5k8p" onSubmit={handleSubmit}>
               {/* Line 1: Company Email */}
-              <div className="contact__form-group__Z7j3s">
+              <div className="form__group__K7p2s">
                 <label htmlFor="companyEmail" className="form__label__B9f4k">
                   Company email
                 </label>
@@ -366,7 +366,7 @@ export default function ContactPage() {
 
               {/* Line 2: Name and Phone Number with Country Selector */}
               <div className="contact__form-row__N7k3s">
-                <div className="contact__form-group__Z7j3s">
+                <div className="form__group__K7p2s">
                   <label htmlFor="name" className="form__label__B9f4k">
                     Your name
                   </label>
@@ -382,7 +382,7 @@ export default function ContactPage() {
                   />
                 </div>
 
-                <div className="contact__form-group__Z7j3s">
+                <div className="form__group__K7p2s">
                   <label htmlFor="phoneNumber" className="form__label__B9f4k">
                     Phone number <span className="contact__optional__K5j8q">(optional)</span>
                   </label>
@@ -424,7 +424,7 @@ export default function ContactPage() {
               </div>
 
               {/* Line 3: Country */}
-              <div className="contact__form-group__Z7j3s">
+              <div className="form__group__K7p2s">
                 <label htmlFor="country" className="form__label__B9f4k">
                   Country
                 </label>
@@ -447,7 +447,7 @@ export default function ContactPage() {
 
               {/* Line 4: Company Size and Website */}
               <div className="contact__form-row__N7k3s">
-                <div className="contact__form-group__Z7j3s">
+                <div className="form__group__K7p2s">
                   <label htmlFor="companySize" className="form__label__B9f4k">
                     Company size
                   </label>
@@ -468,7 +468,7 @@ export default function ContactPage() {
                   </select>
                 </div>
 
-                <div className="contact__form-group__Z7j3s">
+                <div className="form__group__K7p2s">
                   <label htmlFor="website" className="form__label__B9f4k">
                     Company website <span className="contact__optional__K5j8q">(optional)</span>
                   </label>
@@ -485,7 +485,7 @@ export default function ContactPage() {
               </div>
 
               {/* Line 5: Primary Product Interest */}
-              <div className="contact__form-group__Z7j3s">
+              <div className="form__group__K7p2s">
                 <label htmlFor="productInterest" className="form__label__B9f4k">
                   Primary product interest
                 </label>
@@ -507,7 +507,7 @@ export default function ContactPage() {
               </div>
 
               {/* Line 6: How can we help? */}
-              <div className="contact__form-group__Z7j3s">
+              <div className="form__group__K7p2s">
                 <label htmlFor="message" className="form__label__B9f4k">
                   How can we help?
                 </label>

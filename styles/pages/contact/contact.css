@@ -97,13 +97,6 @@
   gap: 0.5rem;
 }
 
-.contact__form-group__Z7j3s {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 1rem;
-}
-
 .contact__form-row__N7k3s {
   display: grid;
   grid-template-columns: 1fr 1fr;
