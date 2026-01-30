@@ -100,7 +100,7 @@
 }
 
 .bitC1 {
-  color: rgba(var(--color-text-secondary), 1);
+  color: rgba(var(--color-text-primary), 1);
 }
 
 @media (max-width: 768px) {
