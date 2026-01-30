@@ -135,7 +135,7 @@
   width: 100%;
   padding: 0.75rem;
   font-size: var(--font-size-regular);
-  line-height: 1.5;
+  line-height: var(--font-size-regular);
   color: rgba(var(--color-text-primary), 1);
   background-color: rgba(var(--color-bg-secondary), 1);
   border: 1px solid rgba(var(--color-border-secondary), 1);
