@@ -354,7 +354,7 @@ export default function ContactPage() {
                           </option>
                         ))}
                       </select>
-                      <div aria-hidden="true">
+                      <div aria-hidden="true" className="form__inputPhoneNR__img--wrapper__H5k8q">
                         <img
                           className="form__inputPhoneNR__img__H5k8q"
                           alt={countries.find((c) => c.code === formData.phoneCountry)?.name || "Country"}
