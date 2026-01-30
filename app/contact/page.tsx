@@ -314,12 +314,11 @@ export default function ContactPage() {
                     </p>
                     <div className="Spacer-module__root__NM019" style={{ '--height' : '64px' }}>
                     </div>
-                    <p className="typography__body__K4n7p" style={{ margin: 0 }}>Technical question or issue? </p>
+                    <p className="typography__small__Q9j2p" style={{ margin: 0 }}>Technical question or issue? </p>
                     <div className="Spacer-module__root__NM019" style={{ '--height' : '4px' }}>
                     </div>
                     <a href="/docs" className="button__root__ZxcvB button__kind-tertiary__R5j2s button__size-small__L9d7h" style={{
-                      margin: 0,
-                      "--button-font-size": "var(--font-size-regular)",
+                      margin: 0
                     }}>Find it in docs
                     <svg xmlns="http://www.w3.org/2000/svg"
                                 viewBox="-0.0002 -0.0003 16.0005 15.9996" width="16.0005px" height="15.9996px">
