@@ -459,7 +459,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                   >
-                    <option value="">Select a value</option>
+                    <option value="" disabled hidden>Select a value</option>
                     {companySizes.map((size) => (
                       <option key={size} value={size}>
                         {size} employees
