@@ -403,7 +403,7 @@ export default function ContactPage() {
                           </option>
                         ))}
                       </select>
-                      <div aria-hidden="true" className="PhoneInputCountryIcon PhoneInputCountryIcon--border">
+                      <div aria-hidden="true" className="PhoneInputCountryIcon">
                         <img
                           className="PhoneInputCountryIconImg"
                           alt={countries.find((c) => c.code === formData.phoneCountry)?.name || "Country"}
