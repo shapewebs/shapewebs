@@ -129,12 +129,6 @@
   box-shadow: var(--shadow-stack-low);
 }
 
-.pricing__badge--ghost__B9k6p {
-  height: 24px;
-  width: 1px;
-  opacity: 0;
-}
-
 /* Price */
 .pricing__price__T7g2m {
   display: flex;
