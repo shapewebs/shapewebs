@@ -190,7 +190,14 @@
   cursor: pointer;
   transition: border-color 0.2s ease;
   font-family: inherit;
-  min-width: 60px;
+  width: 70px;
+  flex-shrink: 0;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/csvg%3e");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px;
+  padding-right: 28px;
 }
 
 .contact__phone-country-select__B9k6p:focus {
@@ -207,83 +214,6 @@
 /* Country input wrapper */
 .contact__country-input-wrapper__M8k5p {
   position: relative;
-}
-
-.contact__country-select-button__L7p3s {
-  width: 100%;
-  height: 40px;
-  padding: 0 0.75rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  background-color: rgba(var(--color-bg-secondary), 1);
-  border: 1px solid rgba(var(--color-border-secondary), 1);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  font-size: var(--font-size-regular);
-  color: rgba(var(--color-text-primary), 1);
-}
-
-.contact__country-select-button__L7p3s:hover {
-  border-color: rgba(var(--color-border-primary), 1);
-}
-
-.contact__country-select-button__L7p3s:focus {
-  outline: none;
-  border-color: var(--color-blue);
-  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
-}
-
-.contact__country-select-text__B9k6p {
-  flex: 1;
-  text-align: left;
-}
-
-/* Country dropdown */
-.contact__country-dropdown__P5k8p {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  margin-top: 4px;
-  background-color: rgba(var(--color-bg-secondary), 1);
-  border: 1px solid rgba(var(--color-border-primary), 1);
-  border-radius: 8px;
-  max-height: 300px;
-  overflow-y: auto;
-  z-index: 10;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.contact__country-dropdown-full__Q7j3s {
-  left: 0;
-  right: auto;
-  min-width: 250px;
-}
-
-.contact__country-option__Q7j3s {
-  width: 100%;
-  padding: 0.75rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: var(--font-size-regular);
-  color: rgba(var(--color-text-primary), 1);
-  text-align: left;
-  transition: background-color 0.2s ease;
-}
-
-.contact__country-option__Q7j3s:hover {
-  background-color: rgba(var(--color-bg-secondary), 0.5);
-}
-
-.contact__flag__K5j8q {
-  font-size: 1.25rem;
-  flex-shrink: 0;
 }
 
 /* Consent section */

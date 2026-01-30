@@ -267,8 +267,6 @@ export default function ContactPage() {
   const companySizes = ["1-10", "11-50", "51-200", "201-500", "500+"]
   const productInterests = ["Marketing Website", "E-Commerce Store", "Web Application", "Mobile App", "Other"]
 
-  const [showCountryDropdown, setShowCountryDropdown] = useState(false)
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target
     setFormData((prev) => ({
@@ -277,20 +275,10 @@ export default function ContactPage() {
     }))
   }
 
-  const handleCountrySelect = (code: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      country: code,
-    }))
-    setShowCountryDropdown(false)
-  }
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log("Form submitted:", formData)
   }
-
-  const selectedCountry = countries.find((c) => c.code === formData.country)
 
   return (
     <div className="contact__container__Q7j3s">
@@ -406,10 +394,11 @@ export default function ContactPage() {
                       className="contact__phone-country-select__B9k6p"
                       value={formData.phoneCountry}
                       onChange={handleChange}
+                      title="Select country"
                     >
                       {countries.map((country) => (
                         <option key={country.code} value={country.code}>
-                          {country.flag} {country.name}
+                          {country.name}
                         </option>
                       ))}
                     </select>
@@ -431,31 +420,21 @@ export default function ContactPage() {
                 <label htmlFor="country" className="contact__form-label__B9k6p">
                   Country
                 </label>
-                <div className="contact__country-input-wrapper__M8k5p">
-                  <button
-                    type="button"
-                    className="contact__country-select-button__L7p3s"
-                    onClick={() => setShowCountryDropdown(!showCountryDropdown)}
-                  >
-                    <span className="contact__flag__K5j8q">{selectedCountry?.flag}</span>
-                    <span className="contact__country-select-text__B9k6p">{selectedCountry?.name || "Select country"}</span>
-                  </button>
-                  {showCountryDropdown && (
-                    <div className="contact__country-dropdown__P5k8p contact__country-dropdown-full__Q7j3s">
-                      {countries.map((country) => (
-                        <button
-                          key={country.code}
-                          type="button"
-                          className="contact__country-option__Q7j3s"
-                          onClick={() => handleCountrySelect(country.code)}
-                        >
-                          <span className="contact__flag__K5j8q">{country.flag}</span>
-                          <span>{country.name}</span>
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                <select
+                  id="country"
+                  name="country"
+                  className="contact__form-input__L3j7q"
+                  value={formData.country}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">Select your country</option>
+                  {countries.map((country) => (
+                    <option key={country.code} value={country.code}>
+                      {country.name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               {/* Line 4: Company Size and Website */}
