@@ -301,7 +301,7 @@ export default function ContactPage() {
     style={{
       fill: "none",
       paintOrder: "fill",
-      stroke: "rgb(0, 0, 0)",
+      stroke: "currentColor",
     }}
     transform="matrix(1, 0, 0, 1, 0, -1.7763568394002505e-15)"
   />
