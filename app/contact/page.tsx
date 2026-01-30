@@ -281,7 +281,7 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="form__container__H8j3p">
+    <div className="contact__container__Q7j3s">
       <section className="contact__content__K9j6q">
         <div className="contact__grid__L7p3s">
           <div className="contact__info-container__H5k8q">
