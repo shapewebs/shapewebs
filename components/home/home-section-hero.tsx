@@ -22,6 +22,19 @@ export function HomeSectionHero() {
     setMounted(true)
   }, [])
 
+useEffect(() => {
+  console.log("effect: mounted")
+  setMounted(true)
+}, [])
+
+useEffect(() => {
+  console.log("effect: animation", hasAnimated.current)
+  if (hasAnimated.current) return
+  hasAnimated.current = true
+  controls.start("visible")
+}, [controls])
+
+
   // ✅ Only run the expensive one-time stuff once
   useEffect(() => {
     if (hasAnimated.current) return
