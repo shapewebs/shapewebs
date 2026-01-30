@@ -436,7 +436,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                 >
-                  <option value="">Select your country</option>
+                  <option value="" disabled hidden>Select your country</option>
                   {countries.map((country) => (
                     <option key={country.code} value={country.code}>
                       {country.name}
@@ -497,7 +497,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                 >
-                  <option value="">Select a value</option>
+                  <option value="" disabled hidden>Select a value</option>
                   {productInterests.map((interest) => (
                     <option key={interest} value={interest}>
                       {interest}
