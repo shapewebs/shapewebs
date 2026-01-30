@@ -358,7 +358,7 @@ input:-webkit-autofill:focus {
 }
 
 .form__inputPhoneNR__img--wrapper__H5k8q {
-  box-shadow: 0 0 0 1px rgba(var(--color-border-secondary), 1) !important;
+  border-right: 1px solid rgba(var(--color-border-secondary),1);
   width: 18px;
   height: 12px;
 }
