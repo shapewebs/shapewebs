@@ -209,3 +209,82 @@
   color: rgba(var(--color-link-hover), 1);
   text-decoration: underline;
 }
+
+.contact__checkbox-wrapper__A7k2p {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Hide native checkbox */
+.contact__checkbox-input__A7k2p {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Label layout */
+.contact__checkbox-label__A7k2p {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: var(--font-size-small);
+  color: rgba(var(--color-text-secondary), 1);
+  line-height: 1.4;
+}
+
+/* Checkbox box */
+.contact__checkbox-box__A7k2p {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  border-radius: 5px; /* Apple-like rounding */
+  background-color: rgba(var(--color-bg-tertiary), 1);
+  border: 1px solid rgba(var(--color-border-secondary), 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+
+/* Checkmark */
+.contact__checkbox-box__A7k2p::after {
+  content: "";
+  width: 6px;
+  height: 10px;
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.15s ease;
+}
+
+/* Checked state */
+.contact__checkbox-input__A7k2p:checked + .contact__checkbox-label__A7k2p
+  .contact__checkbox-box__A7k2p {
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.25);
+}
+
+/* Animate checkmark in */
+.contact__checkbox-input__A7k2p:checked + .contact__checkbox-label__A7k2p
+  .contact__checkbox-box__A7k2p::after {
+  transform: rotate(45deg) scale(1);
+}
+
+/* Focus-visible (keyboard users) */
+.contact__checkbox-input__A7k2p:focus-visible + .contact__checkbox-label__A7k2p
+  .contact__checkbox-box__A7k2p {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.35);
+}
+
+/* Hover */
+.contact__checkbox-label__A7k2p:hover
+  .contact__checkbox-box__A7k2p {
+  border-color: rgba(var(--color-border-primary), 1);
+}
