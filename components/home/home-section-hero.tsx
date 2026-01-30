@@ -228,7 +228,7 @@ export function HomeSectionHero() {
               <span>Calculate price</span>
             </motion.a>
             <motion.a
-              href="/contact/support/"
+              href="/contact"
               className="button__root__ZxcvB button__kind-ghost__R5j2s button__size-medium__L9d7h hero__gradientButton__H5j8q"
               custom={1}
               initial="hidden"
