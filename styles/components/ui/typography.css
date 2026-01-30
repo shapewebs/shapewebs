@@ -99,6 +99,10 @@
   color: rgba(var(--color-text-secondary), 1);
 }
 
+.bitC1 {
+  color: rgba(var(--color-text-secondary), 1);
+}
+
 @media (max-width: 768px) {
   .typography__heading1__T3m8s,
   .typography__heading2__B5x9t,
