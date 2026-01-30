@@ -292,14 +292,14 @@ export default function ContactPage() {
               {/* Line 1: Company Email */}
               <div className="form__group__K7p2s">
                 <label htmlFor="companyEmail" className="form__label__B9f4k">
-                  Company Email
+                  Company email
                 </label>
                 <input
                   type="email"
                   id="companyEmail"
                   name="companyEmail"
                   className="form__input__Z3n7q"
-                  placeholder="your@company.com"
+                  placeholder="tyler@company.com"
                   value={formData.companyEmail}
                   onChange={handleChange}
                   required
@@ -310,14 +310,14 @@ export default function ContactPage() {
               <div className="form__group--row__M93j8">
                 <div className="form__group__K7p2s">
                   <label htmlFor="name" className="form__label__B9f4k">
-                    Your Name
+                    Your name
                   </label>
                   <input
                     type="text"
                     id="name"
                     name="name"
                     className="form__input__Z3n7q"
-                    placeholder="Your full name"
+                    placeholder="Tyler Durden"
                     value={formData.name}
                     onChange={handleChange}
                     required
@@ -326,7 +326,7 @@ export default function ContactPage() {
 
                 <div className="form__group__K7p2s">
                   <label htmlFor="phoneNumber" className="form__label__B9f4k">
-                    Phone Number <span className="contact__optional__K5j8q">(optional)</span>
+                    Phone number <span className="contact__optional__K5j8q">(optional)</span>
                   </label>
                   <div className="contact__phone-input-wrapper__M8k5p">
                     <div className="contact__phone-country-wrapper__Z9k3s">
@@ -357,7 +357,7 @@ export default function ContactPage() {
                       id="phoneNumber"
                       name="phoneNumber"
                       className="form__input__Z3n7q contact__phone-input__H5k8q"
-                      placeholder="+1 (555) 000-0000"
+                      placeholder="Phone number"
                       value={formData.phoneNumber}
                       onChange={handleChange}
                     />
@@ -391,7 +391,7 @@ export default function ContactPage() {
               <div className="form__group--row__M93j8">
                 <div className="form__group__K7p2s">
                   <label htmlFor="companySize" className="form__label__B9f4k">
-                    Company Size
+                    Company size
                   </label>
                   <select
                     id="companySize"
@@ -412,14 +412,14 @@ export default function ContactPage() {
 
                 <div className="form__group__K7p2s">
                   <label htmlFor="website" className="form__label__B9f4k">
-                    Company Website <span className="contact__optional__K5j8q">(optional)</span>
+                    Company website <span className="contact__optional__K5j8q">(optional)</span>
                   </label>
                   <input
                     type="url"
                     id="website"
                     name="website"
                     className="form__input__Z3n7q"
-                    placeholder="https://example.com"
+                    placeholder="https://address.com"
                     value={formData.website}
                     onChange={handleChange}
                   />
@@ -429,7 +429,7 @@ export default function ContactPage() {
               {/* Line 5: Primary Product Interest */}
               <div className="form__group__K7p2s">
                 <label htmlFor="productInterest" className="form__label__B9f4k">
-                  Primary Product Interest
+                  Primary product interest
                 </label>
                 <select
                   id="productInterest"
@@ -439,7 +439,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                 >
-                  <option value="" disabled hidden>Select a website type</option>
+                  <option value="" disabled hidden>Select a value</option>
                   {productInterests.map((interest) => (
                     <option key={interest} value={interest}>
                       {interest}
