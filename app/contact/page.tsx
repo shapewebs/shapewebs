@@ -431,7 +431,7 @@ export default function ContactPage() {
                 <select
                   id="country"
                   name="country"
-                  className="form__input__Z3n7q"
+                  className="form__select__P9j2k"
                   value={formData.country}
                   onChange={handleChange}
                   required
