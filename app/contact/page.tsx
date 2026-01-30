@@ -284,43 +284,7 @@ export default function ContactPage() {
       <section className="contact__content__K9j6q">
         <div className="contact__grid__L7p3s">
           <div className="contact__info-container__H5k8q">
-            <h1 className="contact__section-title__Q3j7q">Contact sales</h1>
-
-            <div className="contact__info-item__M8k5p">
-              <div className="contact__checkmark__N9j6q">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M13.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.793l6.646-6.647a.5.5 0 0 1 .708 0z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
-              <h2>Book a meeting</h2>
-            </div>
-
-            <div className="contact__info-item__M8k5p">
-              <div className="contact__checkmark__N9j6q">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M13.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.793l6.646-6.647a.5.5 0 0 1 .708 0z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
-              <h2>Learn which plan is right for your team</h2>
-            </div>
-
-            <div className="contact__info-item__M8k5p" style={{ marginBottom: "32px" }}>
-              <div className="contact__checkmark__N9j6q">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M13.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.793l6.646-6.647a.5.5 0 0 1 .708 0z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
-              <h2>Get onboarding help</h2>
-            </div>
+            <h1 className="">Contact sales</h1>
 
             <div className="contact__info-group__P5k8p">
               <p className="contact__info-text__B9k6p">

@@ -44,44 +44,11 @@
   }
 }
 
-.contact__section-title__Q3j7q {
-  font-size: 2.5rem;
-  font-weight: var(--font-weight-bold);
-  margin-bottom: 0.5rem;
-  color: rgba(var(--color-text-primary), 1);
-}
-
 .contact__info-container__H5k8q {
   padding: 0;
   background-color: transparent;
   border: none;
   border-radius: 0;
-}
-
-.contact__info-item__M8k5p {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 6px;
-}
-
-.contact__checkmark__N9j6q {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: rgba(var(--color-text-primary), 1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  color: rgba(var(--color-bg-primary), 1);
-}
-
-.contact__info-item__M8k5p h2 {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: var(--font-weight-regular);
-  color: rgba(var(--color-text-primary), 1);
 }
 
 .contact__form__P5k8p {
