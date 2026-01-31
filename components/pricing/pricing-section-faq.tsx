@@ -4,12 +4,12 @@ import type { CSSProperties } from "react";
 import "@/styles/pages/pricing/pricing-section-faq.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
-type FAQItem = {
+type PricingSectionFAQ = {
   question: string;
   answer: React.ReactNode;
 };
 
-const faqs: FAQItem[] = [
+const faqs: PricingSectionFAQ[] = [
   {
     question: "Which plan is right for me?",
     answer: (
