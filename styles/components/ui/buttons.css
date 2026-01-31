@@ -223,7 +223,7 @@
 
 /* iOS styling */
 .root__toggle-wrapper__T7g2m .root__toggle--ios__T7g2m + .root__toggle-btn__T7g2m {
-  background: rgba(var(--color-bg-secondary), 1);
+  background: rgba(var(--color-text-quaternary), 1);
   border-radius: 999px;
   padding: 2px;
   transition: all 0.3s ease;
