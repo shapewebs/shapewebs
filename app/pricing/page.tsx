@@ -22,6 +22,7 @@ const plans: Plan[] = [
     priceYearly: "$0",
     description: "",
     description2: "",
+    billingLabel: "Billed yearly",
     features: ["Next.js + Vercel deployment", "Performance-focused build", "Basic SEO setup", "1–3 pages", "Email support"],
     cta: { label: "Get Started", href: "/get-started" },
   },
@@ -31,6 +32,7 @@ const plans: Plan[] = [
     priceYearly: "$12/mo",
     description: "",
     description2: " + aditional features",
+    billingLabel: "Billed yearly",
     features: [
       "Everything in Hobby",
       "4–8 pages",
@@ -48,6 +50,7 @@ const plans: Plan[] = [
     priceYearly: "$18/mo",
     description: "",
     description2: "",
+    billingLabel: "Billed yearly",
     features: [
       "Everything in Plus",
       "9–15 pages",
@@ -63,6 +66,7 @@ const plans: Plan[] = [
     priceYearly: "Custom",
     description: "",
     description2: "",
+    billingLabel: "Billed yearly",
     features: [
       "Shopify + Next.js architecture",
       "Custom storefront experiences",
@@ -114,9 +118,9 @@ export default function PricingPage() {
                     {plan.priceYearly !== "Custom" && plan.description2}
                   </span>
                 </div>
-                  <span className="typography__small__Q9j2p pricing__billing__C2d3e" style={{ margin: 0 }}>
-                    {plan.priceYearly === "Custom" ? "Tailored yearly pricing" : "Billed yearly"}
-                  </span>
+                <span className="typography__small__Q9j2p pricing__billing__C2d3e">
+                  {plan.billingLabel}
+                </span>
                 <div className="Spacer-module__root__NM019" style={{ "--height": "16px" } as React.CSSProperties} />
               </div>
 
