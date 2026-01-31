@@ -1,99 +1,99 @@
-/* /styles/pages/pricing/pricing-performance-gridModule.css */
-
-.performanceGrid__table__Q7j3s {
-  display: grid;
+.pricingPerformance__container__Q7j3s {
   width: 100%;
+}
+
+.pricingPerformance__content__K9j6q {
+  max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
+  margin: 0 auto;
+  padding-inline: var(--system-padding);
+}
+
+/* role="table" wrapper: rows stack vertically */
+.pricingPerformance__table__L7p3s {
+  display: grid;
+  grid-template-columns: 1fr; /* per your request */
+  border: 1px solid rgba(var(--color-border-primary), 1);
+  border-radius: 16px;
+  background: rgba(var(--color-bg-secondary), 1);
+  overflow: hidden;
+}
+
+/* Rowgroups */
+.pricingPerformance__rowgroup__A1b2c {
+  display: grid;
+  grid-template-columns: 1fr;
 }
 
 /* Sticky header rowgroup */
-.performanceGrid__headGroup__K9j6q {
+.pricingPerformance__rowgroup--sticky__A1b2c {
   position: sticky;
   top: 0;
-  z-index: 5; /* above rows; below tooltips (layer-tooltip) */
-  background: rgba(var(--color-bg-primary), 1);
+  z-index: 5;
+  background: rgba(var(--color-bg-secondary), 1);
   border-bottom: 1px solid rgba(var(--color-border-primary), 1);
 }
 
-/* Each row is a div with 4 equal columns (plus label) => 5 columns total */
-.performanceGrid__rowInner__A1b2c {
+/* Rows: label + 4 plan columns */
+.pricingPerformance__row__P5k8p {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0;
-}
-
-/* Rows */
-.performanceGrid__row__M93j8,
-.performanceGrid__headRow__L7p3s {
-  width: 100%;
-}
-
-/* Cells */
-.performanceGrid__cell__P5k8p {
-  padding: 12px 14px;
-  border-bottom: 1px solid rgba(var(--color-border-secondary), 1);
-  display: flex;
-  align-items: center;
+  grid-template-columns: 1.4fr repeat(4, 1fr);
   min-height: 44px;
 }
 
-.performanceGrid__cell--head__P5k8p,
-.performanceGrid__cell--headLabel__P5k8p {
-  border-bottom: none;
-  padding: 14px 14px;
+.pricingPerformance__row__P5k8p:not(.pricingPerformance__row--header__P5k8p) {
+  border-top: 1px solid rgba(var(--color-border-primary), 1);
 }
 
-.performanceGrid__cell--head__P5k8p {
-  justify-content: center;
+/* Header row */
+.pricingPerformance__row--header__P5k8p {
+  min-height: 56px;
 }
 
-.performanceGrid__cell--headLabel__P5k8p {
-  justify-content: flex-start;
-}
-
-.performanceGrid__cell--label__P5k8p {
-  justify-content: flex-start;
-}
-
-.performanceGrid__cell--value__P5k8p {
-  justify-content: center;
-  text-align: center;
-}
-
-/* Section header row (only first column has content) */
-.performanceGrid__cell--section__P5k8p {
+/* Section header rows inside body */
+.pricingPerformance__row--section__P5k8p {
   background: rgba(var(--color-bg-tertiary), 1);
-  border-bottom: 1px solid rgba(var(--color-border-primary), 1);
 }
 
-.performanceGrid__cell--empty__P5k8p {
-  background: rgba(var(--color-bg-tertiary), 1);
-  border-bottom: 1px solid rgba(var(--color-border-primary), 1);
+/* Cells */
+.pricingPerformance__cell__C2d3e {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-right: 1px solid rgba(var(--color-border-primary), 1);
 }
 
-/* Text helpers */
-.performanceGrid__sectionText__W7m3k {
-  color: rgba(var(--color-text-primary), 1);
+.pricingPerformance__cell__C2d3e:last-child {
+  border-right: 0;
 }
 
-.performanceGrid__labelText__Q9j2p,
-.performanceGrid__valueText__Q9j2p {
+/* top-left corner cell */
+.pricingPerformance__cell--corner__C2d3e {
   color: rgba(var(--color-text-tertiary), 1);
 }
 
-.performanceGrid__labelText__Q9j2p {
+/* Tooltip affordance on row label (matches your pricing tooltip style) */
+.pricingPerformance__labelTooltip__W7m3k {
   cursor: help;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(var(--color-text-tertiary), 0.5);
+  transition: text-decoration-color 0.2s ease;
 }
 
-.performanceGrid__valueText__Q9j2p {
-  cursor: help;
+.pricingPerformance__labelTooltip__W7m3k:hover {
+  text-decoration-color: rgba(var(--color-text-tertiary), 1);
 }
 
-/* Responsive: allow horizontal scroll if needed */
+/* Responsive: allow horizontal scroll on small screens */
 @media (max-width: 768px) {
-  .performanceGrid__table__Q7j3s {
+  .pricingPerformance__table__L7p3s {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
-  .performanceGrid__rowInner__A1b2c {
-    min-width: 680px;
+
+  .pricingPerformance__row__P5k8p {
+    min-width: 860px; /* ensures 5 columns don't crush */
   }
 }
