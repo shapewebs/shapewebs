@@ -66,7 +66,7 @@ const plans: Plan[] = [
     priceYearly: "Custom",
     description: "",
     description2: "",
-    billingLabel: "Billed yearly",
+    billingLabel: "Annual billing only",
     features: [
       "Shopify + Next.js architecture",
       "Custom storefront experiences",
