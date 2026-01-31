@@ -8,10 +8,6 @@
   padding-inline: var(--system-padding);
 }
 
-.pricing__title__Z5m8r {
-  letter-spacing: -0.02em;
-}
-
 .pricing__grid__L7p3s {
   display: grid;
   grid-template-columns: 1fr;
