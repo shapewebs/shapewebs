@@ -17,7 +17,7 @@ const plans: Plan[] = [
   {
     key: "hobby",
     name: "Hobby",
-    priceYearly: "$1,499",
+    priceYearly: "Free forever",
     description: "Perfect for a simple, fast marketing site or landing page.",
     features: ["Next.js + Vercel deployment", "Performance-focused build", "Basic SEO setup", "1–3 pages", "Email support"],
     cta: { label: "Get Started", href: "/get-started" },
