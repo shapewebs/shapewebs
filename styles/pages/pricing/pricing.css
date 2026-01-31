@@ -119,12 +119,13 @@
 
 .pricing__billing__C2d3e {
   margin-top: 10px;
-  padding: 10px 24px;
+  padding: 0 24px;
   border-top: 1px solid rgba(var(--color-border-primary), 1);
   border-bottom: 1px solid rgba(var(--color-border-primary), 1);
   color: rgba(var(--color-text-tertiary), 1);
   display: flex;
   align-items: center;
+  height: 50px;
 }
 
 .pricing__feature__P5k8p {
