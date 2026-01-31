@@ -107,8 +107,8 @@ export default function PricingPage() {
                 <span className="typography__body__K4n7p" style={{ margin: 0 }}>
                   {plan.description}
                 </span>
-                  <span className="pricing__price-value__T7g2m">{plan.priceYearly}</span>
-                  <span className="pricing__price-suffix__T7g2m">{plan.priceYearly === "Custom" ? "" : "/yr"}</span>
+                  <span className="typography__body__K4n7p bitC1">{plan.priceYearly}</span>
+                  <span className="typography__body__K4n7p">{plan.priceYearly === "Custom" ? "" : "/yr"}</span>
                 </div>
                   <span className="typography__small__Q9j2p pricing__billing__C2d3e" style={{ margin: 0 }}>
                     {plan.priceYearly === "Custom" ? "Tailored yearly pricing" : "Billed yearly"}
