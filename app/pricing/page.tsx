@@ -51,7 +51,6 @@ const plans: Plan[] = [
     billingLabelYearly: "Billed yearly",
     showBillingToggle: true,
     features: [
-      "Everything in Hobby",
       "Cold start prevention",
       "Traffic & performance insights",
       "Content structure + conversion guidance",
@@ -70,11 +69,10 @@ const plans: Plan[] = [
     yearlyAmount: 16,
     priceSuffix: "/mo",
     description: "",
-    description2: " + advanced production features",
+    description2: " + advanced features",
     billingLabelYearly: "Billed yearly",
     showBillingToggle: true,
     features: [
-      "Everything in Plus",
       "Custom components + sections",
       "Faster builds with prioritized CI",
       "Advanced caching & ISR configuration",
@@ -93,7 +91,6 @@ const plans: Plan[] = [
     description2: "",
     billingLabelYearly: "Annual billing only",
     features: [
-    "Everything in Business",
     "Unlimited pages & components",
     "Advanced security (SSO, RBAC)",
     "Compliance support (SOC 2, GDPR)",
