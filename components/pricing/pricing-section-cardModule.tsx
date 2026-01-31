@@ -638,9 +638,7 @@ const plans: Plan[] = [
       ),
       feat(10, "Custom components + sections"),
     ],
-    highlighted: true,
     cta: { label: "Get Started", href: "/get-started" },
-    showAltSalesLink: true,
   },
 
   {
@@ -653,7 +651,6 @@ const plans: Plan[] = [
     description2: " + advanced features",
     billingLabelYearly: "Billed yearly",
     showBillingToggle: true,
-    // Cold start prevention is FIRST, Priority support is LAST (and both keep their original icons)
     features: [
       feat(
         5,
@@ -678,7 +675,9 @@ const plans: Plan[] = [
       ),
       feat(9, "Priority support"),
     ],
+    highlighted: true,
     cta: { label: "Get Started", href: "/get-started" },
+    showAltSalesLink: true,
   },
 
   {
