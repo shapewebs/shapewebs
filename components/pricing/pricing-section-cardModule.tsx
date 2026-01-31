@@ -46,7 +46,7 @@ const plans: Plan[] = [
     monthlyAmount: 34,
     yearlyAmount: 28,
     priceSuffix: "/mo",
-    description: "",
+    description: "Starting at ",
     description2: " + additional features",
     billingLabelYearly: "Billed yearly",
     showBillingToggle: true,
