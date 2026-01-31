@@ -6,16 +6,22 @@ import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
 type PlanKey = "hobby" | "plus" | "business" | "enterprise";
 
-type PerfRow =
-  | { type: "category"; label: string; tooltip?: string }
-  | {
-      type: "row";
-      label: string; // feature name (shown in every plan cell)
-      tooltip: string;
-      availability: Record<PlanKey, boolean>;
-    };
+type CategoryRow = {
+  type: "category";
+  label: string;
+  tooltip?: string;
+};
 
-const planOrder: Array<{ key: PlanKey; name: string }> = [
+type FeatureRow = {
+  type: "feature";
+  label: string; // shows inside every cell
+  tooltip: string; // explains what the feature means
+  availability: Record<PlanKey, boolean>;
+};
+
+type PerfRow = CategoryRow | FeatureRow;
+
+const plans: Array<{ key: PlanKey; name: string }> = [
   { key: "hobby", name: "Hobby" },
   { key: "plus", name: "Plus" },
   { key: "business", name: "Business" },
@@ -23,83 +29,51 @@ const planOrder: Array<{ key: PlanKey; name: string }> = [
 ];
 
 const rows: PerfRow[] = [
-  { type: "category", label: "Security" },
+  { type: "category", label: "Core features" },
 
   {
-    type: "row",
+    type: "feature",
     label: "Firewall protection",
     tooltip:
-      "A Web Application Firewall (WAF) helps block common web attacks and malicious traffic patterns.",
-    availability: {
-      hobby: true,
-      plus: true,
-      business: true,
-      enterprise: true,
-    },
+      "Web Application Firewall (WAF): blocks common web attacks like malicious patterns and injection attempts.",
+    availability: { hobby: true, plus: true, business: true, enterprise: true },
   },
   {
-    type: "row",
+    type: "feature",
     label: "DDoS mitigation",
     tooltip:
       "Protection against traffic floods intended to overwhelm your site and knock it offline.",
-    availability: {
-      hobby: true,
-      plus: true,
-      business: true,
-      enterprise: true,
-    },
+    availability: { hobby: true, plus: true, business: true, enterprise: true },
   },
   {
-    type: "row",
+    type: "feature",
+    label: "Cold start prevention",
+    tooltip:
+      "Measures to reduce slow first-loads due to serverless cold starts (keep-warm strategies where applicable).",
+    availability: { hobby: false, plus: true, business: true, enterprise: true },
+  },
+
+  { type: "category", label: "Compliance & access" },
+
+  {
+    type: "feature",
     label: "SSO + RBAC",
     tooltip:
       "Single Sign-On and Role-Based Access Control for enterprise user management and permissions.",
-    availability: {
-      hobby: false,
-      plus: false,
-      business: false,
-      enterprise: true,
-    },
-  },
-
-  { type: "category", label: "Performance" },
-
-  {
-    type: "row",
-    label: "Cold start prevention",
-    tooltip:
-      "Reduces first-load latency caused by serverless cold starts (keep-warm strategies where applicable).",
-    availability: {
-      hobby: false,
-      plus: true,
-      business: true,
-      enterprise: true,
-    },
-  },
-  {
-    type: "row",
-    label: "Performance insights",
-    tooltip:
-      "Visibility into performance trends, bottlenecks, and optimization opportunities.",
-    availability: {
-      hobby: true,
-      plus: true,
-      business: true,
-      enterprise: true,
-    },
+    availability: { hobby: false, plus: false, business: false, enterprise: true },
   },
 ];
 
-function YesIcon() {
+function YesIcon({ className }: { className?: string }) {
   return (
     <svg
       data-testid="geist-icon"
       height="16"
+      width="16"
       strokeLinejoin="round"
       viewBox="0 0 16 16"
-      width="16"
-      style={{ color: "currentcolor" }}
-      aria-hidden="true"
+      style={{ color: "currentColor" }}
+      className={className}
     >
       <path
         fillRule="evenodd"
@@ -111,16 +85,16 @@ function YesIcon() {
   );
 }
 
-function NoIcon() {
+function NoIcon({ className }: { className?: string }) {
   return (
     <svg
       data-testid="geist-icon"
       height="16"
+      width="16"
       strokeLinejoin="round"
       viewBox="0 0 16 16"
-      width="16"
-      style={{ color: "currentcolor" }}
-      aria-hidden="true"
+      style={{ color: "currentColor" }}
+      className={className}
     >
       <path
         fillRule="evenodd"
@@ -132,24 +106,44 @@ function NoIcon() {
   );
 }
 
+function FeatureCell({
+  text,
+  enabled,
+}: {
+  text: string;
+  enabled: boolean;
+}) {
+  return (
+    <div
+      className="performance__cell__C2d3e"
+      role="cell"
+      data-enabled={enabled ? "true" : "false"}
+    >
+      <span className="performance__cell-inner__X1y2z">
+        {enabled ? (
+          <YesIcon className="performance__icon--yes__P5k8p" />
+        ) : (
+          <NoIcon className="performance__icon--no__P5k8p" />
+        )}
+        <span className="typography__small__Q9j2p performance__text__Q9j2p">
+          {text}
+        </span>
+      </span>
+    </div>
+  );
+}
+
 export function PricingSectionPerformance() {
   return (
     <TooltipProvider>
       <section className="performance__container__Q7j3s">
         <div className="performance__content__K9j6q">
-          {/* (intentionally no header/subheader here) */}
-
-          <div
-            className="Spacer-module__root__NM019"
-            style={{ "--height": "32px" } as CSSProperties}
-          />
-
           <div
             className="performance__table__L7p3s"
             role="table"
-            aria-label="Plan performance comparison"
+            aria-label="Plan feature comparison"
           >
-            {/* Rowgroup 1: sticky header (plan titles) */}
+            {/* Rowgroup 1: sticky plan titles */}
             <div
               className="performance__rowgroup__A1b2c performance__rowgroup--sticky__A1b2c"
               role="rowgroup"
@@ -158,16 +152,13 @@ export function PricingSectionPerformance() {
                 className="performance__row__P5k8p performance__row--header__P5k8p"
                 role="row"
               >
-                {planOrder.map((p) => (
+                {plans.map((p) => (
                   <div
                     key={p.key}
                     className="performance__cell__C2d3e performance__cell--header__C2d3e"
                     role="columnheader"
                   >
-                    <span
-                      className="typography__heading6__H5j9s"
-                      style={{ margin: 0 }}
-                    >
+                    <span className="typography__heading6__H5j9s">
                       {p.name}
                     </span>
                   </div>
@@ -202,7 +193,7 @@ export function PricingSectionPerformance() {
                       <div
                         className="performance__row__P5k8p performance__row--category__P5k8p"
                       >
-                        {planOrder.map((p) => (
+                        {plans.map((p) => (
                           <div
                             key={`${r.label}-${p.key}`}
                             className="performance__cell__C2d3e"
@@ -216,11 +207,10 @@ export function PricingSectionPerformance() {
 
                 return (
                   <div
-                    key={`row-${idx}-${r.label}`}
+                    key={`feat-${idx}-${r.label}`}
                     className="performance__rowwrap__V2c3d"
                     role="row"
                   >
-                    {/* Tooltip “explains the row” – not a column */}
                     <div className="performance__rowlabel__X1y2z">
                       <Tooltip content={r.tooltip} position="right">
                         <span className="typography__small__Q9j2p performance__label--tooltip__W7m3k">
@@ -229,33 +219,14 @@ export function PricingSectionPerformance() {
                       </Tooltip>
                     </div>
 
-                    {/* 4 columns: the plans */}
                     <div className="performance__row__P5k8p">
-                      {planOrder.map((p) => {
-                        const has = r.availability[p.key];
-                        return (
-                          <div
-                            key={`${r.label}-${p.key}`}
-                            className={`performance__cell__C2d3e performance__cell--feature__C2d3e ${
-                              has
-                                ? "performance__cell--yes__C2d3e"
-                                : "performance__cell--no__C2d3e"
-                            }`}
-                            role="cell"
-                          >
-                            <span
-                              className="performance__feature__Z3n7q"
-                              aria-hidden="true"
-                            >
-                              {has ? <YesIcon /> : <NoIcon />}
-                            </span>
-
-                            <span className="typography__small__Q9j2p">
-                              {r.label}
-                            </span>
-                          </div>
-                        );
-                      })}
+                      {plans.map((p) => (
+                        <FeatureCell
+                          key={`${r.label}-${p.key}`}
+                          text={r.label}
+                          enabled={r.availability[p.key]}
+                        />
+                      ))}
                     </div>
                   </div>
                 );
@@ -265,7 +236,7 @@ export function PricingSectionPerformance() {
 
           <div
             className="Spacer-module__root__NM019"
-            style={{ "--height": "32px" } as CSSProperties}
+            style={{ "--height": "24px" } as CSSProperties}
           />
         </div>
       </section>
