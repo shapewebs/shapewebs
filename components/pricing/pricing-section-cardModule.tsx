@@ -517,7 +517,7 @@ export function PricingSectionCardModule() {
           className="typography__emphasize__M9J2o"
           style={{ margin: 0, textAlign: "center" }}
         >
-          Built on Next.js + Vercel, with Shopify-ready options for commerce.
+          Built on Next.js + Vercel or Shopify for commerce.
           <br aria-hidden="true" />
           Upgrade to enable more insights, enhanced security and additional
           features.
