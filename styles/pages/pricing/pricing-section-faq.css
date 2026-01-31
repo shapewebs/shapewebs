@@ -8,88 +8,70 @@
   padding-inline: var(--system-padding);
 }
 
+.faq__title__T3m8s {
+  color: rgba(var(--color-text-primary), 1);
+}
+
 .faq__list__L7p3s {
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
 .faq__item__H5k8q {
   border: 1px solid rgba(var(--color-border-primary), 1);
-  background: rgba(var(--color-bg-secondary), 1);
   border-radius: 12px;
+  background: rgba(var(--color-bg-secondary), 1);
   overflow: hidden;
 }
 
-.faq__questionBtn__ZxcvB {
+/* Question button (uses your existing button classes) */
+.faq__questionBtn__X1y2z {
   width: 100%;
   justify-content: space-between;
-  border: none; /* container provides border */
-  box-shadow: none;
-  border-radius: 0;
-  background: transparent;
-  padding: 0 16px;
+  white-space: normal; /* allow wrapping */
+  height: auto; /* allow multi-line question */
+  padding: 14px 16px;
+  border-radius: 0; /* container handles rounding */
+  box-shadow: none; /* match your connected sections vibe */
 }
 
-.faq__questionText__K4n7p {
+.faq__qText__K4n7p {
   color: rgba(var(--color-text-primary), 1);
-  white-space: normal;
+  line-height: 1.3;
   text-align: left;
-  line-height: 1.25;
 }
 
-.faq__chevWrap__Z3n7q {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+/* Panel (animated open/close) */
+.faq__panel__P5k8p {
+  overflow: hidden;
+  transition: height 240ms var(--ease-out-quad), opacity 200ms var(--ease-out-quad);
+  will-change: height;
 }
 
-/* animated open/close */
-.faq__panel__A1b2c {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 220ms var(--ease-out-quad);
+.faq__panelInner__C2d3e {
+  padding: 14px 16px 16px;
   border-top: 1px solid rgba(var(--color-border-primary), 1);
 }
 
-.faq__panel--open__A1b2c {
-  grid-template-rows: 1fr;
-}
-
-.faq__panelInner__P5k8p {
-  overflow: hidden;
-  padding: 14px 16px 16px;
-}
-
-.faq__answer__K4n7p > p {
+.faq__p__K4n7p {
+  margin: 0;
   color: rgba(var(--color-text-tertiary), 1);
+  line-height: 1.55;
 }
 
-.faq__links__Q6z2k {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+.faq__p__K4n7p + .faq__p__K4n7p {
   margin-top: 10px;
 }
 
-.faq__link__Q9j2p {
-  height: auto; /* tertiary links can be less button-like */
-  line-height: 1.2;
+/* Link styling via your button classes */
+.faq__link__B7s3m {
   padding: 0;
+  height: auto;
+  line-height: inherit;
 }
 
-.faq__footer__Q6z2k {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 16px;
-  border: 1px solid rgba(var(--color-border-primary), 1);
-  border-radius: 12px;
-  background: rgba(var(--color-bg-secondary), 1);
-}
-
-.faq__footerLinks__Q6z2k {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+/* small divider dot between links */
+.faq__dot__Q9j2p {
+  margin: 0 8px;
+  color: rgba(var(--color-text-tertiary), 1);
 }
