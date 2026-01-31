@@ -46,7 +46,12 @@
   transform: translateY(-16px);
 }
 
-.module__card__H5k8q:not(:first-child) {
+.module__card__H5k8q:nth-child(1),
+.module__card__H5k8q:nth-child(2) {
+  border-right: 0;
+}
+
+.module__card__H5k8q:nth-child(4) {
   border-left: 0;
 }
 
