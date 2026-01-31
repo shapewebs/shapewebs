@@ -10,7 +10,7 @@ type FaqItem = {
   answer: JSX.Element;
 };
 
-function ChevronDown({ open }: { open: boolean }) {
+function ChevronIcon({ open }: { open: boolean }) {
   return (
     <svg
       data-testid="geist-icon"
@@ -24,6 +24,7 @@ function ChevronDown({ open }: { open: boolean }) {
         transition: "transform 180ms var(--ease-out-quad)",
       }}
       aria-hidden="true"
+      focusable="false"
     >
       <path
         fillRule="evenodd"
@@ -35,61 +36,66 @@ function ChevronDown({ open }: { open: boolean }) {
   );
 }
 
-export function PricingSectionFAQ() {
+export function PricingSectionFaq() {
   const [openId, setOpenId] = useState<string | null>(null);
 
   const faqs: FaqItem[] = useMemo(
     () => [
       {
         id: "which-plan",
-        question: "Which plan is right for my website?",
+        question: "Which plan is right for me?",
         answer: (
           <div className="faq__answer__K4n7p">
-            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
-              <span className="bitC1">Hobby</span> is best for personal projects and simple sites.
-              <br aria-hidden="true" />
-              <span className="bitC1">Plus</span> is for growing sites that need better insights,
-              conversion guidance, and enhanced SEO tools.
-              <br aria-hidden="true" />
-              <span className="bitC1">Business</span> is for production websites where performance,
-              caching, CI priority, and priority support matter.
-              <br aria-hidden="true" />
-              <span className="bitC1">Enterprise</span> is for teams that need advanced security,
-              compliance, and SLAs.
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              <span className="bitC1">Hobby</span> is for personal projects and simple brochure sites.
+              <br />
+              <span className="bitC1">Plus</span> is great if you want ongoing insights and iterative improvements.
+              <br />
+              <span className="bitC1">Business</span> is best for growth-focused sites that need stronger performance,
+              prioritized builds, caching/ISR tuning, and priority support.
+              <br />
+              <span className="bitC1">Enterprise</span> is for teams who need SSO/RBAC, compliance support, SLAs, and
+              dedicated onboarding.
             </p>
+
             <div
               className="Spacer-module__root__NM019"
               style={{ "--height": "10px" } as CSSProperties}
             />
+
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              If you’re unsure, start on{" "}
-              <a className="typography__link__B7s3m" href="/get-started">
+              If you’re not sure, start with{" "}
+              <a href="/get-started" className="typography__link__B7s3m">
                 Get Started
               </a>{" "}
-              and we’ll point you to the best fit.
+              and we’ll recommend the best fit.
             </p>
           </div>
         ),
       },
       {
         id: "what-included",
-        question: "What’s included in every plan?",
+        question: "What’s included when you buy a website from you?",
         answer: (
           <div className="faq__answer__K4n7p">
-            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
-              Every plan includes a modern website setup and hosting workflow (Next.js + Vercel
-              deployment), baseline security, and essentials like routing, HTTPS, and core delivery
-              features. Paid plans add performance and growth capabilities like analytics, caching
-              strategy, and stronger support.
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Every plan includes a modern build on Next.js + Vercel (or Shopify for commerce), deployment, and a solid
+              baseline for SEO and security. Paid plans add progressively more performance and operational support.
             </p>
+
             <div
               className="Spacer-module__root__NM019"
               style={{ "--height": "10px" } as CSSProperties}
             />
+
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              See the full feature breakdown in our{" "}
-              <a className="typography__link__B7s3m" href="/docs">
-                documentation
+              See what each plan includes on{" "}
+              <a href="/pricing" className="typography__link__B7s3m">
+                Pricing
+              </a>{" "}
+              or browse our{" "}
+              <a href="/docs" className="typography__link__B7s3m">
+                Documentation
               </a>
               .
             </p>
@@ -97,23 +103,53 @@ export function PricingSectionFAQ() {
         ),
       },
       {
-        id: "billing",
-        question: "Do you offer monthly and yearly billing?",
+        id: "timeline",
+        question: "How long does it take to launch?",
         answer: (
           <div className="faq__answer__K4n7p">
-            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
-              Yes. <span className="bitC1">Plus</span> and <span className="bitC1">Business</span>{" "}
-              support a billing toggle so you can choose monthly or get a better rate billed yearly.
-              <span className="bitC1"> Enterprise</span> is annual billing only.
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Most launches happen in days to a couple of weeks depending on content readiness (copy, images, brand
+              assets) and complexity (pages, integrations, ecommerce).
             </p>
+
             <div
               className="Spacer-module__root__NM019"
               style={{ "--height": "10px" } as CSSProperties}
             />
+
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              Need something custom?{" "}
-              <a className="typography__link__B7s3m" href="/contact">
-                Talk to sales
+              Want a smoother kickoff? Check our{" "}
+              <a href="/docs/launch-checklist" className="typography__link__B7s3m">
+                launch checklist
+              </a>{" "}
+              or{" "}
+              <a href="/contact" className="typography__link__B7s3m">
+                contact us
+              </a>{" "}
+              with your deadline.
+            </p>
+          </div>
+        ),
+      },
+      {
+        id: "changes",
+        question: "Can I request changes after launch?",
+        answer: (
+          <div className="faq__answer__K4n7p">
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Yes. Plus and Business are designed for ongoing improvements—new sections, content updates, conversion
+              tweaks, and technical SEO upgrades. Enterprise includes deeper coordination and onboarding.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Learn how requests work in{" "}
+              <a href="/docs/support" className="typography__link__B7s3m">
+                Support & updates
               </a>
               .
             </p>
@@ -121,82 +157,82 @@ export function PricingSectionFAQ() {
         ),
       },
       {
-        id: "custom-invoicing",
-        question: "Do you offer custom invoicing or POs?",
+        id: "hosting",
+        question: "Do you handle hosting and deployment?",
         answer: (
           <div className="faq__answer__K4n7p">
-            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
-              We can support custom invoicing for <span className="bitC1">Enterprise</span>{" "}
-              agreements (and select{" "}
-              <span className="bitC1">Business</span> engagements depending on scope). This is
-              especially common when you need a PO process or vendor onboarding.
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Yes—your site is deployed on Vercel and configured with HTTPS, caching, and best-practice defaults. For
+              commerce, we can deploy alongside Shopify where it fits.
             </p>
+
             <div
               className="Spacer-module__root__NM019"
               style={{ "--height": "10px" } as CSSProperties}
             />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Details:{" "}
+              <a href="/docs/hosting" className="typography__link__B7s3m">
+                Hosting & infrastructure
+              </a>
+              .
+            </p>
+          </div>
+        ),
+      },
+      {
+        id: "domains",
+        question: "Can you help with domains and email?",
+        answer: (
+          <div className="faq__answer__K4n7p">
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Absolutely. We can connect an existing domain or help you purchase one. We’ll also point you to the right
+              setup for email (Google Workspace / Microsoft 365, etc.).
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Start here:{" "}
+              <a href="/docs/domains" className="typography__link__B7s3m">
+                Domains
+              </a>{" "}
+              and{" "}
+              <a href="/docs/email" className="typography__link__B7s3m">
+                Email setup
+              </a>
+              .
+            </p>
+          </div>
+        ),
+      },
+      {
+        id: "invoicing",
+        question: "Do you offer custom invoicing or purchase orders?",
+        answer: (
+          <div className="faq__answer__K4n7p">
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Yes—custom invoicing is typically available for Enterprise customers (and sometimes Business for larger
+              engagements). If you need a PO process, we can accommodate it.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
               Reach out via{" "}
-              <a className="typography__link__B7s3m" href="/contact">
+              <a href="/contact" className="typography__link__B7s3m">
                 Contact
               </a>{" "}
-              and we’ll help.
-            </p>
-          </div>
-        ),
-      },
-      {
-        id: "performance",
-        question: "How do you improve performance on Business?",
-        answer: (
-          <div className="faq__answer__K4n7p">
-            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
-              Business includes performance-focused work like advanced caching + ISR configuration,
-              performance budgets tied to Core Web Vitals, and deployment workflow improvements like
-              prioritized CI. You also get cold start prevention for snappier real-world response
-              times.
-            </p>
-            <div
-              className="Spacer-module__root__NM019"
-              style={{ "--height": "10px" } as CSSProperties}
-            />
-            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              Learn more in our docs:{" "}
-              <a className="typography__link__B7s3m" href="/docs/performance">
-                Performance
-              </a>{" "}
-              and{" "}
-              <a className="typography__link__B7s3m" href="/docs/core-web-vitals">
-                Core Web Vitals
-              </a>
-              .
-            </p>
-          </div>
-        ),
-      },
-      {
-        id: "seo-analytics",
-        question: "Do you help with SEO and analytics?",
-        answer: (
-          <div className="faq__answer__K4n7p">
-            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
-              Yes. <span className="bitC1">Plus</span> adds enhanced SEO + analytics, traffic and
-              performance insights, and content structure + conversion guidance.{" "}
-              <span className="bitC1">Business</span> builds on that with technical SEO improvements
-              and performance budgets (Core Web Vitals).
-            </p>
-            <div
-              className="Spacer-module__root__NM019"
-              style={{ "--height": "10px" } as CSSProperties}
-            />
-            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              Suggested reading:{" "}
-              <a className="typography__link__B7s3m" href="/docs/seo">
-                SEO guide
-              </a>{" "}
-              and{" "}
-              <a className="typography__link__B7s3m" href="/docs/analytics">
-                Analytics
+              or see{" "}
+              <a href="/docs/billing" className="typography__link__B7s3m">
+                Billing & invoices
               </a>
               .
             </p>
@@ -205,26 +241,27 @@ export function PricingSectionFAQ() {
       },
       {
         id: "security",
-        question: "What security is included?",
+        question: "What security do you provide?",
         answer: (
           <div className="faq__answer__K4n7p">
-            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
-              All plans include baseline protections like HTTPS/TLS and a Web Application Firewall.
-              Higher tiers add more controls and governance.{" "}
-              <span className="bitC1">Enterprise</span> can include SSO, RBAC, compliance support
-              (SOC 2, GDPR), and security-focused SLAs.
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Every site ships with HTTPS and baseline protections. Plus adds stronger guidance and analytics, Business
+              adds more advanced configuration (caching/ISR and performance tuning) and priority support, and Enterprise
+              can include SSO/RBAC, compliance support, and SLAs.
             </p>
+
             <div
               className="Spacer-module__root__NM019"
               style={{ "--height": "10px" } as CSSProperties}
             />
+
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              See{" "}
-              <a className="typography__link__B7s3m" href="/docs/security">
-                Security docs
+              More details in{" "}
+              <a href="/docs/security" className="typography__link__B7s3m">
+                Security
               </a>{" "}
               and{" "}
-              <a className="typography__link__B7s3m" href="/docs/compliance">
+              <a href="/docs/compliance" className="typography__link__B7s3m">
                 Compliance
               </a>
               .
@@ -233,52 +270,56 @@ export function PricingSectionFAQ() {
         ),
       },
       {
-        id: "upgrade-downgrade",
-        question: "Can I upgrade or downgrade later?",
+        id: "support-response",
+        question: "How does support work?",
         answer: (
           <div className="faq__answer__K4n7p">
-            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
-              Yes. You can start small and upgrade when you need more insights, performance work, or
-              support. Downgrades are possible too—just keep in mind some advanced features may no
-              longer apply after the switch.
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Hobby includes email support. Business includes priority support and faster builds with prioritized CI.
+              Enterprise adds dedicated onboarding and a dedicated point of contact for escalations and planning.
             </p>
+
             <div
               className="Spacer-module__root__NM019"
               style={{ "--height": "10px" } as CSSProperties}
             />
+
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              Need help choosing?{" "}
-              <a className="typography__link__B7s3m" href="/contact">
-                Talk to us
-              </a>
-              .
+              See{" "}
+              <a href="/docs/support" className="typography__link__B7s3m">
+                Support
+              </a>{" "}
+              for response expectations and what to include in a request.
             </p>
           </div>
         ),
       },
       {
-        id: "commerce",
-        question: "Do you build Shopify / e-commerce sites too?",
+        id: "upgrade",
+        question: "Can I upgrade later?",
         answer: (
           <div className="faq__answer__K4n7p">
-            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
-              Yes. We can build commerce experiences on Shopify, and still apply the same performance
-              and SEO principles—fast pages, clean content structure, and conversion-focused design.
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Yes—most customers start on Hobby or Plus and upgrade to Business once they want stronger performance work,
+              prioritized builds, and tighter operational support. Enterprise is available when you need governance (SSO,
+              RBAC) or formal SLAs.
             </p>
+
             <div
               className="Spacer-module__root__NM019"
               style={{ "--height": "10px" } as CSSProperties}
             />
+
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              Check{" "}
-              <a className="typography__link__B7s3m" href="/docs/commerce">
-                Commerce docs
+              Compare plans on{" "}
+              <a href="/pricing" className="typography__link__B7s3m">
+                Pricing
               </a>{" "}
               or{" "}
-              <a className="typography__link__B7s3m" href="/contact">
-                contact sales
-              </a>{" "}
-              for a quote.
+              <a href="/contact" className="typography__link__B7s3m">
+                talk to sales
+              </a>
+              .
             </p>
           </div>
         ),
@@ -288,72 +329,65 @@ export function PricingSectionFAQ() {
   );
 
   return (
-    <section className="faq__container__Q7j3s" aria-label="Frequently asked questions">
+    <section className="faq__container__Q7j3s">
       <div className="faq__content__K9j6q">
-        <h2 className="typography__heading2__B5x9t" style={{ margin: 0 }}>
+        <h3 className="typography__heading3__V1c8r" style={{ margin: 0, textAlign: "center" }}>
           Frequently asked questions
-        </h2>
+        </h3>
 
-        <div
-          className="Spacer-module__root__NM019"
-          style={{ "--height": "16px" } as CSSProperties}
-        />
+        <div className="Spacer-module__root__NM019" style={{ "--height": "20px" } as CSSProperties} />
 
-        <p className="typography__subtitle__R6m2x" style={{ margin: 0 }}>
-          Quick answers about plans, performance, SEO, security, and how we ship websites.
-        </p>
-
-        <div
-          className="Spacer-module__root__NM019"
-          style={{ "--height": "24px" } as CSSProperties}
-        />
-
-        <ul className="faq__list__M93j8" role="list">
+        <div className="faq__list__L7p3s" role="list">
           {faqs.map((item) => {
             const isOpen = openId === item.id;
+            const contentId = `faq-panel-${item.id}`;
+            const buttonId = `faq-button-${item.id}`;
 
             return (
-              <li key={item.id} className="faq__item__H5k8q">
+              <div
+                key={item.id}
+                className="faq__item__H5k8q"
+                role="listitem"
+                data-open={isOpen ? "true" : "false"}
+              >
                 <button
+                  id={buttonId}
                   type="button"
-                  className="faq__trigger__P5k8p"
+                  className="faq__trigger__A1b2c"
                   aria-expanded={isOpen}
-                  aria-controls={`faq-panel-${item.id}`}
+                  aria-controls={contentId}
                   onClick={() => setOpenId((prev) => (prev === item.id ? null : item.id))}
                 >
                   <span className="typography__heading6__H5j9s" style={{ margin: 0 }}>
                     {item.question}
                   </span>
-
-                  <span className="faq__chevron__Z3n7q" aria-hidden="true">
-                    <ChevronDown open={isOpen} />
+                  <span className="faq__chevron__Z3n7q">
+                    <ChevronIcon open={isOpen} />
                   </span>
                 </button>
 
                 <div
-                  id={`faq-panel-${item.id}`}
-                  className="faq__panel__C2d3e"
-                  data-open={isOpen ? "true" : "false"}
+                  id={contentId}
+                  role="region"
+                  aria-labelledby={buttonId}
+                  className="faq__panel__P5k8p"
                 >
                   <div className="faq__panelInner__C2d3e">{item.answer}</div>
                 </div>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </div>
 
-        <div
-          className="Spacer-module__root__NM019"
-          style={{ "--height": "24px" } as CSSProperties}
-        />
+        <div className="Spacer-module__root__NM019" style={{ "--height": "24px" } as CSSProperties} />
 
-        <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+        <p className="typography__small__Q9j2p" style={{ margin: 0, textAlign: "center" }}>
           Still have questions?{" "}
-          <a className="typography__link__B7s3m" href="/contact">
+          <a href="/contact" className="typography__link__B7s3m">
             Contact us
           </a>{" "}
-          or browse the{" "}
-          <a className="typography__link__B7s3m" href="/docs">
+          or browse{" "}
+          <a href="/docs" className="typography__link__B7s3m">
             documentation
           </a>
           .
