@@ -84,7 +84,7 @@ export default function PricingPage() {
 
           <div className="Spacer-module__root__NM019" style={{ "--height": "16px" } as React.CSSProperties} />
 
-          <p className="typography__subtitle__R6m2x pricing__subtitle__B3n7p" style={{ margin: 0 }}>
+          <p className="typography__subtitle__R6m2x" style={{ margin: 0 }}>
             Built on Next.js + Vercel, with Shopify-ready options for commerce.
             <br aria-hidden="true"></br>
             Upgrade to enable more insights, enhanced security and additional features.
