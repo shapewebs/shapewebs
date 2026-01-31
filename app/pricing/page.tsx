@@ -7,19 +7,14 @@ import type { CSSProperties } from "react";
 type Plan = {
   key: "hobby" | "plus" | "business" | "enterprise";
   name: string;
-
   description: string;
   description2: string;
-
   monthlyAmount?: number;
   yearlyAmount?: number;
   priceSuffix?: string;
-
   priceText?: string;
   priceHref?: string;
-
   billingLabelYearly: string;
-
   features: string[];
   highlighted?: boolean;
   cta: { label: string; href: string };
@@ -71,8 +66,8 @@ const plans: Plan[] = [
     monthlyAmount: 18,
     yearlyAmount: 16,
     priceSuffix: "/mo",
-    description: " + additional features",
-    description2: "",
+    description: "",
+    description2: " + additional features",
     billingLabelYearly: "Billed yearly",
     showBillingToggle: true,
     features: [
@@ -217,7 +212,7 @@ export default function PricingPage() {
 
                   <div className="pricing__billing__C2d3e">
                     {plan.showBillingToggle && (
-                      <div className="root__toggle-wrapper__T7g2m">
+                      <div className="root__toggle-wrapper__T7g2m" style={{ scale: 0.7 }}>
                         <input
                           className="root__toggle__T7g2m root__toggle--ios__T7g2m"
                           id={`billingToggle-${plan.key}`}
