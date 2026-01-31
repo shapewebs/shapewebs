@@ -25,7 +25,7 @@ const plans: Plan[] = [
   {
     key: "plus",
     name: "Plus",
-    priceYearly: "$2,999",
+    priceYearly: "$10/mo",
     description: "The best balance for growing brands that need more pages and polish.",
     features: [
       "Everything in Hobby",
