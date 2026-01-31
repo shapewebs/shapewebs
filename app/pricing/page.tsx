@@ -212,7 +212,7 @@ export default function PricingPage() {
 
                   <div className="pricing__billing__C2d3e">
                     {plan.showBillingToggle && (
-                      <div className="root__toggle-wrapper__T7g2m" style={{ scale: 0.7 }}>
+                      <div className="root__toggle-wrapper__T7g2m" style={{ scale: 0.7, marginRight: 2 }}>
                         <input
                           className="root__toggle__T7g2m root__toggle--ios__T7g2m"
                           id={`billingToggle-${plan.key}`}
