@@ -4,195 +4,147 @@ import "@/styles/pages/pricing/pricing-section-performance.css";
 import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
 type PerformanceFeature = {
-  category: string;
-  rows: Array<{
-    label: string;
-    tooltip?: string;
-    isHeader?: boolean;
-    features: Array<{
-      plan: "hobby" | "plus" | "business" | "enterprise";
-      available: boolean;
-      value?: string | number;
-      tooltip?: string;
-    }>;
-  }>;
+  label: string;
+  tooltip?: string;
 };
 
-const performanceData: PerformanceFeature[] = [
+type PerformanceRow = {
+  category: string;
+  categoryTooltip?: string;
+  features: {
+    hobby?: PerformanceFeature | boolean;
+    plus?: PerformanceFeature | boolean;
+    business?: PerformanceFeature | boolean;
+    enterprise?: PerformanceFeature | boolean;
+  };
+};
+
+const performanceData: PerformanceRow[] = [
   {
-    category: "Performance",
-    rows: [
-      {
-        label: "Average Load Time",
-        tooltip: "Measured time from request to fully loaded page",
-        features: [
-          { plan: "hobby", available: true, value: "2.5s" },
-          { plan: "plus", available: true, value: "1.8s" },
-          { plan: "business", available: true, value: "0.9s" },
-          { plan: "enterprise", available: true, value: "< 0.5s" },
-        ],
-      },
-      {
-        label: "99.99% Uptime",
-        tooltip: "Guaranteed server availability percentage",
-        features: [
-          { plan: "hobby", available: false },
-          { plan: "plus", available: true },
-          { plan: "business", available: true },
-          { plan: "enterprise", available: true },
-        ],
-      },
-    ],
+    category: "Page Load Speed",
+    categoryTooltip: "How quickly your website loads for visitors",
+    features: {
+      hobby: { label: "~2.5s", tooltip: "Average page load time" },
+      plus: { label: "~1.2s", tooltip: "Optimized with caching and CDN" },
+      business: { label: "<0.8s", tooltip: "Premium performance with advanced optimization" },
+      enterprise: { label: "<0.5s", tooltip: "Ultra-fast with dedicated infrastructure" },
+    },
   },
   {
-    category: "Security & Compliance",
-    rows: [
-      {
-        label: "SSL/TLS Encryption",
-        features: [
-          { plan: "hobby", available: true },
-          { plan: "plus", available: true },
-          { plan: "business", available: true },
-          { plan: "enterprise", available: true },
-        ],
-      },
-      {
-        label: "GDPR Compliant",
-        tooltip: "General Data Protection Regulation compliance",
-        features: [
-          { plan: "hobby", available: false },
-          { plan: "plus", available: true },
-          { plan: "business", available: true },
-          { plan: "enterprise", available: true },
-        ],
-      },
-    ],
+    category: "Server Response Time",
+    categoryTooltip: "Time taken by server to process and respond to requests",
+    features: {
+      hobby: { label: "~500ms", tooltip: "Standard response time" },
+      plus: { label: "~200ms", tooltip: "Optimized server configuration" },
+      business: { label: "<100ms", tooltip: "Prioritized server resources" },
+      enterprise: { label: "<50ms", tooltip: "Dedicated server resources" },
+    },
   },
   {
-    category: "Scalability",
-    rows: [
-      {
-        label: "Max Monthly Requests",
-        features: [
-          { plan: "hobby", available: true, value: "100K" },
-          { plan: "plus", available: true, value: "1M" },
-          { plan: "business", available: true, value: "10M" },
-          { plan: "enterprise", available: true, value: "Unlimited" },
-        ],
-      },
-    ],
+    category: "Uptime Guarantee",
+    categoryTooltip: "Percentage of time your site is reliably available",
+    features: {
+      hobby: { label: "99.5%", tooltip: "Standard availability" },
+      plus: { label: "99.9%", tooltip: "High availability" },
+      business: { label: "99.95%", tooltip: "Enterprise-grade reliability" },
+      enterprise: { label: "99.99%", tooltip: "Maximum uptime commitment with SLA" },
+    },
+  },
+  {
+    category: "CDN Regions",
+    categoryTooltip: "Content Delivery Network - distributes your content globally for faster access",
+    features: {
+      hobby: { label: "15", tooltip: "Global coverage" },
+      plus: { label: "35", tooltip: "Extended global reach" },
+      business: { label: "50+", tooltip: "Comprehensive worldwide distribution" },
+      enterprise: { label: "100+", tooltip: "Maximum global presence" },
+    },
+  },
+  {
+    category: "Database Performance",
+    features: {
+      hobby: false,
+      plus: { label: "Read replicas", tooltip: "Distributed read-only database copies for faster queries" },
+      business: { label: "Replicas + cache", tooltip: "Multiple replicas with advanced caching layer" },
+      enterprise: { label: "Custom config", tooltip: "Fully customized database setup for your needs" },
+    },
   },
 ];
 
-const planNames = {
-  hobby: "Hobby",
-  plus: "Plus",
-  business: "Business",
-  enterprise: "Enterprise",
-};
-
 export function PricingSectionPerformance() {
+  const plans = ["hobby", "plus", "business", "enterprise"] as const;
+  const planNames = {
+    hobby: "Hobby",
+    plus: "Plus",
+    business: "Business",
+    enterprise: "Enterprise",
+  };
+
   return (
     <TooltipProvider>
-      <section className="pricing-performance__container__Q7j3s">
-        <div className="pricing-performance__header__P5k8p">
-          <h2 className="typography__h2__B9k6p">Performance & Features Comparison</h2>
-          <p className="typography__body__L3j7q">
-            Detailed breakdown of what each plan includes
-          </p>
-        </div>
-
-        <div className="pricing-performance__table__Z9k3s" role="table">
-          {/* Header Row Group */}
-          <div className="pricing-performance__rowgroup-header__M8k5p" role="rowgroup">
-            <div className="pricing-performance__row__Q7j3s" role="row">
-              <div className="pricing-performance__cell__W7m3k pricing-performance__cell-header__V5j2p" role="columnheader">
-                <span className="sr-only">Feature</span>
-              </div>
-              {(["hobby", "plus", "business", "enterprise"] as const).map((plan) => (
-                <div
-                  key={`header-${plan}`}
-                  className="pricing-performance__cell__W7m3k pricing-performance__cell-header__V5j2p"
-                  role="columnheader"
-                >
-                  <span className="typography__body-bold__S5k8p">{planNames[plan]}</span>
-                </div>
-              ))}
-            </div>
+      <section className="pricing__container__Q7j3s">
+        <div className="pricing__content__K9j6q">
+          <div className="performance__header__Z7j3s">
+            <h2 className="typography__heading-2__M8k5p">Performance Metrics</h2>
+            <p className="typography__body__L3j7q performance__description__P5k8p">
+              Detailed breakdown of performance characteristics across all plans
+            </p>
           </div>
 
-          {/* Features Row Group */}
-          <div className="pricing-performance__rowgroup__B9k6p" role="rowgroup">
-            {performanceData.map((section, sectionIdx) => (
-              <div key={`section-${sectionIdx}`}>
-                {section.rows.map((row, rowIdx) => (
-                  <div
-                    key={`row-${sectionIdx}-${rowIdx}`}
-                    className="pricing-performance__row__Q7j3s"
-                    role="row"
-                  >
-                    <div
-                      className="pricing-performance__cell__W7m3k pricing-performance__cell-label__X9m4s"
-                      role="rowheader"
-                    >
-                      {row.tooltip ? (
-                        <Tooltip content={row.tooltip} position="right">
-                          <span className="typography__small-bold__T5k8p pricing-performance__label-text__Y7n3s pricing-performance__label-with-tooltip__Z7n3s">
-                            {row.label}
-                          </span>
-                        </Tooltip>
-                      ) : (
-                        <span className="typography__small-bold__T5k8p pricing-performance__label-text__Y7n3s">
-                          {row.label}
-                        </span>
-                      )}
-                    </div>
-                    {(["hobby", "plus", "business", "enterprise"] as const).map((plan) => {
-                      const feature = row.features.find((f) => f.plan === plan);
-                      return (
-                        <div
-                          key={`cell-${sectionIdx}-${rowIdx}-${plan}`}
-                          className="pricing-performance__cell__W7m3k pricing-performance__cell-feature__U7m4s"
-                          role="cell"
-                        >
-                          {feature ? (
-                            <>
-                              {feature.value ? (
-                                <span className="typography__small__Q9j2p">
-                                  {feature.value}
-                                </span>
-                              ) : (
-                                <span
-                                  className={`pricing-performance__checkmark__A9k5s ${
-                                    feature.available
-                                      ? "pricing-performance__checkmark-active__B9k6p"
-                                      : "pricing-performance__checkmark-inactive__C9k7p"
-                                  }`}
-                                  aria-label={feature.available ? "Included" : "Not included"}
-                                >
-                                  {feature.available ? "✓" : "−"}
-                                </span>
-                              )}
-                              {feature.tooltip && (
-                                <Tooltip content={feature.tooltip} position="top">
-                                  <button
-                                    className="pricing-performance__tooltip-trigger__D9k8s"
-                                    aria-label="More information"
-                                    type="button"
-                                  >
-                                    ?
-                                  </button>
-                                </Tooltip>
-                              )}
-                            </>
-                          ) : null}
-                        </div>
-                      );
-                    })}
+          <div className="performance__table__M93j8" role="table" aria-label="Performance comparison">
+            {/* Header Row Group */}
+            <div role="rowgroup" className="performance__rowgroup__header__Z9k3s">
+              <div role="row" className="performance__row__header__P5k8p">
+                <div role="columnheader" className="performance__cell__header__category__Q7j3s">
+                  <span></span>
+                </div>
+                {plans.map((plan) => (
+                  <div key={plan} role="columnheader" className="performance__cell__header__plan__W7m3k">
+                    <span className="typography__small__Q9j2p">{planNames[plan]}</span>
                   </div>
                 ))}
               </div>
-            ))}
+            </div>
+
+            {/* Body Row Group */}
+            <div role="rowgroup" className="performance__rowgroup__body__L7p3s">
+              {performanceData.map((row, rowIndex) => (
+                <div key={rowIndex} role="row" className="performance__row__body__K5j8q">
+                  <div role="rowheader" className="performance__cell__category__B9k6p">
+                    {row.categoryTooltip ? (
+                      <Tooltip content={row.categoryTooltip} position="right">
+                        <span className="typography__small__Q9j2p performance__category-text__Z3n7q">
+                          {row.category}
+                        </span>
+                      </Tooltip>
+                    ) : (
+                      <span className="typography__small__Q9j2p">{row.category}</span>
+                    )}
+                  </div>
+
+                  {plans.map((plan) => {
+                    const feature = row.features[plan];
+                    const featureObj = typeof feature === "object" ? feature : null;
+
+                    return (
+                      <div key={`${rowIndex}-${plan}`} role="gridcell" className="performance__cell__value__H5k8q">
+                        {feature === false ? (
+                          <span className="typography__small__Q9j2p performance__not-available__M8k5p">—</span>
+                        ) : featureObj?.tooltip ? (
+                          <Tooltip content={featureObj.tooltip} position="top">
+                            <span className="typography__small__Q9j2p performance__value-with-tooltip__W7m3k">
+                              {featureObj.label}
+                            </span>
+                          </Tooltip>
+                        ) : (
+                          <span className="typography__small__Q9j2p">{featureObj?.label || "—"}</span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
