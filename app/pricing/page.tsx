@@ -69,7 +69,7 @@ const plans: Plan[] = [
       "Security + best practices",
       "Dedicated onboarding",
     ],
-    cta: { label: "Talk to sales", href: "/contact" }, // ✅ final plan button
+    cta: { label: "Talk to sales", href: "/contact" },
   },
 ]
 
