@@ -1,7 +1,7 @@
 "use client";
 
 import "@/styles/pages/pricing/pricing.css";
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { CSSProperties } from "react";
 
 type BillingCycle = "monthly" | "yearly";
@@ -10,20 +10,20 @@ type Plan = {
   key: "hobby" | "plus" | "business" | "enterprise";
   name: string;
 
-  // Dial plans (Plus/Business)
+  // Dial plans
   monthlyAmount?: number;
   yearlyAmount?: number;
-
-  // Non-dial plans (Hobby/Enterprise)
-  staticPrice?: string;
 
   currency?: string; // "$"
   unit?: string; // "/mo"
 
+  // Non-dial plans
+  staticPrice?: string;
+
   description: string;
   description2: string;
 
-  // This should NOT change per toggle (per your request)
+  // This should NOT change with the toggle for Plus/Business per your request
   billingLabel: string;
 
   features: string[];
@@ -59,7 +59,7 @@ const plans: Plan[] = [
     unit: "/mo",
     description: "",
     description2: " + aditional features",
-    billingLabel: "Billed yearly",
+    billingLabel: "Billed yearly", // stays constant
     showBillingToggle: true,
     features: [
       "Everything in Hobby",
@@ -81,7 +81,7 @@ const plans: Plan[] = [
     unit: "/mo",
     description: "",
     description2: " + aditional features",
-    billingLabel: "Billed yearly",
+    billingLabel: "Billed yearly", // stays constant
     showBillingToggle: true,
     features: [
       "Everything in Plus",
@@ -110,23 +110,14 @@ const plans: Plan[] = [
   },
 ];
 
-// Build an inclusive integer sequence from a -> b (10..12 => [10,11,12], 12..10 => [12,11,10])
-function buildSequence(a: number, b: number) {
-  if (a === b) return [a];
-  const step = b > a ? 1 : -1;
-  const out: number[] = [];
-  for (let x = a; x !== b; x += step) out.push(x);
-  out.push(b);
-  return out;
+function makeSequence(from: number, to: number) {
+  const seq: number[] = [];
+  const step = to >= from ? 1 : -1;
+  for (let v = from; v !== to; v += step) seq.push(v);
+  seq.push(to);
+  return seq;
 }
 
-/**
- * Smooth dial:
- * - Renders the intermediate sequence in a vertical stack
- * - Animates the stack translateY in one go (no "stops" on intermediate values)
- * - Uses a fade mask so items fade in/out as they pass the center
- * - Uses easing so speed changes during the slide
- */
 function PriceDialSmooth({
   amount,
   currency = "$",
@@ -138,123 +129,73 @@ function PriceDialSmooth({
   unit?: string;
   className?: string;
 }) {
-  const [current, setCurrent] = useState(amount);
+  // What is currently “settled” on screen
+  const [settled, setSettled] = useState(amount);
 
-  // When target changes, we animate from current -> amount through a sequence
-  const [sequence, setSequence] = useState<number[] | null>(null);
+  // Active animation strip (includes intermediate values)
+  const [strip, setStrip] = useState<number[]>([amount]);
+  const [animating, setAnimating] = useState(false);
 
-  // transform index for the stack
-  const [index, setIndex] = useState(0);
+  // direction: translate the strip up or down
+  const [dir, setDir] = useState<"up" | "down">("down");
 
-  // Measure item height so we can translate precisely
-  const itemRef = useRef<HTMLSpanElement | null>(null);
-  const [itemH, setItemH] = useState<number>(0);
-
-  // If multiple quick toggles happen, keep the latest target; animation will restart from current
-  const pendingTargetRef = useRef<number | null>(null);
-  const animatingRef = useRef(false);
-
-  // Measure height (layout)
-  useLayoutEffect(() => {
-    if (!itemRef.current) return;
-    const rect = itemRef.current.getBoundingClientRect();
-    if (rect.height) setItemH(rect.height);
-  }, [current, sequence]);
+  // Duration scales with distance, but is eased (feels like a dial)
+  const durationMs = useMemo(() => {
+    const dist = Math.max(1, Math.abs(strip.length - 1));
+    // 1 step ~220ms, 2 steps ~300ms, 3 steps ~380ms, etc (sublinear)
+    return Math.round(180 + dist * 90);
+  }, [strip.length]);
 
   useEffect(() => {
-    if (amount === current) return;
+    if (amount === settled) return;
 
-    // If we are currently animating, queue the latest target and let the current animation finish,
-    // then immediately animate again from the new current.
-    if (animatingRef.current) {
-      pendingTargetRef.current = amount;
-      return;
-    }
+    const sequence = makeSequence(settled, amount);
 
-    // Start a new smooth animation
-    const seq = buildSequence(current, amount);
-    setSequence(seq);
-    setIndex(0);
-    animatingRef.current = true;
+    // Decide motion direction:
+    // Increasing number: roll "up" (content moves up)
+    // Decreasing number: roll "down" (content moves down)
+    setDir(amount > settled ? "up" : "down");
 
-    // Kick the transform on the next frame so CSS transition applies
-    const raf = requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        setIndex(seq.length - 1);
-      });
-    });
+    setStrip(sequence);
+    setAnimating(true);
+  }, [amount, settled]);
 
-    return () => cancelAnimationFrame(raf);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [amount]);
+  const steps = Math.max(0, strip.length - 1);
 
-  // Duration scales with number of steps; clamp to keep it feeling crisp
-  const durationMs = useMemo(() => {
-    const steps = sequence ? Math.max(1, sequence.length - 1) : 0;
-    // ~120ms per step feels dial-like without pauses; clamp overall
-    const d = steps * 120;
-    return Math.min(520, Math.max(220, d));
-  }, [sequence]);
-
-  const onTransitionEnd = () => {
-    if (!sequence) return;
-
-    // End state: commit last value, clear stack
-    const final = sequence[sequence.length - 1];
-    setCurrent(final);
-    setSequence(null);
-    setIndex(0);
-    animatingRef.current = false;
-
-    // If a new target arrived mid-animation, run again immediately
-    const pending = pendingTargetRef.current;
-    if (pending != null && pending !== final) {
-      pendingTargetRef.current = null;
-      // trigger next run by setting current already; effect will start new seq
-      // but we must do it async so React state settles
-      setTimeout(() => {
-        // This will be picked up by the effect (amount prop already pending target in parent)
-        // If parent already moved away, no-op.
-      }, 0);
-    } else {
-      pendingTargetRef.current = null;
-    }
+  const handleAnimEnd = () => {
+    const finalVal = strip[strip.length - 1] ?? settled;
+    setSettled(finalVal);
+    setStrip([finalVal]);
+    setAnimating(false);
   };
-
-  const displayedSequence = sequence ?? [current];
-  const translateY = itemH ? -index * itemH : 0;
 
   return (
     <span className={["priceDialSmooth", className ?? ""].filter(Boolean).join(" ")}>
       <span className="priceDialSmoothFixed">{currency}</span>
 
       <span
-        className="priceDialSmoothWindow"
+        className={[
+          "priceDialSmoothWindow",
+          animating ? "is-animating" : "",
+          animating ? `dir-${dir}` : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
         style={
           {
-            "--h": itemH ? `${itemH}px` : "1.25em",
+            "--steps": String(steps),
+            "--dur": `${durationMs}ms`,
           } as CSSProperties
         }
         aria-live="polite"
+        aria-label={`Price ${currency}${settled}${unit}`}
       >
         <span
-          className="priceDialSmoothStack"
-          style={
-            {
-              transform: `translateY(${translateY}px)`,
-              transition: sequence
-                ? `transform ${durationMs}ms cubic-bezier(0.22, 0.75, 0.16, 0.99)`
-                : "none",
-            } as CSSProperties
-          }
-          onTransitionEnd={onTransitionEnd}
+          className="priceDialSmoothStrip"
+          onAnimationEnd={animating ? handleAnimEnd : undefined}
         >
-          {displayedSequence.map((n, i) => (
-            <span
-              key={`${n}-${i}`}
-              className="priceDialSmoothItem"
-              ref={i === 0 ? itemRef : undefined}
-            >
+          {strip.map((n, i) => (
+            <span className="priceDialSmoothNum" key={`${n}-${i}`}>
               {n}
             </span>
           ))}
@@ -267,11 +208,9 @@ function PriceDialSmooth({
 }
 
 export default function PricingPage() {
-  // Shared toggle state controls BOTH Plus and Business
+  // One shared state controls BOTH Plus and Business.
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
   const isYearly = billingCycle === "yearly";
-
-  const toggleTo = (next: BillingCycle) => setBillingCycle(next);
 
   return (
     <section className="pricing__container__Q7j3s">
@@ -332,11 +271,11 @@ export default function PricingPage() {
                       <span className="typography__body__K4n7p bitC1">{plan.staticPrice ?? ""}</span>
                     )}
 
-                    {/* description2 must remain unchanged */}
+                    {/* stays the same no matter what */}
                     <span className="typography__body__K4n7p">{plan.description2}</span>
                   </div>
 
-                  {/* Toggle right before billing label */}
+                  {/* Toggle right before billing label (Plus + Business only) */}
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     {showToggle ? (
                       <div className="root__toggle-wrapper__T7g2m">
@@ -346,14 +285,14 @@ export default function PricingPage() {
                           type="checkbox"
                           name={`billingToggle-${plan.key}`}
                           checked={isYearly}
-                          onChange={(e) => toggleTo(e.target.checked ? "yearly" : "monthly")}
+                          onChange={(e) => setBillingCycle(e.target.checked ? "yearly" : "monthly")}
                           aria-label="Toggle yearly billing"
                         />
                         <label className="root__toggle-btn__T7g2m" htmlFor={`billingToggle-${plan.key}`} />
                       </div>
                     ) : null}
 
-                    {/* Billing label must NOT change */}
+                    {/* IMPORTANT: this text does NOT change */}
                     <span className="typography__small__Q9j2p pricing__billing__C2d3e">{plan.billingLabel}</span>
                   </div>
 
@@ -421,47 +360,110 @@ export default function PricingPage() {
           position: relative;
           display: inline-block;
           overflow: hidden;
-          height: var(--h);
-          line-height: var(--h);
+          height: 1.25em;
+          line-height: 1.25em;
           vertical-align: bottom;
           min-width: 2ch;
 
-          /* This creates the “fade while moving” look (no harsh cut) */
+          /* This makes the “fade speed” feel non-linear as the strip moves */
           -webkit-mask-image: linear-gradient(
             to bottom,
             transparent 0%,
-            rgba(0, 0, 0, 1) 28%,
-            rgba(0, 0, 0, 1) 72%,
+            rgba(0, 0, 0, 0.35) 18%,
+            rgba(0, 0, 0, 1) 50%,
+            rgba(0, 0, 0, 0.35) 82%,
             transparent 100%
           );
           mask-image: linear-gradient(
             to bottom,
             transparent 0%,
-            rgba(0, 0, 0, 1) 28%,
-            rgba(0, 0, 0, 1) 72%,
+            rgba(0, 0, 0, 0.35) 18%,
+            rgba(0, 0, 0, 1) 50%,
+            rgba(0, 0, 0, 0.35) 82%,
             transparent 100%
           );
         }
 
-        .priceDialSmoothStack {
+        .priceDialSmoothStrip {
           display: block;
-          will-change: transform;
+          will-change: transform, opacity;
         }
 
-        .priceDialSmoothItem {
+        .priceDialSmoothNum {
           display: block;
-          height: var(--h);
-          line-height: var(--h);
+          height: 1.25em;
+          line-height: 1.25em;
+        }
+
+        /* One continuous animation across all intermediate numbers */
+        .priceDialSmoothWindow.is-animating.dir-up .priceDialSmoothStrip {
+          animation: dialUp var(--dur) cubic-bezier(0.22, 0.0, 0.12, 1) forwards,
+            dialFade var(--dur) cubic-bezier(0.2, 0.0, 0.2, 1) forwards;
+        }
+
+        .priceDialSmoothWindow.is-animating.dir-down .priceDialSmoothStrip {
+          animation: dialDown var(--dur) cubic-bezier(0.22, 0.0, 0.12, 1) forwards,
+            dialFade var(--dur) cubic-bezier(0.2, 0.0, 0.2, 1) forwards;
+        }
+
+        /* UP: content moves up (negative) through the window */
+        @keyframes dialUp {
+          from {
+            transform: translateY(0%);
+          }
+          to {
+            transform: translateY(calc(-1 * var(--steps) * 100%));
+          }
+        }
+
+        /* DOWN: content moves down (positive) through the window */
+        @keyframes dialDown {
+          from {
+            transform: translateY(0%);
+          }
+          to {
+            transform: translateY(calc(var(--steps) * 100%));
+          }
+        }
+
+        /**
+         * Nonlinear “fade speed” during motion:
+         * - starts crisp
+         * - softens faster mid-way (feels like momentum)
+         * - sharpens again at the end
+         */
+        @keyframes dialFade {
+          0% {
+            opacity: 1;
+            filter: blur(0px);
+          }
+          18% {
+            opacity: 0.92;
+            filter: blur(0.2px);
+          }
+          45% {
+            opacity: 0.78;
+            filter: blur(0.5px);
+          }
+          72% {
+            opacity: 0.9;
+            filter: blur(0.2px);
+          }
+          100% {
+            opacity: 1;
+            filter: blur(0px);
+          }
         }
 
         @media (prefers-reduced-motion: reduce) {
           .priceDialSmoothWindow {
             -webkit-mask-image: none;
             mask-image: none;
+            overflow: visible;
+            height: auto;
           }
-          .priceDialSmoothStack {
-            transition: none !important;
-            transform: none !important;
+          .priceDialSmoothStrip {
+            animation: none !important;
           }
         }
       `}</style>
