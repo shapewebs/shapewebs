@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from "react";
 import type { CSSProperties } from "react";
-import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 import "@/styles/pages/pricing/pricing-section-cardModule.css";
+import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
 type Plan = {
   key: "hobby" | "plus" | "business" | "enterprise";
@@ -16,7 +16,7 @@ type Plan = {
   priceText?: string;
   priceHref?: string;
   billingLabelYearly: string;
-  features: string[];
+  features: Array<string | { text: string; tooltip: string }>;
   highlighted?: boolean;
   cta: { label: string; href: string };
   showAltSalesLink?: boolean;
@@ -33,9 +33,9 @@ const plans: Plan[] = [
     billingLabelYearly: "No maintenance price",
     features: [
       "Next.js + Vercel deployment",
-      "Automatic CI/CD",
-      "Web Application Firewall",
-      "DDoS Mitigation",
+      { text: "Automatic CI/CD", tooltip: "Continuous Integration/Continuous Deployment - automatically tests and deploys your code changes" },
+      { text: "Web Application Firewall", tooltip: "Security layer that protects your website from common web attacks and threats" },
+      { text: "DDoS Mitigation", tooltip: "Protection against Distributed Denial of Service attacks that could overwhelm your site" },
       "Basic SEO",
       "Email support",
     ],
@@ -52,10 +52,10 @@ const plans: Plan[] = [
     billingLabelYearly: "Billed yearly",
     showBillingToggle: true,
     features: [
-      "Cold start prevention",
+      { text: "Cold start prevention", tooltip: "Keeps your site running fast by avoiding delays when a function hasn't been used recently" },
       "Traffic & performance insights",
       "Content structure + conversion guidance",
-      "Enhanced SEO + analytics",
+      { text: "Enhanced SEO + analytics", tooltip: "Advanced tools to track rankings, optimize for search engines, and understand visitor behavior" },
       "Priority support",
       "Custom components + sections",
     ],
@@ -74,10 +74,10 @@ const plans: Plan[] = [
     billingLabelYearly: "Billed yearly",
     showBillingToggle: true,
     features: [
-      "Faster builds with prioritized CI",
-      "Advanced caching & ISR configuration",
+      { text: "Faster builds with prioritized CI", tooltip: "Your code deploys faster by getting priority in the build queue" },
+      { text: "Advanced caching & ISR configuration", tooltip: "Incremental Static Regeneration allows pages to update without rebuilding your entire site" },
       "Technical SEO improvements",
-      "Performance budgets (Core Web Vitals)",
+      { text: "Performance budgets (Core Web Vitals)", tooltip: "Set limits on page performance metrics to ensure users have a fast experience" },
     ],
     cta: { label: "Get Started", href: "/get-started" },
   },
@@ -91,9 +91,9 @@ const plans: Plan[] = [
     billingLabelYearly: "Annual billing only",
     features: [
       "Unlimited pages & components",
-      "Advanced security (SSO, RBAC)",
-      "Compliance support (SOC 2, GDPR)",
-      "Custom SLAs & uptime guarantees",
+      { text: "Advanced security (SSO, RBAC)", tooltip: "Single Sign-On for easy user management + Role-Based Access Control for fine-grained permissions" },
+      { text: "Compliance support (SOC 2, GDPR)", tooltip: "Help meeting security standards (SOC 2) and data privacy regulations (GDPR)" },
+      { text: "Custom SLAs & uptime guarantees", tooltip: "Service Level Agreements - guaranteed minimum uptime and performance commitments" },
       "Dedicated support & onboarding",
     ],
     cta: { label: "Talk to sales", href: "/contact" },
@@ -699,31 +699,6 @@ const planFeatureOffset: Record<Plan["key"], number> = (() => {
   return map;
 })();
 
-// Feature explanations for tooltips
-const featureTooltips: Record<string, string> = {
-  "Next.js + Vercel deployment": "Modern JavaScript framework with optimized hosting for fast, scalable websites",
-  "Automatic CI/CD": "Continuous Integration/Continuous Deployment - automatically test and deploy changes",
-  "Web Application Firewall": "Security layer that protects your website from attacks and malicious traffic",
-  "DDoS Mitigation": "Protection against distributed denial-of-service attacks that try to overload your site",
-  "Basic SEO": "Search engine optimization tools to help your site rank better in Google",
-  "Email support": "Get help via email from our support team",
-  "Cold start prevention": "Eliminates delays when serverless functions are first called, ensuring instant responses",
-  "Traffic & performance insights": "Real-time data about visitor behavior and how your site performs",
-  "Content structure + conversion guidance": "AI-powered recommendations to improve content layout and turn visitors into customers",
-  "Enhanced SEO + analytics": "Advanced tools for search rankings and detailed performance metrics",
-  "Priority support": "Get faster responses and dedicated help from our support team",
-  "Custom components + sections": "Build unique website elements tailored to your specific needs",
-  "Faster builds with prioritized CI": "Speed up your website deployment process with higher priority processing",
-  "Advanced caching & ISR configuration": "Incremental Static Regeneration - cache pages intelligently for ultra-fast loading",
-  "Technical SEO improvements": "Advanced optimization techniques for search engines and Core Web Vitals",
-  "Performance budgets (Core Web Vitals)": "Monitor and control page speed metrics that affect Google rankings and user experience",
-  "Unlimited pages & components": "Create as many website pages and custom components as you need",
-  "Advanced security (SSO, RBAC)": "Single Sign-On for user access and Role-Based Access Control for granular permissions",
-  "Compliance support (SOC 2, GDPR)": "Help meeting security standards and privacy regulations",
-  "Custom SLAs & uptime guarantees": "Service Level Agreements ensuring your site stays online with guaranteed uptime",
-  "Dedicated support & onboarding": "Personal account manager and comprehensive setup help",
-};
-
 function RollingNumber({ value }: { value: number }) {
   const digits = useMemo(() => value.toString().split(""), [value]);
 
@@ -892,25 +867,29 @@ export function PricingSectionCardModule() {
                 )}
 
                 <ul className="pricing__features__M93j8">
-                  {plan.features.map((f, i) => {
+                  {plan.features.map((feature, i) => {
                     const Icon = FeatureIcons[baseIconIndex + i];
-                    const tooltip = featureTooltips[f];
+                    const isObject = typeof feature === 'object';
+                    const featureText = isObject ? feature.text : feature;
+                    const featureTooltip = isObject ? feature.tooltip : null;
 
                     return (
-                      <li key={`${plan.key}-${i}-${f}`} className="pricing__feature__P5k8p">
+                      <li key={`${plan.key}-${i}-${featureText}`} className="pricing__feature__P5k8p">
                         <span className="pricing__check__Z3n7q" aria-hidden="true">
                           {Icon ? <Icon size={16} /> : null}
                         </span>
 
-                        <span className="typography__small__Q9j2p pricing__feature-text__Q9j2p">
-                          {tooltip ? (
-                            <Tooltip content={tooltip} position="right">
-                              <span className="pricing__feature-with-tooltip__H7k2s">{f}</span>
-                            </Tooltip>
-                          ) : (
-                            f
-                          )}
-                        </span>
+                        {featureTooltip ? (
+                          <Tooltip content={featureTooltip} position="right">
+                            <span className="typography__small__Q9j2p pricing__feature-text__Q9j2p pricing__feature-with-tooltip__W7m3k">
+                              {featureText}
+                            </span>
+                          </Tooltip>
+                        ) : (
+                          <span className="typography__small__Q9j2p pricing__feature-text__Q9j2p">
+                            {featureText}
+                          </span>
+                        )}
                       </li>
                     );
                   })}
@@ -947,7 +926,7 @@ export function PricingSectionCardModule() {
           })}
         </div>
       </div>
-    </section>
+      </section>
     </TooltipProvider>
   );
 }

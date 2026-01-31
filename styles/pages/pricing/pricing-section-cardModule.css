@@ -185,16 +185,15 @@
   text-align: center;
 }
 
-/* Tooltip styling for features */
-.pricing__feature-with-tooltip__H7k2s {
+.pricing__feature-with-tooltip__W7m3k {
   cursor: help;
   text-decoration: underline;
   text-decoration-style: dotted;
-  text-decoration-color: rgba(var(--color-text-tertiary), 0.5);
   text-underline-offset: 3px;
+  text-decoration-color: rgba(var(--color-text-tertiary), 0.5);
   transition: text-decoration-color 0.2s ease;
 }
 
-.pricing__feature-with-tooltip__H7k2s:hover {
-  text-decoration-color: rgba(var(--color-text-tertiary), 0.8);
+.pricing__feature-with-tooltip__W7m3k:hover {
+  text-decoration-color: rgba(var(--color-text-tertiary), 1);
 }
