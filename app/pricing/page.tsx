@@ -1,32 +1,31 @@
 "use client";
 
 import "@/styles/pages/pricing/pricing.css";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import type { CSSProperties } from "react";
-
-type BillingCycle = "monthly" | "yearly";
 
 type Plan = {
   key: "hobby" | "plus" | "business" | "enterprise";
   name: string;
 
-  // For plans that animate between monthly/yearly:
-  priceMonthly?: number;
-  priceYearly?: number;
-
-  // For plans that don’t toggle:
-  priceText?: string;
-
   description: string;
   description2: string;
-  billingLabel: string;
+
+  // If you want the rolling animation, set these (Plus/Business)
+  monthlyAmount?: number;
+  yearlyAmount?: number;
+  priceSuffix?: string; // e.g. "/mo"
+
+  // Fallback (Hobby/Enterprise)
+  priceText?: string;
+
+  billingLabelMonthly?: string;
+  billingLabelYearly: string;
 
   features: string[];
   highlighted?: boolean;
   cta: { label: string; href: string };
   showAltSalesLink?: boolean;
-
-  // Show the shared toggle only on these cards:
   showBillingToggle?: boolean;
 };
 
@@ -37,7 +36,7 @@ const plans: Plan[] = [
     priceText: "$0",
     description: "",
     description2: "",
-    billingLabel: "No maintenance price",
+    billingLabelYearly: "No maintenance price",
     features: [
       "Next.js + Vercel deployment",
       "Performance-focused build",
@@ -50,11 +49,14 @@ const plans: Plan[] = [
   {
     key: "plus",
     name: "Plus",
-    priceMonthly: 12,
-    priceYearly: 10, // ✅ yearly-paid price
+    monthlyAmount: 12,
+    yearlyAmount: 10,
+    priceSuffix: "/mo",
     description: "",
     description2: " + aditional features",
-    billingLabel: "Billed yearly",
+    billingLabelMonthly: "Billed monthly",
+    billingLabelYearly: "Billed yearly",
+    showBillingToggle: true,
     features: [
       "Everything in Hobby",
       "4–8 pages",
@@ -65,16 +67,18 @@ const plans: Plan[] = [
     highlighted: true,
     cta: { label: "Get Started", href: "/get-started" },
     showAltSalesLink: true,
-    showBillingToggle: true,
   },
   {
     key: "business",
     name: "Business",
-    priceMonthly: 18,
-    priceYearly: 16, // ✅ yearly-paid price
+    monthlyAmount: 18,
+    yearlyAmount: 16,
+    priceSuffix: "/mo",
     description: " + aditional features",
     description2: "",
-    billingLabel: "Billed yearly",
+    billingLabelMonthly: "Billed monthly",
+    billingLabelYearly: "Billed yearly",
+    showBillingToggle: true,
     features: [
       "Everything in Plus",
       "9–15 pages",
@@ -83,7 +87,6 @@ const plans: Plan[] = [
       "Technical SEO improvements",
     ],
     cta: { label: "Get Started", href: "/get-started" },
-    showBillingToggle: true,
   },
   {
     key: "enterprise",
@@ -91,7 +94,7 @@ const plans: Plan[] = [
     priceText: "Contact us",
     description: "",
     description2: "",
-    billingLabel: "Annual billing only",
+    billingLabelYearly: "Annual billing only",
     features: [
       "Shopify + Next.js architecture",
       "Custom storefront experiences",
@@ -103,172 +106,81 @@ const plans: Plan[] = [
   },
 ];
 
-/**
- * Rolls digits up/down when `value` changes.
- * Assumptions: small changes (no 9→0 wrap). Perfect for 12↔10 and 18↔16.
- */
-function RollingNumber({
-  value,
-  prefix = "$",
-  suffix = "/mo",
-  className,
-}: {
-  value: number;
-  prefix?: string;
-  suffix?: string;
-  className?: string;
-}) {
-  const prevRef = useRef<number>(value);
-  const [direction, setDirection] = useState<"up" | "down">("down");
-
-  useEffect(() => {
-    const prev = prevRef.current;
-    if (value !== prev) {
-      setDirection(value > prev ? "up" : "down");
-      prevRef.current = value;
-    }
-  }, [value]);
-
-  const digits = useMemo(() => String(value).split("").map((d) => Number(d)), [value]);
+function RollingNumber({ value }: { value: number }) {
+  const digits = useMemo(() => value.toString().split(""), [value]);
 
   return (
-    <span className={`rollPrice ${className ?? ""}`} aria-label={`${prefix}${value}${suffix}`}>
-      <span className="rollPrefix">{prefix}</span>
-
-      <span className={`rollDigits ${direction}`}>
-        {digits.map((digit, idx) => (
-          <span className="digitWindow" key={idx}>
+    <span className="rollNumber" aria-label={value.toString()}>
+      {digits.map((d, i) => {
+        const n = Number(d);
+        return (
+          <span key={i} className="rollDigit">
             <span
-              className="digitStack"
-              style={{ transform: `translateY(-${digit * 100}%)` }}
+              className="rollDigitInner"
+              style={{ transform: `translateY(-${n * 10}%)` }}
             >
-              {Array.from({ length: 10 }, (_, n) => (
-                <span className="digit" key={n}>
-                  {n}
+              {Array.from({ length: 10 }, (_, tick) => (
+                <span key={tick} className="rollTick">
+                  {tick}
                 </span>
               ))}
             </span>
           </span>
-        ))}
-      </span>
-
-      <span className="rollSuffix">{suffix}</span>
-
-      {/* scoped styles (no color changes) */}
-      <style jsx>{`
-        .rollPrice {
-          display: inline-flex;
-          align-items: baseline;
-          gap: 0.15em;
-          white-space: nowrap;
-        }
-
-        .rollPrefix,
-        .rollSuffix {
-          display: inline-block;
-        }
-
-        .rollDigits {
-          display: inline-flex;
-          align-items: baseline;
-        }
-
-        /* Height is driven by current font-size (so it matches your typography class). */
-        .digitWindow {
-          position: relative;
-          display: inline-block;
-          height: 1em;
-          overflow: hidden;
-          width: 0.62em; /* tweak if you want tighter/wider digits */
-        }
-
-        .digitStack {
-          display: flex;
-          flex-direction: column;
-          will-change: transform;
-          transition: transform 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        /* “Roll up” vs “roll down” feel: slightly different easing */
-        .rollDigits.up .digitStack {
-          transition-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
-        }
-        .rollDigits.down .digitStack {
-          transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .digit {
-          height: 1em;
-          line-height: 1em;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-      `}</style>
+        );
+      })}
     </span>
   );
 }
 
-function BillingToggle({
-  checked,
-  onChange,
-  id,
-}: {
-  checked: boolean;
-  onChange: (checked: boolean) => void;
-  id: string;
-}) {
-  return (
-    <div className="root__toggle-wrapper__T7g2m">
-      <input
-        className="root__toggle__T7g2m root__toggle--ios__T7g2m"
-        id={id}
-        type="checkbox"
-        checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
-      />
-      <label className="root__toggle-btn__T7g2m" htmlFor={id} />
-    </div>
-  );
-}
-
 export default function PricingPage() {
-  // ✅ One shared state controls BOTH toggles
-  // checked=true => yearly (as in previous code)
-  const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
-  const isYearly = billingCycle === "yearly";
+  // One toggle controls both Plus + Business
+  const [isYearly, setIsYearly] = useState(true);
 
   return (
     <section className="pricing__container__Q7j3s">
       <div className="pricing__content__K9j6q">
-        <h1 className="typography__heading1__T3m8s" style={{ margin: 0, textAlign: "center" }}>
+        <h1
+          className="typography__heading1__T3m8s"
+          style={{ margin: 0, textAlign: "center" }}
+        >
           Pricing
         </h1>
 
-        <div className="Spacer-module__root__NM019" style={{ "--height": "24px" } as CSSProperties} />
+        <div
+          className="Spacer-module__root__NM019"
+          style={{ "--height": "24px" } as CSSProperties}
+        />
 
-        <p className="typography__emphasize__M9J2o" style={{ margin: 0, textAlign: "center" }}>
+        <p
+          className="typography__emphasize__M9J2o"
+          style={{ margin: 0, textAlign: "center" }}
+        >
           Built on Next.js + Vercel, with Shopify-ready options for commerce.
           <br aria-hidden="true" />
           Upgrade to enable more insights, enhanced security and additional features.
         </p>
 
-        <div className="Spacer-module__root__NM019" style={{ "--height": "112px" } as CSSProperties} />
+        <div
+          className="Spacer-module__root__NM019"
+          style={{ "--height": "112px" } as CSSProperties}
+        />
 
         <div className="pricing__grid__L7p3s">
           {plans.map((plan) => {
             const showToggle = !!plan.showBillingToggle;
 
-            // Price logic:
-            // - Plus/Business: animated number changes with shared toggle
-            // - Hobby/Enterprise: static text
-            const hasRollingPrice = typeof plan.priceMonthly === "number" && typeof plan.priceYearly === "number";
+            const amount =
+              showToggle && plan.monthlyAmount != null && plan.yearlyAmount != null
+                ? isYearly
+                  ? plan.yearlyAmount
+                  : plan.monthlyAmount
+                : null;
 
-            const shownNumber = hasRollingPrice
+            const billingLabel = showToggle
               ? isYearly
-                ? plan.priceYearly!
-                : plan.priceMonthly!
-              : null;
+                ? plan.billingLabelYearly
+                : plan.billingLabelMonthly ?? plan.billingLabelYearly
+              : plan.billingLabelYearly;
 
             return (
               <article
@@ -283,44 +195,66 @@ export default function PricingPage() {
                     </h4>
                   </div>
 
-                  <div className="Spacer-module__root__NM019" style={{ "--height": "12px" } as CSSProperties} />
+                  <div
+                    className="Spacer-module__root__NM019"
+                    style={{ "--height": "12px" } as CSSProperties}
+                  />
 
                   <div className="pricing__price__T7g2m">
                     <span className="typography__body__K4n7p" style={{ margin: 0 }}>
                       {plan.description}
                     </span>
 
+                    {/* Price (animated for Plus/Business, static for Hobby/Enterprise) */}
                     <span className="typography__body__K4n7p bitC1">
-                      {hasRollingPrice ? (
-                        <RollingNumber value={shownNumber!} prefix="$" suffix="/mo" />
+                      {amount != null ? (
+                        <>
+                          <span aria-hidden="true">$</span>
+                          <RollingNumber value={amount} />
+                          <span aria-hidden="true">{plan.priceSuffix ?? ""}</span>
+                        </>
                       ) : (
                         plan.priceText
                       )}
                     </span>
 
-                    {/* ✅ description2 remains the same (never changes with toggle) */}
+                    {/* description2 stays the same regardless of toggle */}
                     <span className="typography__body__K4n7p">{plan.description2}</span>
                   </div>
 
-                  {/* Toggle + billing label row (toggle only for Plus/Business) */}
-                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    {showToggle && (
-                      <BillingToggle
-                        id={`billingToggle-shared-${plan.key}`}
-                        checked={isYearly}
-                        onChange={(checked) => setBillingCycle(checked ? "yearly" : "monthly")}
-                      />
-                    )}
+                  {/* Toggle + Billing label row */}
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    {showToggle ? (
+                      <div className="root__toggle-wrapper__T7g2m">
+                        <input
+                          className="root__toggle__T7g2m root__toggle--ios__T7g2m"
+                          id={`billingToggle-${plan.key}`}
+                          type="checkbox"
+                          checked={isYearly}
+                          onChange={(e) => setIsYearly(e.target.checked)}
+                        />
+                        <label
+                          className="root__toggle-btn__T7g2m"
+                          htmlFor={`billingToggle-${plan.key}`}
+                        />
+                      </div>
+                    ) : null}
 
                     <span className="typography__small__Q9j2p pricing__billing__C2d3e">
-                      {plan.billingLabel}
+                      {billingLabel}
                     </span>
                   </div>
 
-                  <div className="Spacer-module__root__NM019" style={{ "--height": "16px" } as CSSProperties} />
+                  <div
+                    className="Spacer-module__root__NM019"
+                    style={{ "--height": "16px" } as CSSProperties}
+                  />
                 </div>
 
-                <div className="Spacer-module__root__NM019" style={{ "--height": "20px" } as CSSProperties} />
+                <div
+                  className="Spacer-module__root__NM019"
+                  style={{ "--height": "20px" } as CSSProperties}
+                />
 
                 <ul className="pricing__features__M93j8">
                   {plan.features.map((f) => (
@@ -333,12 +267,17 @@ export default function PricingPage() {
                           />
                         </svg>
                       </span>
-                      <span className="typography__small__Q9j2p pricing__feature-text__Q9j2p">{f}</span>
+                      <span className="typography__small__Q9j2p pricing__feature-text__Q9j2p">
+                        {f}
+                      </span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="Spacer-module__root__NM019" style={{ "--height": "20px" } as CSSProperties} />
+                <div
+                  className="Spacer-module__root__NM019"
+                  style={{ "--height": "20px" } as CSSProperties}
+                />
 
                 <div className="pricing__actions__Q6z2k">
                   <a
@@ -362,6 +301,41 @@ export default function PricingPage() {
             );
           })}
         </div>
+
+        {/* Rolling number styles */}
+        <style jsx>{`
+          .rollNumber {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 0px;
+            margin: 0 2px;
+          }
+
+          .rollDigit {
+            position: relative;
+            display: inline-block;
+            width: 0.62em; /* tweak if your font is wider/narrower */
+            height: 1em;
+            overflow: hidden;
+            vertical-align: baseline;
+          }
+
+          .rollDigitInner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            will-change: transform;
+            transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+          }
+
+          .rollTick {
+            display: block;
+            height: 1em;
+            line-height: 1em;
+            text-align: center;
+          }
+        `}</style>
       </div>
     </section>
   );
