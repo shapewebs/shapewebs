@@ -6,72 +6,77 @@
   max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
   margin: 0 auto;
   padding-inline: var(--system-padding);
+  padding-top: 96px;
 }
 
-.faq__title__T3m8s {
-  color: rgba(var(--color-text-primary), 1);
-}
-
-.faq__list__L7p3s {
+/* list */
+.faq__list__M93j8 {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: grid;
   gap: 10px;
 }
 
+/* item card */
 .faq__item__H5k8q {
   border: 1px solid rgba(var(--color-border-primary), 1);
-  border-radius: 12px;
   background: rgba(var(--color-bg-secondary), 1);
+  border-radius: 12px;
   overflow: hidden;
 }
 
-/* Question button (uses your existing button classes) */
-.faq__questionBtn__X1y2z {
+/* clickable question row */
+.faq__trigger__P5k8p {
   width: 100%;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  white-space: normal; /* allow wrapping */
-  height: auto; /* allow multi-line question */
-  padding: 14px 16px;
-  border-radius: 0; /* container handles rounding */
-  box-shadow: none; /* match your connected sections vibe */
-}
-
-.faq__qText__K4n7p {
-  color: rgba(var(--color-text-primary), 1);
-  line-height: 1.3;
+  gap: 16px;
+  padding: 16px 16px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
   text-align: left;
 }
 
-/* Panel (animated open/close) */
-.faq__panel__P5k8p {
-  overflow: hidden;
-  transition: height 240ms var(--ease-out-quad), opacity 200ms var(--ease-out-quad);
-  will-change: height;
+/* chevron */
+.faq__chevron__Z3n7q {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(var(--color-text-tertiary), 1);
+  flex: 0 0 auto;
 }
 
+/* animated panel wrapper */
+.faq__panel__C2d3e {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 220ms var(--ease-out-quad);
+}
+
+/* open state */
+.faq__panel__C2d3e[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+/* inner content (prevents overflow during animation) */
 .faq__panelInner__C2d3e {
-  padding: 14px 16px 16px;
-  border-top: 1px solid rgba(var(--color-border-primary), 1);
+  overflow: hidden;
+  padding: 0 16px 16px 16px;
 }
 
-.faq__p__K4n7p {
-  margin: 0;
+.faq__answer__K4n7p .typography__body__K4n7p {
   color: rgba(var(--color-text-tertiary), 1);
-  line-height: 1.55;
 }
 
-.faq__p__K4n7p + .faq__p__K4n7p {
-  margin-top: 10px;
-}
+@media (max-width: 768px) {
+  .faq__trigger__P5k8p {
+    padding: 14px 12px;
+  }
 
-/* Link styling via your button classes */
-.faq__link__B7s3m {
-  padding: 0;
-  height: auto;
-  line-height: inherit;
-}
-
-/* small divider dot between links */
-.faq__dot__Q9j2p {
-  margin: 0 8px;
-  color: rgba(var(--color-text-tertiary), 1);
+  .faq__panelInner__C2d3e {
+    padding: 0 12px 14px 12px;
+  }
 }
