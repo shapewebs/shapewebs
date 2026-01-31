@@ -18,8 +18,8 @@ const plans: Plan[] = [
   {
     key: "hobby",
     name: "Hobby",
-    priceYearly: "Free forever",
-    description: "The perfect starting place for your personal project.",
+    priceYearly: "$0",
+    description: "",
     description2: "",
     features: ["Next.js + Vercel deployment", "Performance-focused build", "Basic SEO setup", "1–3 pages", "Email support"],
     cta: { label: "Get Started", href: "/get-started" },
@@ -28,8 +28,8 @@ const plans: Plan[] = [
     key: "plus",
     name: "Plus",
     priceYearly: "$12/mo",
-    description: "The best balance for growing brands that need more pages and polish.",
-    description2: " + aditional usage",
+    description: "",
+    description2: " + aditional features",
     features: [
       "Everything in Hobby",
       "4–8 pages",
@@ -45,7 +45,7 @@ const plans: Plan[] = [
     key: "business",
     name: "Business",
     priceYearly: "$18/mo",
-    description: "For companies that need advanced content, integrations, and scalability.",
+    description: "",
     description2: "",
     features: [
       "Everything in Plus",
@@ -60,7 +60,7 @@ const plans: Plan[] = [
     key: "enterprise",
     name: "Enterprise",
     priceYearly: "Custom",
-    description: "For Shopify builds, complex requirements, and high-performance commerce.",
+    description: "",
     description2: "",
     features: [
       "Shopify + Next.js architecture",
