@@ -364,7 +364,7 @@ const rows: PerfRow[] = [
 
   {
     type: "category",
-    label: "Compliance & assurance",
+    label: "Compliance",
     tooltip: "Security standards support and documentation readiness for larger orgs.",
   },
 
