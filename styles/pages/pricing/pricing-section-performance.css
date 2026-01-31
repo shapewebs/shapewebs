@@ -11,7 +11,7 @@
 /* role=table wrapper */
 .performance__table__L7p3s {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* your requirement */
   gap: 0;
 }
 
@@ -21,12 +21,11 @@
   grid-template-columns: 1fr;
 }
 
-/* sticky header rowgroup */
+/* sticky header rowgroup (no background colors) */
 .performance__rowgroup--sticky__A1b2c {
   position: sticky;
   top: 0;
   z-index: 5;
-  /* no background colors */
 }
 
 /* rows are 4 equal columns */
@@ -35,51 +34,36 @@
   grid-template-columns: repeat(4, 1fr);
 }
 
-/* NO vertical grid lines: only horizontal separators */
+/* cells: ONLY horizontal lines */
 .performance__cell__C2d3e {
   padding: 14px 16px;
   border-bottom: 1px solid rgba(var(--color-border-primary), 1);
 }
 
-/* header row cell layout */
-.performance__cell--header__C2d3e {
+/* add a top border for the header row to visually start the table */
+.performance__row--header__P5k8p .performance__cell__C2d3e {
+  border-top: 1px solid rgba(var(--color-border-primary), 1);
   text-align: center;
   padding-top: 16px;
   padding-bottom: 16px;
 }
 
-/* category label styling */
+/* category row styling (still no backgrounds) */
+.performance__row--category__P5k8p .performance__cell__C2d3e {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
 .performance__category__Q9j2p {
   color: rgba(var(--color-text-secondary), 1);
   font-weight: var(--font-weight-medium);
 }
 
-/* inner cell layout */
+/* inner layout inside each cell */
 .performance__cellInner__C2d3e {
   display: inline-flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 8px;
-}
-
-.performance__textStack__Q9j2p {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.performance__label__Q9j2p {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
-
-.performance__value__L3p7q {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
 }
 
 /* icon colors */
@@ -107,7 +91,7 @@
   color: rgba(var(--color-text-tertiary), 1);
 }
 
-/* tooltip underline affordance (for category label only) */
+/* tooltip underline for category labels */
 .performance__label--tooltip__W7m3k {
   cursor: help;
   text-decoration: underline;
@@ -124,10 +108,5 @@
 @media (max-width: 768px) {
   .performance__cell__C2d3e {
     padding: 12px 10px;
-  }
-
-  .performance__label__Q9j2p,
-  .performance__value__L3p7q {
-    max-width: 22vw;
   }
 }
