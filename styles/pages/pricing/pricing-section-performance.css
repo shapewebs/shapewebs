@@ -125,7 +125,7 @@
 
 /* Also strengthen the top divider in the header for the highlighted column */
 .performance__row--header__P5k8p .performance__cell__C2d3e[data-highlighted="true"] {
-  border-top-color: rgba(var(--color-border-primary), 0.95);
+  border-top: rgba(var(--color-border-primary), 0.95);
 }
 
 /* Optional: very subtle emphasis without adding a background color */
