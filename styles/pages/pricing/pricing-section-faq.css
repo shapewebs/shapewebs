@@ -96,7 +96,6 @@
   transform: translateY(0);
 }
 
-/* spacing within answers */
 .faq__answer__K4n7p p + p {
   margin-top: 10px;
 }
