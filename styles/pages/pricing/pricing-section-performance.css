@@ -8,12 +8,11 @@
   padding-inline: var(--system-padding);
 }
 
-/* role=table wrapper (your requirement) */
+/* role=table wrapper */
 .performance__table__L7p3s {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* your requirement */
   gap: 0;
-  position: relative;
 }
 
 /* rowgroups */
@@ -22,88 +21,86 @@
   grid-template-columns: 1fr;
 }
 
-/* sticky header rowgroup - NO background */
+/* sticky header rowgroup */
 .performance__rowgroup--sticky__A1b2c {
   position: sticky;
   top: 0;
   z-index: 5;
+  /* NO background colors per your request */
 }
 
-/* each row is 4 equal columns */
+/* rows are 4 equal columns */
 .performance__row__P5k8p {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
 
-/* cells: no background, only borders */
+/* keep it minimal (no background) */
 .performance__cell__C2d3e {
   padding: 14px 16px;
-  border: 1px solid rgba(var(--color-border-primary), 1);
-  border-right: 0;
-  border-top: 0;
+  border-bottom: 1px solid rgba(var(--color-border-primary), 1);
+  border-left: 1px solid rgba(var(--color-border-primary), 1);
 }
 
 .performance__row__P5k8p .performance__cell__C2d3e:last-child {
   border-right: 1px solid rgba(var(--color-border-primary), 1);
 }
 
-/* header row: keep borders, no background */
-.performance__row--header__P5k8p .performance__cell__C2d3e {
-  border-top: 1px solid rgba(var(--color-border-primary), 1);
-}
-
+/* header row: same border language, no background */
 .performance__cell--header__C2d3e {
   text-align: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
-/* wrapper to allow a non-column row label pill (not a 5th column) */
-.performance__rowwrap__V2c3d {
-  position: relative;
+/* category row: only first column filled, but no backgrounds */
+.performance__row--category__P5k8p .performance__cell__C2d3e {
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
-/* “row label pill” — NO background per your request */
-.performance__rowlabel__X1y2z {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translate(-8px, -50%);
-  padding: 0; /* keep it minimal since no background */
-  pointer-events: auto;
+.performance__category__Q9j2p {
+  color: rgba(var(--color-text-secondary), 1);
+  font-weight: var(--font-weight-medium);
 }
 
-/* optional: category rows just get a label; row itself is empty cells */
-.performance__row--category__P5k8p {
-  min-height: 44px;
-}
-
-/* cell inner layout */
-.performance__cell-inner__X1y2z {
+/* inner layout inside each cell */
+.performance__cellInner__C2d3e {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  justify-content: center;
-  width: 100%;
-}
-
-/* text color depends on enabled */
-.performance__cell__C2d3e[data-enabled="true"] .performance__text__Q9j2p {
-  color: rgba(var(--color-text-primary), 1);
-}
-
-.performance__cell__C2d3e[data-enabled="false"] .performance__text__Q9j2p {
-  color: rgba(var(--color-text-tertiary), 1);
 }
 
 /* icon colors */
-.performance__icon--yes__P5k8p {
+.performance__icon__Z3n7q {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(0.5px);
+}
+
+.performance__icon--yes__Z3n7q {
   color: var(--color-blue);
 }
 
-.performance__icon--no__P5k8p {
+.performance__icon--no__Z3n7q {
   color: rgba(var(--color-text-tertiary), 1);
 }
 
-/* Tooltip underline affordance on row label */
+/* text colors */
+.performance__text__Q9j2p {
+  /* base is typography__small__Q9j2p */
+}
+
+.performance__text--yes__Q9j2p {
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.performance__text--no__Q9j2p {
+  color: rgba(var(--color-text-tertiary), 1);
+}
+
+/* Tooltip underline affordance for category labels (optional) */
 .performance__label--tooltip__W7m3k {
   cursor: help;
   text-decoration: underline;
@@ -117,15 +114,8 @@
   text-decoration-color: rgba(var(--color-text-tertiary), 1);
 }
 
-/* responsive padding */
 @media (max-width: 768px) {
   .performance__cell__C2d3e {
     padding: 12px 10px;
-  }
-  .performance__cell-inner__X1y2z {
-    gap: 6px;
-  }
-  .performance__rowlabel__X1y2z {
-    transform: translate(-6px, -50%);
   }
 }
