@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import type { CSSProperties } from "react";
 import "@/styles/pages/pricing/pricing-section-faq.css";
 
@@ -10,7 +10,7 @@ type FaqItem = {
   answer: JSX.Element;
 };
 
-function ChevronDownIcon({ isOpen }: { isOpen: boolean }) {
+function ChevronDown({ open }: { open: boolean }) {
   return (
     <svg
       data-testid="geist-icon"
@@ -20,7 +20,7 @@ function ChevronDownIcon({ isOpen }: { isOpen: boolean }) {
       width="16"
       style={{
         color: "currentColor",
-        transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+        transform: open ? "rotate(180deg)" : "rotate(0deg)",
         transition: "transform 180ms var(--ease-out-quad)",
       }}
       aria-hidden="true"
@@ -35,222 +35,252 @@ function ChevronDownIcon({ isOpen }: { isOpen: boolean }) {
   );
 }
 
-function LinkButton({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <a
-      href={href}
-      className="button__root__ZxcvB button__kind-tertiary__R5j2s button__size-small__L9d7h faq__link__B7s3m"
-    >
-      {children}
-    </a>
-  );
-}
-
-export function PricingSectionFAQ() {
+export function PricingSectionFaq() {
   const [openId, setOpenId] = useState<string | null>(null);
-  const contentRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const faqs: FaqItem[] = useMemo(
     () => [
       {
-        id: "plan-right",
-        question: "Which plan is right for me?",
+        id: "which-plan",
+        question: "Which plan is right for my website?",
         answer: (
-          <>
-            <p className="faq__p__K4n7p">
-              <strong>Hobby</strong> is for testing, personal projects, and simple sites.{" "}
-              <strong>Plus</strong> is for serious marketing sites that need better SEO, analytics,
-              and custom sections. <strong>Business</strong> is for brands that care about speed,
-              stability, and support (performance budgets, caching/ISR config, prioritized builds,
-              priority support). <strong>Enterprise</strong> is for larger orgs that need advanced
-              security, compliance, and custom SLAs.
+          <div className="faq__answer__K4n7p">
+            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
+              <span className="bitC1">Hobby</span> is best for personal projects and simple sites.
+              <br aria-hidden="true" />
+              <span className="bitC1">Plus</span> is for growing sites that need better insights,
+              conversion guidance, and enhanced SEO tools.
+              <br aria-hidden="true" />
+              <span className="bitC1">Business</span> is for production websites where performance,
+              caching, CI priority, and priority support matter.
+              <br aria-hidden="true" />
+              <span className="bitC1">Enterprise</span> is for teams that need advanced security,
+              compliance, and SLAs.
             </p>
-            <p className="faq__p__K4n7p">
-              If you’re unsure, start with <strong>Plus</strong> and move up when traffic or
-              requirements grow.{" "}
-              <LinkButton href="/pricing">Compare plans</LinkButton>{" "}
-              <span className="faq__dot__Q9j2p">·</span>{" "}
-              <LinkButton href="/contact">Talk to sales</LinkButton>
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              If you’re unsure, start on{" "}
+              <a className="typography__link__B7s3m" href="/get-started">
+                Get Started
+              </a>{" "}
+              and we’ll point you to the best fit.
             </p>
-          </>
+          </div>
         ),
       },
       {
-        id: "what-you-sell",
-        question: "What exactly do you deliver when I buy a website?",
+        id: "what-included",
+        question: "What’s included in every plan?",
         answer: (
-          <>
-            <p className="faq__p__K4n7p">
-              You’re buying a complete website build: structure, pages, components/sections, SEO
-              basics, and deployment (Next.js + Vercel for standard sites, or Shopify for commerce).
-              Each plan adds depth—insights, performance, security, and support.
+          <div className="faq__answer__K4n7p">
+            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
+              Every plan includes a modern website setup and hosting workflow (Next.js + Vercel
+              deployment), baseline security, and essentials like routing, HTTPS, and core delivery
+              features. Paid plans add performance and growth capabilities like analytics, caching
+              strategy, and stronger support.
             </p>
-            <p className="faq__p__K4n7p">
-              Want the technical breakdown?{" "}
-              <LinkButton href="/docs">Browse the docs</LinkButton>
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              See the full feature breakdown in our{" "}
+              <a className="typography__link__B7s3m" href="/docs">
+                documentation
+              </a>
+              .
             </p>
-          </>
+          </div>
         ),
       },
       {
-        id: "timeline",
-        question: "How long does it take to launch?",
+        id: "billing",
+        question: "Do you offer monthly and yearly billing?",
         answer: (
-          <>
-            <p className="faq__p__K4n7p">
-              Most sites can launch in days to a couple weeks depending on content readiness and
-              complexity. If you already have copy, images, and a clear sitemap, we move fast. If
-              content is missing, we can still build the structure and slot content in as it lands.
+          <div className="faq__answer__K4n7p">
+            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
+              Yes. <span className="bitC1">Plus</span> and <span className="bitC1">Business</span>{" "}
+              support a billing toggle so you can choose monthly or get a better rate billed yearly.
+              <span className="bitC1"> Enterprise</span> is annual billing only.
             </p>
-            <p className="faq__p__K4n7p">
-              We usually ship in steps: first a functional draft, then refinement, then launch.
-              <LinkButton href="/get-started">Get started</LinkButton>
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Need something custom?{" "}
+              <a className="typography__link__B7s3m" href="/contact">
+                Talk to sales
+              </a>
+              .
             </p>
-          </>
+          </div>
         ),
       },
       {
-        id: "hosting",
-        question: "Do you handle hosting and deployment?",
+        id: "custom-invoicing",
+        question: "Do you offer custom invoicing or POs?",
         answer: (
-          <>
-            <p className="faq__p__K4n7p">
-              Yes. We deploy to Vercel for Next.js sites (fast global delivery, HTTPS, edge caching),
-              and to Shopify for commerce. We can also plug into your existing hosting setup if you
-              have one, but Vercel/Shopify is what our plans are built around.
+          <div className="faq__answer__K4n7p">
+            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
+              We can support custom invoicing for <span className="bitC1">Enterprise</span>{" "}
+              agreements (and select{" "}
+              <span className="bitC1">Business</span> engagements depending on scope). This is
+              especially common when you need a PO process or vendor onboarding.
             </p>
-            <p className="faq__p__K4n7p">
-              <LinkButton href="/docs/hosting">Hosting & deployment docs</LinkButton>
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Reach out via{" "}
+              <a className="typography__link__B7s3m" href="/contact">
+                Contact
+              </a>{" "}
+              and we’ll help.
             </p>
-          </>
-        ),
-      },
-      {
-        id: "domain-email",
-        question: "Can you help with domains, DNS, and email?",
-        answer: (
-          <>
-            <p className="faq__p__K4n7p">
-              Yes. We can connect your domain, configure DNS, and ensure HTTPS works correctly.
-              Email is typically handled through your email provider (Google Workspace, Microsoft
-              365, etc.), but we’ll make sure your DNS records are set up properly.
-            </p>
-            <p className="faq__p__K4n7p">
-              <LinkButton href="/docs/domains">Domains & DNS</LinkButton>{" "}
-              <span className="faq__dot__Q9j2p">·</span>{" "}
-              <LinkButton href="/docs/email">Email setup</LinkButton>
-            </p>
-          </>
-        ),
-      },
-      {
-        id: "seo",
-        question: "What SEO do I get in each plan?",
-        answer: (
-          <>
-            <p className="faq__p__K4n7p">
-              <strong>Hobby</strong> includes basic SEO foundations. <strong>Plus</strong> adds
-              enhanced SEO + analytics plus content structure and conversion guidance.{" "}
-              <strong>Business</strong> adds technical SEO improvements and performance budgets
-              (Core Web Vitals) to help keep the site fast as it grows.
-            </p>
-            <p className="faq__p__K4n7p">
-              <LinkButton href="/docs/seo">SEO documentation</LinkButton>{" "}
-              <span className="faq__dot__Q9j2p">·</span>{" "}
-              <LinkButton href="/docs/analytics">Analytics documentation</LinkButton>
-            </p>
-          </>
+          </div>
         ),
       },
       {
         id: "performance",
-        question: "What does “performance budgets” and “cold start prevention” mean?",
+        question: "How do you improve performance on Business?",
         answer: (
-          <>
-            <p className="faq__p__K4n7p">
-              <strong>Performance budgets</strong> are guardrails for key metrics (like Core Web
-              Vitals) so changes don’t silently slow your site over time.{" "}
-              <strong>Cold start prevention</strong> reduces delays that can happen when backend
-              functions haven’t been used recently—helping your site feel consistently fast.
+          <div className="faq__answer__K4n7p">
+            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
+              Business includes performance-focused work like advanced caching + ISR configuration,
+              performance budgets tied to Core Web Vitals, and deployment workflow improvements like
+              prioritized CI. You also get cold start prevention for snappier real-world response
+              times.
             </p>
-            <p className="faq__p__K4n7p">
-              <LinkButton href="/docs/performance">Performance docs</LinkButton>
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Learn more in our docs:{" "}
+              <a className="typography__link__B7s3m" href="/docs/performance">
+                Performance
+              </a>{" "}
+              and{" "}
+              <a className="typography__link__B7s3m" href="/docs/core-web-vitals">
+                Core Web Vitals
+              </a>
+              .
             </p>
-          </>
+          </div>
         ),
       },
       {
-        id: "support",
-        question: "What support is included?",
+        id: "seo-analytics",
+        question: "Do you help with SEO and analytics?",
         answer: (
-          <>
-            <p className="faq__p__K4n7p">
-              <strong>Hobby</strong> includes email support. <strong>Business</strong> includes
-              priority support, and <strong>Enterprise</strong> includes dedicated onboarding and a
-              dedicated support channel.
+          <div className="faq__answer__K4n7p">
+            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
+              Yes. <span className="bitC1">Plus</span> adds enhanced SEO + analytics, traffic and
+              performance insights, and content structure + conversion guidance.{" "}
+              <span className="bitC1">Business</span> builds on that with technical SEO improvements
+              and performance budgets (Core Web Vitals).
             </p>
-            <p className="faq__p__K4n7p">
-              <LinkButton href="/docs/support">Support policy</LinkButton>{" "}
-              <span className="faq__dot__Q9j2p">·</span>{" "}
-              <LinkButton href="/contact">Contact</LinkButton>
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Suggested reading:{" "}
+              <a className="typography__link__B7s3m" href="/docs/seo">
+                SEO guide
+              </a>{" "}
+              and{" "}
+              <a className="typography__link__B7s3m" href="/docs/analytics">
+                Analytics
+              </a>
+              .
             </p>
-          </>
+          </div>
         ),
       },
       {
         id: "security",
-        question: "How do you handle security?",
+        question: "What security is included?",
         answer: (
-          <>
-            <p className="faq__p__K4n7p">
-              All sites include HTTPS and baseline protection patterns. Paid plans add more advanced
-              controls (WAF rules, rate limiting, and other protections depending on setup).{" "}
-              <strong>Enterprise</strong> supports advanced security like SSO/RBAC and compliance
-              workflows.
+          <div className="faq__answer__K4n7p">
+            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
+              All plans include baseline protections like HTTPS/TLS and a Web Application Firewall.
+              Higher tiers add more controls and governance.{" "}
+              <span className="bitC1">Enterprise</span> can include SSO, RBAC, compliance support
+              (SOC 2, GDPR), and security-focused SLAs.
             </p>
-            <p className="faq__p__K4n7p">
-              <LinkButton href="/docs/security">Security docs</LinkButton>{" "}
-              <span className="faq__dot__Q9j2p">·</span>{" "}
-              <LinkButton href="/docs/compliance">Compliance docs</LinkButton>
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              See{" "}
+              <a className="typography__link__B7s3m" href="/docs/security">
+                Security docs
+              </a>{" "}
+              and{" "}
+              <a className="typography__link__B7s3m" href="/docs/compliance">
+                Compliance
+              </a>
+              .
             </p>
-          </>
+          </div>
         ),
       },
       {
-        id: "upgrade",
-        question: "Can I upgrade later?",
+        id: "upgrade-downgrade",
+        question: "Can I upgrade or downgrade later?",
         answer: (
-          <>
-            <p className="faq__p__K4n7p">
-              Yep. Start small, then upgrade when you need more insights, performance work, or
-              stronger support. Upgrading doesn’t reset your site—you keep the same codebase and we
-              add the plan benefits on top.
+          <div className="faq__answer__K4n7p">
+            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
+              Yes. You can start small and upgrade when you need more insights, performance work, or
+              support. Downgrades are possible too—just keep in mind some advanced features may no
+              longer apply after the switch.
             </p>
-            <p className="faq__p__K4n7p">
-              <LinkButton href="/pricing">See pricing</LinkButton>
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Need help choosing?{" "}
+              <a className="typography__link__B7s3m" href="/contact">
+                Talk to us
+              </a>
+              .
             </p>
-          </>
+          </div>
         ),
       },
       {
-        id: "enterprise",
-        question: "Do you offer custom invoicing or contracts?",
+        id: "commerce",
+        question: "Do you build Shopify / e-commerce sites too?",
         answer: (
-          <>
-            <p className="faq__p__K4n7p">
-              Yes—typically for <strong>Enterprise</strong>. We can support custom invoicing, SLAs,
-              and tailored requirements.
+          <div className="faq__answer__K4n7p">
+            <p className="typography__body__K4n7p" style={{ margin: 0 }}>
+              Yes. We can build commerce experiences on Shopify, and still apply the same performance
+              and SEO principles—fast pages, clean content structure, and conversion-focused design.
             </p>
-            <p className="faq__p__K4n7p">
-              <LinkButton href="/contact">Talk to sales</LinkButton>
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Check{" "}
+              <a className="typography__link__B7s3m" href="/docs/commerce">
+                Commerce docs
+              </a>{" "}
+              or{" "}
+              <a className="typography__link__B7s3m" href="/contact">
+                contact sales
+              </a>{" "}
+              for a quote.
             </p>
-          </>
+          </div>
         ),
       },
     ],
@@ -260,68 +290,74 @@ export function PricingSectionFAQ() {
   return (
     <section className="faq__container__Q7j3s" aria-label="Frequently asked questions">
       <div className="faq__content__K9j6q">
-        <h2 className="faq__title__T3m8s" style={{ margin: 0, textAlign: "center" }}>
+        <h2 className="typography__heading2__B5x9t" style={{ margin: 0 }}>
           Frequently asked questions
         </h2>
 
         <div
           className="Spacer-module__root__NM019"
-          style={{ "--height": "24px" } as CSSProperties}
+          style={{ "--height": "16px" } as CSSProperties}
         />
 
-        <div className="faq__list__L7p3s">
-          {faqs.map((item) => {
-            const isOpen = openId === item.id;
-            const panelId = `faq-panel-${item.id}`;
-            const btnId = `faq-button-${item.id}`;
-
-            const measuredHeight =
-              (contentRefs.current[item.id]?.scrollHeight ?? 0) + "px";
-
-            return (
-              <div key={item.id} className="faq__item__H5k8q">
-                <button
-                  id={btnId}
-                  type="button"
-                  className="button__root__ZxcvB button__kind-secondary__R5j2s button__size-medium__L9d7h faq__questionBtn__X1y2z"
-                  aria-expanded={isOpen}
-                  aria-controls={panelId}
-                  onClick={() => setOpenId((cur) => (cur === item.id ? null : item.id))}
-                >
-                  <span className="faq__qText__K4n7p">{item.question}</span>
-                  <ChevronDownIcon isOpen={isOpen} />
-                </button>
-
-                <div
-                  id={panelId}
-                  role="region"
-                  aria-labelledby={btnId}
-                  className="faq__panel__P5k8p"
-                  style={
-                    {
-                      height: isOpen ? measuredHeight : "0px",
-                      opacity: isOpen ? 1 : 0,
-                    } as CSSProperties
-                  }
-                >
-                  <div
-                    ref={(el) => {
-                      contentRefs.current[item.id] = el;
-                    }}
-                    className="faq__panelInner__C2d3e"
-                  >
-                    {item.answer}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <p className="typography__subtitle__R6m2x" style={{ margin: 0 }}>
+          Quick answers about plans, performance, SEO, security, and how we ship websites.
+        </p>
 
         <div
           className="Spacer-module__root__NM019"
           style={{ "--height": "24px" } as CSSProperties}
         />
+
+        <ul className="faq__list__M93j8" role="list">
+          {faqs.map((item) => {
+            const isOpen = openId === item.id;
+
+            return (
+              <li key={item.id} className="faq__item__H5k8q">
+                <button
+                  type="button"
+                  className="faq__trigger__P5k8p"
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-panel-${item.id}`}
+                  onClick={() => setOpenId((prev) => (prev === item.id ? null : item.id))}
+                >
+                  <span className="typography__heading6__H5j9s" style={{ margin: 0 }}>
+                    {item.question}
+                  </span>
+
+                  <span className="faq__chevron__Z3n7q" aria-hidden="true">
+                    <ChevronDown open={isOpen} />
+                  </span>
+                </button>
+
+                <div
+                  id={`faq-panel-${item.id}`}
+                  className="faq__panel__C2d3e"
+                  data-open={isOpen ? "true" : "false"}
+                >
+                  <div className="faq__panelInner__C2d3e">{item.answer}</div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+
+        <div
+          className="Spacer-module__root__NM019"
+          style={{ "--height": "24px" } as CSSProperties}
+        />
+
+        <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+          Still have questions?{" "}
+          <a className="typography__link__B7s3m" href="/contact">
+            Contact us
+          </a>{" "}
+          or browse the{" "}
+          <a className="typography__link__B7s3m" href="/docs">
+            documentation
+          </a>
+          .
+        </p>
       </div>
     </section>
   );
