@@ -10,15 +10,13 @@ type Plan = {
   key: "hobby" | "plus" | "business" | "enterprise";
   name: string;
 
-  // For dial plans (Plus/Business)
   monthlyAmount?: number;
   yearlyAmount?: number;
 
-  // For non-dial plans (Hobby/Enterprise)
   staticPrice?: string;
 
-  currency?: string; // e.g. "$"
-  unit?: string; // e.g. "/mo"
+  currency?: string;
+  unit?: string;
 
   description: string;
   description2: string;
@@ -108,6 +106,36 @@ const plans: Plan[] = [
   },
 ];
 
+/**
+ * Ease curve for timing ticks (0..1 -> 0..1).
+ * This makes the overall "sequence" feel like it accelerates then decelerates.
+ */
+function easeInOutCubic(t: number) {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
+
+/**
+ * Returns a per-tick duration (ms) that changes over the sequence:
+ * slower at start/end, faster in the middle.
+ */
+function tickDuration(stepIndex: number, totalSteps: number) {
+  // progress from 0..1 across the ticks
+  const p = totalSteps <= 1 ? 1 : stepIndex / (totalSteps - 1);
+  const eased = easeInOutCubic(p);
+
+  // Map eased(0..1) to duration range.
+  // Slow at ends (~190ms), fast mid (~110ms).
+  const slow = 190;
+  const fast = 110;
+
+  // We want: ends slow, middle fast => use a "U" shape.
+  // U = 1 - 4*(x-0.5)^2 ranges 0 at ends, 1 at center.
+  const u = 1 - 4 * (eased - 0.5) * (eased - 0.5);
+  const dur = slow - u * (slow - fast);
+
+  return Math.round(dur);
+}
+
 function PriceDial({
   amount,
   currency = "$",
@@ -122,46 +150,66 @@ function PriceDial({
   const [current, setCurrent] = useState<number>(amount);
   const [next, setNext] = useState<number | null>(null);
   const [direction, setDirection] = useState<"up" | "down">("down");
+  const [tickMs, setTickMs] = useState<number>(150);
+
   const runningRef = useRef(false);
+  const queuedTargetRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (amount === current) return;
 
-    // If a new change comes in mid-animation, we just "retarget" from whatever is current now.
-    if (runningRef.current) return;
+    // If anim is running, just queue the latest target.
+    if (runningRef.current) {
+      queuedTargetRef.current = amount;
+      return;
+    }
 
     runningRef.current = true;
+    queuedTargetRef.current = null;
 
-    const stepOnce = async () => {
+    const run = async (target: number) => {
       let from = current;
-
-      // Decide direction based on target vs current
-      const dir: "up" | "down" = amount > from ? "down" : "up";
+      const dir: "up" | "down" = target > from ? "down" : "up";
       setDirection(dir);
 
-      while (from !== amount) {
-        const to = from + (amount > from ? 1 : -1);
+      const steps = Math.abs(target - from);
+      const stepSign = target > from ? 1 : -1;
 
-        // Show next value
+      for (let i = 0; i < steps; i++) {
+        const to = from + stepSign;
+
+        // variable tick duration
+        const dur = tickDuration(i, Math.max(2, steps));
+        setTickMs(dur);
+
         setNext(to);
 
-        // Wait for the visual transition
-        await new Promise((r) => window.setTimeout(r, 160));
+        // Let CSS animate for `dur`
+        await new Promise((r) => window.setTimeout(r, dur));
 
-        // Commit
+        // Commit without an extra pause (removes the "stop at 11" feeling)
         setCurrent(to);
         setNext(null);
 
-        // Small pause so the tick feels like a dial
-        await new Promise((r) => window.setTimeout(r, 40));
-
         from = to;
+      }
+    };
+
+    const runLoop = async () => {
+      let target = amount;
+      await run(target);
+
+      // If a new target was queued mid-run, immediately continue.
+      while (queuedTargetRef.current != null && queuedTargetRef.current !== target) {
+        target = queuedTargetRef.current;
+        queuedTargetRef.current = null;
+        await run(target);
       }
 
       runningRef.current = false;
     };
 
-    stepOnce();
+    runLoop();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [amount]);
 
@@ -177,6 +225,8 @@ function PriceDial({
         ]
           .filter(Boolean)
           .join(" ")}
+        // pass duration to CSS for this tick
+        style={{ ["--tickMs" as any]: `${tickMs}ms` }}
         aria-live="polite"
       >
         <span className="priceDialNum current">{current}</span>
@@ -251,16 +301,14 @@ export default function PricingPage() {
                         className="typography__body__K4n7p bitC1"
                       />
                     ) : (
-                      <span className="typography__body__K4n7p bitC1">
-                        {plan.staticPrice ?? ""}
-                      </span>
+                      <span className="typography__body__K4n7p bitC1">{plan.staticPrice ?? ""}</span>
                     )}
 
-                    {/* stays the same no matter what */}
+                    {/* stays the same */}
                     <span className="typography__body__K4n7p">{plan.description2}</span>
                   </div>
 
-                  {/* Toggle goes RIGHT BEFORE the billing label (Plus + Business only) */}
+                  {/* Toggle + constant billing label */}
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     {showToggle ? (
                       <div className="root__toggle-wrapper__T7g2m">
@@ -277,10 +325,7 @@ export default function PricingPage() {
                       </div>
                     ) : null}
 
-                    {/* billing label does NOT change */}
-                    <span className="typography__small__Q9j2p pricing__billing__C2d3e">
-                      {plan.billingLabel}
-                    </span>
+                    <span className="typography__small__Q9j2p pricing__billing__C2d3e">{plan.billingLabel}</span>
                   </div>
 
                   <div className="Spacer-module__root__NM019" style={{ "--height": "16px" } as CSSProperties} />
@@ -365,61 +410,81 @@ export default function PricingPage() {
           opacity: 1;
         }
 
+        /* Use per-tick duration from --tickMs, plus easing on opacity to feel "non-linear" */
+        .priceDialWindow.is-animating .priceDialNum {
+          animation-duration: var(--tickMs, 150ms);
+          animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
         /* DOWN = new comes from above, old exits down */
         .priceDialWindow.is-animating.dir-down .priceDialNum.current {
-          animation: dialDownCurrent 160ms ease-in forwards;
+          animation-name: dialDownCurrent;
         }
         .priceDialWindow.is-animating.dir-down .priceDialNum.next {
           transform: translateY(-110%);
-          animation: dialDownNext 160ms ease-in forwards;
+          animation-name: dialDownNext;
         }
 
         /* UP = new comes from below, old exits up */
         .priceDialWindow.is-animating.dir-up .priceDialNum.current {
-          animation: dialUpCurrent 160ms ease-in forwards;
+          animation-name: dialUpCurrent;
         }
         .priceDialWindow.is-animating.dir-up .priceDialNum.next {
           transform: translateY(110%);
-          animation: dialUpNext 160ms ease-in forwards;
+          animation-name: dialUpNext;
         }
 
         @keyframes dialDownCurrent {
-          from {
+          0% {
             transform: translateY(0%);
             opacity: 1;
           }
-          to {
+          60% {
+            opacity: 0.35;
+          }
+          100% {
             transform: translateY(110%);
             opacity: 0;
           }
         }
+
         @keyframes dialDownNext {
-          from {
+          0% {
             transform: translateY(-110%);
-            opacity: 0.6;
+            opacity: 0.15;
           }
-          to {
+          55% {
+            opacity: 0.85;
+          }
+          100% {
             transform: translateY(0%);
             opacity: 1;
           }
         }
 
         @keyframes dialUpCurrent {
-          from {
+          0% {
             transform: translateY(0%);
             opacity: 1;
           }
-          to {
+          60% {
+            opacity: 0.35;
+          }
+          100% {
             transform: translateY(-110%);
             opacity: 0;
           }
         }
+
         @keyframes dialUpNext {
-          from {
+          0% {
             transform: translateY(110%);
-            opacity: 0.6;
+            opacity: 0.15;
           }
-          to {
+          55% {
+            opacity: 0.85;
+          }
+          100% {
             transform: translateY(0%);
             opacity: 1;
           }
