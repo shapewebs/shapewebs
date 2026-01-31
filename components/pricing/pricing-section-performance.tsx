@@ -1,16 +1,22 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import "@/styles/pages/pricing/pricing-section-performance.css";
 import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
 type PlanKey = "hobby" | "plus" | "business" | "enterprise";
 
 type PerfRow =
-  | { type: "category"; label: string }
+  | {
+      type: "category";
+      label: string;
+      tooltip?: string;
+    }
   | {
       type: "feature";
-      label: string; // same text shown in all 4 plan cells
-      details: Record<PlanKey, string>; // tooltip text per plan
+      label: string; // shown inside every cell (with icon + value)
+      tooltip: string;
+      values: Record<PlanKey, string>;
     };
 
 const planOrder: Array<{ key: PlanKey; name: string }> = [
@@ -20,20 +26,19 @@ const planOrder: Array<{ key: PlanKey; name: string }> = [
   { key: "enterprise", name: "Enterprise" },
 ];
 
-// Map Vercel plan data -> your 4 plans:
-// Hobby + Plus = Vercel Hobby (free)
-// Business = Vercel Pro
-// Enterprise = Vercel Enterprise
+// Map Vercel tiers (Hobby/Pro/Enterprise) into your 4 plans
 const v = (hobby: string, pro: string, enterprise: string): Record<PlanKey, string> => ({
   hobby,
-  plus: hobby,
-  business: pro,
-  enterprise,
+  plus: hobby, // Plus runs Vercel free (Hobby)
+  business: pro, // Business runs Vercel Pro
+  enterprise, // Enterprise runs Vercel Enterprise
 });
 
-const isEnabled = (detail: string) => {
-  const d = (detail ?? "").trim();
-  return d !== "" && d !== "—" && d.toLowerCase() !== "custom"; // treat "Custom" as enabled (true) for Enterprise rows
+const isEnabledValue = (value: string) => {
+  const t = value.trim();
+  if (!t) return false;
+  if (t === "—") return false;
+  return true; // "Custom" counts as enabled
 };
 
 function YesIcon() {
@@ -78,17 +83,19 @@ function NoIcon() {
   );
 }
 
-function FeatureCell({
+function CellItem({
   label,
-  detail,
+  value,
+  tooltip,
 }: {
   label: string;
-  detail: string;
+  value: string;
+  tooltip: string;
 }) {
-  const enabled = isEnabled(detail);
+  const enabled = isEnabledValue(value);
 
   return (
-    <Tooltip content={detail || "—"} position="right">
+    <Tooltip content={tooltip} position="right">
       <div className="performance__cellInner__C2d3e">
         <span
           className={[
@@ -100,162 +107,443 @@ function FeatureCell({
           {enabled ? <YesIcon /> : <NoIcon />}
         </span>
 
-        <span
-          className={[
-            "typography__small__Q9j2p",
-            "performance__text__Q9j2p",
-            enabled ? "performance__text--yes__Q9j2p" : "performance__text--no__Q9j2p",
-          ].join(" ")}
-        >
-          {label}
-        </span>
+        <div className="performance__textStack__Q9j2p">
+          <span
+            className={[
+              "typography__small__Q9j2p",
+              "performance__label__Q9j2p",
+              enabled ? "performance__text--yes__Q9j2p" : "performance__text--no__Q9j2p",
+            ].join(" ")}
+          >
+            {label}
+          </span>
+
+          <span
+            className={[
+              "typography__caption__L3p7q",
+              "performance__value__L3p7q",
+              enabled ? "performance__text--yes__Q9j2p" : "performance__text--no__Q9j2p",
+            ].join(" ")}
+          >
+            {value}
+          </span>
+        </div>
       </div>
     </Tooltip>
   );
 }
 
-/**
- * Rows: visible text is always the feature label.
- * Tooltip shows the plan-specific limits/pricing/etc.
- * Enabled/disabled is derived: "—" => disabled.
- */
 const rows: PerfRow[] = [
-  { type: "category", label: "Managed Infrastructure" },
+  { type: "category", label: "Managed Infrastructure", tooltip: "Core network, routing, and regional capabilities." },
 
-  { type: "feature", label: "Vercel Delivery Network", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Vercel Network", details: v("Global Points of Presence", "Global Points of Presence", "Global Points of Presence") },
-  { type: "feature", label: "Vercel Regions", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Automatic Routing", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "HTTPS Certificates", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "TLS/SSL Encryption", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Traffic Load Balancing", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Private Inter-Region Network", details: v("—", "Included", "Included") },
-  { type: "feature", label: "Automatic Region Failover", details: v("—", "Included", "Included") },
-
-  { type: "category", label: "Configurable Routing" },
-
-  { type: "feature", label: "Reverse Proxy", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Rewrites", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Redirects", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Middleware Support", details: v("Included", "Included", "Included") },
-
-  { type: "category", label: "Edge & Transfer" },
+  // Delivery Network
+  { type: "category", label: "Vercel Delivery Network", tooltip: "Global delivery, routing, and transfer limits." },
 
   {
     type: "feature",
-    label: "Edge Requests",
-    details: v(
-      "1M / month included",
-      "10M / month included (up to $32 in value) — then starting at $2 per 1M",
-      "Custom"
-    ),
+    label: "Vercel Network",
+    tooltip: "Global application delivery network (PoPs).",
+    values: v("Global Points of Presence", "Global Points of Presence", "Global Points of Presence"),
   },
   {
     type: "feature",
-    label: "Fast Data Transfer",
-    details: v(
-      "100 GB / month included",
-      "1TB / month included (up to $350 in value) — then starting at $0.15 per GB",
-      "Custom"
-    ),
+    label: "Vercel Regions",
+    tooltip: "Regions available for workloads and deployments.",
+    values: v("Vercel Regions", "Vercel Regions", "Vercel Regions"),
   },
-  { type: "feature", label: "Regional pricing", details: v("Included", "Included", "Custom") },
+  {
+    type: "feature",
+    label: "Automatic Routing",
+    tooltip: "Routes requests automatically to optimal locations.",
+    values: v("Included", "Included", "Included"),
+  },
+  {
+    type: "feature",
+    label: "HTTPS Certificates",
+    tooltip: "Automatic HTTPS certificates for secure connections.",
+    values: v("Included", "Included", "Included"),
+  },
+  {
+    type: "feature",
+    label: "TLS/SSL Encryption",
+    tooltip: "Encrypted traffic between clients and your application.",
+    values: v("Included", "Included", "Included"),
+  },
+  {
+    type: "feature",
+    label: "Traffic Load Balancing",
+    tooltip: "Load distribution across regions/instances.",
+    values: v("Included", "Included", "Included"),
+  },
+  {
+    type: "feature",
+    label: "Private Inter-Region Network",
+    tooltip: "Private network between regions (where applicable).",
+    values: v("—", "Included", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Automatic Region Failover",
+    tooltip: "Automatic failover to healthy regions.",
+    values: v("—", "Included", "Custom"),
+  },
 
-  { type: "category", label: "Vercel Firewall" },
+  // Configurable Routing
+  { type: "category", label: "Configurable Routing", tooltip: "Reverse proxy, rewrites, redirects, middleware." },
 
-  { type: "feature", label: "Web Application Firewall", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Custom Firewall Rules", details: v("Up to 3", "Up to 40", "Up to 1,000") },
-  { type: "feature", label: "IP Blocking", details: v("Up to 3", "Up to 100", "Up to 1,000") },
-  { type: "feature", label: "System Bypass Rules", details: v("—", "Up to 25", "Up to 100") },
+  {
+    type: "feature",
+    label: "Reverse Proxy",
+    tooltip: "Proxy requests to other origins/services.",
+    values: v("Included", "Included", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Rewrites",
+    tooltip: "Rewrite URLs without redirecting the browser.",
+    values: v("Included", "Included", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Redirects",
+    tooltip: "Redirect users from one URL to another.",
+    values: v("Included", "Included", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Middleware Support",
+    tooltip: "Run code at the edge before a request completes.",
+    values: v("Included", "Included", "Custom"),
+  },
+
+  // Edge Requests
+  { type: "category", label: "Edge Requests", tooltip: "Monthly included edge requests & overage behavior." },
+
+  {
+    type: "feature",
+    label: "Edge Requests included",
+    tooltip: "Requests handled on the edge. Includes monthly quota.",
+    values: v("1M / month included", "10M / month included (up to $32 in value) then starting at $2 per 1M", "Custom"),
+  },
+
+  // Data transfer
+  { type: "category", label: "Fast Data Transfer", tooltip: "Included data transfer & overage pricing." },
+
+  {
+    type: "feature",
+    label: "Fast Data Transfer included",
+    tooltip: "Included data transfer for serving your app globally.",
+    values: v("100 GB / month included", "1TB / month included (up to $350 in value) then starting at $0.15 per GB", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Regional pricing",
+    tooltip: "Pricing varies by region.",
+    values: v("Regional pricing", "Regional pricing", "Regional pricing"),
+  },
+
+  // Firewall
+  { type: "category", label: "Managed Infrastructure", tooltip: "Security controls and managed rulesets." },
+  { type: "category", label: "Vercel Firewall", tooltip: "Security features to protect your apps." },
+
+  {
+    type: "feature",
+    label: "Web Application Firewall",
+    tooltip: "Managed WAF protections for common threats.",
+    values: v("Included", "Included", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Custom Firewall Rules",
+    tooltip: "Number of custom firewall rules available.",
+    values: v("Up to 3", "Up to 40", "Up to 1,000"),
+  },
+  {
+    type: "feature",
+    label: "IP Blocking",
+    tooltip: "Number of IP block rules available.",
+    values: v("Up to 3", "Up to 100", "Up to 1,000"),
+  },
+  {
+    type: "feature",
+    label: "System Bypass Rules",
+    tooltip: "Bypass system protections for trusted traffic flows.",
+    values: v("—", "Up to 25", "Up to 100"),
+  },
   {
     type: "feature",
     label: "Rate Limiting",
-    details: v(
-      "1M allowed requests included / month",
-      "Starting at $0.50 per 1M allowed requests",
-      "Custom"
-    ),
+    tooltip: "Allowed requests included & pricing beyond quota.",
+    values: v("1M allowed requests included / month", "Starting at $0.50 per 1M allowed requests", "Custom"),
   },
-  { type: "feature", label: "OWASP Core Ruleset (managed)", details: v("—", "—", "Custom") },
+  {
+    type: "feature",
+    label: "OWASP Core Ruleset (managed)",
+    tooltip: "Managed OWASP CRS rule set support.",
+    values: v("—", "—", "Custom"),
+  },
 
-  { type: "category", label: "Bot Management" },
+  // Bot Management
+  { type: "category", label: "Bot Management", tooltip: "DDoS mitigation and bot controls." },
 
-  { type: "feature", label: "Automated DDoS Mitigation", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "AI Bots (managed ruleset)", details: v("Included", "Included", "Custom") },
-  { type: "feature", label: "Bot Protection (managed ruleset)", details: v("Included", "Included", "Custom") },
+  {
+    type: "feature",
+    label: "Automated DDoS Mitigation",
+    tooltip: "Automatic protections against volumetric attacks.",
+    values: v("Included", "Included", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "AI Bots (managed ruleset)",
+    tooltip: "Managed rule set for AI bot traffic.",
+    values: v("Included", "Included", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Bot Protection (managed ruleset)",
+    tooltip: "Managed protection against bot traffic patterns.",
+    values: v("Included", "Included", "Custom"),
+  },
   {
     type: "feature",
     label: "BotID",
-    details: v(
-      "Basic checks included",
-      "$1 per 1,000 Deep Analysis checks",
-      "Custom"
-    ),
+    tooltip: "Bot identification and deep analysis checks.",
+    values: v("Basic checks included", "$1 per 1,000 Deep Analysis checks", "Custom"),
   },
-  { type: "feature", label: "Attack Challenge Mode", details: v("Included", "Included", "Custom") },
+  {
+    type: "feature",
+    label: "Attack Challenge Mode",
+    tooltip: "Challenge suspicious traffic with additional checks.",
+    values: v("Included", "Included", "Custom"),
+  },
 
-  { type: "category", label: "Content, Caching & Optimization" },
+  // Content, caching & optimization
+  { type: "category", label: "Managed Infrastructure", tooltip: "Content delivery and cache behavior." },
+  { type: "category", label: "Content, Caching & Optimization", tooltip: "Cache and optimize content close to users." },
 
-  { type: "feature", label: "Zero-config CDN cache", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Automated Compression", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Background Revalidation", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Stale-While-Revalidate", details: v("Included", "Included", "Included") },
+  {
+    type: "feature",
+    label: "Zero-config CDN cache",
+    tooltip: "Automatic CDN caching where applicable.",
+    values: v("Included", "Included", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Automated Compression",
+    tooltip: "Compression for faster transfer.",
+    values: v("Included", "Included", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Background Revalidation",
+    tooltip: "Revalidate content in the background.",
+    values: v("Included", "Included", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Stale-While-Revalidate",
+    tooltip: "Serve cached responses while revalidating.",
+    values: v("Included", "Included", "Custom"),
+  },
 
-  { type: "category", label: "Incremental Static Regeneration (ISR)" },
+  // ISR
+  { type: "category", label: "Incremental Static Regeneration (ISR)", tooltip: "ISR reads/writes quotas and overage." },
 
-  { type: "feature", label: "ISR Reads", details: v("1M / month included", "Starting at $0.40 per 1M", "Custom") },
-  { type: "feature", label: "ISR Writes", details: v("200,000 / month included", "Starting at $4 per 1M", "Custom") },
+  {
+    type: "feature",
+    label: "ISR Reads",
+    tooltip: "Monthly included ISR reads.",
+    values: v("1M / month included", "Starting at $0.40 per 1M", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "ISR Writes",
+    tooltip: "Monthly included ISR writes.",
+    values: v("200,000 / month included", "Starting at $4 per 1M", "Custom"),
+  },
 
-  { type: "category", label: "Bulk Redirects" },
+  // Bulk redirects
+  {
+    type: "feature",
+    label: "Bulk Redirects",
+    tooltip: "Bulk redirect limits and pricing.",
+    values: v("1K included per project", "$50 per month per 25K redirects", "Custom"),
+  },
 
-  { type: "feature", label: "Bulk Redirects", details: v("1K included per project", "$50 / month per 25K redirects", "Custom") },
+  // Blob
+  { type: "category", label: "Blob", tooltip: "Blob storage quotas and operations." },
 
-  { type: "category", label: "Blob Storage" },
+  {
+    type: "feature",
+    label: "Blob Storage Size",
+    tooltip: "Monthly included blob storage.",
+    values: v("1 GB / month included", "$0.023 per GB", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Blob Simple Operations",
+    tooltip: "Monthly included simple blob operations.",
+    values: v("10,000 / month included", "$0.40 per 1M", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Blob Advanced Operations",
+    tooltip: "Monthly included advanced blob operations.",
+    values: v("2,000 / month included", "$5.00 per 1M", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Blob Data Transfer",
+    tooltip: "Monthly included blob data transfer.",
+    values: v("10 GB / month included", "Starting at $0.05 per GB", "Custom"),
+  },
 
-  { type: "feature", label: "Blob Storage Size", details: v("1 GB / month included", "$0.023 per GB", "Custom") },
-  { type: "feature", label: "Blob Simple Operations", details: v("10,000 / month included", "$0.40 per 1M", "Custom") },
-  { type: "feature", label: "Blob Advanced Operations", details: v("2,000 / month included", "$5.00 per 1M", "Custom") },
-  { type: "feature", label: "Blob Data Transfer", details: v("10 GB / month included", "Starting at $0.05 per GB", "Custom") },
+  // Image optimization
+  { type: "category", label: "Image Optimization", tooltip: "Image transformation and cache quotas." },
 
-  { type: "category", label: "Image Optimization" },
+  {
+    type: "feature",
+    label: "Image Transformations",
+    tooltip: "Monthly included transformations.",
+    values: v("5,000 / month included", "Starting at $0.05 per 1K", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Image Cache Reads",
+    tooltip: "Monthly included reads from image cache.",
+    values: v("300,000 / month included", "Starting at $0.40 per 1M", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Image Cache Writes",
+    tooltip: "Monthly included writes to image cache.",
+    values: v("100,000 / month included", "Starting at $4.00 per 1M", "Custom"),
+  },
 
-  { type: "feature", label: "Image Transformations", details: v("5,000 / month included", "Starting at $0.05 per 1K", "Custom") },
-  { type: "feature", label: "Image Cache Reads", details: v("300,000 / month included", "Starting at $0.40 per 1M", "Custom") },
-  { type: "feature", label: "Image Cache Writes", details: v("100,000 / month included", "Starting at $4.00 per 1M", "Custom") },
+  // Edge Config
+  { type: "category", label: "Edge Config", tooltip: "Edge config reads/writes quotas." },
 
-  { type: "category", label: "Edge Config" },
+  {
+    type: "feature",
+    label: "Edge Config Reads",
+    tooltip: "Monthly included reads.",
+    values: v("100,000 / month included", "Starting at $3.00 per 1M reads", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Edge Config Writes",
+    tooltip: "Monthly included writes.",
+    values: v("100 writes / month included", "$5.00 per 500 writes", "Custom"),
+  },
 
-  { type: "feature", label: "Edge Config Reads", details: v("100,000 / month included", "Starting at $3.00 per 1M reads", "Custom") },
-  { type: "feature", label: "Edge Config Writes", details: v("100 writes / month included", "$5.00 per 500 writes", "Custom") },
+  // Compute
+  { type: "category", label: "Managed Infrastructure", tooltip: "Compute limits and pricing." },
+  { type: "category", label: "Vercel Compute", tooltip: "Functions, sandbox, and workflow." },
 
-  { type: "category", label: "Compute" },
+  {
+    type: "feature",
+    label: "Functions: Active CPU",
+    tooltip: "Monthly included function active CPU time.",
+    values: v("4 hours / month included", "Starting at $0.128 per hour", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Functions: Provisioned Memory",
+    tooltip: "Monthly included provisioned memory.",
+    values: v("360 GB-hrs / month included", "Starting at $0.0106 per GB-hour", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Functions: Invocations",
+    tooltip: "Monthly included function invocations.",
+    values: v("1M / month included", "Starting at $0.60 per 1M", "Custom"),
+  },
 
-  { type: "feature", label: "Functions — Active CPU", details: v("4 hours / month included", "Starting at $0.128 / hour", "Custom") },
-  { type: "feature", label: "Functions — Provisioned Memory", details: v("360 GB-hrs / month included", "Starting at $0.0106 per GB-hour", "Custom") },
-  { type: "feature", label: "Functions — Invocations", details: v("1M / month included", "Starting at $0.60 per 1M", "Custom") },
+  {
+    type: "feature",
+    label: "Sandbox: Active CPU",
+    tooltip: "Monthly included sandbox active CPU time.",
+    values: v("5 hours / month included", "Starting at $0.128 per hour", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Sandbox: Provisioned Memory",
+    tooltip: "Monthly included sandbox provisioned memory.",
+    values: v("420 GB-hours / month included", "Starting at $0.0212 per GB-hr", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Sandbox: Creation",
+    tooltip: "Monthly included sandbox creations.",
+    values: v("5,000 / month included", "Starting at $0.60 per 1M", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Sandbox: Network",
+    tooltip: "Monthly included sandbox network transfer.",
+    values: v("20 GB / month included", "Starting at $0.15 per GB", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Concurrent Sandboxes",
+    tooltip: "Max concurrent sandbox instances.",
+    values: v("10", "2000", "Custom"),
+  },
+  {
+    type: "feature",
+    label: "Sandbox Storage",
+    tooltip: "Included sandbox storage size.",
+    values: v("15 GB", "Starting at $0.08 per GB-month", "Custom"),
+  },
 
-  { type: "category", label: "DX Platform — Build & Deploy" },
+  // Observability
+  { type: "category", label: "Managed Infrastructure", tooltip: "Monitoring and logging." },
+  { type: "category", label: "Observability", tooltip: "Logs, traces, analytics & add-ons." },
 
-  { type: "feature", label: "Automatic CI/CD", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Environment Variables", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Build Logs", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Remote Cache", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Monorepo Support", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Webhook Triggers", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Custom Environments", details: v("—", "1 environment", "12 environments") },
+  {
+    type: "feature",
+    label: "Runtime Logs retention",
+    tooltip: "How long logs are retained by default.",
+    values: v("1 hour of logs", "1 day of logs (30 days with Observability Plus)", "3 days of logs (30 days with Observability Plus)"),
+  },
+  {
+    type: "feature",
+    label: "Session Tracing retention",
+    tooltip: "How long traces are retained.",
+    values: v("1 hour of traces", "1 day of traces", "3 days of traces"),
+  },
+  {
+    type: "feature",
+    label: "Log Drains",
+    tooltip: "Export logs to external destinations.",
+    values: v("—", "$0.50 per 1 GB", "Custom"),
+  },
 
-  { type: "category", label: "Observability" },
+  // Security & Privacy (subset)
+  { type: "category", label: "Security & Privacy", tooltip: "Access controls and deployment protection." },
 
-  { type: "feature", label: "Runtime Logs retention", details: v("1 hour of logs", "1 day of logs (30 days w/ Observability Plus)", "3 days of logs (30 days w/ Observability Plus)") },
-  { type: "feature", label: "Session Tracing retention", details: v("1 hour of traces", "1 day of traces", "3 days of traces") },
-  { type: "feature", label: "Log Drains", details: v("—", "$0.50 per 1 GB", "Custom") },
+  {
+    type: "feature",
+    label: "Role-Based Access Control",
+    tooltip: "Control access via roles and permissions.",
+    values: v("—", "Team level", "Team & project level"),
+  },
+  {
+    type: "feature",
+    label: "SAML Single Sign-On (SSO)",
+    tooltip: "SAML SSO support.",
+    values: v("—", "$300 / month", "Custom"),
+  },
 
-  { type: "category", label: "Access & Deployment Security" },
+  // Compliance (subset)
+  { type: "category", label: "Compliance", tooltip: "Security/compliance standards and add-ons." },
 
-  { type: "feature", label: "Multi-Factor Authentication (MFA)", details: v("Included", "Included", "Included") },
-  { type: "feature", label: "Role-Based Access Control", details: v("—", "Team level", "Team & project level") },
-  { type: "feature", label: "Audit Logs", details: v("—", "—", "Included") },
-  { type: "feature", label: "SAML Single Sign-On (SSO)", details: v("—", "$300 / month", "Custom") },
+  {
+    type: "feature",
+    label: "HIPAA BAA",
+    tooltip: "HIPAA Business Associate Agreement availability.",
+    values: v("—", "$350 / month", "Custom"),
+  },
 ];
 
 export function PricingSectionPerformance() {
@@ -298,11 +586,18 @@ export function PricingSectionPerformance() {
                       className="performance__row__P5k8p performance__row--category__P5k8p"
                       role="row"
                     >
-                      {/* Only first column has category label (as requested) */}
                       <div className="performance__cell__C2d3e" role="cell">
-                        <span className="typography__small__Q9j2p performance__category__Q9j2p">
-                          {r.label}
-                        </span>
+                        {r.tooltip ? (
+                          <Tooltip content={r.tooltip} position="right">
+                            <span className="typography__small__Q9j2p performance__category__Q9j2p performance__label--tooltip__W7m3k">
+                              {r.label}
+                            </span>
+                          </Tooltip>
+                        ) : (
+                          <span className="typography__small__Q9j2p performance__category__Q9j2p">
+                            {r.label}
+                          </span>
+                        )}
                       </div>
                       <div className="performance__cell__C2d3e" role="cell" />
                       <div className="performance__cell__C2d3e" role="cell" />
@@ -315,7 +610,7 @@ export function PricingSectionPerformance() {
                   <div key={`feat-${idx}-${r.label}`} className="performance__row__P5k8p" role="row">
                     {planOrder.map((p) => (
                       <div key={`${r.label}-${p.key}`} className="performance__cell__C2d3e" role="cell">
-                        <FeatureCell label={r.label} detail={r.details[p.key]} />
+                        <CellItem label={r.label} value={r.values[p.key]} tooltip={r.tooltip} />
                       </div>
                     ))}
                   </div>
@@ -323,6 +618,8 @@ export function PricingSectionPerformance() {
               })}
             </div>
           </div>
+
+          <div className="Spacer-module__root__NM019" style={{ "--height": "24px" } as CSSProperties} />
         </div>
       </section>
     </TooltipProvider>
