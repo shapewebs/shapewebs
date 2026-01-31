@@ -8,6 +8,7 @@ type Plan = {
   priceYearly: string
   description: string
   description2: string
+  billingLabel: string
   features: string[]
   highlighted?: boolean
   cta: { label: string; href: string }
