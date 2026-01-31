@@ -19,6 +19,7 @@
   --color-border-primary: 227, 229, 231;
   --color-border-secondary: 216, 217, 219;
   --color-border-tertiary: 212, 213, 215;
+  --color-toggle: ;
   --color-text-primary: 40, 42, 48;
   --color-text-secondary: 84, 90, 99;
   --color-text-tertiary: 134, 132, 141;
@@ -45,6 +46,7 @@
   --color-border-primary: 35, 37, 42;
   --color-border-secondary: 52, 52, 58;
   --color-border-tertiary: 62, 62, 68;
+  --color-toggle: 92, 102, 109;
   --color-text-primary: 247, 248, 248;
   --color-text-secondary: 208, 214, 216;
   --color-text-tertiary: 138, 143, 152;
