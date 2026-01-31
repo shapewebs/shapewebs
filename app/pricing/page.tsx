@@ -48,7 +48,7 @@ const plans: Plan[] = [
     key: "business",
     name: "Business",
     priceYearly: "$18/mo",
-    description: "",
+    description: " + aditional features",
     description2: "",
     billingLabel: "Billed yearly",
     features: [
@@ -63,7 +63,7 @@ const plans: Plan[] = [
   {
     key: "enterprise",
     name: "Enterprise",
-    priceYearly: "Custom",
+    priceYearly: "Contact us",
     description: "",
     description2: "",
     billingLabel: "Annual billing only",
