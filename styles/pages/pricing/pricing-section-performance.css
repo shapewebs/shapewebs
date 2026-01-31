@@ -1,79 +1,97 @@
-.pricingPerformance__container__Q7j3s {
+.performance__container__Q7j3s {
   width: 100%;
 }
 
-.pricingPerformance__content__K9j6q {
+.performance__content__K9j6q {
   max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
   margin: 0 auto;
   padding-inline: var(--system-padding);
 }
 
-/* role="table" wrapper: rows stack vertically */
-.pricingPerformance__table__L7p3s {
+/* role=table container */
+.performance__table__L7p3s {
   display: grid;
-  grid-template-columns: 1fr; /* per your request */
-  border: 1px solid rgba(var(--color-border-primary), 1);
-  border-radius: 16px;
-  background: rgba(var(--color-bg-secondary), 1);
-  overflow: hidden;
+  grid-template-columns: 1fr; /* per your requirement */
+  gap: 0;
+  position: relative;
 }
 
-/* Rowgroups */
-.pricingPerformance__rowgroup__A1b2c {
+/* rowgroups */
+.performance__rowgroup__A1b2c {
   display: grid;
   grid-template-columns: 1fr;
 }
 
-/* Sticky header rowgroup */
-.pricingPerformance__rowgroup--sticky__A1b2c {
+/* sticky header rowgroup */
+.performance__rowgroup--sticky__A1b2c {
   position: sticky;
   top: 0;
   z-index: 5;
-  background: rgba(var(--color-bg-secondary), 1);
+  background: rgba(var(--color-bg-primary), 1);
   border-bottom: 1px solid rgba(var(--color-border-primary), 1);
 }
 
-/* Rows: label + 4 plan columns */
-.pricingPerformance__row__P5k8p {
+/* each row is 4 equal columns */
+.performance__row__P5k8p {
   display: grid;
-  grid-template-columns: 1.4fr repeat(4, 1fr);
-  min-height: 44px;
+  grid-template-columns: repeat(4, 1fr);
+  background: rgba(var(--color-bg-secondary), 1);
 }
 
-.pricingPerformance__row__P5k8p:not(.pricingPerformance__row--header__P5k8p) {
-  border-top: 1px solid rgba(var(--color-border-primary), 1);
+/* header row styling */
+.performance__row--header__P5k8p {
+  background: rgba(var(--color-bg-primary), 1);
 }
 
-/* Header row */
-.pricingPerformance__row--header__P5k8p {
-  min-height: 56px;
+.performance__cell__C2d3e {
+  padding: 14px 16px;
+  border-left: 1px solid rgba(var(--color-border-primary), 1);
+  border-right: 0;
+  border-top: 0;
+  border-bottom: 1px solid rgba(var(--color-border-primary), 1);
 }
 
-/* Section header rows inside body */
-.pricingPerformance__row--section__P5k8p {
+.performance__cell__C2d3e:first-child {
+  border-left: 1px solid rgba(var(--color-border-primary), 1);
+}
+
+.performance__cell--header__C2d3e {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  text-align: center;
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.performance__value__C2d3e {
+  text-align: center;
+}
+
+/* Row wrapper: allows a non-column label on the left */
+.performance__rowwrap__V2c3d {
+  position: relative;
+}
+
+/* The “row label” that does NOT consume a column */
+.performance__rowlabel__X1y2z {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(-8px, -50%);
+  background: rgba(var(--color-bg-primary), 1);
+  border: 1px solid rgba(var(--color-border-primary), 1);
+  border-radius: 999px;
+  padding: 6px 10px;
+  box-shadow: var(--shadow-stack-low);
+  max-width: min(260px, 60vw);
+}
+
+/* Category rows a bit more subtle */
+.performance__row--category__P5k8p .performance__cell__C2d3e {
   background: rgba(var(--color-bg-tertiary), 1);
 }
 
-/* Cells */
-.pricingPerformance__cell__C2d3e {
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border-right: 1px solid rgba(var(--color-border-primary), 1);
-}
-
-.pricingPerformance__cell__C2d3e:last-child {
-  border-right: 0;
-}
-
-/* top-left corner cell */
-.pricingPerformance__cell--corner__C2d3e {
-  color: rgba(var(--color-text-tertiary), 1);
-}
-
-/* Tooltip affordance on row label (matches your pricing tooltip style) */
-.pricingPerformance__labelTooltip__W7m3k {
+/* Tooltip-ish underline style for labels (matches your pricing feature tooltip affordance) */
+.performance__label--tooltip__W7m3k {
   cursor: help;
   text-decoration: underline;
   text-decoration-style: dotted;
@@ -82,18 +100,17 @@
   transition: text-decoration-color 0.2s ease;
 }
 
-.pricingPerformance__labelTooltip__W7m3k:hover {
+.performance__label--tooltip__W7m3k:hover {
   text-decoration-color: rgba(var(--color-text-tertiary), 1);
 }
 
-/* Responsive: allow horizontal scroll on small screens */
+/* Responsive: keep columns, but reduce padding */
 @media (max-width: 768px) {
-  .pricingPerformance__table__L7p3s {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+  .performance__cell__C2d3e {
+    padding: 12px 10px;
   }
-
-  .pricingPerformance__row__P5k8p {
-    min-width: 860px; /* ensures 5 columns don't crush */
+  .performance__rowlabel__X1y2z {
+    transform: translate(-6px, -50%);
+    padding: 6px 8px;
   }
 }
