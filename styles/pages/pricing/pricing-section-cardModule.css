@@ -105,12 +105,6 @@
   padding: 0 24px 24px 24px;
 }
 
-.pricing__cta__X1y2z {
-  width: 100%;
-  justify-content: center;
-  box-shadow: var(--shadow-stack-low);
-}
-
 .pricing__price-value__T7g2m {
   font-size: 28px;
   font-weight: var(--font-weight-semibold);
