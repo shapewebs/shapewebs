@@ -3,6 +3,7 @@
 import { useId, useMemo, useState } from "react";
 import type { CSSProperties } from "react";
 import "@/styles/pages/pricing/pricing-section-faq.css";
+import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
 type FaqItem = {
   question: string;
