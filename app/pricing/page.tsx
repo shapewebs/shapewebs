@@ -9,6 +9,7 @@ export default function PricingPage() {
     <>
       <PricingSectionCardModule />
       <PricingSectionPerformance />
+      <PricingSectionFAQ />
     </>
   );
 }
