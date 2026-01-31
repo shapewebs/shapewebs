@@ -288,26 +288,14 @@ export default function ContactPage() {
                     <div className="Spacer-module__root__NM019" style={{ '--height' : '32px' }}>
                     </div>
                     <p className="typography__body__K4n7p" style={{ margin: 0 }}>
-                        <span className="Text-regular-bitC bitCO"><svg xmlns="http://www.w3.org/2000/svg"
-                                viewBox="-0.0002 -0.0003 16.0005 15.9996" width="16.0005px" height="15.9996px">
-                                <path
-                                    d="M 5.605 2.225 C 5.408 1.753 4.893 1.503 4.403 1.635 L 4.265 1.673 C 2.65 2.113 1.27 3.678 1.673 5.583 C 2.6 9.958 6.043 13.4 10.418 14.328 C 12.325 14.733 13.888 13.35 14.328 11.735 L 14.365 11.598 C 14.5 11.105 14.248 10.59 13.778 10.395 L 11.345 9.383 C 10.933 9.21 10.455 9.33 10.17 9.678 L 9.205 10.858 C 7.448 9.985 6.033 8.525 5.22 6.733 L 6.325 5.833 C 6.673 5.55 6.79 5.073 6.62 4.658 L 5.605 2.225 Z"
-                                    style={{ fill: "none" , paintOrder: "fill" , stroke: "currentColor" ,
-                                    strokeWidth: "1.25px" , }} transform="matrix(1, 0, 0, 1, 0, -1.7763568394002505e-15)" />
-                            </svg>
+                        <span className="Text-regular-bitC bitCO"><svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path d="M5.5 1H2.87785C1.63626 1 0.694688 2.11946 0.907423 3.34268L1.14841 4.72836C1.96878 9.4455 5.51475 13.2235 10.1705 14.3409L12.5333 14.908C13.7909 15.2098 15 14.2566 15 12.9632V10.5L11.75 8.25L9.25 10.75L5.25 6.75L7.75 4.25L5.5 1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="transparent"></path></svg>
                             Start with a custom demo. </span>
                         <span>Discover the value of a carefully crafted web presence by Shapewebs.</span>
                     </p>
                     <div className="Spacer-module__root__NM019" style={{ '--height' : '24px' }}>
                     </div>
                     <p className="typography__body__K4n7p" style={{ margin: 0 }}>
-                        <span className="Text-regular-bitC bitCO"><svg xmlns="http://www.w3.org/2000/svg"
-                                viewBox="-0.0002 -0.0003 16.0005 15.9996" width="16.0005px" height="15.9996px">
-                                <path
-                                    d="M 1.6 3.6 C 1.6 2.938 2.138 2.4 2.8 2.4 L 5.2 2.4 C 5.863 2.4 6.4 2.938 6.4 3.6 L 6.4 4 L 9.6 4 L 9.6 3.6 C 9.6 2.938 10.138 2.4 10.8 2.4 L 13.2 2.4 C 13.863 2.4 14.4 2.938 14.4 3.6 L 14.4 6 C 14.4 6.663 13.863 7.2 13.2 7.2 L 10.8 7.2 C 10.138 7.2 9.6 6.663 9.6 6 L 9.6 5.6 L 6.4 5.6 L 6.4 6 C 6.4 6.183 6.358 6.358 6.285 6.513 L 8 8.8 L 10 8.8 C 10.663 8.8 11.2 9.338 11.2 10 L 11.2 12.4 C 11.2 13.063 10.663 13.6 10 13.6 L 7.6 13.6 C 6.938 13.6 6.4 13.063 6.4 12.4 L 6.4 10 C 6.4 9.818 6.443 9.643 6.515 9.488 L 4.8 7.2 L 2.8 7.2 C 2.138 7.2 1.6 6.663 1.6 6 L 1.6 3.6 Z"
-                                    style={{ fill: "none" , paintOrder: "fill" , stroke: "currentColor" ,
-                                    strokeWidth: "1.25px" , }} transform="matrix(1, 0, 0, 1, 0, -1.7763568394002505e-15)" />
-                            </svg>
+                        <span className="Text-regular-bitC bitCO"><svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 1C0 0.447716 0.447715 0 1 0H15C15.5523 0 16 0.447716 16 1V10C16 10.5523 15.5523 11 15 11H12.5V9.5H14.5V1.5H1.5V9.5H3.5V11H1C0.447715 11 0 10.5523 0 10V1ZM8 14C6.84509 14 5.76659 14.5772 5.12596 15.5381L5 15.7271V16H3.5V15.5V15.2729L3.62596 15.084L3.87789 14.7061C4.79671 13.3278 6.34356 12.5 8 12.5C9.65644 12.5 11.2033 13.3278 12.1221 14.7061L12.374 15.084L12.5 15.2729V15.5V16H11V15.7271L10.874 15.5381C10.2334 14.5772 9.15491 14 8 14ZM7.75 6C6.50736 6 5.5 7.00736 5.5 8.25V8.75C5.5 9.99264 6.50736 11 7.75 11H8.25C9.49264 11 10.5 9.99264 10.5 8.75V8.25C10.5 7.00736 9.49264 6 8.25 6H7.75ZM7 8.25C7 7.83579 7.33579 7.5 7.75 7.5H8.25C8.66421 7.5 9 7.83579 9 8.25V8.75C9 9.16421 8.66421 9.5 8.25 9.5H7.75C7.33579 9.5 7 9.16421 7 8.75V8.25Z" fill="currentColor"></path></svg>
                             See the process in action. </span>
                         <span>From idea to launch, you can learn about our <a href="/method"
                                 className="typography__link__B7s3m">method</a> or talk to sales.</span>
@@ -318,12 +306,7 @@ export default function ContactPage() {
                     <a href="/docs" className="button__root__ZxcvB button__kind-tertiary__R5j2s button__size-small__L9d7h" style={{
                       margin: 0
                     }}>Find it in docs
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                                viewBox="-0.0002 -0.0003 16.0005 15.9996" width="16.0005px" height="15.9996px">
-                                <path
-                                    d="M 11.778 7.435 C 12.09 7.748 12.09 8.255 11.778 8.568 L 6.978 13.368 C 6.665 13.68 6.158 13.68 5.845 13.368 C 5.533 13.055 5.533 12.548 5.845 12.235 L 10.08 8 L 5.848 3.765 C 5.535 3.453 5.535 2.945 5.848 2.633 C 6.16 2.32 6.668 2.32 6.98 2.633 L 11.78 7.433 L 11.778 7.435 Z"
-                                    style={{ fill: "cuttentColor" , paintOrder: "fill" }} transform="matrix(1, 0, 0, 1, 0, -1.7763568394002505e-15)" />
-                            </svg>
+<svg data-testid="geist-icon" height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.50001 1.93933L6.03034 2.46966L10.8536 7.29288C11.2441 7.68341 11.2441 8.31657 10.8536 8.7071L6.03034 13.5303L5.50001 14.0607L4.43935 13L4.96968 12.4697L9.43935 7.99999L4.96968 3.53032L4.43935 2.99999L5.50001 1.93933Z" fill="currentColor"></path></svg>
                     </a>
                 </div>
                 <div className="form__container__H8j3p">
