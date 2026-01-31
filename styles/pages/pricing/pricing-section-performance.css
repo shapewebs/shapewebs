@@ -56,8 +56,9 @@
 }
 
 .performance__category__Q9j2p {
-  color: rgba(var(--color-text-secondary), 1);
-  font-weight: var(--font-weight-medium);
+    color: rgba(var(--color-text-primary), 1);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-large);
 }
 
 /* inner layout inside each cell */
