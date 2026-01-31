@@ -11,7 +11,7 @@
 /* role=table wrapper */
 .performance__table__L7p3s {
   display: grid;
-  grid-template-columns: 1fr; /* your requirement */
+  grid-template-columns: 1fr;
   gap: 0;
 }
 
@@ -26,7 +26,7 @@
   position: sticky;
   top: 0;
   z-index: 5;
-  /* NO background colors per your request */
+  /* no background colors */
 }
 
 /* rows are 4 equal columns */
@@ -35,30 +35,20 @@
   grid-template-columns: repeat(4, 1fr);
 }
 
-/* keep it minimal (no background) */
+/* ONLY horizontal separators (no vertical lines) */
 .performance__cell__C2d3e {
   padding: 14px 16px;
   border-bottom: 1px solid rgba(var(--color-border-primary), 1);
-  border-left: 1px solid rgba(var(--color-border-primary), 1);
 }
 
-.performance__row__P5k8p .performance__cell__C2d3e:last-child {
-  border-right: 1px solid rgba(var(--color-border-primary), 1);
-}
-
-/* header row: same border language, no background */
+/* header cells */
 .performance__cell--header__C2d3e {
   text-align: center;
   padding-top: 16px;
   padding-bottom: 16px;
 }
 
-/* category row: only first column filled, but no backgrounds */
-.performance__row--category__P5k8p .performance__cell__C2d3e {
-  padding-top: 12px;
-  padding-bottom: 12px;
-}
-
+/* category label style */
 .performance__category__Q9j2p {
   color: rgba(var(--color-text-secondary), 1);
   font-weight: var(--font-weight-medium);
@@ -88,30 +78,12 @@
 }
 
 /* text colors */
-.performance__text__Q9j2p {
-  /* base is typography__small__Q9j2p */
-}
-
 .performance__text--yes__Q9j2p {
   color: rgba(var(--color-text-primary), 1);
 }
 
 .performance__text--no__Q9j2p {
   color: rgba(var(--color-text-tertiary), 1);
-}
-
-/* Tooltip underline affordance for category labels (optional) */
-.performance__label--tooltip__W7m3k {
-  cursor: help;
-  text-decoration: underline;
-  text-decoration-style: dotted;
-  text-underline-offset: 3px;
-  text-decoration-color: rgba(var(--color-text-tertiary), 0.5);
-  transition: text-decoration-color 0.2s ease;
-}
-
-.performance__label--tooltip__W7m3k:hover {
-  text-decoration-color: rgba(var(--color-text-tertiary), 1);
 }
 
 @media (max-width: 768px) {

@@ -1,22 +1,16 @@
 "use client";
 
-import type { CSSProperties } from "react";
 import "@/styles/pages/pricing/pricing-section-performance.css";
 import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
 type PlanKey = "hobby" | "plus" | "business" | "enterprise";
 
 type PerfRow =
-  | {
-      type: "category";
-      label: string;
-      tooltip?: string;
-    }
+  | { type: "category"; label: string }
   | {
       type: "feature";
-      label: string; // text shown inside every cell
-      tooltip: string;
-      availability: Record<PlanKey, boolean>;
+      label: string; // same text shown in all 4 plan cells
+      details: Record<PlanKey, string>; // tooltip text per plan
     };
 
 const planOrder: Array<{ key: PlanKey; name: string }> = [
@@ -26,59 +20,21 @@ const planOrder: Array<{ key: PlanKey; name: string }> = [
   { key: "enterprise", name: "Enterprise" },
 ];
 
-// Example data — replace/extend freely
-const rows: PerfRow[] = [
-  { type: "category", label: "Core features" },
+// Map Vercel plan data -> your 4 plans:
+// Hobby + Plus = Vercel Hobby (free)
+// Business = Vercel Pro
+// Enterprise = Vercel Enterprise
+const v = (hobby: string, pro: string, enterprise: string): Record<PlanKey, string> => ({
+  hobby,
+  plus: hobby,
+  business: pro,
+  enterprise,
+});
 
-  {
-    type: "feature",
-    label: "Firewall protection",
-    tooltip:
-      "Web Application Firewall (WAF): blocks common attack patterns like injection attempts and malicious requests.",
-    availability: { hobby: true, plus: true, business: true, enterprise: true },
-  },
-  {
-    type: "feature",
-    label: "DDoS mitigation",
-    tooltip:
-      "Protection against Distributed Denial of Service attacks that try to overwhelm your site with traffic.",
-    availability: { hobby: true, plus: true, business: true, enterprise: true },
-  },
-  {
-    type: "feature",
-    label: "Cold start prevention",
-    tooltip:
-      "Keeps serverless functions warm to reduce slow first responses after inactivity.",
-    availability: { hobby: false, plus: true, business: true, enterprise: true },
-  },
-
-  { type: "category", label: "Performance" },
-
-  {
-    type: "feature",
-    label: "Performance insights",
-    tooltip:
-      "Visibility into traffic and performance trends (what’s slow, what’s popular, what to optimize).",
-    availability: { hobby: false, plus: true, business: true, enterprise: true },
-  },
-  {
-    type: "feature",
-    label: "Core Web Vitals budgets",
-    tooltip:
-      "Defines thresholds for metrics like LCP/CLS/INP to prevent regressions and keep performance in check.",
-    availability: { hobby: false, plus: false, business: true, enterprise: true },
-  },
-
-  { type: "category", label: "Enterprise" },
-
-  {
-    type: "feature",
-    label: "SSO / RBAC",
-    tooltip:
-      "Single Sign-On and Role-Based Access Control for enterprise-grade authentication and permissions.",
-    availability: { hobby: false, plus: false, business: false, enterprise: true },
-  },
-];
+const isEnabled = (detail: string) => {
+  const d = (detail ?? "").trim();
+  return d !== "" && d !== "—" && d.toLowerCase() !== "custom"; // treat "Custom" as enabled (true) for Enterprise rows
+};
 
 function YesIcon() {
   return (
@@ -123,16 +79,16 @@ function NoIcon() {
 }
 
 function FeatureCell({
-  enabled,
   label,
-  tooltip,
+  detail,
 }: {
-  enabled: boolean;
   label: string;
-  tooltip: string;
+  detail: string;
 }) {
+  const enabled = isEnabled(detail);
+
   return (
-    <Tooltip content={tooltip} position="right">
+    <Tooltip content={detail || "—"} position="right">
       <div className="performance__cellInner__C2d3e">
         <span
           className={[
@@ -158,6 +114,150 @@ function FeatureCell({
   );
 }
 
+/**
+ * Rows: visible text is always the feature label.
+ * Tooltip shows the plan-specific limits/pricing/etc.
+ * Enabled/disabled is derived: "—" => disabled.
+ */
+const rows: PerfRow[] = [
+  { type: "category", label: "Managed Infrastructure" },
+
+  { type: "feature", label: "Vercel Delivery Network", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Vercel Network", details: v("Global Points of Presence", "Global Points of Presence", "Global Points of Presence") },
+  { type: "feature", label: "Vercel Regions", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Automatic Routing", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "HTTPS Certificates", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "TLS/SSL Encryption", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Traffic Load Balancing", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Private Inter-Region Network", details: v("—", "Included", "Included") },
+  { type: "feature", label: "Automatic Region Failover", details: v("—", "Included", "Included") },
+
+  { type: "category", label: "Configurable Routing" },
+
+  { type: "feature", label: "Reverse Proxy", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Rewrites", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Redirects", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Middleware Support", details: v("Included", "Included", "Included") },
+
+  { type: "category", label: "Edge & Transfer" },
+
+  {
+    type: "feature",
+    label: "Edge Requests",
+    details: v(
+      "1M / month included",
+      "10M / month included (up to $32 in value) — then starting at $2 per 1M",
+      "Custom"
+    ),
+  },
+  {
+    type: "feature",
+    label: "Fast Data Transfer",
+    details: v(
+      "100 GB / month included",
+      "1TB / month included (up to $350 in value) — then starting at $0.15 per GB",
+      "Custom"
+    ),
+  },
+  { type: "feature", label: "Regional pricing", details: v("Included", "Included", "Custom") },
+
+  { type: "category", label: "Vercel Firewall" },
+
+  { type: "feature", label: "Web Application Firewall", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Custom Firewall Rules", details: v("Up to 3", "Up to 40", "Up to 1,000") },
+  { type: "feature", label: "IP Blocking", details: v("Up to 3", "Up to 100", "Up to 1,000") },
+  { type: "feature", label: "System Bypass Rules", details: v("—", "Up to 25", "Up to 100") },
+  {
+    type: "feature",
+    label: "Rate Limiting",
+    details: v(
+      "1M allowed requests included / month",
+      "Starting at $0.50 per 1M allowed requests",
+      "Custom"
+    ),
+  },
+  { type: "feature", label: "OWASP Core Ruleset (managed)", details: v("—", "—", "Custom") },
+
+  { type: "category", label: "Bot Management" },
+
+  { type: "feature", label: "Automated DDoS Mitigation", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "AI Bots (managed ruleset)", details: v("Included", "Included", "Custom") },
+  { type: "feature", label: "Bot Protection (managed ruleset)", details: v("Included", "Included", "Custom") },
+  {
+    type: "feature",
+    label: "BotID",
+    details: v(
+      "Basic checks included",
+      "$1 per 1,000 Deep Analysis checks",
+      "Custom"
+    ),
+  },
+  { type: "feature", label: "Attack Challenge Mode", details: v("Included", "Included", "Custom") },
+
+  { type: "category", label: "Content, Caching & Optimization" },
+
+  { type: "feature", label: "Zero-config CDN cache", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Automated Compression", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Background Revalidation", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Stale-While-Revalidate", details: v("Included", "Included", "Included") },
+
+  { type: "category", label: "Incremental Static Regeneration (ISR)" },
+
+  { type: "feature", label: "ISR Reads", details: v("1M / month included", "Starting at $0.40 per 1M", "Custom") },
+  { type: "feature", label: "ISR Writes", details: v("200,000 / month included", "Starting at $4 per 1M", "Custom") },
+
+  { type: "category", label: "Bulk Redirects" },
+
+  { type: "feature", label: "Bulk Redirects", details: v("1K included per project", "$50 / month per 25K redirects", "Custom") },
+
+  { type: "category", label: "Blob Storage" },
+
+  { type: "feature", label: "Blob Storage Size", details: v("1 GB / month included", "$0.023 per GB", "Custom") },
+  { type: "feature", label: "Blob Simple Operations", details: v("10,000 / month included", "$0.40 per 1M", "Custom") },
+  { type: "feature", label: "Blob Advanced Operations", details: v("2,000 / month included", "$5.00 per 1M", "Custom") },
+  { type: "feature", label: "Blob Data Transfer", details: v("10 GB / month included", "Starting at $0.05 per GB", "Custom") },
+
+  { type: "category", label: "Image Optimization" },
+
+  { type: "feature", label: "Image Transformations", details: v("5,000 / month included", "Starting at $0.05 per 1K", "Custom") },
+  { type: "feature", label: "Image Cache Reads", details: v("300,000 / month included", "Starting at $0.40 per 1M", "Custom") },
+  { type: "feature", label: "Image Cache Writes", details: v("100,000 / month included", "Starting at $4.00 per 1M", "Custom") },
+
+  { type: "category", label: "Edge Config" },
+
+  { type: "feature", label: "Edge Config Reads", details: v("100,000 / month included", "Starting at $3.00 per 1M reads", "Custom") },
+  { type: "feature", label: "Edge Config Writes", details: v("100 writes / month included", "$5.00 per 500 writes", "Custom") },
+
+  { type: "category", label: "Compute" },
+
+  { type: "feature", label: "Functions — Active CPU", details: v("4 hours / month included", "Starting at $0.128 / hour", "Custom") },
+  { type: "feature", label: "Functions — Provisioned Memory", details: v("360 GB-hrs / month included", "Starting at $0.0106 per GB-hour", "Custom") },
+  { type: "feature", label: "Functions — Invocations", details: v("1M / month included", "Starting at $0.60 per 1M", "Custom") },
+
+  { type: "category", label: "DX Platform — Build & Deploy" },
+
+  { type: "feature", label: "Automatic CI/CD", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Environment Variables", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Build Logs", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Remote Cache", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Monorepo Support", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Webhook Triggers", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Custom Environments", details: v("—", "1 environment", "12 environments") },
+
+  { type: "category", label: "Observability" },
+
+  { type: "feature", label: "Runtime Logs retention", details: v("1 hour of logs", "1 day of logs (30 days w/ Observability Plus)", "3 days of logs (30 days w/ Observability Plus)") },
+  { type: "feature", label: "Session Tracing retention", details: v("1 hour of traces", "1 day of traces", "3 days of traces") },
+  { type: "feature", label: "Log Drains", details: v("—", "$0.50 per 1 GB", "Custom") },
+
+  { type: "category", label: "Access & Deployment Security" },
+
+  { type: "feature", label: "Multi-Factor Authentication (MFA)", details: v("Included", "Included", "Included") },
+  { type: "feature", label: "Role-Based Access Control", details: v("—", "Team level", "Team & project level") },
+  { type: "feature", label: "Audit Logs", details: v("—", "—", "Included") },
+  { type: "feature", label: "SAML Single Sign-On (SSO)", details: v("—", "$300 / month", "Custom") },
+];
+
 export function PricingSectionPerformance() {
   return (
     <TooltipProvider>
@@ -173,10 +273,7 @@ export function PricingSectionPerformance() {
               className="performance__rowgroup__A1b2c performance__rowgroup--sticky__A1b2c"
               role="rowgroup"
             >
-              <div
-                className="performance__row__P5k8p performance__row--header__P5k8p"
-                role="row"
-              >
+              <div className="performance__row__P5k8p performance__row--header__P5k8p" role="row">
                 {planOrder.map((p) => (
                   <div
                     key={p.key}
@@ -201,20 +298,12 @@ export function PricingSectionPerformance() {
                       className="performance__row__P5k8p performance__row--category__P5k8p"
                       role="row"
                     >
+                      {/* Only first column has category label (as requested) */}
                       <div className="performance__cell__C2d3e" role="cell">
-                        {r.tooltip ? (
-                          <Tooltip content={r.tooltip} position="right">
-                            <span className="typography__small__Q9j2p performance__category__Q9j2p performance__label--tooltip__W7m3k">
-                              {r.label}
-                            </span>
-                          </Tooltip>
-                        ) : (
-                          <span className="typography__small__Q9j2p performance__category__Q9j2p">
-                            {r.label}
-                          </span>
-                        )}
+                        <span className="typography__small__Q9j2p performance__category__Q9j2p">
+                          {r.label}
+                        </span>
                       </div>
-
                       <div className="performance__cell__C2d3e" role="cell" />
                       <div className="performance__cell__C2d3e" role="cell" />
                       <div className="performance__cell__C2d3e" role="cell" />
@@ -223,22 +312,10 @@ export function PricingSectionPerformance() {
                 }
 
                 return (
-                  <div
-                    key={`feat-${idx}-${r.label}`}
-                    className="performance__row__P5k8p"
-                    role="row"
-                  >
+                  <div key={`feat-${idx}-${r.label}`} className="performance__row__P5k8p" role="row">
                     {planOrder.map((p) => (
-                      <div
-                        key={`${r.label}-${p.key}`}
-                        className="performance__cell__C2d3e"
-                        role="cell"
-                      >
-                        <FeatureCell
-                          enabled={r.availability[p.key]}
-                          label={r.label}
-                          tooltip={r.tooltip}
-                        />
+                      <div key={`${r.label}-${p.key}`} className="performance__cell__C2d3e" role="cell">
+                        <FeatureCell label={r.label} detail={r.details[p.key]} />
                       </div>
                     ))}
                   </div>
@@ -246,11 +323,6 @@ export function PricingSectionPerformance() {
               })}
             </div>
           </div>
-
-          <div
-            className="Spacer-module__root__NM019"
-            style={{ "--height": "24px" } as CSSProperties}
-          />
         </div>
       </section>
     </TooltipProvider>
