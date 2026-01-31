@@ -96,9 +96,9 @@ export default function PricingPage() {
           >
               <div className="pricing__card-top__A1b2c">
                 <div className="pricing__plan-row__V2c3d">
-                  <h3 className="typography__heading4__Z7p4s" style={{ margin: 0 }}>
+                  <h4 className="typography__heading4__Z7p4s" style={{ margin: 0 }}>
                     {plan.name}
-                  </h3>
+                  </h4>
                 </div>
 
                 <div className="Spacer-module__root__NM019" style={{ "--height": "12px" } as React.CSSProperties} />
