@@ -514,7 +514,7 @@ export function PricingSectionCardModule() {
         />
 
         <p
-          className="typography__emphasize__M9J2o"
+          className="typography__subtitle__R6m2x"
           style={{ margin: 0, textAlign: "center" }}
         >
           Built on Next.js + Vercel or Shopify for commerce.
