@@ -2,7 +2,7 @@
 
 import "@/styles/pages/pricing/pricing.css";
 import { PricingSectionCardModule } from "@/components/pricing/pricing-section-cardModule";
-import { PricingSectionPerformance } from "@/components/pricing/pricing-section-performance";
+import { PricingSectionPerformance } from "@/components/pricing/pricing-section-performance";import { PricingSectionFAQ } from "@/components/pricing/pricing-section-faq";
 
 export default function PricingPage() {
   return (
