@@ -13,38 +13,38 @@
   display: grid;
   gap: 0;
   border: 1px solid rgba(var(--color-border-primary), 1);
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
   background: rgba(var(--color-bg-secondary), 1);
 }
 
-.faq__item__H5k8q {
+.faq__item__C2d3e {
   border-bottom: 1px solid rgba(var(--color-border-primary), 1);
 }
 
-.faq__item__H5k8q:last-child {
+.faq__item__C2d3e:last-child {
   border-bottom: 0;
 }
 
-.faq__trigger__A1b2c {
+.faq__question__P5k8p {
   width: 100%;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
-  padding: 18px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+
+  padding: 18px 18px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
   text-align: left;
 }
 
-.faq__trigger__A1b2c:hover {
-  background: rgba(var(--color-bg-tertiary), 0.75);
+.faq__question__P5k8p:hover {
+  background: rgba(var(--color-bg-tertiary), 1);
 }
 
-.faq__question__M9J2o {
+.faq__questionText__H5j9s {
   color: rgba(var(--color-text-primary), 1);
 }
 
@@ -52,44 +52,31 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
   color: rgba(var(--color-text-tertiary), 1);
 }
 
-.faq__panel__P5k8p {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 180ms var(--ease-out-quad);
+.faq__item__C2d3e[data-open="true"] .faq__chevron__Z3n7q {
+  color: rgba(var(--color-text-primary), 1);
 }
 
-.faq__panel__P5k8p[data-open="true"] {
-  grid-template-rows: 1fr;
-}
-
-.faq__panelInner__C2d3e {
-  overflow: hidden;
+.faq__answer__Q9j2p {
   padding: 0 18px 18px 18px;
 }
 
-.faq__answerText__Q9j2p {
+.faq__answerInner__Q9j2p p {
   color: rgba(var(--color-text-tertiary), 1);
-  margin: 0 0 10px 0;
+  line-height: 1.55;
 }
 
-.faq__bullets__M93j8 {
-  margin: 8px 0 10px 18px;
-  padding: 0;
-  display: grid;
-  gap: 6px;
-  color: rgba(var(--color-text-tertiary), 1);
+.faq__answerInner__Q9j2p a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(var(--color-text-tertiary), 0.6);
 }
 
-@media (max-width: 768px) {
-  .faq__trigger__A1b2c {
-    padding: 16px 14px;
-  }
-
-  .faq__panelInner__C2d3e {
-    padding: 0 14px 16px 14px;
-  }
+.faq__answerInner__Q9j2p a:hover {
+  text-decoration-color: rgba(var(--color-text-tertiary), 1);
 }
