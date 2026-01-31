@@ -36,7 +36,7 @@ function ChevronIcon({ open }: { open: boolean }) {
   );
 }
 
-export function PricingSectionFaq() {
+export function PricingSectionFAQ() {
   const [openId, setOpenId] = useState<string | null>(null);
 
   const faqs: FaqItem[] = useMemo(
