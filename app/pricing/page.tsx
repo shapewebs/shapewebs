@@ -4,161 +4,174 @@ import "@/styles/pages/pricing/pricing.css";
 import { useState } from "react";
 import type { CSSProperties } from "react";
 
-type Plan = {
-  key: "hobby" | "plus" | "business" | "enterprise"
-  name: string
-  priceMonthly?: string
-  priceYearly?: string
-  description: string
-  description2: string
-  billingLabelMonthly?: string
-  billingLabelYearly?: string
-  features: string[]
-  highlighted?: boolean
-  cta: { label: string; href: string }
-  showAltSalesLink?: boolean
-  showBillingToggle?: boolean
-}
-
-const plans: Plan[] = [
-  {
-    key: "hobby",
-    name: "Hobby",
-    priceYearly: "$0",
-    description: "",
-    description2: "",
-    billingLabelYearly: "No maintenance price",
-    features: ["Next.js + Vercel deployment", "Performance-focused build", "Basic SEO setup", "1–3 pages", "Email support"],
-    cta: { label: "Get Started", href: "/get-started" },
-  },
-  {
-    key: "plus",
-    name: "Plus",
-    priceMonthly: "$12/mo",
-    priceYearly: "$120/yr",
-    description: "",
-    description2: " + additional features",
-    billingLabelMonthly: "Billed monthly",
-    billingLabelYearly: "Billed yearly",
-    showBillingToggle: true,
-    features: ["Everything in Hobby", "4–8 pages", "Enhanced SEO + analytics", "Content structure + conversion guidance", "Priority support"],
-    highlighted: true,
-    cta: { label: "Get Started", href: "/get-started" },
-    showAltSalesLink: true,
-  },
-  {
-    key: "business",
-    name: "Business",
-    priceMonthly: "$18/mo",
-    priceYearly: "$180/yr",
-    description: " + additional features",
-    description2: "",
-    billingLabelMonthly: "Billed monthly",
-    billingLabelYearly: "Billed yearly",
-    showBillingToggle: true,
-    features: ["Everything in Plus", "9–15 pages", "Custom components + sections", "Integrations (forms, CRM, tracking)", "Technical SEO improvements"],
-    cta: { label: "Get Started", href: "/get-started" },
-  },
-  {
-    key: "enterprise",
-    name: "Enterprise",
-    priceYearly: "Contact us",
-    description: "",
-    description2: "",
-    billingLabelYearly: "Annual billing only",
-    features: ["Shopify + Next.js architecture", "Custom storefront experiences", "Performance + scalability review", "Security + best practices", "Dedicated onboarding"],
-    cta: { label: "talk to sales", href: "/contact" },
-  },
-]
-
 export default function PricingPage() {
+  const [billingCycleByPlan, setBillingCycleByPlan] = useState<Record<string, "monthly" | "yearly">>({
+    plus: "yearly",
+    business: "yearly",
+  });
+
+  const getCycle = (key: string) => billingCycleByPlan[key] ?? "yearly";
+  const setCycle = (key: string, cycle: "monthly" | "yearly") =>
+    setBillingCycleByPlan((prev) => ({ ...prev, [key]: cycle }));
+
   return (
-    <section className="pricing__container__Q7j3s">
-      <div className="pricing__content__K9j6q">
-        <h1 className="typography__heading1__T3m8s" style={{ margin: 0, textAlign: "center" }}>
-          Pricing
-        </h1>
-        <div className="Spacer-module__root__NM019" style={{ "--height": "24px" } as React.CSSProperties} />
-        <p className="typography__emphasize__M9J2o" style={{ margin: 0, textAlign: "center" }}>
-          Built on Next.js + Vercel, with Shopify-ready options for commerce.
-          <br aria-hidden="true"></br>
-          Upgrade to enable more insights, enhanced security and additional features.
-        </p>
+    type Plan = {
+      key: "hobby" | "plus" | "business" | "enterprise"
+      name: string
+      priceMonthly?: string
+      priceYearly?: string
+      description: string
+      description2: string
+      billingLabelMonthly?: string
+      billingLabelYearly?: string
+      features: string[]
+      highlighted?: boolean
+      cta: { label: string; href: string }
+      showAltSalesLink?: boolean
+      showBillingToggle?: boolean
+    }
 
-        <div className="Spacer-module__root__NM019" style={{ "--height": "112px" } as React.CSSProperties} />
+    const plans: Plan[] = [
+      {
+        key: "hobby",
+        name: "Hobby",
+        priceYearly: "$0",
+        description: "",
+        description2: "",
+        billingLabelYearly: "No maintenance price",
+        features: ["Next.js + Vercel deployment", "Performance-focused build", "Basic SEO setup", "1–3 pages", "Email support"],
+        cta: { label: "Get Started", href: "/get-started" },
+      },
+      {
+        key: "plus",
+        name: "Plus",
+        priceMonthly: "$12/mo",
+        priceYearly: "$120/yr",
+        description: "",
+        description2: " + additional features",
+        billingLabelMonthly: "Billed monthly",
+        billingLabelYearly: "Billed yearly",
+        showBillingToggle: true,
+        features: ["Everything in Hobby", "4–8 pages", "Enhanced SEO + analytics", "Content structure + conversion guidance", "Priority support"],
+        highlighted: true,
+        cta: { label: "Get Started", href: "/get-started" },
+        showAltSalesLink: true,
+      },
+      {
+        key: "business",
+        name: "Business",
+        priceMonthly: "$18/mo",
+        priceYearly: "$180/yr",
+        description: " + additional features",
+        description2: "",
+        billingLabelMonthly: "Billed monthly",
+        billingLabelYearly: "Billed yearly",
+        showBillingToggle: true,
+        features: ["Everything in Plus", "9–15 pages", "Custom components + sections", "Integrations (forms, CRM, tracking)", "Technical SEO improvements"],
+        cta: { label: "Get Started", href: "/get-started" },
+      },
+      {
+        key: "enterprise",
+        name: "Enterprise",
+        priceYearly: "Contact us",
+        description: "",
+        description2: "",
+        billingLabelYearly: "Annual billing only",
+        features: ["Shopify + Next.js architecture", "Custom storefront experiences", "Performance + scalability review", "Security + best practices", "Dedicated onboarding"],
+        cta: { label: "talk to sales", href: "/contact" },
+      },
+    ]
 
-        <div className="pricing__grid__L7p3s">
-          {plans.map((plan) => (
-          <article
-            className="module__card__H5k8q"
-            data-highlighted={plan.highlighted ? "true" : "false"}
-          >
-              <div className="pricing__card-top__A1b2c">
-                <div className="pricing__plan-row__V2c3d">
-                  <h4 className="typography__heading4__Z7p4s" style={{ margin: 0 }}>
-                    {plan.name}
-                  </h4>
-                </div>
+    export default function PricingPage() {
+      return (
+        <section className="pricing__container__Q7j3s">
+          <div className="pricing__content__K9j6q">
+            <h1 className="typography__heading1__T3m8s" style={{ margin: 0, textAlign: "center" }}>
+              Pricing
+            </h1>
+            <div className="Spacer-module__root__NM019" style={{ "--height": "24px" } as React.CSSProperties} />
+            <p className="typography__emphasize__M9J2o" style={{ margin: 0, textAlign: "center" }}>
+              Built on Next.js + Vercel, with Shopify-ready options for commerce.
+              <br aria-hidden="true"></br>
+              Upgrade to enable more insights, enhanced security and additional features.
+            </p>
 
-                <div className="Spacer-module__root__NM019" style={{ "--height": "12px" } as React.CSSProperties} />
+            <div className="Spacer-module__root__NM019" style={{ "--height": "112px" } as React.CSSProperties} />
 
-                <div className="pricing__price__T7g2m">
-                <span className="typography__body__K4n7p" style={{ margin: 0 }}>
-                  {plan.description}
-                </span>
-                  <span className="typography__body__K4n7p bitC1">{plan.priceYearly}</span>
-                  <span className="typography__body__K4n7p">
-                    {plan.priceYearly && plan.description2}
-                  </span>
-                </div>
-                <span className="typography__small__Q9j2p pricing__billing__C2d3e">
-                  {plan.billingLabel}
-                </span>
-                <div className="Spacer-module__root__NM019" style={{ "--height": "16px" } as React.CSSProperties} />
-              </div>
+            <div className="pricing__grid__L7p3s">
+              {plans.map((plan) => (
+              <article
+                className="module__card__H5k8q"
+                data-highlighted={plan.highlighted ? "true" : "false"}
+              >
+                  <div className="pricing__card-top__A1b2c">
+                    <div className="pricing__plan-row__V2c3d">
+                      <h4 className="typography__heading4__Z7p4s" style={{ margin: 0 }}>
+                        {plan.name}
+                      </h4>
+                    </div>
 
-              <div className="Spacer-module__root__NM019" style={{ "--height": "20px" } as React.CSSProperties} />
+                    <div className="Spacer-module__root__NM019" style={{ "--height": "12px" } as React.CSSProperties} />
 
-              <ul className="pricing__features__M93j8">
-                {plan.features.map((f) => (
-                  <li key={f} className="pricing__feature__P5k8p">
-                    <span className="pricing__check__Z3n7q" aria-hidden="true">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-                        <path
-                          d="M6.6 11.2 3.5 8.2a.8.8 0 0 1 1.1-1.1l2 2 4.5-4.6a.8.8 0 1 1 1.1 1.1l-5.1 5.6a.8.8 0 0 1-1.1 0Z"
-                          fill="currentColor"
-                        />
-                      </svg>
+                    <div className="pricing__price__T7g2m">
+                    <span className="typography__body__K4n7p" style={{ margin: 0 }}>
+                      {plan.description}
                     </span>
-                    <span className="typography__small__Q9j2p pricing__feature-text__Q9j2p">{f}</span>
-                  </li>
-                ))}
-              </ul>
+                      <span className="typography__body__K4n7p bitC1">{plan.priceYearly}</span>
+                      <span className="typography__body__K4n7p">
+                        {plan.priceYearly && plan.description2}
+                      </span>
+                    </div>
+                    <span className="typography__small__Q9j2p pricing__billing__C2d3e">
+                      {plan.billingLabel}
+                    </span>
+                    <div className="Spacer-module__root__NM019" style={{ "--height": "16px" } as React.CSSProperties} />
+                  </div>
 
-              <div className="Spacer-module__root__NM019" style={{ "--height": "20px" } as React.CSSProperties} />
+                  <div className="Spacer-module__root__NM019" style={{ "--height": "20px" } as React.CSSProperties} />
 
-              <div className="pricing__actions__Q6z2k">
-                <a
-                  href={plan.cta.href}
-                  className="button__root__ZxcvB button__kind-primary__R5j2s button__size-medium__L9d7h pricing__cta__X1y2z"
-                  style={{ width: "100%", justifyContent: "center" }}
-                >
-                  <span>{plan.cta.label}</span>
-                </a>
+                  <ul className="pricing__features__M93j8">
+                    {plan.features.map((f) => (
+                      <li key={f} className="pricing__feature__P5k8p">
+                        <span className="pricing__check__Z3n7q" aria-hidden="true">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                            <path
+                              d="M6.6 11.2 3.5 8.2a.8.8 0 0 1 1.1-1.1l2 2 4.5-4.6a.8.8 0 1 1 1.1 1.1l-5.1 5.6a.8.8 0 0 1-1.1 0Z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </span>
+                        <span className="typography__small__Q9j2p pricing__feature-text__Q9j2p">{f}</span>
+                      </li>
+                    ))}
+                  </ul>
 
-                {plan.showAltSalesLink ? (
-                  <p className="typography__small__Q9j2p pricing__alt__P5k8p" style={{ margin: 0 }}>
-                    or{" "}
-                    <a href="/contact" className="typography__link__B7s3m">
-                      Talk to sales
+                  <div className="Spacer-module__root__NM019" style={{ "--height": "20px" } as React.CSSProperties} />
+
+                  <div className="pricing__actions__Q6z2k">
+                    <a
+                      href={plan.cta.href}
+                      className="button__root__ZxcvB button__kind-primary__R5j2s button__size-medium__L9d7h pricing__cta__X1y2z"
+                      style={{ width: "100%", justifyContent: "center" }}
+                    >
+                      <span>{plan.cta.label}</span>
                     </a>
-                  </p>
-                ) : null}
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
+
+                    {plan.showAltSalesLink ? (
+                      <p className="typography__small__Q9j2p pricing__alt__P5k8p" style={{ margin: 0 }}>
+                        or{" "}
+                        <a href="/contact" className="typography__link__B7s3m">
+                          Talk to sales
+                        </a>
+                      </p>
+                    ) : null}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )
+    }
+  );
 }
