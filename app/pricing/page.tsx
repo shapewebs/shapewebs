@@ -104,6 +104,9 @@ export default function PricingPage() {
                 <div className="Spacer-module__root__NM019" style={{ "--height": "12px" } as React.CSSProperties} />
 
                 <div className="pricing__price__T7g2m">
+                  <span className="typography__small__Q9j2p pricing__billing__C2d3e" style={{ margin: 0 }}>
+                    {plan.priceYearly === "Custom" ? "Tailored yearly pricing" : "Billed yearly"}
+                  </span>
                   <span className="pricing__price-value__T7g2m">{plan.priceYearly}</span>
                   <span className="pricing__price-suffix__T7g2m">{plan.priceYearly === "Custom" ? "" : "/yr"}</span>
                 </div>
