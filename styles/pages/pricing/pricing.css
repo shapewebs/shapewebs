@@ -94,8 +94,7 @@
 }
 
 .pricing__plan-row__V2c3d,
-.pricing__price__T7g2m,
-.pricing__desc__K4n7p {
+.pricing__price__T7g2m {
   padding-inline: 24px;
 }
 
@@ -131,10 +130,6 @@
 .pricing__price-suffix__T7g2m {
   font-size: 14px;
   color: rgba(var(--color-text-tertiary), 1);
-}
-
-.pricing__desc__K4n7p {
-  opacity: 0.95;
 }
 
 .pricing__billing__C2d3e {
