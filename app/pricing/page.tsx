@@ -115,7 +115,7 @@ export default function PricingPage() {
                 </span>
                   <span className="typography__body__K4n7p bitC1">&nbsp;{plan.priceYearly}&nbsp;</span>
                   <span className="typography__body__K4n7p">
-                    {plan.priceYearly !== "Custom" && plan.description2}
+                    {plan.priceYearly && plan.description2}
                   </span>
                 </div>
                 <span className="typography__small__Q9j2p pricing__billing__C2d3e">
