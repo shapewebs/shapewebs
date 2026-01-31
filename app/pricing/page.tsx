@@ -253,7 +253,7 @@ export default function PricingPage() {
                 {topLabel && (
                   <p
                     className="typography__small__Q9j2p"
-                    style={{ margin: "0 0 10px 0", opacity: 0.9 }}
+                    style={{ padding: "0 24px 10px" }}
                   >
                     {topLabel}
                   </p>
