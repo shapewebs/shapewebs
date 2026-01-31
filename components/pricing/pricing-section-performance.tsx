@@ -1,153 +1,248 @@
 "use client";
 
+import { useMemo } from "react";
+import type { CSSProperties } from "react";
 import "@/styles/pages/pricing/pricing-section-performance.css";
 import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
-type PerformanceFeature = {
-  label: string;
-  tooltip?: string;
+type PlanKey = "hobby" | "plus" | "business" | "enterprise";
+
+type RowCell = {
+  text: string;
+  tooltip: string;
 };
 
-type PerformanceRow = {
-  category: string;
-  categoryTooltip?: string;
-  features: {
-    hobby?: PerformanceFeature | boolean;
-    plus?: PerformanceFeature | boolean;
-    business?: PerformanceFeature | boolean;
-    enterprise?: PerformanceFeature | boolean;
-  };
+type PerformanceRow =
+  | { kind: "section"; label: string; tooltip: string } // header row (only first column filled)
+  | { kind: "row"; label: RowCell; values: Record<PlanKey, RowCell> }; // normal row
+
+const planTitles: Record<PlanKey, string> = {
+  hobby: "Hobby",
+  plus: "Plus",
+  business: "Business",
+  enterprise: "Enterprise",
 };
 
-const performanceData: PerformanceRow[] = [
+const performanceRows: PerformanceRow[] = [
   {
-    category: "Page Load Speed",
-    categoryTooltip: "How quickly your website loads for visitors",
-    features: {
-      hobby: { label: "~2.5s", tooltip: "Average page load time" },
-      plus: { label: "~1.2s", tooltip: "Optimized with caching and CDN" },
-      business: { label: "<0.8s", tooltip: "Premium performance with advanced optimization" },
-      enterprise: { label: "<0.5s", tooltip: "Ultra-fast with dedicated infrastructure" },
+    kind: "section",
+    label: "Core features",
+    tooltip: "Baseline capabilities included in each plan category below",
+  },
+  {
+    kind: "row",
+    label: {
+      text: "Customer requests",
+      tooltip: "Ability to request changes, additions, or adjustments to your site",
+    },
+    values: {
+      hobby: { text: "Customer requests", tooltip: "Included in Hobby" },
+      plus: { text: "Customer requests", tooltip: "Included in Plus" },
+      business: { text: "Customer requests", tooltip: "Included in Business" },
+      enterprise: { text: "Customer requests", tooltip: "Included in Enterprise" },
     },
   },
   {
-    category: "Server Response Time",
-    categoryTooltip: "Time taken by server to process and respond to requests",
-    features: {
-      hobby: { label: "~500ms", tooltip: "Standard response time" },
-      plus: { label: "~200ms", tooltip: "Optimized server configuration" },
-      business: { label: "<100ms", tooltip: "Prioritized server resources" },
-      enterprise: { label: "<50ms", tooltip: "Dedicated server resources" },
+    kind: "row",
+    label: {
+      text: "Support response time",
+      tooltip: "Typical time to first response from the team",
+    },
+    values: {
+      hobby: { text: "Email (standard)", tooltip: "Standard email response window" },
+      plus: { text: "Priority", tooltip: "Moves ahead in the support queue" },
+      business: { text: "Priority+", tooltip: "Faster handling + escalation" },
+      enterprise: { text: "Dedicated", tooltip: "Dedicated channel + onboarding support" },
+    },
+  },
+
+  {
+    kind: "section",
+    label: "Performance & reliability",
+    tooltip: "Speed, uptime, and safeguards that improve user experience",
+  },
+  {
+    kind: "row",
+    label: {
+      text: "Cold start prevention",
+      tooltip: "Avoids slow first loads when serverless functions go idle",
+    },
+    values: {
+      hobby: { text: "—", tooltip: "Not included in Hobby" },
+      plus: { text: "Included", tooltip: "Enabled on Plus" },
+      business: { text: "Included", tooltip: "Enabled on Business" },
+      enterprise: { text: "Included", tooltip: "Enabled on Enterprise" },
     },
   },
   {
-    category: "Uptime Guarantee",
-    categoryTooltip: "Percentage of time your site is reliably available",
-    features: {
-      hobby: { label: "99.5%", tooltip: "Standard availability" },
-      plus: { label: "99.9%", tooltip: "High availability" },
-      business: { label: "99.95%", tooltip: "Enterprise-grade reliability" },
-      enterprise: { label: "99.99%", tooltip: "Maximum uptime commitment with SLA" },
+    kind: "row",
+    label: {
+      text: "Caching / ISR configuration",
+      tooltip:
+        "Incremental Static Regeneration (ISR) enables pages to update without full rebuilds",
+    },
+    values: {
+      hobby: { text: "Basic", tooltip: "Standard caching defaults" },
+      plus: { text: "Improved", tooltip: "Better caching guidance and tuning" },
+      business: { text: "Advanced", tooltip: "Advanced caching + ISR setup" },
+      enterprise: { text: "Advanced+", tooltip: "Advanced + custom strategy" },
+    },
+  },
+
+  {
+    kind: "section",
+    label: "Security",
+    tooltip: "Protection layers that help prevent attacks and reduce risk",
+  },
+  {
+    kind: "row",
+    label: {
+      text: "Web Application Firewall (WAF)",
+      tooltip: "Filters malicious traffic and blocks common web attacks",
+    },
+    values: {
+      hobby: { text: "Included", tooltip: "Enabled on Hobby" },
+      plus: { text: "Included", tooltip: "Enabled on Plus" },
+      business: { text: "Included", tooltip: "Enabled on Business" },
+      enterprise: { text: "Included", tooltip: "Enabled on Enterprise" },
     },
   },
   {
-    category: "CDN Regions",
-    categoryTooltip: "Content Delivery Network - distributes your content globally for faster access",
-    features: {
-      hobby: { label: "15", tooltip: "Global coverage" },
-      plus: { label: "35", tooltip: "Extended global reach" },
-      business: { label: "50+", tooltip: "Comprehensive worldwide distribution" },
-      enterprise: { label: "100+", tooltip: "Maximum global presence" },
+    kind: "row",
+    label: {
+      text: "DDoS mitigation",
+      tooltip: "Protection against traffic floods designed to overwhelm your site",
+    },
+    values: {
+      hobby: { text: "Included", tooltip: "Enabled on Hobby" },
+      plus: { text: "Included", tooltip: "Enabled on Plus" },
+      business: { text: "Included", tooltip: "Enabled on Business" },
+      enterprise: { text: "Included", tooltip: "Enabled on Enterprise" },
     },
   },
   {
-    category: "Database Performance",
-    features: {
-      hobby: false,
-      plus: { label: "Read replicas", tooltip: "Distributed read-only database copies for faster queries" },
-      business: { label: "Replicas + cache", tooltip: "Multiple replicas with advanced caching layer" },
-      enterprise: { label: "Custom config", tooltip: "Fully customized database setup for your needs" },
+    kind: "row",
+    label: {
+      text: "SSO / RBAC",
+      tooltip:
+        "Single Sign-On (SSO) for authentication + Role-Based Access Control (RBAC) for permissions",
+    },
+    values: {
+      hobby: { text: "—", tooltip: "Not included in Hobby" },
+      plus: { text: "—", tooltip: "Not included in Plus" },
+      business: { text: "—", tooltip: "Not included in Business" },
+      enterprise: { text: "Included", tooltip: "Available in Enterprise" },
     },
   },
 ];
 
+function CellWithTooltip({
+  text,
+  tooltip,
+  className,
+}: {
+  text: string;
+  tooltip: string;
+  className?: string;
+}) {
+  return (
+    <Tooltip content={tooltip} position="right">
+      <span className={className}>{text}</span>
+    </Tooltip>
+  );
+}
+
 export function PricingSectionPerformance() {
-  const plans = ["hobby", "plus", "business", "enterprise"] as const;
-  const planNames = {
-    hobby: "Hobby",
-    plus: "Plus",
-    business: "Business",
-    enterprise: "Enterprise",
-  };
+  const columns = useMemo(() => ["label", "hobby", "plus", "business", "enterprise"] as const, []);
 
   return (
     <TooltipProvider>
-      <section className="pricing__container__Q7j3s">
-        <div className="pricing__content__K9j6q">
-          <div className="performance__header__Z7j3s">
-            <h2 className="typography__heading-2__M8k5p">Performance Metrics</h2>
-            <p className="typography__body__L3j7q performance__description__P5k8p">
-              Detailed breakdown of performance characteristics across all plans
-            </p>
-          </div>
-
-          <div className="performance__table__M93j8" role="table" aria-label="Performance comparison">
-            {/* Header Row Group */}
-            <div role="rowgroup" className="performance__rowgroup__header__Z9k3s">
-              <div role="row" className="performance__row__header__P5k8p">
-                <div role="columnheader" className="performance__cell__header__category__Q7j3s">
-                  <span></span>
-                </div>
-                {plans.map((plan) => (
-                  <div key={plan} role="columnheader" className="performance__cell__header__plan__W7m3k">
-                    <span className="typography__small__Q9j2p">{planNames[plan]}</span>
-                  </div>
-                ))}
+      <div
+        className="performanceGrid__table__Q7j3s"
+        role="table"
+        style={{ gridTemplateColumns: "1fr" } as CSSProperties}
+      >
+        {/* ROW GROUP 1: Sticky header with plan titles */}
+        <div className="performanceGrid__headGroup__K9j6q" role="rowgroup">
+          <div className="performanceGrid__headRow__L7p3s" role="row">
+            <div className="performanceGrid__rowInner__A1b2c">
+              <div className="performanceGrid__cell__P5k8p performanceGrid__cell--headLabel__P5k8p" role="columnheader">
+                <span className="typography__small__Q9j2p">Performance</span>
               </div>
-            </div>
 
-            {/* Body Row Group */}
-            <div role="rowgroup" className="performance__rowgroup__body__L7p3s">
-              {performanceData.map((row, rowIndex) => (
-                <div key={rowIndex} role="row" className="performance__row__body__K5j8q">
-                  <div role="rowheader" className="performance__cell__category__B9k6p">
-                    {row.categoryTooltip ? (
-                      <Tooltip content={row.categoryTooltip} position="right">
-                        <span className="typography__small__Q9j2p performance__category-text__Z3n7q">
-                          {row.category}
-                        </span>
-                      </Tooltip>
-                    ) : (
-                      <span className="typography__small__Q9j2p">{row.category}</span>
-                    )}
-                  </div>
-
-                  {plans.map((plan) => {
-                    const feature = row.features[plan];
-                    const featureObj = typeof feature === "object" ? feature : null;
-
-                    return (
-                      <div key={`${rowIndex}-${plan}`} role="gridcell" className="performance__cell__value__H5k8q">
-                        {feature === false ? (
-                          <span className="typography__small__Q9j2p performance__not-available__M8k5p">—</span>
-                        ) : featureObj?.tooltip ? (
-                          <Tooltip content={featureObj.tooltip} position="top">
-                            <span className="typography__small__Q9j2p performance__value-with-tooltip__W7m3k">
-                              {featureObj.label}
-                            </span>
-                          </Tooltip>
-                        ) : (
-                          <span className="typography__small__Q9j2p">{featureObj?.label || "—"}</span>
-                        )}
-                      </div>
-                    );
-                  })}
+              {(
+                ["hobby", "plus", "business", "enterprise"] as const
+              ).map((k) => (
+                <div
+                  key={k}
+                  className="performanceGrid__cell__P5k8p performanceGrid__cell--head__P5k8p"
+                  role="columnheader"
+                >
+                  <span className="typography__heading5__J8d3k">{planTitles[k]}</span>
                 </div>
               ))}
             </div>
           </div>
         </div>
-      </section>
+
+        {/* ROW GROUP 2: Body rows */}
+        <div className="performanceGrid__bodyGroup__K9j6q" role="rowgroup">
+          {performanceRows.map((row, idx) => {
+            if (row.kind === "section") {
+              return (
+                <div key={`section-${idx}`} className="performanceGrid__row__M93j8" role="row">
+                  <div className="performanceGrid__rowInner__A1b2c">
+                    <div
+                      className="performanceGrid__cell__P5k8p performanceGrid__cell--section__P5k8p"
+                      role="cell"
+                    >
+                      <CellWithTooltip
+                        text={row.label}
+                        tooltip={row.tooltip}
+                        className="typography__heading6__H5j9s performanceGrid__sectionText__W7m3k"
+                      />
+                    </div>
+
+                    {/* empty cells to keep 5-column layout */}
+                    <div className="performanceGrid__cell__P5k8p performanceGrid__cell--empty__P5k8p" role="cell" />
+                    <div className="performanceGrid__cell__P5k8p performanceGrid__cell--empty__P5k8p" role="cell" />
+                    <div className="performanceGrid__cell__P5k8p performanceGrid__cell--empty__P5k8p" role="cell" />
+                    <div className="performanceGrid__cell__P5k8p performanceGrid__cell--empty__P5k8p" role="cell" />
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <div key={`row-${idx}`} className="performanceGrid__row__M93j8" role="row">
+                <div className="performanceGrid__rowInner__A1b2c">
+                  <div className="performanceGrid__cell__P5k8p performanceGrid__cell--label__P5k8p" role="rowheader">
+                    <CellWithTooltip
+                      text={row.label.text}
+                      tooltip={row.label.tooltip}
+                      className="typography__small__Q9j2p performanceGrid__labelText__Q9j2p"
+                    />
+                  </div>
+
+                  {(["hobby", "plus", "business", "enterprise"] as const).map((k) => (
+                    <div
+                      key={`${idx}-${k}`}
+                      className="performanceGrid__cell__P5k8p performanceGrid__cell--value__P5k8p"
+                      role="cell"
+                    >
+                      <CellWithTooltip
+                        text={row.values[k].text}
+                        tooltip={row.values[k].tooltip}
+                        className="typography__small__Q9j2p performanceGrid__valueText__Q9j2p"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </TooltipProvider>
   );
 }
