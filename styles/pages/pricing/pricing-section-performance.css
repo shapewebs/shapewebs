@@ -127,4 +127,9 @@
 /* ensure header highlighted cell uses bg-secondary (overrides header bg-primary rule) */
 .performance__row--header__P5k8p .performance__cell__C2d3e[data-highlighted="true"] {
   background: rgba(var(--color-bg-secondary), 1);
-}
+    padding-top: 32px;
+    margin-top: -16px;
+    border-top: 1px solid rgba(var(--color-border-primary), 1);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
