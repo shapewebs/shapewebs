@@ -1,6 +1,8 @@
 "use client"
 
-import "@/styles/pages/pricing/pricing.css"
+import "@/styles/pages/pricing/pricing.css";
+import { useState } from "react";
+import type { CSSProperties } from "react";
 
 type Plan = {
   key: "hobby" | "plus" | "business" | "enterprise"
