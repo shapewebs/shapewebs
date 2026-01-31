@@ -80,7 +80,7 @@
 }
 
 .button__kind-secondary__R5j2s {
-  background: rgba(var(--color-toggle), 1);
+  background: rgba(var(--color-text-quaternary), 1);
   border: 0.5px solid rgba(var(--color-border-tertiary), 1);
   color: rgba(var(--color-text-primary), 1);
   box-shadow: var(--shadow-stack-low);
@@ -223,7 +223,7 @@
 
 /* iOS styling */
 .root__toggle-wrapper__T7g2m .root__toggle--ios__T7g2m + .root__toggle-btn__T7g2m {
-  background: rgba(var(--color-text-quaternary), 1);
+  background: rgba(var(--color-toggle), 1);
   border-radius: 999px;
   padding: 2px;
   transition: all 0.3s ease;
