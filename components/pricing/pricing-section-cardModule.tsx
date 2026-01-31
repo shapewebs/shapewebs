@@ -883,7 +883,7 @@ export function PricingSectionCardModule() {
                 <div className="pricing__actions__Q6z2k">
                   <a
                     href={plan.cta.href}
-                    className="button__root__ZxcvB button__kind-primary__R5j2s button__size-medium__L9d7h pricing__cta__X1y2z"
+                    className="button__root__ZxcvB button__kind-primary__R5j2s button__size-medium__L9d7h"
                     style={{ width: "100%", justifyContent: "center" }}
                   >
                     <span>{plan.cta.label}</span>
