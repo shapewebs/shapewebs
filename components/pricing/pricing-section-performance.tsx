@@ -6,28 +6,27 @@ import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
 type PlanKey = "hobby" | "plus" | "business" | "enterprise";
 
-type CategoryRow = {
-  type: "category";
-  label: string;
-  tooltip?: string;
-};
+type PerfRow =
+  | {
+      type: "category";
+      label: string;
+      tooltip?: string;
+    }
+  | {
+      type: "feature";
+      label: string; // text shown inside every cell
+      tooltip: string;
+      availability: Record<PlanKey, boolean>;
+    };
 
-type FeatureRow = {
-  type: "feature";
-  label: string; // shows inside every cell
-  tooltip: string; // explains what the feature means
-  availability: Record<PlanKey, boolean>;
-};
-
-type PerfRow = CategoryRow | FeatureRow;
-
-const plans: Array<{ key: PlanKey; name: string }> = [
+const planOrder: Array<{ key: PlanKey; name: string }> = [
   { key: "hobby", name: "Hobby" },
   { key: "plus", name: "Plus" },
   { key: "business", name: "Business" },
   { key: "enterprise", name: "Enterprise" },
 ];
 
+// Example data — replace/extend freely
 const rows: PerfRow[] = [
   { type: "category", label: "Core features" },
 
@@ -35,45 +34,62 @@ const rows: PerfRow[] = [
     type: "feature",
     label: "Firewall protection",
     tooltip:
-      "Web Application Firewall (WAF): blocks common web attacks like malicious patterns and injection attempts.",
+      "Web Application Firewall (WAF): blocks common attack patterns like injection attempts and malicious requests.",
     availability: { hobby: true, plus: true, business: true, enterprise: true },
   },
   {
     type: "feature",
     label: "DDoS mitigation",
     tooltip:
-      "Protection against traffic floods intended to overwhelm your site and knock it offline.",
+      "Protection against Distributed Denial of Service attacks that try to overwhelm your site with traffic.",
     availability: { hobby: true, plus: true, business: true, enterprise: true },
   },
   {
     type: "feature",
     label: "Cold start prevention",
     tooltip:
-      "Measures to reduce slow first-loads due to serverless cold starts (keep-warm strategies where applicable).",
+      "Keeps serverless functions warm to reduce slow first responses after inactivity.",
     availability: { hobby: false, plus: true, business: true, enterprise: true },
   },
 
-  { type: "category", label: "Compliance & access" },
+  { type: "category", label: "Performance" },
 
   {
     type: "feature",
-    label: "SSO + RBAC",
+    label: "Performance insights",
     tooltip:
-      "Single Sign-On and Role-Based Access Control for enterprise user management and permissions.",
+      "Visibility into traffic and performance trends (what’s slow, what’s popular, what to optimize).",
+    availability: { hobby: false, plus: true, business: true, enterprise: true },
+  },
+  {
+    type: "feature",
+    label: "Core Web Vitals budgets",
+    tooltip:
+      "Defines thresholds for metrics like LCP/CLS/INP to prevent regressions and keep performance in check.",
+    availability: { hobby: false, plus: false, business: true, enterprise: true },
+  },
+
+  { type: "category", label: "Enterprise" },
+
+  {
+    type: "feature",
+    label: "SSO / RBAC",
+    tooltip:
+      "Single Sign-On and Role-Based Access Control for enterprise-grade authentication and permissions.",
     availability: { hobby: false, plus: false, business: false, enterprise: true },
   },
 ];
 
-function YesIcon({ className }: { className?: string }) {
+function YesIcon() {
   return (
     <svg
       data-testid="geist-icon"
       height="16"
-      width="16"
       strokeLinejoin="round"
       viewBox="0 0 16 16"
+      width="16"
       style={{ color: "currentColor" }}
-      className={className}
+      aria-hidden="true"
     >
       <path
         fillRule="evenodd"
@@ -85,16 +101,16 @@ function YesIcon({ className }: { className?: string }) {
   );
 }
 
-function NoIcon({ className }: { className?: string }) {
+function NoIcon() {
   return (
     <svg
       data-testid="geist-icon"
       height="16"
-      width="16"
       strokeLinejoin="round"
       viewBox="0 0 16 16"
+      width="16"
       style={{ color: "currentColor" }}
-      className={className}
+      aria-hidden="true"
     >
       <path
         fillRule="evenodd"
@@ -107,29 +123,38 @@ function NoIcon({ className }: { className?: string }) {
 }
 
 function FeatureCell({
-  text,
   enabled,
+  label,
+  tooltip,
 }: {
-  text: string;
   enabled: boolean;
+  label: string;
+  tooltip: string;
 }) {
   return (
-    <div
-      className="performance__cell__C2d3e"
-      role="cell"
-      data-enabled={enabled ? "true" : "false"}
-    >
-      <span className="performance__cell-inner__X1y2z">
-        {enabled ? (
-          <YesIcon className="performance__icon--yes__P5k8p" />
-        ) : (
-          <NoIcon className="performance__icon--no__P5k8p" />
-        )}
-        <span className="typography__small__Q9j2p performance__text__Q9j2p">
-          {text}
+    <Tooltip content={tooltip} position="right">
+      <div className="performance__cellInner__C2d3e">
+        <span
+          className={[
+            "performance__icon__Z3n7q",
+            enabled ? "performance__icon--yes__Z3n7q" : "performance__icon--no__Z3n7q",
+          ].join(" ")}
+          aria-hidden="true"
+        >
+          {enabled ? <YesIcon /> : <NoIcon />}
         </span>
-      </span>
-    </div>
+
+        <span
+          className={[
+            "typography__small__Q9j2p",
+            "performance__text__Q9j2p",
+            enabled ? "performance__text--yes__Q9j2p" : "performance__text--no__Q9j2p",
+          ].join(" ")}
+        >
+          {label}
+        </span>
+      </div>
+    </Tooltip>
   );
 }
 
@@ -141,9 +166,9 @@ export function PricingSectionPerformance() {
           <div
             className="performance__table__L7p3s"
             role="table"
-            aria-label="Plan feature comparison"
+            aria-label="Plan performance comparison"
           >
-            {/* Rowgroup 1: sticky plan titles */}
+            {/* Rowgroup 1: sticky header */}
             <div
               className="performance__rowgroup__A1b2c performance__rowgroup--sticky__A1b2c"
               role="rowgroup"
@@ -152,13 +177,13 @@ export function PricingSectionPerformance() {
                 className="performance__row__P5k8p performance__row--header__P5k8p"
                 role="row"
               >
-                {plans.map((p) => (
+                {planOrder.map((p) => (
                   <div
                     key={p.key}
                     className="performance__cell__C2d3e performance__cell--header__C2d3e"
                     role="columnheader"
                   >
-                    <span className="typography__heading6__H5j9s">
+                    <span className="typography__heading6__H5j9s" style={{ margin: 0 }}>
                       {p.name}
                     </span>
                   </div>
@@ -173,34 +198,26 @@ export function PricingSectionPerformance() {
                   return (
                     <div
                       key={`cat-${idx}-${r.label}`}
-                      className="performance__rowwrap__V2c3d"
+                      className="performance__row__P5k8p performance__row--category__P5k8p"
                       role="row"
                     >
-                      <div className="performance__rowlabel__X1y2z">
+                      <div className="performance__cell__C2d3e" role="cell">
                         {r.tooltip ? (
                           <Tooltip content={r.tooltip} position="right">
-                            <span className="typography__small__Q9j2p performance__label--tooltip__W7m3k">
+                            <span className="typography__small__Q9j2p performance__category__Q9j2p performance__label--tooltip__W7m3k">
                               {r.label}
                             </span>
                           </Tooltip>
                         ) : (
-                          <span className="typography__small__Q9j2p">
+                          <span className="typography__small__Q9j2p performance__category__Q9j2p">
                             {r.label}
                           </span>
                         )}
                       </div>
 
-                      <div
-                        className="performance__row__P5k8p performance__row--category__P5k8p"
-                      >
-                        {plans.map((p) => (
-                          <div
-                            key={`${r.label}-${p.key}`}
-                            className="performance__cell__C2d3e"
-                            role="cell"
-                          />
-                        ))}
-                      </div>
+                      <div className="performance__cell__C2d3e" role="cell" />
+                      <div className="performance__cell__C2d3e" role="cell" />
+                      <div className="performance__cell__C2d3e" role="cell" />
                     </div>
                   );
                 }
@@ -208,26 +225,22 @@ export function PricingSectionPerformance() {
                 return (
                   <div
                     key={`feat-${idx}-${r.label}`}
-                    className="performance__rowwrap__V2c3d"
+                    className="performance__row__P5k8p"
                     role="row"
                   >
-                    <div className="performance__rowlabel__X1y2z">
-                      <Tooltip content={r.tooltip} position="right">
-                        <span className="typography__small__Q9j2p performance__label--tooltip__W7m3k">
-                          {r.label}
-                        </span>
-                      </Tooltip>
-                    </div>
-
-                    <div className="performance__row__P5k8p">
-                      {plans.map((p) => (
+                    {planOrder.map((p) => (
+                      <div
+                        key={`${r.label}-${p.key}`}
+                        className="performance__cell__C2d3e"
+                        role="cell"
+                      >
                         <FeatureCell
-                          key={`${r.label}-${p.key}`}
-                          text={r.label}
                           enabled={r.availability[p.key]}
+                          label={r.label}
+                          tooltip={r.tooltip}
                         />
-                      ))}
-                    </div>
+                      </div>
+                    ))}
                   </div>
                 );
               })}
