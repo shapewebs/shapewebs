@@ -513,17 +513,18 @@ export function PricingSectionPerformance() {
                 className="performance__row__P5k8p performance__row--header__P5k8p"
                 role="row"
               >
-                {planOrder.map((p) => (
-                  <div
-                    key={p.key}
-                    className="performance__cell__C2d3e performance__cell--header__C2d3e"
-                    role="columnheader"
-                  >
-                    <span className="typography__heading6__H5j9s" style={{ margin: 0 }}>
-                      {p.name}
-                    </span>
-                  </div>
-                ))}
+              {planOrder.map((p) => (
+                <div
+                  key={p.key}
+                  className="performance__cell__C2d3e performance__cell--header__C2d3e"
+                  role="columnheader"
+                  data-highlighted={p.key === "plus" ? "true" : "false"}
+                >
+                  <span className="typography__heading6__H5j9s" style={{ margin: 0 }}>
+                    {p.name}
+                  </span>
+                </div>
+              ))}
               </div>
             </div>
 
@@ -563,19 +564,20 @@ export function PricingSectionPerformance() {
                     className="performance__row__P5k8p"
                     role="row"
                   >
-                    {planOrder.map((p) => (
-                      <div
-                        key={`${r.label}-${p.key}`}
-                        className="performance__cell__C2d3e"
-                        role="cell"
-                      >
-                        <FeatureCell
-                          enabled={r.availability[p.key]}
-                          label={r.label}
-                          tooltip={r.tooltip}
-                        />
-                      </div>
-                    ))}
+{planOrder.map((p) => (
+  <div
+    key={`${r.label}-${p.key}`}
+    className="performance__cell__C2d3e"
+    role="cell"
+    data-highlighted={p.key === "plus" ? "true" : "false"}
+  >
+    <FeatureCell
+      enabled={r.availability[p.key]}
+      label={r.label}
+      tooltip={r.tooltip}
+    />
+  </div>
+))}
                   </div>
                 );
               })}
