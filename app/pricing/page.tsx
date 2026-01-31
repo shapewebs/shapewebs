@@ -21,7 +21,7 @@ const plans: Plan[] = [
     name: "Hobby",
     priceYearly: "$0",
     description: "",
-    description2: "",
+    description2: "No maintenance price.",
     billingLabel: "Billed yearly",
     features: ["Next.js + Vercel deployment", "Performance-focused build", "Basic SEO setup", "1–3 pages", "Email support"],
     cta: { label: "Get Started", href: "/get-started" },
