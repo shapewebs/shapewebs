@@ -22,6 +22,9 @@ const planOrder: Array<{ key: PlanKey; name: string }> = [
   { key: "enterprise", name: "Enterprise" },
 ];
 
+// ✅ highlight THIS column
+const highlightedPlanKey: PlanKey = "business";
+
 const FREE = { hobby: true, plus: true, business: true, enterprise: true } as const;
 const PRO_ONLY = { hobby: false, plus: false, business: true, enterprise: true } as const;
 const ENT_ONLY = { hobby: false, plus: false, business: false, enterprise: true } as const;
@@ -499,11 +502,7 @@ export function PricingSectionPerformance() {
     <TooltipProvider>
       <section className="performance__container__Q7j3s">
         <div className="performance__content__K9j6q">
-          <div
-            className="performance__table__L7p3s"
-            role="table"
-            aria-label="Plan comparison"
-          >
+          <div className="performance__table__L7p3s" role="table" aria-label="Plan comparison">
             {/* Rowgroup 1: sticky header */}
             <div
               className="performance__rowgroup__A1b2c performance__rowgroup--sticky__A1b2c"
@@ -518,6 +517,7 @@ export function PricingSectionPerformance() {
                     key={p.key}
                     className="performance__cell__C2d3e performance__cell--header__C2d3e"
                     role="columnheader"
+                    data-highlighted={p.key === highlightedPlanKey ? "true" : "false"}
                   >
                     <span className="typography__heading6__H5j9s" style={{ margin: 0 }}>
                       {p.name}
@@ -537,37 +537,52 @@ export function PricingSectionPerformance() {
                       className="performance__row__P5k8p performance__row--category__P5k8p"
                       role="row"
                     >
-                      <div className="performance__cell__C2d3e" role="cell">
-                        {r.tooltip ? (
-                          <Tooltip content={r.tooltip} position="right">
-                            <span className="typography__small__Q9j2p performance__category__Q9j2p performance__label--tooltip__W7m3k">
-                              {r.label}
-                            </span>
-                          </Tooltip>
-                        ) : (
-                          <span className="typography__small__Q9j2p performance__category__Q9j2p">
-                            {r.label}
-                          </span>
-                        )}
-                      </div>
-                      <div className="performance__cell__C2d3e" role="cell" />
-                      <div className="performance__cell__C2d3e" role="cell" />
-                      <div className="performance__cell__C2d3e" role="cell" />
+                      {planOrder.map((p, cellIdx) => {
+                        // Category label lives in the first column; the rest are empty cells
+                        if (cellIdx === 0) {
+                          return (
+                            <div
+                              key={`cat-${idx}-${p.key}-label`}
+                              className="performance__cell__C2d3e"
+                              role="cell"
+                              data-highlighted={p.key === highlightedPlanKey ? "true" : "false"}
+                            >
+                              {r.tooltip ? (
+                                <Tooltip content={r.tooltip} position="right">
+                                  <span className="typography__small__Q9j2p performance__category__Q9j2p performance__label--tooltip__W7m3k">
+                                    {r.label}
+                                  </span>
+                                </Tooltip>
+                              ) : (
+                                <span className="typography__small__Q9j2p performance__category__Q9j2p">
+                                  {r.label}
+                                </span>
+                              )}
+                            </div>
+                          );
+                        }
+
+                        return (
+                          <div
+                            key={`cat-${idx}-${p.key}-empty`}
+                            className="performance__cell__C2d3e"
+                            role="cell"
+                            data-highlighted={p.key === highlightedPlanKey ? "true" : "false"}
+                          />
+                        );
+                      })}
                     </div>
                   );
                 }
 
                 return (
-                  <div
-                    key={`feat-${idx}-${r.label}`}
-                    className="performance__row__P5k8p"
-                    role="row"
-                  >
+                  <div key={`feat-${idx}-${r.label}`} className="performance__row__P5k8p" role="row">
                     {planOrder.map((p) => (
                       <div
                         key={`${r.label}-${p.key}`}
                         className="performance__cell__C2d3e"
                         role="cell"
+                        data-highlighted={p.key === highlightedPlanKey ? "true" : "false"}
                       >
                         <FeatureCell
                           enabled={r.availability[p.key]}
