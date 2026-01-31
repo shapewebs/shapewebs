@@ -215,7 +215,7 @@ export default function PricingPage() {
                     </span>
                   </div>
 
-                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <div className="pricing__billing__C2d3e">
                     {plan.showBillingToggle && (
                       <div className="root__toggle-wrapper__T7g2m">
                         <input
