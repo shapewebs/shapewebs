@@ -547,17 +547,9 @@ export function PricingSectionPerformance() {
                               role="cell"
                               data-highlighted={p.key === highlightedPlanKey ? "true" : "false"}
                             >
-                              {r.tooltip ? (
-                                <Tooltip content={r.tooltip} position="right">
-                                  <span className="typography__small__Q9j2p performance__category__Q9j2p performance__label--tooltip__W7m3k">
-                                    {r.label}
-                                  </span>
-                                </Tooltip>
-                              ) : (
-                                <span className="typography__small__Q9j2p performance__category__Q9j2p">
-                                  {r.label}
-                                </span>
-                              )}
+                              <span className="typography__small__Q9j2p performance__category__Q9j2p">
+                                {r.label}
+                              </span>
                             </div>
                           );
                         }
