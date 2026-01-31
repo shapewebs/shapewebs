@@ -29,6 +29,7 @@ const plans: Plan[] = [
     name: "Plus",
     priceYearly: "$10/mo",
     description: "The best balance for growing brands that need more pages and polish.",
+    description2: "",
     features: [
       "Everything in Hobby",
       "4–8 pages",
@@ -45,6 +46,7 @@ const plans: Plan[] = [
     name: "Business",
     priceYearly: "$5,999",
     description: "For companies that need advanced content, integrations, and scalability.",
+    description2: "",
     features: [
       "Everything in Plus",
       "9–15 pages",
