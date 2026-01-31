@@ -80,7 +80,7 @@
 }
 
 .button__kind-secondary__R5j2s {
-  background: rgba(var(--color-text-tertiary), 1);
+  background: rgba(var(--color-bg-tertiary), 1);
   border: 0.5px solid rgba(var(--color-border-secondary), 1);
   color: rgba(var(--color-text-primary), 1);
   box-shadow: var(--shadow-stack-low);
