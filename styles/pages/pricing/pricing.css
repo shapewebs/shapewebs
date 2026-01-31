@@ -157,3 +157,30 @@
   opacity: 0.95;
   padding-inline: 24px;
 }
+
+          .rollNumber__9G01K {
+            display: inline-flex;
+            align-items: baseline;
+            transform: translateY(2px);
+          }
+
+          .rollDigit__9G01K {
+            position: relative;
+            width: 0.62em;
+            height: 1em;
+            overflow: hidden;
+          }
+
+          .rollDigitInner__9G01K {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+          }
+
+          .rollTick {
+            display: block;
+            height: 1em;
+            line-height: 1em;
+            text-align: center;
+          }

@@ -703,13 +703,13 @@ function RollingNumber({ value }: { value: number }) {
   const digits = useMemo(() => value.toString().split(""), [value]);
 
   return (
-    <span className="rollNumber" aria-label={value.toString()}>
+    <span className="rollNumber__9G01K" aria-label={value.toString()}>
       {digits.map((d, i) => {
         const n = Number(d);
         return (
-          <span key={i} className="rollDigit">
+          <span key={i} className="rollDigit__9G01K">
             <span
-              className="rollDigitInner"
+              className="rollDigitInner__9G01K"
               style={{ transform: `translateY(-${n * 10}%)` }}
             >
               {Array.from({ length: 10 }, (_, tick) => (
