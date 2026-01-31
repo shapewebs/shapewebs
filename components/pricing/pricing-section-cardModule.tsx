@@ -43,19 +43,17 @@ const plans: Plan[] = [
   {
     key: "plus",
     name: "Plus",
-    monthlyAmount: 34,
-    yearlyAmount: 28,
+    monthlyAmount: 24,
+    yearlyAmount: 20,
     priceSuffix: "/mo",
-    description: "Get started for ",
+    description: "",
     description2: " + additional features",
     billingLabelYearly: "Billed yearly",
     showBillingToggle: true,
     features: [
-      { text: "Cold start prevention", tooltip: "Keeps your site running fast by avoiding delays when a function hasn't been used recently" },
       "Traffic & performance insights",
       "Content structure + conversion guidance",
       { text: "Enhanced SEO + analytics", tooltip: "Advanced tools to track rankings, optimize for search engines, and understand visitor behavior" },
-      "Priority support",
       "Custom components + sections",
     ],
     highlighted: true,
@@ -65,18 +63,20 @@ const plans: Plan[] = [
   {
     key: "business",
     name: "Business",
-    monthlyAmount: 65,
-    yearlyAmount: 55,
+    monthlyAmount: 60,
+    yearlyAmount: 50,
     priceSuffix: "/mo",
-    description: "Get started for ",
+    description: "",
     description2: " + advanced features",
     billingLabelYearly: "Billed yearly",
     showBillingToggle: true,
     features: [
+      { text: "Cold start prevention", tooltip: "Keeps your site running fast by avoiding delays when a function hasn't been used recently" },
       { text: "Faster builds with prioritized CI", tooltip: "Your code deploys faster by getting priority in the build queue" },
       { text: "Advanced caching & ISR configuration", tooltip: "Incremental Static Regeneration allows pages to update without rebuilding your entire site" },
       "Technical SEO improvements",
       { text: "Performance budgets (Core Web Vitals)", tooltip: "Set limits on page performance metrics to ensure users have a fast experience" },
+      "Priority support",
     ],
     cta: { label: "Get Started", href: "/get-started" },
   },
@@ -242,27 +242,6 @@ const FeatureIcons: Array<(props: IconProps) => JSX.Element> = [
   },
 
   // 7
-  (props) => {
-    const { size, rest } = makeProps(props);
-    return (
-      <svg
-        data-testid="geist-icon"
-        height={size}
-        width={size}
-        strokeLinejoin="round"
-        viewBox="0 0 16 16"
-        style={{ color: "currentColor" }}
-        {...rest}
-      >
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M5.30761 1.5L1.5 5.30761L1.5 10.6924L5.30761 14.5H10.6924L14.5 10.6924V5.30761L10.6924 1.5H5.30761ZM5.10051 0C4.83529 0 4.58094 0.105357 4.3934 0.292893L0.292893 4.3934C0.105357 4.58094 0 4.83529 0 5.10051V10.8995C0 11.1647 0.105357 11.4191 0.292894 11.6066L4.3934 15.7071C4.58094 15.8946 4.83529 16 5.10051 16H10.8995C11.1647 16 11.4191 15.8946 11.6066 15.7071L15.7071 11.6066C15.8946 11.4191 16 11.1647 16 10.8995V5.10051C16 4.83529 15.8946 4.58093 15.7071 4.3934L11.6066 0.292893C11.4191 0.105357 11.1647 0 10.8995 0H5.10051ZM8.75 3.75V4.5V8L8.75 8.75H7.25V8V4.5V3.75H8.75ZM8 12C8.55229 12 9 11.5523 9 11C9 10.4477 8.55229 10 8 10C7.44772 10 7 10.4477 7 11C7 11.5523 7.44772 12 8 12Z"
-          fill="currentColor"
-        />
-      </svg>
-    );
-  },
 
   // 8
   (props) => {
@@ -384,27 +363,6 @@ const FeatureIcons: Array<(props: IconProps) => JSX.Element> = [
   },
 
   // 12
-  (props) => {
-    const { size, rest } = makeProps(props);
-    return (
-      <svg
-        data-testid="geist-icon"
-        height={size}
-        width={size}
-        strokeLinejoin="round"
-        viewBox="0 0 16 16"
-        style={{ color: "currentColor" }}
-        {...rest}
-      >
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M1.80808 4.44191L2.25003 4.88386L3.13391 3.99997L2.69196 3.55803L1.63391 2.49997L2.69197 1.44191L3.13391 0.999972L2.25003 0.116089L1.80808 0.558031L0.484858 1.88126C0.143149 2.22296 0.143149 2.77698 0.484859 3.11869L1.80808 4.44191ZM12 0.999972H11.25V2.49997H12H13.5V11.75C13.5 12.7165 12.7165 13.5 11.75 13.5H4.25002C3.28353 13.5 2.50003 12.7165 2.50003 11.75V6.99997V6.24997H1.00003V6.99997V11.75C1.00003 13.5449 2.4551 15 4.25002 15H11.75C13.545 15 15 13.5449 15 11.75V1.74997V0.999972H14.25H12ZM7.75003 4.88386L8.19197 4.44191L9.51519 3.11869C9.8569 2.77698 9.8569 2.22296 9.51519 1.88126L8.19196 0.55803L7.75002 0.116089L6.86614 0.999973L7.30808 1.44191L8.36614 2.49997L7.30809 3.55803L6.86615 3.99997L7.75003 4.88386ZM4.13155 3.89688L4.02847 4.51535L5.26541 4.7215L5.36848 4.10303L5.86848 1.10303L5.97156 0.484566L4.73462 0.278409L4.63155 0.896878L4.13155 3.89688Z"
-          fill="currentColor"
-        />
-      </svg>
-    );
-  },
 
   // 13
   (props) => {
@@ -428,6 +386,50 @@ const FeatureIcons: Array<(props: IconProps) => JSX.Element> = [
       </svg>
     );
   },
+
+    (props) => {
+    const { size, rest } = makeProps(props);
+    return (
+      <svg
+        data-testid="geist-icon"
+        height={size}
+        width={size}
+        strokeLinejoin="round"
+        viewBox="0 0 16 16"
+        style={{ color: "currentColor" }}
+        {...rest}
+      >
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M5.30761 1.5L1.5 5.30761L1.5 10.6924L5.30761 14.5H10.6924L14.5 10.6924V5.30761L10.6924 1.5H5.30761ZM5.10051 0C4.83529 0 4.58094 0.105357 4.3934 0.292893L0.292893 4.3934C0.105357 4.58094 0 4.83529 0 5.10051V10.8995C0 11.1647 0.105357 11.4191 0.292894 11.6066L4.3934 15.7071C4.58094 15.8946 4.83529 16 5.10051 16H10.8995C11.1647 16 11.4191 15.8946 11.6066 15.7071L15.7071 11.6066C15.8946 11.4191 16 11.1647 16 10.8995V5.10051C16 4.83529 15.8946 4.58093 15.7071 4.3934L11.6066 0.292893C11.4191 0.105357 11.1647 0 10.8995 0H5.10051ZM8.75 3.75V4.5V8L8.75 8.75H7.25V8V4.5V3.75H8.75ZM8 12C8.55229 12 9 11.5523 9 11C9 10.4477 8.55229 10 8 10C7.44772 10 7 10.4477 7 11C7 11.5523 7.44772 12 8 12Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  },
+  (props) => {
+    const { size, rest } = makeProps(props);
+    return (
+      <svg
+        data-testid="geist-icon"
+        height={size}
+        width={size}
+        strokeLinejoin="round"
+        viewBox="0 0 16 16"
+        style={{ color: "currentColor" }}
+        {...rest}
+      >
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M5.30761 1.5L1.5 5.30761L1.5 10.6924L5.30761 14.5H10.6924L14.5 10.6924V5.30761L10.6924 1.5H5.30761ZM5.10051 0C4.83529 0 4.58094 0.105357 4.3934 0.292893L0.292893 4.3934C0.105357 4.58094 0 4.83529 0 5.10051V10.8995C0 11.1647 0.105357 11.4191 0.292894 11.6066L4.3934 15.7071C4.58094 15.8946 4.83529 16 5.10051 16H10.8995C11.1647 16 11.4191 15.8946 11.6066 15.7071L15.7071 11.6066C15.8946 11.4191 16 11.1647 16 10.8995V5.10051C16 4.83529 15.8946 4.58093 15.7071 4.3934L11.6066 0.292893C11.4191 0.105357 11.1647 0 10.8995 0H5.10051ZM8.75 3.75V4.5V8L8.75 8.75H7.25V8V4.5V3.75H8.75ZM8 12C8.55229 12 9 11.5523 9 11C9 10.4477 8.55229 10 8 10C7.44772 10 7 10.4477 7 11C7 11.5523 7.44772 12 8 12Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  },
+
 
    (props) => {
     const { size, rest } = makeProps(props);
@@ -503,6 +505,29 @@ const FeatureIcons: Array<(props: IconProps) => JSX.Element> = [
       </svg>
     );
   },
+
+  (props) => {
+    const { size, rest } = makeProps(props);
+    return (
+      <svg
+        data-testid="geist-icon"
+        height={size}
+        width={size}
+        strokeLinejoin="round"
+        viewBox="0 0 16 16"
+        style={{ color: "currentColor" }}
+        {...rest}
+      >
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M1.80808 4.44191L2.25003 4.88386L3.13391 3.99997L2.69196 3.55803L1.63391 2.49997L2.69197 1.44191L3.13391 0.999972L2.25003 0.116089L1.80808 0.558031L0.484858 1.88126C0.143149 2.22296 0.143149 2.77698 0.484859 3.11869L1.80808 4.44191ZM12 0.999972H11.25V2.49997H12H13.5V11.75C13.5 12.7165 12.7165 13.5 11.75 13.5H4.25002C3.28353 13.5 2.50003 12.7165 2.50003 11.75V6.99997V6.24997H1.00003V6.99997V11.75C1.00003 13.5449 2.4551 15 4.25002 15H11.75C13.545 15 15 13.5449 15 11.75V1.74997V0.999972H14.25H12ZM7.75003 4.88386L8.19197 4.44191L9.51519 3.11869C9.8569 2.77698 9.8569 2.22296 9.51519 1.88126L8.19196 0.55803L7.75002 0.116089L6.86614 0.999973L7.30808 1.44191L8.36614 2.49997L7.30809 3.55803L6.86615 3.99997L7.75003 4.88386ZM4.13155 3.89688L4.02847 4.51535L5.26541 4.7215L5.36848 4.10303L5.86848 1.10303L5.97156 0.484566L4.73462 0.278409L4.63155 0.896878L4.13155 3.89688Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  },
+
 
   // 18 (doc + green cube)
   (props) => {
