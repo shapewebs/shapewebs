@@ -73,7 +73,6 @@ const plans: Plan[] = [
     billingLabelYearly: "Billed yearly",
     showBillingToggle: true,
     features: [
-      "Custom components + sections",
       "Faster builds with prioritized CI",
       "Advanced caching & ISR configuration",
       "Technical SEO improvements",
