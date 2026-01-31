@@ -184,3 +184,17 @@
   line-height: 1em;
   text-align: center;
 }
+
+/* Tooltip styling for features */
+.pricing__feature-with-tooltip__H7k2s {
+  cursor: help;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: rgba(var(--color-text-tertiary), 0.5);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.pricing__feature-with-tooltip__H7k2s:hover {
+  text-decoration-color: rgba(var(--color-text-tertiary), 0.8);
+}

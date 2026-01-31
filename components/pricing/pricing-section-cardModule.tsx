@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { CSSProperties } from "react";
+import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 import "@/styles/pages/pricing/pricing-section-cardModule.css";
 
 type Plan = {
@@ -698,6 +699,31 @@ const planFeatureOffset: Record<Plan["key"], number> = (() => {
   return map;
 })();
 
+// Feature explanations for tooltips
+const featureTooltips: Record<string, string> = {
+  "Next.js + Vercel deployment": "Modern JavaScript framework with optimized hosting for fast, scalable websites",
+  "Automatic CI/CD": "Continuous Integration/Continuous Deployment - automatically test and deploy changes",
+  "Web Application Firewall": "Security layer that protects your website from attacks and malicious traffic",
+  "DDoS Mitigation": "Protection against distributed denial-of-service attacks that try to overload your site",
+  "Basic SEO": "Search engine optimization tools to help your site rank better in Google",
+  "Email support": "Get help via email from our support team",
+  "Cold start prevention": "Eliminates delays when serverless functions are first called, ensuring instant responses",
+  "Traffic & performance insights": "Real-time data about visitor behavior and how your site performs",
+  "Content structure + conversion guidance": "AI-powered recommendations to improve content layout and turn visitors into customers",
+  "Enhanced SEO + analytics": "Advanced tools for search rankings and detailed performance metrics",
+  "Priority support": "Get faster responses and dedicated help from our support team",
+  "Custom components + sections": "Build unique website elements tailored to your specific needs",
+  "Faster builds with prioritized CI": "Speed up your website deployment process with higher priority processing",
+  "Advanced caching & ISR configuration": "Incremental Static Regeneration - cache pages intelligently for ultra-fast loading",
+  "Technical SEO improvements": "Advanced optimization techniques for search engines and Core Web Vitals",
+  "Performance budgets (Core Web Vitals)": "Monitor and control page speed metrics that affect Google rankings and user experience",
+  "Unlimited pages & components": "Create as many website pages and custom components as you need",
+  "Advanced security (SSO, RBAC)": "Single Sign-On for user access and Role-Based Access Control for granular permissions",
+  "Compliance support (SOC 2, GDPR)": "Help meeting security standards and privacy regulations",
+  "Custom SLAs & uptime guarantees": "Service Level Agreements ensuring your site stays online with guaranteed uptime",
+  "Dedicated support & onboarding": "Personal account manager and comprehensive setup help",
+};
+
 function RollingNumber({ value }: { value: number }) {
   const digits = useMemo(() => value.toString().split(""), [value]);
 
@@ -735,7 +761,8 @@ export function PricingSectionCardModule() {
   };
 
   return (
-    <section className="pricing__container__Q7j3s">
+    <TooltipProvider>
+      <section className="pricing__container__Q7j3s">
       <div className="pricing__content__K9j6q">
         <h1
           className="typography__heading1__T3m8s"
@@ -867,6 +894,7 @@ export function PricingSectionCardModule() {
                 <ul className="pricing__features__M93j8">
                   {plan.features.map((f, i) => {
                     const Icon = FeatureIcons[baseIconIndex + i];
+                    const tooltip = featureTooltips[f];
 
                     return (
                       <li key={`${plan.key}-${i}-${f}`} className="pricing__feature__P5k8p">
@@ -875,7 +903,13 @@ export function PricingSectionCardModule() {
                         </span>
 
                         <span className="typography__small__Q9j2p pricing__feature-text__Q9j2p">
-                          {f}
+                          {tooltip ? (
+                            <Tooltip content={tooltip} position="right">
+                              <span className="pricing__feature-with-tooltip__H7k2s">{f}</span>
+                            </Tooltip>
+                          ) : (
+                            f
+                          )}
                         </span>
                       </li>
                     );
@@ -914,5 +948,6 @@ export function PricingSectionCardModule() {
         </div>
       </div>
     </section>
+    </TooltipProvider>
   );
 }
