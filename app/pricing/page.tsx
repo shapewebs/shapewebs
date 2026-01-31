@@ -29,7 +29,7 @@ const plans: Plan[] = [
     name: "Plus",
     priceYearly: "$12/mo",
     description: "The best balance for growing brands that need more pages and polish.",
-    description2: "+ aditional usage",
+    description2: " + aditional usage",
     features: [
       "Everything in Hobby",
       "4–8 pages",
