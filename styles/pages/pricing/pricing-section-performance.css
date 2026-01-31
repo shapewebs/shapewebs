@@ -43,10 +43,10 @@
 
 /* add a top border for the header row to visually start the table */
 .performance__row--header__P5k8p .performance__cell__C2d3e {
-  border-top: 1px solid rgba(var(--color-border-primary), 1);
   text-align: center;
   padding-top: 16px;
   padding-bottom: 16px;
+  background: rgba(var(--color-bg-primary), 1);
 }
 
 /* category row styling (still no backgrounds) */
