@@ -77,19 +77,15 @@ export default function PricingPage() {
   return (
     <section className="pricing__container__Q7j3s">
       <div className="pricing__content__K9j6q">
-        <header className="pricing__header__P8k4q">
-          <h1 className="typography__heading1__T3m8s pricing__title__Z5m8r" style={{ margin: 0 }}>
-            Pricing
-          </h1>
-
-          <div className="Spacer-module__root__NM019" style={{ "--height": "16px" } as React.CSSProperties} />
-
-          <p className="typography__emphasize__M9J2o" style={{ margin: 0 }}>
-            Built on Next.js + Vercel, with Shopify-ready options for commerce.
-            <br aria-hidden="true"></br>
-            Upgrade to enable more insights, enhanced security and additional features.
-          </p>
-        </header>
+        <h1 className="typography__heading1__T3m8s pricing__title__Z5m8r" style={{ margin: 0 }}>
+          Pricing
+        </h1>
+        <div className="Spacer-module__root__NM019" style={{ "--height": "16px" } as React.CSSProperties} />
+        <p className="typography__emphasize__M9J2o" style={{ margin: 0 }}>
+          Built on Next.js + Vercel, with Shopify-ready options for commerce.
+          <br aria-hidden="true"></br>
+          Upgrade to enable more insights, enhanced security and additional features.
+        </p>
 
         <div className="Spacer-module__root__NM019" style={{ "--height": "40px" } as React.CSSProperties} />
 
