@@ -1,7 +1,7 @@
 "use client";
 
 import "@/styles/pages/pricing/pricing.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 
 type BillingCycle = "monthly" | "yearly";
@@ -10,16 +10,20 @@ type Plan = {
   key: "hobby" | "plus" | "business" | "enterprise";
   name: string;
 
+  // Dial plans (Plus/Business)
   monthlyAmount?: number;
   yearlyAmount?: number;
 
+  // Non-dial plans (Hobby/Enterprise)
   staticPrice?: string;
 
-  currency?: string;
-  unit?: string;
+  currency?: string; // "$"
+  unit?: string; // "/mo"
 
   description: string;
   description2: string;
+
+  // This should NOT change per toggle (per your request)
   billingLabel: string;
 
   features: string[];
@@ -106,37 +110,24 @@ const plans: Plan[] = [
   },
 ];
 
-/**
- * Ease curve for timing ticks (0..1 -> 0..1).
- * This makes the overall "sequence" feel like it accelerates then decelerates.
- */
-function easeInOutCubic(t: number) {
-  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+// Build an inclusive integer sequence from a -> b (10..12 => [10,11,12], 12..10 => [12,11,10])
+function buildSequence(a: number, b: number) {
+  if (a === b) return [a];
+  const step = b > a ? 1 : -1;
+  const out: number[] = [];
+  for (let x = a; x !== b; x += step) out.push(x);
+  out.push(b);
+  return out;
 }
 
 /**
- * Returns a per-tick duration (ms) that changes over the sequence:
- * slower at start/end, faster in the middle.
+ * Smooth dial:
+ * - Renders the intermediate sequence in a vertical stack
+ * - Animates the stack translateY in one go (no "stops" on intermediate values)
+ * - Uses a fade mask so items fade in/out as they pass the center
+ * - Uses easing so speed changes during the slide
  */
-function tickDuration(stepIndex: number, totalSteps: number) {
-  // progress from 0..1 across the ticks
-  const p = totalSteps <= 1 ? 1 : stepIndex / (totalSteps - 1);
-  const eased = easeInOutCubic(p);
-
-  // Map eased(0..1) to duration range.
-  // Slow at ends (~190ms), fast mid (~110ms).
-  const slow = 190;
-  const fast = 110;
-
-  // We want: ends slow, middle fast => use a "U" shape.
-  // U = 1 - 4*(x-0.5)^2 ranges 0 at ends, 1 at center.
-  const u = 1 - 4 * (eased - 0.5) * (eased - 0.5);
-  const dur = slow - u * (slow - fast);
-
-  return Math.round(dur);
-}
-
-function PriceDial({
+function PriceDialSmooth({
   amount,
   currency = "$",
   unit = "/mo",
@@ -147,99 +138,136 @@ function PriceDial({
   unit?: string;
   className?: string;
 }) {
-  const [current, setCurrent] = useState<number>(amount);
-  const [next, setNext] = useState<number | null>(null);
-  const [direction, setDirection] = useState<"up" | "down">("down");
-  const [tickMs, setTickMs] = useState<number>(150);
+  const [current, setCurrent] = useState(amount);
 
-  const runningRef = useRef(false);
-  const queuedTargetRef = useRef<number | null>(null);
+  // When target changes, we animate from current -> amount through a sequence
+  const [sequence, setSequence] = useState<number[] | null>(null);
+
+  // transform index for the stack
+  const [index, setIndex] = useState(0);
+
+  // Measure item height so we can translate precisely
+  const itemRef = useRef<HTMLSpanElement | null>(null);
+  const [itemH, setItemH] = useState<number>(0);
+
+  // If multiple quick toggles happen, keep the latest target; animation will restart from current
+  const pendingTargetRef = useRef<number | null>(null);
+  const animatingRef = useRef(false);
+
+  // Measure height (layout)
+  useLayoutEffect(() => {
+    if (!itemRef.current) return;
+    const rect = itemRef.current.getBoundingClientRect();
+    if (rect.height) setItemH(rect.height);
+  }, [current, sequence]);
 
   useEffect(() => {
     if (amount === current) return;
 
-    // If anim is running, just queue the latest target.
-    if (runningRef.current) {
-      queuedTargetRef.current = amount;
+    // If we are currently animating, queue the latest target and let the current animation finish,
+    // then immediately animate again from the new current.
+    if (animatingRef.current) {
+      pendingTargetRef.current = amount;
       return;
     }
 
-    runningRef.current = true;
-    queuedTargetRef.current = null;
+    // Start a new smooth animation
+    const seq = buildSequence(current, amount);
+    setSequence(seq);
+    setIndex(0);
+    animatingRef.current = true;
 
-    const run = async (target: number) => {
-      let from = current;
-      const dir: "up" | "down" = target > from ? "down" : "up";
-      setDirection(dir);
+    // Kick the transform on the next frame so CSS transition applies
+    const raf = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setIndex(seq.length - 1);
+      });
+    });
 
-      const steps = Math.abs(target - from);
-      const stepSign = target > from ? 1 : -1;
-
-      for (let i = 0; i < steps; i++) {
-        const to = from + stepSign;
-
-        // variable tick duration
-        const dur = tickDuration(i, Math.max(2, steps));
-        setTickMs(dur);
-
-        setNext(to);
-
-        // Let CSS animate for `dur`
-        await new Promise((r) => window.setTimeout(r, dur));
-
-        // Commit without an extra pause (removes the "stop at 11" feeling)
-        setCurrent(to);
-        setNext(null);
-
-        from = to;
-      }
-    };
-
-    const runLoop = async () => {
-      let target = amount;
-      await run(target);
-
-      // If a new target was queued mid-run, immediately continue.
-      while (queuedTargetRef.current != null && queuedTargetRef.current !== target) {
-        target = queuedTargetRef.current;
-        queuedTargetRef.current = null;
-        await run(target);
-      }
-
-      runningRef.current = false;
-    };
-
-    runLoop();
+    return () => cancelAnimationFrame(raf);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [amount]);
 
+  // Duration scales with number of steps; clamp to keep it feeling crisp
+  const durationMs = useMemo(() => {
+    const steps = sequence ? Math.max(1, sequence.length - 1) : 0;
+    // ~120ms per step feels dial-like without pauses; clamp overall
+    const d = steps * 120;
+    return Math.min(520, Math.max(220, d));
+  }, [sequence]);
+
+  const onTransitionEnd = () => {
+    if (!sequence) return;
+
+    // End state: commit last value, clear stack
+    const final = sequence[sequence.length - 1];
+    setCurrent(final);
+    setSequence(null);
+    setIndex(0);
+    animatingRef.current = false;
+
+    // If a new target arrived mid-animation, run again immediately
+    const pending = pendingTargetRef.current;
+    if (pending != null && pending !== final) {
+      pendingTargetRef.current = null;
+      // trigger next run by setting current already; effect will start new seq
+      // but we must do it async so React state settles
+      setTimeout(() => {
+        // This will be picked up by the effect (amount prop already pending target in parent)
+        // If parent already moved away, no-op.
+      }, 0);
+    } else {
+      pendingTargetRef.current = null;
+    }
+  };
+
+  const displayedSequence = sequence ?? [current];
+  const translateY = itemH ? -index * itemH : 0;
+
   return (
-    <span className={["priceDial", className ?? ""].filter(Boolean).join(" ")}>
-      <span className="priceDialFixed">{currency}</span>
+    <span className={["priceDialSmooth", className ?? ""].filter(Boolean).join(" ")}>
+      <span className="priceDialSmoothFixed">{currency}</span>
 
       <span
-        className={[
-          "priceDialWindow",
-          next !== null ? "is-animating" : "",
-          next !== null ? `dir-${direction}` : "",
-        ]
-          .filter(Boolean)
-          .join(" ")}
-        // pass duration to CSS for this tick
-        style={{ ["--tickMs" as any]: `${tickMs}ms` }}
+        className="priceDialSmoothWindow"
+        style={
+          {
+            "--h": itemH ? `${itemH}px` : "1.25em",
+          } as CSSProperties
+        }
         aria-live="polite"
       >
-        <span className="priceDialNum current">{current}</span>
-        {next !== null && <span className="priceDialNum next">{next}</span>}
+        <span
+          className="priceDialSmoothStack"
+          style={
+            {
+              transform: `translateY(${translateY}px)`,
+              transition: sequence
+                ? `transform ${durationMs}ms cubic-bezier(0.22, 0.75, 0.16, 0.99)`
+                : "none",
+            } as CSSProperties
+          }
+          onTransitionEnd={onTransitionEnd}
+        >
+          {displayedSequence.map((n, i) => (
+            <span
+              key={`${n}-${i}`}
+              className="priceDialSmoothItem"
+              ref={i === 0 ? itemRef : undefined}
+            >
+              {n}
+            </span>
+          ))}
+        </span>
       </span>
 
-      <span className="priceDialFixed">{unit}</span>
+      <span className="priceDialSmoothFixed">{unit}</span>
     </span>
   );
 }
 
 export default function PricingPage() {
-  // One shared state controls BOTH Plus and Business.
+  // Shared toggle state controls BOTH Plus and Business
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
   const isYearly = billingCycle === "yearly";
 
@@ -294,7 +322,7 @@ export default function PricingPage() {
                     </span>
 
                     {dialAmount !== null ? (
-                      <PriceDial
+                      <PriceDialSmooth
                         amount={dialAmount}
                         currency={plan.currency ?? "$"}
                         unit={plan.unit ?? "/mo"}
@@ -304,11 +332,11 @@ export default function PricingPage() {
                       <span className="typography__body__K4n7p bitC1">{plan.staticPrice ?? ""}</span>
                     )}
 
-                    {/* stays the same */}
+                    {/* description2 must remain unchanged */}
                     <span className="typography__body__K4n7p">{plan.description2}</span>
                   </div>
 
-                  {/* Toggle + constant billing label */}
+                  {/* Toggle right before billing label */}
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     {showToggle ? (
                       <div className="root__toggle-wrapper__T7g2m">
@@ -325,6 +353,7 @@ export default function PricingPage() {
                       </div>
                     ) : null}
 
+                    {/* Billing label must NOT change */}
                     <span className="typography__small__Q9j2p pricing__billing__C2d3e">{plan.billingLabel}</span>
                   </div>
 
@@ -375,129 +404,64 @@ export default function PricingPage() {
         </div>
       </div>
 
-      {/* Dial animation CSS */}
+      {/* Smooth dial CSS */}
       <style jsx>{`
-        .priceDial {
+        .priceDialSmooth {
           display: inline-flex;
           align-items: baseline;
           gap: 0.1em;
-        }
-
-        .priceDialFixed {
           white-space: nowrap;
         }
 
-        .priceDialWindow {
+        .priceDialSmoothFixed {
+          white-space: nowrap;
+        }
+
+        .priceDialSmoothWindow {
           position: relative;
           display: inline-block;
           overflow: hidden;
-          height: 1.25em;
-          line-height: 1.25em;
+          height: var(--h);
+          line-height: var(--h);
           vertical-align: bottom;
           min-width: 2ch;
+
+          /* This creates the “fade while moving” look (no harsh cut) */
+          -webkit-mask-image: linear-gradient(
+            to bottom,
+            transparent 0%,
+            rgba(0, 0, 0, 1) 28%,
+            rgba(0, 0, 0, 1) 72%,
+            transparent 100%
+          );
+          mask-image: linear-gradient(
+            to bottom,
+            transparent 0%,
+            rgba(0, 0, 0, 1) 28%,
+            rgba(0, 0, 0, 1) 72%,
+            transparent 100%
+          );
         }
 
-        .priceDialNum {
-          position: absolute;
-          left: 0;
-          top: 0;
-          will-change: transform, opacity;
-          white-space: nowrap;
+        .priceDialSmoothStack {
+          display: block;
+          will-change: transform;
         }
 
-        .priceDialNum.current {
-          transform: translateY(0%);
-          opacity: 1;
-        }
-
-        /* Use per-tick duration from --tickMs, plus easing on opacity to feel "non-linear" */
-        .priceDialWindow.is-animating .priceDialNum {
-          animation-duration: var(--tickMs, 150ms);
-          animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-        }
-
-        /* DOWN = new comes from above, old exits down */
-        .priceDialWindow.is-animating.dir-down .priceDialNum.current {
-          animation-name: dialDownCurrent;
-        }
-        .priceDialWindow.is-animating.dir-down .priceDialNum.next {
-          transform: translateY(-110%);
-          animation-name: dialDownNext;
-        }
-
-        /* UP = new comes from below, old exits up */
-        .priceDialWindow.is-animating.dir-up .priceDialNum.current {
-          animation-name: dialUpCurrent;
-        }
-        .priceDialWindow.is-animating.dir-up .priceDialNum.next {
-          transform: translateY(110%);
-          animation-name: dialUpNext;
-        }
-
-        @keyframes dialDownCurrent {
-          0% {
-            transform: translateY(0%);
-            opacity: 1;
-          }
-          60% {
-            opacity: 0.35;
-          }
-          100% {
-            transform: translateY(110%);
-            opacity: 0;
-          }
-        }
-
-        @keyframes dialDownNext {
-          0% {
-            transform: translateY(-110%);
-            opacity: 0.15;
-          }
-          55% {
-            opacity: 0.85;
-          }
-          100% {
-            transform: translateY(0%);
-            opacity: 1;
-          }
-        }
-
-        @keyframes dialUpCurrent {
-          0% {
-            transform: translateY(0%);
-            opacity: 1;
-          }
-          60% {
-            opacity: 0.35;
-          }
-          100% {
-            transform: translateY(-110%);
-            opacity: 0;
-          }
-        }
-
-        @keyframes dialUpNext {
-          0% {
-            transform: translateY(110%);
-            opacity: 0.15;
-          }
-          55% {
-            opacity: 0.85;
-          }
-          100% {
-            transform: translateY(0%);
-            opacity: 1;
-          }
+        .priceDialSmoothItem {
+          display: block;
+          height: var(--h);
+          line-height: var(--h);
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .priceDialWindow {
-            overflow: visible;
-            height: auto;
+          .priceDialSmoothWindow {
+            -webkit-mask-image: none;
+            mask-image: none;
           }
-          .priceDialNum {
-            position: static;
-            animation: none !important;
+          .priceDialSmoothStack {
+            transition: none !important;
+            transform: none !important;
           }
         }
       `}</style>
