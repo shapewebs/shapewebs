@@ -26,6 +26,7 @@ const FREE = { hobby: true, plus: true, business: true, enterprise: true } as co
 const PRO_ONLY = { hobby: false, plus: false, business: true, enterprise: true } as const;
 const ENT_ONLY = { hobby: false, plus: false, business: false, enterprise: true } as const;
 
+// Lots of rows, relevant to a Vercel-hosted website (Free vs Pro vs Enterprise add-ons)
 const rows: PerfRow[] = [
   {
     type: "category",
@@ -461,23 +462,18 @@ function FeatureCell({
   enabled,
   label,
   tooltip,
-  buttonKindClass,
 }: {
   enabled: boolean;
   label: string;
   tooltip: string;
-  buttonKindClass: string;
 }) {
   return (
     <Tooltip content={tooltip} position="right">
       <div className="performance__cellInner__C2d3e">
-        {/* This is the only part you need to apply to your "button" element.
-            If your icon wrapper isn't a button, move this class onto the real button. */}
         <span
           className={[
             "performance__icon__Z3n7q",
             enabled ? "performance__icon--yes__Z3n7q" : "performance__icon--no__Z3n7q",
-            buttonKindClass,
           ].join(" ")}
           aria-hidden="true"
         >
@@ -503,19 +499,25 @@ export function PricingSectionPerformance() {
     <TooltipProvider>
       <section className="performance__container__Q7j3s">
         <div className="performance__content__K9j6q">
-          <div className="performance__table__L7p3s" role="table" aria-label="Plan comparison">
+          <div
+            className="performance__table__L7p3s"
+            role="table"
+            aria-label="Plan comparison"
+          >
             {/* Rowgroup 1: sticky header */}
             <div
               className="performance__rowgroup__A1b2c performance__rowgroup--sticky__A1b2c"
               role="rowgroup"
             >
-              <div className="performance__row__P5k8p performance__row--header__P5k8p" role="row">
+              <div
+                className="performance__row__P5k8p performance__row--header__P5k8p"
+                role="row"
+              >
                 {planOrder.map((p) => (
                   <div
                     key={p.key}
                     className="performance__cell__C2d3e performance__cell--header__C2d3e"
                     role="columnheader"
-                    data-highlighted={p.key === "plus" ? "true" : "false"}
                   >
                     <span className="typography__heading6__H5j9s" style={{ margin: 0 }}>
                       {p.name}
@@ -556,36 +558,34 @@ export function PricingSectionPerformance() {
                 }
 
                 return (
-                  <div key={`feat-${idx}-${r.label}`} className="performance__row__P5k8p" role="row">
-                    {planOrder.map((p) => {
-                      const highlighted = p.key === "plus";
-                      const buttonKindClass = highlighted
-                        ? "button__kind-primary__R5j2s"
-                        : "button__kind-secondary__R5j2s";
-
-                      return (
-                        <div
-                          key={`${r.label}-${p.key}`}
-                          className="performance__cell__C2d3e"
-                          role="cell"
-                          data-highlighted={highlighted ? "true" : "false"}
-                        >
-                          <FeatureCell
-                            enabled={r.availability[p.key]}
-                            label={r.label}
-                            tooltip={r.tooltip}
-                            buttonKindClass={buttonKindClass}
-                          />
-                        </div>
-                      );
-                    })}
+                  <div
+                    key={`feat-${idx}-${r.label}`}
+                    className="performance__row__P5k8p"
+                    role="row"
+                  >
+                    {planOrder.map((p) => (
+                      <div
+                        key={`${r.label}-${p.key}`}
+                        className="performance__cell__C2d3e"
+                        role="cell"
+                      >
+                        <FeatureCell
+                          enabled={r.availability[p.key]}
+                          label={r.label}
+                          tooltip={r.tooltip}
+                        />
+                      </div>
+                    ))}
                   </div>
                 );
               })}
             </div>
           </div>
 
-          <div className="Spacer-module__root__NM019" style={{ "--height": "24px" } as CSSProperties} />
+          <div
+            className="Spacer-module__root__NM019"
+            style={{ "--height": "24px" } as CSSProperties}
+          />
         </div>
       </section>
     </TooltipProvider>
