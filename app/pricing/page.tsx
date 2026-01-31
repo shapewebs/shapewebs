@@ -61,6 +61,7 @@ const plans: Plan[] = [
     name: "Enterprise",
     priceYearly: "Custom",
     description: "For Shopify builds, complex requirements, and high-performance commerce.",
+    description2: "",
     features: [
       "Shopify + Next.js architecture",
       "Custom storefront experiences",
