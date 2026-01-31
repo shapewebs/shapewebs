@@ -913,35 +913,6 @@ export default function PricingPage() {
             );
           })}
         </div>
-
-        <style jsx>{`
-          .rollNumber {
-            display: inline-flex;
-            align-items: baseline;
-            transform: translateY(2px);
-          }
-
-          .rollDigit {
-            position: relative;
-            width: 0.62em;
-            height: 1em;
-            overflow: hidden;
-          }
-
-          .rollDigitInner {
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
-          }
-
-          .rollTick {
-            display: block;
-            height: 1em;
-            line-height: 1em;
-            text-align: center;
-          }
-        `}</style>
       </div>
     </section>
   );
