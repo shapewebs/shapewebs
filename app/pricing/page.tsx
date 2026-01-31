@@ -178,7 +178,7 @@ export default function PricingPage() {
                 data-highlighted={plan.highlighted ? "true" : "false"}
               >
                 <div className="pricing__card-top__A1b2c">
-                  <h4 className="typography__heading4__Z7p4s" style={{ margin: 0 }}>
+                  <h4 className="typography__heading4__Z7p4s" style={{ margin: 0, paddingInline: 24px }}>
                     {plan.name}
                   </h4>
 
