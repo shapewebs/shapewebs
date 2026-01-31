@@ -104,7 +104,7 @@ export default function PricingPage() {
                 <div className="Spacer-module__root__NM019" style={{ "--height": "12px" } as React.CSSProperties} />
 
                 <div className="pricing__price__T7g2m">
-                <span className="typography__body__K4n7p pricing__desc__K4n7p" style={{ margin: 0 }}>
+                <span className="typography__body__K4n7p" style={{ margin: 0 }}>
                   {plan.description}
                 </span>
                   <span className="pricing__price-value__T7g2m">{plan.priceYearly}</span>
