@@ -73,6 +73,10 @@
   }
 }
 
+.module__card__H5k8q[data-highlighted="true"] .pricing__card-top__A1b2c {
+    padding-top: 40px;
+}
+
 .pricing__card-top__A1b2c {
   display: flex;
   flex-direction: column;
