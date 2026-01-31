@@ -519,7 +519,7 @@ export function PricingSectionPerformance() {
                     role="columnheader"
                     data-highlighted={p.key === highlightedPlanKey ? "true" : "false"}
                   >
-                    <span className="typography__heading6__H5j9s" style={{ margin: 0 }}>
+                    <span className="typography__emphasize__M9J2o bitC1" style={{ margin: 0 }}>
                       {p.name}
                     </span>
                   </div>
