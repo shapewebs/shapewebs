@@ -4,6 +4,9 @@ import "@/styles/pages/pricing/pricing.css";
 import { useMemo, useState } from "react";
 import type { CSSProperties } from "react";
 
+// Geist (Vercel-style) outline icons (regular, not solid)
+import { Check } from "@geist-ui/icons";
+
 type Plan = {
   key: "hobby" | "plus" | "business" | "enterprise";
   name: string;
@@ -99,28 +102,6 @@ const plans: Plan[] = [
     cta: { label: "Talk to sales", href: "/contact" },
   },
 ];
-
-// Regular (outline) icon that fits pricing feature lists
-function FeatureIcon({ title = "Included" }: { title?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      role="img"
-      aria-label={title}
-      focusable="false"
-    >
-      <path d="M20 6 9 17l-5-5" />
-    </svg>
-  );
-}
 
 function RollingNumber({ value }: { value: number }) {
   const digits = useMemo(() => value.toString().split(""), [value]);
@@ -277,7 +258,7 @@ export default function PricingPage() {
                   style={{ "--height": "20px" } as CSSProperties}
                 />
 
-                {/* label above features list */}
+                {/* Label above features list */}
                 {topLabel && (
                   <p
                     className="typography__small__Q9j2p"
@@ -290,9 +271,11 @@ export default function PricingPage() {
                 <ul className="pricing__features__M93j8">
                   {plan.features.map((f) => (
                     <li key={f} className="pricing__feature__P5k8p">
+                      {/* Geist outline icon */}
                       <span className="pricing__check__Z3n7q" aria-hidden="true">
-                        <FeatureIcon />
+                        <Check size={16} />
                       </span>
+
                       <span className="typography__small__Q9j2p pricing__feature-text__Q9j2p">
                         {f}
                       </span>

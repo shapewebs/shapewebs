@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
+    "@geist-ui/core": "latest",
+    "@geist-ui/icons": "latest",
     "@hookform/resolvers": "^5.2.2",
     "@pinia/colada": "latest",
     "@radix-ui/react-accordion": "^1.2.12",
