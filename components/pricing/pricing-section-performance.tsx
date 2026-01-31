@@ -6,37 +6,35 @@ import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
 type PlanKey = "hobby" | "plus" | "business" | "enterprise";
 
-type PerformanceRow =
+type PerfRow =
   | {
-      kind: "section";
+      type: "category";
       label: string;
-      tooltip: string;
+      // tooltip optional for category headers (you can add if you want)
+      tooltip?: string;
     }
   | {
-      kind: "row";
-      label: string;
+      type: "row";
+      label: string; // shown in first column (with tooltip)
       tooltip: string;
       values: Record<PlanKey, string>;
     };
 
-const planLabels: Record<PlanKey, string> = {
-  hobby: "Hobby",
-  plus: "Plus",
-  business: "Business",
-  enterprise: "Enterprise",
-};
+const planOrder: Array<{ key: PlanKey; name: string }> = [
+  { key: "hobby", name: "Hobby" },
+  { key: "plus", name: "Plus" },
+  { key: "business", name: "Business" },
+  { key: "enterprise", name: "Enterprise" },
+];
 
-// Example dataset (edit freely)
-const rows: PerformanceRow[] = [
+const rows: PerfRow[] = [
+  { type: "category", label: "Core features" },
+
   {
-    kind: "section",
-    label: "Core features",
-    tooltip: "Baseline capabilities included with each plan. This section is used as a header for the rows below.",
-  },
-  {
-    kind: "row",
+    type: "row",
     label: "Customer requests",
-    tooltip: "Includes handling customer requests/changes within the plan scope.",
+    tooltip:
+      "How many feature/content requests you can submit per month (copy, sections, tweaks, improvements).",
     values: {
       hobby: "Customer requests",
       plus: "Customer requests",
@@ -45,9 +43,10 @@ const rows: PerformanceRow[] = [
     },
   },
   {
-    kind: "row",
-    label: "Next.js + Vercel deployment",
-    tooltip: "Standard deployment pipeline using Next.js and Vercel.",
+    type: "row",
+    label: "Deployment & hosting setup",
+    tooltip:
+      "Included setup for Next.js + Vercel (or Shopify for commerce), environment variables, domains, and CI basics.",
     values: {
       hobby: "Included",
       plus: "Included",
@@ -56,26 +55,25 @@ const rows: PerformanceRow[] = [
     },
   },
   {
-    kind: "row",
-    label: "Basic SEO guidance",
-    tooltip: "Foundational SEO improvements: metadata, indexing hygiene, and on-page best practices.",
+    type: "row",
+    label: "SEO baseline",
+    tooltip:
+      "Baseline SEO such as metadata, sitemap/robots, indexing sanity checks and essential structured markup.",
     values: {
-      hobby: "Included",
-      plus: "Included",
-      business: "Included",
-      enterprise: "Included",
+      hobby: "Basic",
+      plus: "Enhanced",
+      business: "Advanced",
+      enterprise: "Advanced + custom",
     },
   },
 
+  { type: "category", label: "Performance & reliability" },
+
   {
-    kind: "section",
-    label: "Performance",
-    tooltip: "Features that influence speed, caching behavior, monitoring, and optimization.",
-  },
-  {
-    kind: "row",
+    type: "row",
     label: "Cold start prevention",
-    tooltip: "Keeps functions warm to reduce latency spikes when a route hasn't been hit recently.",
+    tooltip:
+      "Measures to avoid slow first-loads due to serverless cold starts (keep-warm strategies where applicable).",
     values: {
       hobby: "—",
       plus: "Included",
@@ -84,31 +82,22 @@ const rows: PerformanceRow[] = [
     },
   },
   {
-    kind: "row",
-    label: "Traffic & performance insights",
-    tooltip: "Visibility into usage patterns and performance hotspots to guide optimizations.",
+    type: "row",
+    label: "Performance insights",
+    tooltip:
+      "Visibility into traffic, performance trends, bottlenecks, and optimization opportunities.",
     values: {
-      hobby: "—",
-      plus: "Included",
-      business: "Included",
-      enterprise: "Included",
+      hobby: "Basic",
+      plus: "Standard",
+      business: "Advanced",
+      enterprise: "Advanced + custom",
     },
   },
   {
-    kind: "row",
-    label: "Performance budgets (Core Web Vitals)",
-    tooltip: "Targets/limits for CWV metrics (LCP, INP, CLS) to keep performance within expectations.",
-    values: {
-      hobby: "—",
-      plus: "—",
-      business: "Included",
-      enterprise: "Included",
-    },
-  },
-  {
-    kind: "row",
-    label: "Advanced caching & ISR configuration",
-    tooltip: "Stronger caching rules + ISR tuning to improve speed while keeping content fresh.",
+    type: "row",
+    label: "Core Web Vitals budgets",
+    tooltip:
+      "Set targets/thresholds for performance metrics (LCP/CLS/INP) and guard against regressions.",
     values: {
       hobby: "—",
       plus: "—",
@@ -117,15 +106,13 @@ const rows: PerformanceRow[] = [
     },
   },
 
+  { type: "category", label: "Security" },
+
   {
-    kind: "section",
-    label: "Security & compliance",
-    tooltip: "Security posture improvements, access control, and compliance enablement.",
-  },
-  {
-    kind: "row",
+    type: "row",
     label: "Web Application Firewall (WAF)",
-    tooltip: "Blocks common malicious traffic and mitigates typical web threats.",
+    tooltip:
+      "Rules-based protection layer to block common web attacks (e.g. malicious patterns, injection attempts).",
     values: {
       hobby: "Included",
       plus: "Included",
@@ -134,9 +121,10 @@ const rows: PerformanceRow[] = [
     },
   },
   {
-    kind: "row",
+    type: "row",
     label: "DDoS mitigation",
-    tooltip: "Protection against traffic floods intended to degrade uptime or performance.",
+    tooltip:
+      "Protection against traffic floods intended to overwhelm your site and knock it offline.",
     values: {
       hobby: "Included",
       plus: "Included",
@@ -145,20 +133,10 @@ const rows: PerformanceRow[] = [
     },
   },
   {
-    kind: "row",
-    label: "SSO + RBAC",
-    tooltip: "Single Sign-On and Role-Based Access Control for enterprise-grade access management.",
-    values: {
-      hobby: "—",
-      plus: "—",
-      business: "—",
-      enterprise: "Included",
-    },
-  },
-  {
-    kind: "row",
-    label: "Compliance support (SOC 2, GDPR)",
-    tooltip: "Process/documentation support for security and privacy frameworks (as applicable).",
+    type: "row",
+    label: "SSO / RBAC",
+    tooltip:
+      "Single Sign-On and Role-Based Access Control for enterprise user management and permissions.",
     values: {
       hobby: "—",
       plus: "—",
@@ -171,100 +149,105 @@ const rows: PerformanceRow[] = [
 export function PricingSectionPerformance() {
   return (
     <TooltipProvider>
-      <section className="pricingPerformance__container__Q7j3s">
-        <div className="pricingPerformance__content__K9j6q">
-          <h2 className="typography__heading2__B5x9t" style={{ margin: 0, textAlign: "center" }}>
-            Performance & Features
+      <section className="performance__container__Q7j3s">
+        <div className="performance__content__K9j6q">
+          <h2 className="typography__heading2__B5x9t" style={{ margin: 0 }}>
+            Performance
           </h2>
 
-          <div className="Spacer-module__root__NM019" style={{ "--height": "16px" } as CSSProperties} />
+          <div
+            className="Spacer-module__root__NM019"
+            style={{ "--height": "16px" } as CSSProperties}
+          />
 
-          <p className="typography__subtitle__R6m2x" style={{ margin: 0, textAlign: "center" }}>
-            Compare what’s included across plans — performance, security and operational support.
+          <p className="typography__subtitle__R6m2x" style={{ margin: 0 }}>
+            Compare what’s included across plans — hover any row label to see
+            details.
           </p>
 
-          <div className="Spacer-module__root__NM019" style={{ "--height": "32px" } as CSSProperties} />
+          <div
+            className="Spacer-module__root__NM019"
+            style={{ "--height": "32px" } as CSSProperties}
+          />
 
-          <div className="pricingPerformance__table__L7p3s" role="table" aria-label="Plan comparison table">
+          <div className="performance__table__L7p3s" role="table" aria-label="Plan performance comparison">
             {/* Rowgroup 1: sticky header */}
-            <div className="pricingPerformance__rowgroup__A1b2c pricingPerformance__rowgroup--sticky__A1b2c" role="rowgroup">
-              <div className="pricingPerformance__row__P5k8p pricingPerformance__row--header__P5k8p" role="row">
-                <div className="pricingPerformance__cell__C2d3e pricingPerformance__cell--corner__C2d3e" role="columnheader">
-                  <span className="typography__small__Q9j2p">Compare plans</span>
-                </div>
-
-                <div className="pricingPerformance__cell__C2d3e" role="columnheader">
-                  <span className="typography__heading6__H5j9s" style={{ margin: 0 }}>
-                    {planLabels.hobby}
-                  </span>
-                </div>
-                <div className="pricingPerformance__cell__C2d3e" role="columnheader">
-                  <span className="typography__heading6__H5j9s" style={{ margin: 0 }}>
-                    {planLabels.plus}
-                  </span>
-                </div>
-                <div className="pricingPerformance__cell__C2d3e" role="columnheader">
-                  <span className="typography__heading6__H5j9s" style={{ margin: 0 }}>
-                    {planLabels.business}
-                  </span>
-                </div>
-                <div className="pricingPerformance__cell__C2d3e" role="columnheader">
-                  <span className="typography__heading6__H5j9s" style={{ margin: 0 }}>
-                    {planLabels.enterprise}
-                  </span>
-                </div>
+            <div className="performance__rowgroup__A1b2c performance__rowgroup--sticky__A1b2c" role="rowgroup">
+              <div className="performance__row__P5k8p performance__row--header__P5k8p" role="row">
+                {planOrder.map((p) => (
+                  <div
+                    key={p.key}
+                    className="performance__cell__C2d3e performance__cell--header__C2d3e"
+                    role="columnheader"
+                  >
+                    <span className="typography__heading6__H5j9s" style={{ margin: 0 }}>
+                      {p.name}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Rowgroup 2: body */}
-            <div className="pricingPerformance__rowgroup__A1b2c" role="rowgroup">
+            {/* Rowgroup 2: body rows */}
+            <div className="performance__rowgroup__A1b2c" role="rowgroup">
               {rows.map((r, idx) => {
-                if (r.kind === "section") {
+                if (r.type === "category") {
                   return (
                     <div
-                      key={`section-${idx}-${r.label}`}
-                      className="pricingPerformance__row__P5k8p pricingPerformance__row--section__P5k8p"
+                      key={`cat-${idx}-${r.label}`}
+                      className="performance__row__P5k8p performance__row--category__P5k8p"
                       role="row"
                     >
-                      <div className="pricingPerformance__cell__C2d3e" role="rowheader">
-                        <Tooltip content={r.tooltip} position="right">
-                          <span className="typography__small__Q9j2p pricingPerformance__labelTooltip__W7m3k">
+                      {/* category: only first column filled */}
+                      <div className="performance__cell__C2d3e" role="cell">
+                        {r.tooltip ? (
+                          <Tooltip content={r.tooltip} position="right">
+                            <span className="typography__small__Q9j2p performance__label__Q9j2p performance__label--tooltip__W7m3k">
+                              {r.label}
+                            </span>
+                          </Tooltip>
+                        ) : (
+                          <span className="typography__small__Q9j2p performance__label__Q9j2p">
                             {r.label}
                           </span>
-                        </Tooltip>
+                        )}
                       </div>
 
-                      {/* empty cells */}
-                      <div className="pricingPerformance__cell__C2d3e" role="cell" />
-                      <div className="pricingPerformance__cell__C2d3e" role="cell" />
-                      <div className="pricingPerformance__cell__C2d3e" role="cell" />
-                      <div className="pricingPerformance__cell__C2d3e" role="cell" />
+                      {/* remaining 3 empty cells */}
+                      <div className="performance__cell__C2d3e" role="cell" />
+                      <div className="performance__cell__C2d3e" role="cell" />
+                      <div className="performance__cell__C2d3e" role="cell" />
                     </div>
                   );
                 }
 
                 return (
-                  <div key={`row-${idx}-${r.label}`} className="pricingPerformance__row__P5k8p" role="row">
-                    <div className="pricingPerformance__cell__C2d3e" role="rowheader">
+                  <div
+                    key={`row-${idx}-${r.label}`}
+                    className="performance__row__P5k8p"
+                    role="row"
+                  >
+                    {/* column 1: label with tooltip */}
+                    <div className="performance__cell__C2d3e" role="cell">
                       <Tooltip content={r.tooltip} position="right">
-                        <span className="typography__small__Q9j2p pricingPerformance__labelTooltip__W7m3k">
+                        <span className="typography__small__Q9j2p performance__label__Q9j2p performance__label--tooltip__W7m3k">
                           {r.label}
                         </span>
                       </Tooltip>
                     </div>
 
-                    <div className="pricingPerformance__cell__C2d3e" role="cell">
-                      <span className="typography__small__Q9j2p">{r.values.hobby}</span>
-                    </div>
-                    <div className="pricingPerformance__cell__C2d3e" role="cell">
-                      <span className="typography__small__Q9j2p">{r.values.plus}</span>
-                    </div>
-                    <div className="pricingPerformance__cell__C2d3e" role="cell">
-                      <span className="typography__small__Q9j2p">{r.values.business}</span>
-                    </div>
-                    <div className="pricingPerformance__cell__C2d3e" role="cell">
-                      <span className="typography__small__Q9j2p">{r.values.enterprise}</span>
-                    </div>
+                    {/* columns 2-4: values per plan */}
+                    {planOrder.map((p) => (
+                      <div
+                        key={`${r.label}-${p.key}`}
+                        className="performance__cell__C2d3e performance__value__C2d3e"
+                        role="cell"
+                      >
+                        <span className="typography__small__Q9j2p">
+                          {r.values[p.key]}
+                        </span>
+                      </div>
+                    )).slice(1) /* remove the first one because label is column 1 */}
                   </div>
                 );
               })}
