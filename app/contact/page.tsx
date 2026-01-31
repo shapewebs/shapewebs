@@ -458,11 +458,11 @@ export default function ContactPage() {
                                 </label>
 
                                 {/* iOS toggle */}
-                                <div className="contact__toggle-wrapper__T7g2m">
-                                    <input required className="contact__toggle__T7g2m contact__toggle--ios__T7g2m"
+                                <div className="root__toggle-wrapper__T7g2m">
+                                    <input required className="root__toggle__T7g2m root__toggle--ios__T7g2m"
                                         id="consentMarketing" name="consentMarketing" type="checkbox"
                                         checked={formData.consentMarketing} onChange={handleChange} />
-                                    <label className="contact__toggle-btn__T7g2m" htmlFor="consentMarketing" />
+                                    <label className="root__toggle-btn__T7g2m" htmlFor="consentMarketing" />
                                 </div>
                             </div>
                         </div>
