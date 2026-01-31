@@ -87,7 +87,7 @@ export default function PricingPage() {
           Upgrade to enable more insights, enhanced security and additional features.
         </p>
 
-        <div className="Spacer-module__root__NM019" style={{ "--height": "72px" } as React.CSSProperties} />
+        <div className="Spacer-module__root__NM019" style={{ "--height": "112px" } as React.CSSProperties} />
 
         <div className="pricing__grid__L7p3s">
           {plans.map((plan) => (
