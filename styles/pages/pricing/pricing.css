@@ -121,12 +121,6 @@
   box-shadow: var(--shadow-stack-low);
 }
 
-.pricing__price__T7g2m {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-}
-
 .pricing__price-value__T7g2m {
   font-size: 28px;
   font-weight: var(--font-weight-semibold);
