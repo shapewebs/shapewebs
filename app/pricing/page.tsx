@@ -1,7 +1,7 @@
 "use client";
 
 import "@/styles/pages/pricing/pricing.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import type { CSSProperties } from "react";
 
 type BillingCycle = "monthly" | "yearly";
@@ -11,8 +11,8 @@ type Plan = {
   key: "hobby" | "plus" | "business" | "enterprise";
   name: string;
 
-  priceMonthly?: string; // shown when cycle === "monthly"
-  priceYearly?: string; // shown when cycle === "yearly"
+  priceMonthly?: string;
+  priceYearly: string;
 
   description: string;
   description2: string;
@@ -50,7 +50,7 @@ const plans: Plan[] = [
     priceMonthly: "$12/mo",
     priceYearly: "$10/mo",
     description: "",
-    description2: " + additional features",
+    description2: " + aditional features",
     billingLabelMonthly: "Billed monthly",
     billingLabelYearly: "Billed yearly",
     showBillingToggle: true,
@@ -70,8 +70,8 @@ const plans: Plan[] = [
     name: "Business",
     priceMonthly: "$18/mo",
     priceYearly: "$16/mo",
-    description: " + additional features",
-    description2: "",
+    description: "",
+    description2: " + aditional features",
     billingLabelMonthly: "Billed monthly",
     billingLabelYearly: "Billed yearly",
     showBillingToggle: true,
@@ -102,174 +102,67 @@ const plans: Plan[] = [
   },
 ];
 
-function PriceRoll({
+function PriceRoller({
   value,
   direction,
+  className,
 }: {
   value: string;
   direction: RollDirection;
+  className?: string;
 }) {
-  const [prev, setPrev] = useState<string | null>(null);
-  const [animating, setAnimating] = useState(false);
-  const prevValueRef = useRef(value);
+  const [display, setDisplay] = useState(value);
+  const [incoming, setIncoming] = useState<string | null>(null);
+  const [animDir, setAnimDir] = useState<RollDirection>(direction);
 
   useEffect(() => {
-    if (value === prevValueRef.current) return;
+    if (value === display) return;
 
-    // start animation: keep previous value, show new value
-    setPrev(prevValueRef.current);
-    setAnimating(true);
+    setAnimDir(direction);
+    setIncoming(value);
 
     const t = window.setTimeout(() => {
-      setAnimating(false);
-      setPrev(null);
-      prevValueRef.current = value;
-    }, 320);
+      setDisplay(value);
+      setIncoming(null);
+    }, 240);
 
     return () => window.clearTimeout(t);
-  }, [value]);
-
-  const cls =
-    "priceRoll__root" +
-    (animating ? ` priceRoll__anim priceRoll__${direction}` : "");
+  }, [value, direction, display]);
 
   return (
-    <span className={cls} aria-label={value}>
-      <span className="priceRoll__slot">
-        {/* previous value (animates out) */}
-        {prev !== null && (
-          <span className="priceRoll__prev" aria-hidden="true">
-            {prev}
-          </span>
-        )}
-
-        {/* current value (animates in) */}
-        <span className="priceRoll__curr">{value}</span>
-      </span>
+    <span
+      className={[
+        "priceRoll",
+        incoming ? "is-animating" : "",
+        incoming ? `dir-${animDir}` : "",
+        className ?? "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      aria-live="polite"
+    >
+      <span className="priceRollItem current">{display}</span>
+      {incoming && <span className="priceRollItem next">{incoming}</span>}
     </span>
   );
 }
 
 export default function PricingPage() {
-  // ✅ One shared state for both Plus + Business toggles
+  // One shared state controls BOTH Plus and Business.
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
-  const [rollDir, setRollDir] = useState<RollDirection>("down");
+  const [rollDirection, setRollDirection] = useState<RollDirection>("down");
 
-  const toggleBilling = (checkedYearly: boolean) => {
-    // checked = yearly
-    const next: BillingCycle = checkedYearly ? "yearly" : "monthly";
-    // monthly -> yearly should roll DOWN, yearly -> monthly roll UP
-    setRollDir(next === "yearly" ? "down" : "up");
+  const toggleTo = (next: BillingCycle) => {
+    // monthly -> yearly should roll DOWN (new comes from above)
+    // yearly -> monthly should roll UP (new comes from below)
+    setRollDirection(next === "yearly" ? "down" : "up");
     setBillingCycle(next);
   };
 
-  const getPrice = (plan: Plan) => {
-    if (!plan.showBillingToggle) return plan.priceYearly ?? "";
-    return billingCycle === "yearly" ? plan.priceYearly ?? "" : plan.priceMonthly ?? "";
-  };
-
-  const getBillingLabel = (plan: Plan) => {
-    if (!plan.showBillingToggle) return plan.billingLabelYearly;
-    return billingCycle === "yearly"
-      ? plan.billingLabelYearly
-      : plan.billingLabelMonthly ?? plan.billingLabelYearly;
-  };
+  const isYearly = billingCycle === "yearly";
 
   return (
     <section className="pricing__container__Q7j3s">
-      {/* Minimal CSS for the rolling price animation */}
-      <style jsx global>{`
-        .priceRoll__root {
-          display: inline-block;
-        }
-        .priceRoll__slot {
-          position: relative;
-          display: inline-block;
-          overflow: hidden;
-          height: 1.2em;
-          line-height: 1.2em;
-          vertical-align: bottom;
-        }
-        .priceRoll__curr,
-        .priceRoll__prev {
-          display: block;
-          white-space: nowrap;
-        }
-
-        /* Default positions (no animation) */
-        .priceRoll__curr {
-          transform: translateY(0);
-          opacity: 1;
-        }
-
-        /* During animation we absolutely stack */
-        .priceRoll__anim .priceRoll__curr,
-        .priceRoll__anim .priceRoll__prev {
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
-        }
-
-        /* DOWN: new comes from top, old exits down */
-        .priceRoll__down .priceRoll__curr {
-          animation: priceRollInDown 320ms ease forwards;
-        }
-        .priceRoll__down .priceRoll__prev {
-          animation: priceRollOutDown 320ms ease forwards;
-        }
-
-        @keyframes priceRollInDown {
-          from {
-            transform: translateY(-110%);
-            opacity: 0;
-          }
-          to {
-            transform: translateY(0);
-            opacity: 1;
-          }
-        }
-        @keyframes priceRollOutDown {
-          from {
-            transform: translateY(0);
-            opacity: 1;
-          }
-          to {
-            transform: translateY(110%);
-            opacity: 0;
-          }
-        }
-
-        /* UP: new comes from bottom, old exits up */
-        .priceRoll__up .priceRoll__curr {
-          animation: priceRollInUp 320ms ease forwards;
-        }
-        .priceRoll__up .priceRoll__prev {
-          animation: priceRollOutUp 320ms ease forwards;
-        }
-
-        @keyframes priceRollInUp {
-          from {
-            transform: translateY(110%);
-            opacity: 0;
-          }
-          to {
-            transform: translateY(0);
-            opacity: 1;
-          }
-        }
-        @keyframes priceRollOutUp {
-          from {
-            transform: translateY(0);
-            opacity: 1;
-          }
-          to {
-            transform: translateY(-110%);
-            opacity: 0;
-          }
-        }
-      `}</style>
-
       <div className="pricing__content__K9j6q">
         <h1 className="typography__heading1__T3m8s" style={{ margin: 0, textAlign: "center" }}>
           Pricing
@@ -286,106 +179,228 @@ export default function PricingPage() {
         <div className="Spacer-module__root__NM019" style={{ "--height": "112px" } as CSSProperties} />
 
         <div className="pricing__grid__L7p3s">
-          {plans.map((plan) => (
-            <article
-              key={plan.key}
-              className="module__card__H5k8q"
-              data-highlighted={plan.highlighted ? "true" : "false"}
-            >
-              <div className="pricing__card-top__A1b2c">
-                <div className="pricing__plan-row__V2c3d">
-                  <h4 className="typography__heading4__Z7p4s" style={{ margin: 0 }}>
-                    {plan.name}
-                  </h4>
-                </div>
+          {plans.map((plan) => {
+            const showToggle = Boolean(plan.showBillingToggle);
 
-                <div className="Spacer-module__root__NM019" style={{ "--height": "12px" } as CSSProperties} />
+            const priceValue = showToggle
+              ? isYearly
+                ? plan.priceYearly
+                : plan.priceMonthly ?? plan.priceYearly
+              : plan.priceYearly;
 
-                <div className="pricing__price__T7g2m">
-                  <span className="typography__body__K4n7p" style={{ margin: 0 }}>
-                    {plan.description}
-                  </span>
+            const billingLabel = showToggle
+              ? isYearly
+                ? plan.billingLabelYearly
+                : plan.billingLabelMonthly ?? plan.billingLabelYearly
+              : plan.billingLabelYearly;
 
-                  <span className="typography__body__K4n7p bitC1">
-                    {/* ✅ Price changes with billingCycle + rolls up/down */}
-                    <PriceRoll value={getPrice(plan)} direction={rollDir} />
-                  </span>
+            return (
+              <article
+                key={plan.key}
+                className="module__card__H5k8q"
+                data-highlighted={plan.highlighted ? "true" : "false"}
+              >
+                <div className="pricing__card-top__A1b2c">
+                  <div className="pricing__plan-row__V2c3d">
+                    <h4 className="typography__heading4__Z7p4s" style={{ margin: 0 }}>
+                      {plan.name}
+                    </h4>
+                  </div>
 
-                  <span className="typography__body__K4n7p">
-                    {/* ✅ description2 stays the same always */}
-                    {plan.description2}
-                  </span>
-                </div>
+                  <div className="Spacer-module__root__NM019" style={{ "--height": "12px" } as CSSProperties} />
 
-                {/* Toggle (only on Plus & Business) + billing label */}
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  {plan.showBillingToggle ? (
-                    <div className="root__toggle-wrapper__T7g2m">
-                      <input
-                        className="root__toggle__T7g2m root__toggle--ios__T7g2m"
-                        id={`billingToggle-${plan.key}`}
-                        type="checkbox"
-                        // ✅ one shared state: toggling either affects both
-                        checked={billingCycle === "yearly"}
-                        onChange={(e) => toggleBilling(e.target.checked)}
-                      />
-                      <label
-                        className="root__toggle-btn__T7g2m"
-                        htmlFor={`billingToggle-${plan.key}`}
-                      />
-                    </div>
-                  ) : null}
-
-                  <span className="typography__small__Q9j2p pricing__billing__C2d3e">
-                    {getBillingLabel(plan)}
-                  </span>
-                </div>
-
-                <div className="Spacer-module__root__NM019" style={{ "--height": "16px" } as CSSProperties} />
-              </div>
-
-              <div className="Spacer-module__root__NM019" style={{ "--height": "20px" } as CSSProperties} />
-
-              <ul className="pricing__features__M93j8">
-                {plan.features.map((f) => (
-                  <li key={f} className="pricing__feature__P5k8p">
-                    <span className="pricing__check__Z3n7q" aria-hidden="true">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-                        <path
-                          d="M6.6 11.2 3.5 8.2a.8.8 0 0 1 1.1-1.1l2 2 4.5-4.6a.8.8 0 1 1 1.1 1.1l-5.1 5.6a.8.8 0 0 1-1.1 0Z"
-                          fill="currentColor"
-                        />
-                      </svg>
+                  <div className="pricing__price__T7g2m">
+                    <span className="typography__body__K4n7p" style={{ margin: 0 }}>
+                      {plan.description}
                     </span>
-                    <span className="typography__small__Q9j2p pricing__feature-text__Q9j2p">{f}</span>
-                  </li>
-                ))}
-              </ul>
 
-              <div className="Spacer-module__root__NM019" style={{ "--height": "20px" } as CSSProperties} />
+                    {showToggle ? (
+                      <PriceRoller
+                        value={priceValue}
+                        direction={rollDirection}
+                        className="typography__body__K4n7p bitC1"
+                      />
+                    ) : (
+                      <span className="typography__body__K4n7p bitC1">{priceValue}</span>
+                    )}
 
-              <div className="pricing__actions__Q6z2k">
-                <a
-                  href={plan.cta.href}
-                  className="button__root__ZxcvB button__kind-primary__R5j2s button__size-medium__L9d7h pricing__cta__X1y2z"
-                  style={{ width: "100%", justifyContent: "center" }}
-                >
-                  <span>{plan.cta.label}</span>
-                </a>
+                    <span className="typography__body__K4n7p">{plan.description2}</span>
+                  </div>
 
-                {plan.showAltSalesLink ? (
-                  <p className="typography__small__Q9j2p pricing__alt__P5k8p" style={{ margin: 0 }}>
-                    or{" "}
-                    <a href="/contact" className="typography__link__B7s3m">
-                      Talk to sales
-                    </a>
-                  </p>
-                ) : null}
-              </div>
-            </article>
-          ))}
+                  {/* Toggle goes RIGHT BEFORE the billing label (Plus + Business only) */}
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    {showToggle ? (
+                      <div className="root__toggle-wrapper__T7g2m">
+                        <input
+                          className="root__toggle__T7g2m root__toggle--ios__T7g2m"
+                          id={`billingToggle-${plan.key}`}
+                          type="checkbox"
+                          name={`billingToggle-${plan.key}`}
+                          checked={isYearly}
+                          onChange={(e) => toggleTo(e.target.checked ? "yearly" : "monthly")}
+                          aria-label="Toggle yearly billing"
+                        />
+                        <label
+                          className="root__toggle-btn__T7g2m"
+                          htmlFor={`billingToggle-${plan.key}`}
+                        />
+                      </div>
+                    ) : null}
+
+                    <span className="typography__small__Q9j2p pricing__billing__C2d3e">{billingLabel}</span>
+                  </div>
+
+                  <div className="Spacer-module__root__NM019" style={{ "--height": "16px" } as CSSProperties} />
+                </div>
+
+                <div className="Spacer-module__root__NM019" style={{ "--height": "20px" } as CSSProperties} />
+
+                <ul className="pricing__features__M93j8">
+                  {plan.features.map((f) => (
+                    <li key={f} className="pricing__feature__P5k8p">
+                      <span className="pricing__check__Z3n7q" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                          <path
+                            d="M6.6 11.2 3.5 8.2a.8.8 0 0 1 1.1-1.1l2 2 4.5-4.6a.8.8 0 1 1 1.1 1.1l-5.1 5.6a.8.8 0 0 1-1.1 0Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </span>
+                      <span className="typography__small__Q9j2p pricing__feature-text__Q9j2p">{f}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="Spacer-module__root__NM019" style={{ "--height": "20px" } as CSSProperties} />
+
+                <div className="pricing__actions__Q6z2k">
+                  <a
+                    href={plan.cta.href}
+                    className="button__root__ZxcvB button__kind-primary__R5j2s button__size-medium__L9d7h pricing__cta__X1y2z"
+                    style={{ width: "100%", justifyContent: "center" }}
+                  >
+                    <span>{plan.cta.label}</span>
+                  </a>
+
+                  {plan.showAltSalesLink ? (
+                    <p className="typography__small__Q9j2p pricing__alt__P5k8p" style={{ margin: 0 }}>
+                      or{" "}
+                      <a href="/contact" className="typography__link__B7s3m">
+                        Talk to sales
+                      </a>
+                    </p>
+                  ) : null}
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
+
+      {/* Animation CSS (kept local so you can paste this file anywhere) */}
+      <style jsx>{`
+        .priceRoll {
+          position: relative;
+          display: inline-block;
+          overflow: hidden;
+          height: 1.25em;
+          line-height: 1.25em;
+          vertical-align: bottom;
+          min-width: 3.5ch;
+        }
+
+        .priceRollItem {
+          position: absolute;
+          left: 0;
+          top: 0;
+          white-space: nowrap;
+          will-change: transform, opacity;
+        }
+
+        .priceRollItem.current {
+          transform: translateY(0%);
+          opacity: 1;
+        }
+
+        .priceRollItem.next {
+          opacity: 1;
+        }
+
+        /* DOWN: old exits down, new enters from above */
+        .priceRoll.is-animating.dir-down .priceRollItem.current {
+          animation: rollDownCurrent 240ms ease-in forwards;
+        }
+        .priceRoll.is-animating.dir-down .priceRollItem.next {
+          transform: translateY(-110%);
+          animation: rollDownNext 240ms ease-in forwards;
+        }
+
+        /* UP: old exits up, new enters from below */
+        .priceRoll.is-animating.dir-up .priceRollItem.current {
+          animation: rollUpCurrent 240ms ease-in forwards;
+        }
+        .priceRoll.is-animating.dir-up .priceRollItem.next {
+          transform: translateY(110%);
+          animation: rollUpNext 240ms ease-in forwards;
+        }
+
+        @keyframes rollDownCurrent {
+          from {
+            transform: translateY(0%);
+            opacity: 1;
+          }
+          to {
+            transform: translateY(110%);
+            opacity: 0;
+          }
+        }
+        @keyframes rollDownNext {
+          from {
+            transform: translateY(-110%);
+            opacity: 0.9;
+          }
+          to {
+            transform: translateY(0%);
+            opacity: 1;
+          }
+        }
+
+        @keyframes rollUpCurrent {
+          from {
+            transform: translateY(0%);
+            opacity: 1;
+          }
+          to {
+            transform: translateY(-110%);
+            opacity: 0;
+          }
+        }
+        @keyframes rollUpNext {
+          from {
+            transform: translateY(110%);
+            opacity: 0.9;
+          }
+          to {
+            transform: translateY(0%);
+            opacity: 1;
+          }
+        }
+
+        /* Respect reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+          .priceRoll.is-animating .priceRollItem.current,
+          .priceRoll.is-animating .priceRollItem.next {
+            animation: none !important;
+          }
+          .priceRollItem {
+            position: static;
+          }
+          .priceRoll {
+            overflow: visible;
+            height: auto;
+          }
+        }
+      `}</style>
     </section>
   );
 }
