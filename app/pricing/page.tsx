@@ -1,34 +1,33 @@
 "use client";
 
 import "@/styles/pages/pricing/pricing.css";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 
-type PlanKey = "hobby" | "plus" | "business" | "enterprise";
-type RollDirection = "up" | "down";
+type BillingCycle = "monthly" | "yearly";
 
 type Plan = {
-  key: PlanKey;
+  key: "hobby" | "plus" | "business" | "enterprise";
   name: string;
 
-  // Only Plus/Business use the dial animation
-  dial?: {
-    monthly: number;
-    yearly: number;
-    suffix: string; // e.g. "/mo"
-  };
+  // For dial plans (Plus/Business)
+  monthlyAmount?: number;
+  yearlyAmount?: number;
 
-  // For non-dial plans
-  priceText?: string;
+  // For non-dial plans (Hobby/Enterprise)
+  staticPrice?: string;
+
+  currency?: string; // e.g. "$"
+  unit?: string; // e.g. "/mo"
 
   description: string;
   description2: string;
+  billingLabel: string;
 
   features: string[];
   highlighted?: boolean;
   cta: { label: string; href: string };
   showAltSalesLink?: boolean;
-
   showBillingToggle?: boolean;
 };
 
@@ -36,9 +35,10 @@ const plans: Plan[] = [
   {
     key: "hobby",
     name: "Hobby",
-    priceText: "$0",
+    staticPrice: "$0",
     description: "",
     description2: "",
+    billingLabel: "No maintenance price",
     features: [
       "Next.js + Vercel deployment",
       "Performance-focused build",
@@ -51,9 +51,14 @@ const plans: Plan[] = [
   {
     key: "plus",
     name: "Plus",
-    dial: { monthly: 12, yearly: 10, suffix: "/mo" },
+    monthlyAmount: 12,
+    yearlyAmount: 10,
+    currency: "$",
+    unit: "/mo",
     description: "",
     description2: " + aditional features",
+    billingLabel: "Billed yearly",
+    showBillingToggle: true,
     features: [
       "Everything in Hobby",
       "4–8 pages",
@@ -64,14 +69,18 @@ const plans: Plan[] = [
     highlighted: true,
     cta: { label: "Get Started", href: "/get-started" },
     showAltSalesLink: true,
-    showBillingToggle: true,
   },
   {
     key: "business",
     name: "Business",
-    dial: { monthly: 18, yearly: 16, suffix: "/mo" },
+    monthlyAmount: 18,
+    yearlyAmount: 16,
+    currency: "$",
+    unit: "/mo",
     description: "",
     description2: " + aditional features",
+    billingLabel: "Billed yearly",
+    showBillingToggle: true,
     features: [
       "Everything in Plus",
       "9–15 pages",
@@ -80,14 +89,14 @@ const plans: Plan[] = [
       "Technical SEO improvements",
     ],
     cta: { label: "Get Started", href: "/get-started" },
-    showBillingToggle: true,
   },
   {
     key: "enterprise",
     name: "Enterprise",
-    priceText: "Contact us",
+    staticPrice: "Contact us",
     description: "",
     description2: "",
+    billingLabel: "Annual billing only",
     features: [
       "Shopify + Next.js architecture",
       "Custom storefront experiences",
@@ -99,129 +108,92 @@ const plans: Plan[] = [
   },
 ];
 
-function formatDialPrice(n: number, suffix: string) {
-  return `$${n}${suffix}`;
-}
-
-/**
- * DialStepper
- * - When target changes, it animates number-by-number (e.g. 12 -> 11 -> 10)
- * - Each step does a small roll + fade.
- */
-function DialStepper({
-  value,
-  direction,
+function PriceDial({
+  amount,
+  currency = "$",
+  unit = "/mo",
   className,
 }: {
-  value: string; // formatted string e.g. "$12/mo"
-  direction: RollDirection; // down: new comes from above, old exits down
+  amount: number;
+  currency?: string;
+  unit?: string;
   className?: string;
 }) {
-  const [display, setDisplay] = useState(value);
-  const [incoming, setIncoming] = useState<string | null>(null);
-  const [dir, setDir] = useState<RollDirection>(direction);
+  const [current, setCurrent] = useState<number>(amount);
+  const [next, setNext] = useState<number | null>(null);
+  const [direction, setDirection] = useState<"up" | "down">("down");
+  const runningRef = useRef(false);
 
   useEffect(() => {
-    if (value === display) return;
+    if (amount === current) return;
 
-    setDir(direction);
-    setIncoming(value);
+    // If a new change comes in mid-animation, we just "retarget" from whatever is current now.
+    if (runningRef.current) return;
 
-    const t = window.setTimeout(() => {
-      setDisplay(value);
-      setIncoming(null);
-    }, 160);
+    runningRef.current = true;
 
-    return () => window.clearTimeout(t);
-  }, [value, direction, display]);
+    const stepOnce = async () => {
+      let from = current;
+
+      // Decide direction based on target vs current
+      const dir: "up" | "down" = amount > from ? "down" : "up";
+      setDirection(dir);
+
+      while (from !== amount) {
+        const to = from + (amount > from ? 1 : -1);
+
+        // Show next value
+        setNext(to);
+
+        // Wait for the visual transition
+        await new Promise((r) => window.setTimeout(r, 160));
+
+        // Commit
+        setCurrent(to);
+        setNext(null);
+
+        // Small pause so the tick feels like a dial
+        await new Promise((r) => window.setTimeout(r, 40));
+
+        from = to;
+      }
+
+      runningRef.current = false;
+    };
+
+    stepOnce();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [amount]);
 
   return (
-    <span
-      className={[
-        "dial",
-        incoming ? "is-animating" : "",
-        incoming ? `dir-${dir}` : "",
-        className ?? "",
-      ]
-        .filter(Boolean)
-        .join(" ")}
-      aria-live="polite"
-    >
-      <span className="dialItem current">{display}</span>
-      {incoming && <span className="dialItem next">{incoming}</span>}
+    <span className={["priceDial", className ?? ""].filter(Boolean).join(" ")}>
+      <span className="priceDialFixed">{currency}</span>
+
+      <span
+        className={[
+          "priceDialWindow",
+          next !== null ? "is-animating" : "",
+          next !== null ? `dir-${direction}` : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
+        aria-live="polite"
+      >
+        <span className="priceDialNum current">{current}</span>
+        {next !== null && <span className="priceDialNum next">{next}</span>}
+      </span>
+
+      <span className="priceDialFixed">{unit}</span>
     </span>
   );
 }
 
-function useDialSequence(target: number, stepMs = 170) {
-  const [current, setCurrent] = useState(target);
-  const prevTargetRef = useRef(target);
-  const runningRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    const prevTarget = prevTargetRef.current;
-    if (target === prevTarget) return;
-
-    // Cancel any in-flight timer chain
-    if (runningRef.current) {
-      window.clearTimeout(runningRef.current);
-      runningRef.current = null;
-    }
-
-    const dir: RollDirection = target < prevTarget ? "down" : "up";
-    prevTargetRef.current = target;
-
-    const step = () => {
-      setCurrent((c) => {
-        if (c === target) return c;
-        return c + (target > c ? 1 : -1);
-      });
-
-      runningRef.current = window.setTimeout(() => {
-        // keep stepping until we land on target
-        setCurrent((c) => {
-          if (c === target) return c;
-          return c;
-        });
-        if (target !== (prev => prev)(target)) {
-          // noop safety
-        }
-        // Read state on next tick by scheduling again:
-        // We just schedule again unconditionally, but it will stop when current === target
-        // via the guard inside setCurrent update.
-        step();
-      }, stepMs);
-    };
-
-    // Kick off the chain, but only if we need to move.
-    runningRef.current = window.setTimeout(step, 0);
-
-    return () => {
-      if (runningRef.current) window.clearTimeout(runningRef.current);
-      runningRef.current = null;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [target]);
-
-  // Determine direction based on last movement intent (target vs previous target).
-  const direction: RollDirection = useMemo(() => {
-    const prevTarget = prevTargetRef.current;
-    return target < prevTarget ? "down" : "up";
-  }, [target]);
-
-  return { current, direction };
-}
-
 export default function PricingPage() {
-  // Shared toggle: one checkbox controls BOTH Plus & Business
-  const [yearly, setYearly] = useState<boolean>(false);
+  // One shared state controls BOTH Plus and Business.
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
+  const isYearly = billingCycle === "yearly";
 
-  // Dial targets
-  const plusTarget = yearly ? 10 : 12;
-  const bizTarget = yearly ? 16 : 18;
-
-  const plusDial = useDialSequence(plusTarget);
-  const bizDial = useDialSequence(bizTarget);
+  const toggleTo = (next: BillingCycle) => setBillingCycle(next);
 
   return (
     <section className="pricing__container__Q7j3s">
@@ -244,12 +216,12 @@ export default function PricingPage() {
           {plans.map((plan) => {
             const showToggle = Boolean(plan.showBillingToggle);
 
-            // Resolve dial state per plan (Plus/Business only)
-            const isPlus = plan.key === "plus";
-            const isBusiness = plan.key === "business";
-
-            const dialNumber = isPlus ? plusDial.current : isBusiness ? bizDial.current : null;
-            const dialDir = isPlus ? plusDial.direction : isBusiness ? bizDial.direction : "down";
+            const dialAmount =
+              showToggle && plan.monthlyAmount != null && plan.yearlyAmount != null
+                ? isYearly
+                  ? plan.yearlyAmount
+                  : plan.monthlyAmount
+                : null;
 
             return (
               <article
@@ -271,22 +243,24 @@ export default function PricingPage() {
                       {plan.description}
                     </span>
 
-                    {/* PRICE */}
-                    {plan.dial && dialNumber !== null ? (
-                      <DialStepper
-                        value={formatDialPrice(dialNumber, plan.dial.suffix)}
-                        direction={dialDir}
+                    {dialAmount !== null ? (
+                      <PriceDial
+                        amount={dialAmount}
+                        currency={plan.currency ?? "$"}
+                        unit={plan.unit ?? "/mo"}
                         className="typography__body__K4n7p bitC1"
                       />
                     ) : (
-                      <span className="typography__body__K4n7p bitC1">{plan.priceText ?? ""}</span>
+                      <span className="typography__body__K4n7p bitC1">
+                        {plan.staticPrice ?? ""}
+                      </span>
                     )}
 
-                    {/* description2 stays constant always */}
+                    {/* stays the same no matter what */}
                     <span className="typography__body__K4n7p">{plan.description2}</span>
                   </div>
 
-                  {/* Toggle (Plus + Business only) + fixed billing label */}
+                  {/* Toggle goes RIGHT BEFORE the billing label (Plus + Business only) */}
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     {showToggle ? (
                       <div className="root__toggle-wrapper__T7g2m">
@@ -295,17 +269,17 @@ export default function PricingPage() {
                           id={`billingToggle-${plan.key}`}
                           type="checkbox"
                           name={`billingToggle-${plan.key}`}
-                          checked={yearly}
-                          onChange={(e) => setYearly(e.target.checked)}
-                          aria-label="Toggle yearly pricing"
+                          checked={isYearly}
+                          onChange={(e) => toggleTo(e.target.checked ? "yearly" : "monthly")}
+                          aria-label="Toggle yearly billing"
                         />
                         <label className="root__toggle-btn__T7g2m" htmlFor={`billingToggle-${plan.key}`} />
                       </div>
                     ) : null}
 
-                    {/* IMPORTANT: this text never changes */}
+                    {/* billing label does NOT change */}
                     <span className="typography__small__Q9j2p pricing__billing__C2d3e">
-                      {showToggle ? "Billed yearly" : plan.key === "enterprise" ? "Annual billing only" : "No maintenance price"}
+                      {plan.billingLabel}
                     </span>
                   </div>
 
@@ -358,44 +332,54 @@ export default function PricingPage() {
 
       {/* Dial animation CSS */}
       <style jsx>{`
-        .dial {
+        .priceDial {
+          display: inline-flex;
+          align-items: baseline;
+          gap: 0.1em;
+        }
+
+        .priceDialFixed {
+          white-space: nowrap;
+        }
+
+        .priceDialWindow {
           position: relative;
           display: inline-block;
           overflow: hidden;
           height: 1.25em;
           line-height: 1.25em;
           vertical-align: bottom;
-          min-width: 5ch;
+          min-width: 2ch;
         }
 
-        .dialItem {
+        .priceDialNum {
           position: absolute;
           left: 0;
           top: 0;
-          white-space: nowrap;
           will-change: transform, opacity;
+          white-space: nowrap;
         }
 
-        .dialItem.current {
+        .priceDialNum.current {
           transform: translateY(0%);
           opacity: 1;
         }
 
-        /* DOWN: old exits down, new enters from above */
-        .dial.is-animating.dir-down .dialItem.current {
+        /* DOWN = new comes from above, old exits down */
+        .priceDialWindow.is-animating.dir-down .priceDialNum.current {
           animation: dialDownCurrent 160ms ease-in forwards;
         }
-        .dial.is-animating.dir-down .dialItem.next {
-          transform: translateY(-90%);
+        .priceDialWindow.is-animating.dir-down .priceDialNum.next {
+          transform: translateY(-110%);
           animation: dialDownNext 160ms ease-in forwards;
         }
 
-        /* UP: old exits up, new enters from below */
-        .dial.is-animating.dir-up .dialItem.current {
+        /* UP = new comes from below, old exits up */
+        .priceDialWindow.is-animating.dir-up .priceDialNum.current {
           animation: dialUpCurrent 160ms ease-in forwards;
         }
-        .dial.is-animating.dir-up .dialItem.next {
-          transform: translateY(90%);
+        .priceDialWindow.is-animating.dir-up .priceDialNum.next {
+          transform: translateY(110%);
           animation: dialUpNext 160ms ease-in forwards;
         }
 
@@ -405,14 +389,14 @@ export default function PricingPage() {
             opacity: 1;
           }
           to {
-            transform: translateY(90%);
+            transform: translateY(110%);
             opacity: 0;
           }
         }
         @keyframes dialDownNext {
           from {
-            transform: translateY(-90%);
-            opacity: 0;
+            transform: translateY(-110%);
+            opacity: 0.6;
           }
           to {
             transform: translateY(0%);
@@ -426,14 +410,14 @@ export default function PricingPage() {
             opacity: 1;
           }
           to {
-            transform: translateY(-90%);
+            transform: translateY(-110%);
             opacity: 0;
           }
         }
         @keyframes dialUpNext {
           from {
-            transform: translateY(90%);
-            opacity: 0;
+            transform: translateY(110%);
+            opacity: 0.6;
           }
           to {
             transform: translateY(0%);
@@ -442,16 +426,13 @@ export default function PricingPage() {
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .dial.is-animating .dialItem.current,
-          .dial.is-animating .dialItem.next {
-            animation: none !important;
-          }
-          .dialItem {
-            position: static;
-          }
-          .dial {
+          .priceDialWindow {
             overflow: visible;
             height: auto;
+          }
+          .priceDialNum {
+            position: static;
+            animation: none !important;
           }
         }
       `}</style>
