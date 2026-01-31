@@ -7,6 +7,7 @@ type Plan = {
   name: string
   priceYearly: string
   description: string
+  description2: string
   features: string[]
   highlighted?: boolean
   cta: { label: string; href: string }
@@ -19,6 +20,7 @@ const plans: Plan[] = [
     name: "Hobby",
     priceYearly: "Free forever",
     description: "Perfect for a simple, fast marketing site or landing page.",
+    description2: "",
     features: ["Next.js + Vercel deployment", "Performance-focused build", "Basic SEO setup", "1–3 pages", "Email support"],
     cta: { label: "Get Started", href: "/get-started" },
   },
