@@ -11,15 +11,13 @@ type Plan = {
   description: string;
   description2: string;
 
-  // If you want the rolling animation, set these (Plus/Business)
   monthlyAmount?: number;
   yearlyAmount?: number;
-  priceSuffix?: string; // e.g. "/mo"
+  priceSuffix?: string;
 
-  // Fallback (Hobby/Enterprise)
   priceText?: string;
+  priceHref?: string;
 
-  billingLabelMonthly?: string;
   billingLabelYearly: string;
 
   features: string[];
@@ -53,8 +51,7 @@ const plans: Plan[] = [
     yearlyAmount: 10,
     priceSuffix: "/mo",
     description: "",
-    description2: " + aditional features",
-    billingLabelMonthly: "Billed monthly",
+    description2: " + additional features",
     billingLabelYearly: "Billed yearly",
     showBillingToggle: true,
     features: [
@@ -74,9 +71,8 @@ const plans: Plan[] = [
     monthlyAmount: 18,
     yearlyAmount: 16,
     priceSuffix: "/mo",
-    description: " + aditional features",
+    description: " + additional features",
     description2: "",
-    billingLabelMonthly: "Billed monthly",
     billingLabelYearly: "Billed yearly",
     showBillingToggle: true,
     features: [
@@ -92,6 +88,7 @@ const plans: Plan[] = [
     key: "enterprise",
     name: "Enterprise",
     priceText: "Contact us",
+    priceHref: "/contact",
     description: "",
     description2: "",
     billingLabelYearly: "Annual billing only",
@@ -167,20 +164,12 @@ export default function PricingPage() {
 
         <div className="pricing__grid__L7p3s">
           {plans.map((plan) => {
-            const showToggle = !!plan.showBillingToggle;
-
             const amount =
-              showToggle && plan.monthlyAmount != null && plan.yearlyAmount != null
+              plan.showBillingToggle && plan.monthlyAmount && plan.yearlyAmount
                 ? isYearly
                   ? plan.yearlyAmount
                   : plan.monthlyAmount
                 : null;
-
-            const billingLabel = showToggle
-              ? isYearly
-                ? plan.billingLabelYearly
-                : plan.billingLabelMonthly ?? plan.billingLabelYearly
-              : plan.billingLabelYearly;
 
             return (
               <article
@@ -189,11 +178,9 @@ export default function PricingPage() {
                 data-highlighted={plan.highlighted ? "true" : "false"}
               >
                 <div className="pricing__card-top__A1b2c">
-                  <div className="pricing__plan-row__V2c3d">
-                    <h4 className="typography__heading4__Z7p4s" style={{ margin: 0 }}>
-                      {plan.name}
-                    </h4>
-                  </div>
+                  <h4 className="typography__heading4__Z7p4s" style={{ margin: 0 }}>
+                    {plan.name}
+                  </h4>
 
                   <div
                     className="Spacer-module__root__NM019"
@@ -201,30 +188,35 @@ export default function PricingPage() {
                   />
 
                   <div className="pricing__price__T7g2m">
-                    <span className="typography__body__K4n7p" style={{ margin: 0 }}>
+                    <span className="typography__body__K4n7p">
                       {plan.description}
                     </span>
 
-                    {/* Price (animated for Plus/Business, static for Hobby/Enterprise) */}
                     <span className="typography__body__K4n7p bitC1">
                       {amount != null ? (
                         <>
-                          <span aria-hidden="true">$</span>
-                          <RollingNumber value={amount} />
-                          <span aria-hidden="true">{plan.priceSuffix ?? ""}</span>
+                          $<RollingNumber value={amount} />
+                          {plan.priceSuffix}
                         </>
+                      ) : plan.priceHref ? (
+                        <a
+                          href={plan.priceHref}
+                          className="typography__link__B7s3m"
+                        >
+                          {plan.priceText}
+                        </a>
                       ) : (
                         plan.priceText
                       )}
                     </span>
 
-                    {/* description2 stays the same regardless of toggle */}
-                    <span className="typography__body__K4n7p">{plan.description2}</span>
+                    <span className="typography__body__K4n7p">
+                      {plan.description2}
+                    </span>
                   </div>
 
-                  {/* Toggle + Billing label row */}
                   <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    {showToggle ? (
+                    {plan.showBillingToggle && (
                       <div className="root__toggle-wrapper__T7g2m">
                         <input
                           className="root__toggle__T7g2m root__toggle--ios__T7g2m"
@@ -238,17 +230,12 @@ export default function PricingPage() {
                           htmlFor={`billingToggle-${plan.key}`}
                         />
                       </div>
-                    ) : null}
+                    )}
 
                     <span className="typography__small__Q9j2p pricing__billing__C2d3e">
-                      {billingLabel}
+                      {plan.billingLabelYearly}
                     </span>
                   </div>
-
-                  <div
-                    className="Spacer-module__root__NM019"
-                    style={{ "--height": "16px" } as CSSProperties}
-                  />
                 </div>
 
                 <div
@@ -288,44 +275,37 @@ export default function PricingPage() {
                     <span>{plan.cta.label}</span>
                   </a>
 
-                  {plan.showAltSalesLink ? (
+                  {plan.showAltSalesLink && (
                     <p className="typography__small__Q9j2p pricing__alt__P5k8p" style={{ margin: 0 }}>
                       or{" "}
                       <a href="/contact" className="typography__link__B7s3m">
                         Talk to sales
                       </a>
                     </p>
-                  ) : null}
+                  )}
                 </div>
               </article>
             );
           })}
         </div>
 
-        {/* Rolling number styles */}
         <style jsx>{`
           .rollNumber {
             display: inline-flex;
             align-items: baseline;
-            gap: 0px;
-            margin: 0 2px;
           }
 
           .rollDigit {
             position: relative;
-            display: inline-block;
-            width: 0.62em; /* tweak if your font is wider/narrower */
+            width: 0.62em;
             height: 1em;
             overflow: hidden;
-            vertical-align: baseline;
           }
 
           .rollDigitInner {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            will-change: transform;
             transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
           }
 
