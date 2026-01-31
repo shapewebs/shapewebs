@@ -5,14 +5,22 @@ import "@/styles/pages/pricing/pricing.css"
 type Plan = {
   key: "hobby" | "plus" | "business" | "enterprise"
   name: string
-  priceYearly: string
+
+  priceMonthly?: string
+  priceYearly?: string
+
   description: string
   description2: string
-  billingLabel: string
+
+  billingLabelMonthly?: string
+  billingLabelYearly?: string
+
   features: string[]
   highlighted?: boolean
   cta: { label: string; href: string }
   showAltSalesLink?: boolean
+
+  showBillingToggle?: boolean
 }
 
 const plans: Plan[] = [
