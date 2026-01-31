@@ -35,13 +35,13 @@
   grid-template-columns: repeat(4, 1fr);
 }
 
-/* cells: ONLY horizontal lines */
+/* cells: ONLY horizontal lines by default */
 .performance__cell__C2d3e {
   padding: 14px 16px;
   border-bottom: 1px solid rgba(var(--color-border-primary), 1);
 }
 
-/* add a top border for the header row to visually start the table */
+/* header cells */
 .performance__row--header__P5k8p .performance__cell__C2d3e {
   text-align: center;
   padding-top: 16px;
@@ -49,7 +49,7 @@
   background: rgba(var(--color-bg-primary), 1);
 }
 
-/* category row styling (still no backgrounds) */
+/* category row styling */
 .performance__row--category__P5k8p .performance__cell__C2d3e {
   padding-top: 12px;
   padding-bottom: 12px;
@@ -112,29 +112,20 @@
   }
 }
 
-/* Highlight the Plus column (or whichever cell has data-highlighted="true") */
+/* ✅ Highlight the Business column via data-highlighted="true" */
 .performance__cell__C2d3e[data-highlighted="true"] {
   position: relative;
   z-index: 1;
+
+  /* column background */
+  background: rgba(var(--color-bg-secondary), 1);
+
+  /* borders on BOTH sides of the highlighted column */
+  border-left: 1px solid rgba(var(--color-border-primary), 1);
+  border-right: 1px solid rgba(var(--color-border-primary), 1);
 }
 
-/* Make the horizontal dividers for the highlighted column slightly stronger */
-.performance__cell__C2d3e[data-highlighted="true"] {
-  border-bottom-color: rgba(var(--color-border-primary), 0.95);
-}
-
-/* Also strengthen the top divider in the header for the highlighted column */
+/* ensure header highlighted cell uses bg-secondary (overrides header bg-primary rule) */
 .performance__row--header__P5k8p .performance__cell__C2d3e[data-highlighted="true"] {
-  border-top: rgba(var(--color-border-primary), 0.95);
-}
-
-/* Optional: very subtle emphasis without adding a background color */
-.performance__cell__C2d3e[data-highlighted="true"] {
-  box-shadow:
-    inset 0 0 0 1px rgba(0, 122, 255, 0.28);
-}
-
-/* Optional: make header text slightly stronger for highlighted column */
-.performance__cell--header__C2d3e[data-highlighted="true"] .typography__heading6__H5j9s {
-  color: rgba(var(--color-text-primary), 1);
+  background: rgba(var(--color-bg-secondary), 1);
 }
