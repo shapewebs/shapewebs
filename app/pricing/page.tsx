@@ -10,26 +10,23 @@ type Plan = {
   key: "hobby" | "plus" | "business" | "enterprise";
   name: string;
 
-  // Dial plans (Plus/Business)
-  monthlyAmount?: number;
-  yearlyAmount?: number;
+  // For plans that animate between monthly/yearly:
+  priceMonthly?: number;
+  priceYearly?: number;
 
-  // Non-dial plans (Hobby/Enterprise)
-  staticPrice?: string;
-
-  currency?: string; // "$"
-  unit?: string; // "/mo"
+  // For plans that don’t toggle:
+  priceText?: string;
 
   description: string;
   description2: string;
-
-  // As requested: this text should NOT change when toggling
   billingLabel: string;
 
   features: string[];
   highlighted?: boolean;
   cta: { label: string; href: string };
   showAltSalesLink?: boolean;
+
+  // Show the shared toggle only on these cards:
   showBillingToggle?: boolean;
 };
 
@@ -37,7 +34,7 @@ const plans: Plan[] = [
   {
     key: "hobby",
     name: "Hobby",
-    staticPrice: "$0",
+    priceText: "$0",
     description: "",
     description2: "",
     billingLabel: "No maintenance price",
@@ -53,14 +50,11 @@ const plans: Plan[] = [
   {
     key: "plus",
     name: "Plus",
-    monthlyAmount: 12,
-    yearlyAmount: 10,
-    currency: "$",
-    unit: "/mo",
+    priceMonthly: 12,
+    priceYearly: 10, // ✅ yearly-paid price
     description: "",
     description2: " + aditional features",
     billingLabel: "Billed yearly",
-    showBillingToggle: true,
     features: [
       "Everything in Hobby",
       "4–8 pages",
@@ -71,18 +65,16 @@ const plans: Plan[] = [
     highlighted: true,
     cta: { label: "Get Started", href: "/get-started" },
     showAltSalesLink: true,
+    showBillingToggle: true,
   },
   {
     key: "business",
     name: "Business",
-    monthlyAmount: 18,
-    yearlyAmount: 16,
-    currency: "$",
-    unit: "/mo",
-    description: "",
-    description2: " + aditional features",
+    priceMonthly: 18,
+    priceYearly: 16, // ✅ yearly-paid price
+    description: " + aditional features",
+    description2: "",
     billingLabel: "Billed yearly",
-    showBillingToggle: true,
     features: [
       "Everything in Plus",
       "9–15 pages",
@@ -91,11 +83,12 @@ const plans: Plan[] = [
       "Technical SEO improvements",
     ],
     cta: { label: "Get Started", href: "/get-started" },
+    showBillingToggle: true,
   },
   {
     key: "enterprise",
     name: "Enterprise",
-    staticPrice: "Contact us",
+    priceText: "Contact us",
     description: "",
     description2: "",
     billingLabel: "Annual billing only",
@@ -110,136 +103,140 @@ const plans: Plan[] = [
   },
 ];
 
-function buildSequence(from: number, to: number) {
-  if (from === to) return [from];
-  const seq: number[] = [];
-  const step = from < to ? 1 : -1;
-  for (let v = from; v !== to; v += step) seq.push(v);
-  seq.push(to);
-  return seq;
-}
-
 /**
- * Smooth dial:
- * - Renders a vertical stack of intermediate values.
- * - Animates translateY once from start -> end (no stops).
- * - A mask gradient provides natural top/bottom fading,
- *   and because motion accelerates/decelerates, the fade
- *   feels like it changes speed during the transition.
+ * Rolls digits up/down when `value` changes.
+ * Assumptions: small changes (no 9→0 wrap). Perfect for 12↔10 and 18↔16.
  */
-function SmoothPriceDial({
-  amount,
-  currency = "$",
-  unit = "/mo",
+function RollingNumber({
+  value,
+  prefix = "$",
+  suffix = "/mo",
   className,
 }: {
-  amount: number;
-  currency?: string;
-  unit?: string;
+  value: number;
+  prefix?: string;
+  suffix?: string;
   className?: string;
 }) {
-  const [current, setCurrent] = useState(amount);
-  const [stack, setStack] = useState<number[]>([amount]);
-  const [offsetIndex, setOffsetIndex] = useState(0);
-  const [animating, setAnimating] = useState(false);
-
-  const stackRef = useRef<HTMLSpanElement | null>(null);
-  const rafRef = useRef<number | null>(null);
-
-  // Duration scales with distance but clamps to a nice range.
-  const getDurationMs = (distance: number) => {
-    const perStep = 70; // ms per integer "tick" (tuned for dial feel)
-    const raw = distance * perStep;
-    return Math.max(220, Math.min(520, raw));
-  };
+  const prevRef = useRef<number>(value);
+  const [direction, setDirection] = useState<"up" | "down">("down");
 
   useEffect(() => {
-    if (amount === current) return;
+    const prev = prevRef.current;
+    if (value !== prev) {
+      setDirection(value > prev ? "up" : "down");
+      prevRef.current = value;
+    }
+  }, [value]);
 
-    const seq = buildSequence(current, amount);
-    const distance = Math.abs(amount - current);
-    const duration = getDurationMs(distance);
-
-    setStack(seq);
-    setOffsetIndex(0);
-    setAnimating(false);
-
-    // Next frame: enable transition and jump to final index.
-    // This avoids the browser batching the initial and final transform.
-    rafRef.current = window.requestAnimationFrame(() => {
-      rafRef.current = null;
-      setAnimating(true);
-      setOffsetIndex(seq.length - 1);
-
-      // When the transition ends, commit and reset stack to single value.
-      const el = stackRef.current;
-      if (!el) return;
-
-      const onEnd = (e: TransitionEvent) => {
-        if (e.propertyName !== "transform") return;
-        el.removeEventListener("transitionend", onEnd);
-
-        // commit final state
-        setCurrent(amount);
-        setStack([amount]);
-        setOffsetIndex(0);
-        setAnimating(false);
-      };
-
-      el.addEventListener("transitionend", onEnd);
-
-      // Set CSS custom prop for duration on the element.
-      el.style.setProperty("--dial-duration", `${duration}ms`);
-    });
-
-    return () => {
-      if (rafRef.current) window.cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [amount]);
-
-  // If stack has been reset (single value), keep duration sane.
-  useEffect(() => {
-    const el = stackRef.current;
-    if (!el) return;
-    if (stack.length <= 1) el.style.setProperty("--dial-duration", `0ms`);
-  }, [stack.length]);
+  const digits = useMemo(() => String(value).split("").map((d) => Number(d)), [value]);
 
   return (
-    <span className={["dialRoot", className ?? ""].filter(Boolean).join(" ")}>
-      <span className="dialFixed">{currency}</span>
+    <span className={`rollPrice ${className ?? ""}`} aria-label={`${prefix}${value}${suffix}`}>
+      <span className="rollPrefix">{prefix}</span>
 
-      <span className="dialWindow" aria-live="polite">
-        <span
-          ref={stackRef}
-          className={["dialStack", animating ? "is-animating" : ""].join(" ")}
-          style={
-            {
-              transform: `translateY(${-offsetIndex * 100}%)`,
-            } as CSSProperties
-          }
-        >
-          {stack.map((v, i) => (
-            <span key={`${v}-${i}`} className="dialItem">
-              {v}
+      <span className={`rollDigits ${direction}`}>
+        {digits.map((digit, idx) => (
+          <span className="digitWindow" key={idx}>
+            <span
+              className="digitStack"
+              style={{ transform: `translateY(-${digit * 100}%)` }}
+            >
+              {Array.from({ length: 10 }, (_, n) => (
+                <span className="digit" key={n}>
+                  {n}
+                </span>
+              ))}
             </span>
-          ))}
-        </span>
+          </span>
+        ))}
       </span>
 
-      <span className="dialFixed">{unit}</span>
+      <span className="rollSuffix">{suffix}</span>
+
+      {/* scoped styles (no color changes) */}
+      <style jsx>{`
+        .rollPrice {
+          display: inline-flex;
+          align-items: baseline;
+          gap: 0.15em;
+          white-space: nowrap;
+        }
+
+        .rollPrefix,
+        .rollSuffix {
+          display: inline-block;
+        }
+
+        .rollDigits {
+          display: inline-flex;
+          align-items: baseline;
+        }
+
+        /* Height is driven by current font-size (so it matches your typography class). */
+        .digitWindow {
+          position: relative;
+          display: inline-block;
+          height: 1em;
+          overflow: hidden;
+          width: 0.62em; /* tweak if you want tighter/wider digits */
+        }
+
+        .digitStack {
+          display: flex;
+          flex-direction: column;
+          will-change: transform;
+          transition: transform 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        /* “Roll up” vs “roll down” feel: slightly different easing */
+        .rollDigits.up .digitStack {
+          transition-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+        }
+        .rollDigits.down .digitStack {
+          transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .digit {
+          height: 1em;
+          line-height: 1em;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      `}</style>
     </span>
   );
 }
 
-export default function PricingPage() {
-  // One shared state controls BOTH Plus and Business.
-  const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
-  const isYearly = billingCycle === "yearly";
+function BillingToggle({
+  checked,
+  onChange,
+  id,
+}: {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  id: string;
+}) {
+  return (
+    <div className="root__toggle-wrapper__T7g2m">
+      <input
+        className="root__toggle__T7g2m root__toggle--ios__T7g2m"
+        id={id}
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+      />
+      <label className="root__toggle-btn__T7g2m" htmlFor={id} />
+    </div>
+  );
+}
 
-  // Shared toggle handler: toggling one toggles both.
-  const setIsYearly = (checked: boolean) => setBillingCycle(checked ? "yearly" : "monthly");
+export default function PricingPage() {
+  // ✅ One shared state controls BOTH toggles
+  // checked=true => yearly (as in previous code)
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
+  const isYearly = billingCycle === "yearly";
 
   return (
     <section className="pricing__container__Q7j3s">
@@ -260,14 +257,18 @@ export default function PricingPage() {
 
         <div className="pricing__grid__L7p3s">
           {plans.map((plan) => {
-            const showToggle = Boolean(plan.showBillingToggle);
+            const showToggle = !!plan.showBillingToggle;
 
-            const dialAmount =
-              showToggle && plan.monthlyAmount != null && plan.yearlyAmount != null
-                ? isYearly
-                  ? plan.yearlyAmount
-                  : plan.monthlyAmount
-                : null;
+            // Price logic:
+            // - Plus/Business: animated number changes with shared toggle
+            // - Hobby/Enterprise: static text
+            const hasRollingPrice = typeof plan.priceMonthly === "number" && typeof plan.priceYearly === "number";
+
+            const shownNumber = hasRollingPrice
+              ? isYearly
+                ? plan.priceYearly!
+                : plan.priceMonthly!
+              : null;
 
             return (
               <article
@@ -289,40 +290,31 @@ export default function PricingPage() {
                       {plan.description}
                     </span>
 
-                    {dialAmount !== null ? (
-                      <SmoothPriceDial
-                        amount={dialAmount}
-                        currency={plan.currency ?? "$"}
-                        unit={plan.unit ?? "/mo"}
-                        className="typography__body__K4n7p bitC1"
-                      />
-                    ) : (
-                      <span className="typography__body__K4n7p bitC1">{plan.staticPrice ?? ""}</span>
-                    )}
+                    <span className="typography__body__K4n7p bitC1">
+                      {hasRollingPrice ? (
+                        <RollingNumber value={shownNumber!} prefix="$" suffix="/mo" />
+                      ) : (
+                        plan.priceText
+                      )}
+                    </span>
 
-                    {/* stays the same no matter what */}
+                    {/* ✅ description2 remains the same (never changes with toggle) */}
                     <span className="typography__body__K4n7p">{plan.description2}</span>
                   </div>
 
-                  {/* Toggle goes RIGHT BEFORE the billing label (Plus + Business only) */}
+                  {/* Toggle + billing label row (toggle only for Plus/Business) */}
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    {showToggle ? (
-                      <div className="root__toggle-wrapper__T7g2m">
-                        <input
-                          className="root__toggle__T7g2m root__toggle--ios__T7g2m"
-                          id={`billingToggle-${plan.key}`}
-                          type="checkbox"
-                          name={`billingToggle-${plan.key}`}
-                          checked={isYearly}
-                          onChange={(e) => setIsYearly(e.target.checked)}
-                          aria-label="Toggle yearly billing"
-                        />
-                        <label className="root__toggle-btn__T7g2m" htmlFor={`billingToggle-${plan.key}`} />
-                      </div>
-                    ) : null}
+                    {showToggle && (
+                      <BillingToggle
+                        id={`billingToggle-shared-${plan.key}`}
+                        checked={isYearly}
+                        onChange={(checked) => setBillingCycle(checked ? "yearly" : "monthly")}
+                      />
+                    )}
 
-                    {/* IMPORTANT: label does NOT change on toggle */}
-                    <span className="typography__small__Q9j2p pricing__billing__C2d3e">{plan.billingLabel}</span>
+                    <span className="typography__small__Q9j2p pricing__billing__C2d3e">
+                      {plan.billingLabel}
+                    </span>
                   </div>
 
                   <div className="Spacer-module__root__NM019" style={{ "--height": "16px" } as CSSProperties} />
@@ -371,78 +363,6 @@ export default function PricingPage() {
           })}
         </div>
       </div>
-
-      {/* Smooth dial CSS (kept local so you can paste the file anywhere) */}
-      <style jsx>{`
-        .dialRoot {
-          display: inline-flex;
-          align-items: baseline;
-          gap: 0.08em;
-          white-space: nowrap;
-        }
-
-        .dialFixed {
-          white-space: nowrap;
-        }
-
-        .dialWindow {
-          position: relative;
-          display: inline-block;
-          overflow: hidden;
-
-          /* tweak if your typography line-height differs */
-          height: 1.25em;
-          line-height: 1.25em;
-
-          min-width: 2ch;
-          vertical-align: bottom;
-
-          /* This creates the fade at top/bottom; perceived fade speed changes with velocity */
-          -webkit-mask-image: linear-gradient(
-            to bottom,
-            transparent 0%,
-            rgba(0, 0, 0, 1) 26%,
-            rgba(0, 0, 0, 1) 74%,
-            transparent 100%
-          );
-          mask-image: linear-gradient(
-            to bottom,
-            transparent 0%,
-            rgba(0, 0, 0, 1) 26%,
-            rgba(0, 0, 0, 1) 74%,
-            transparent 100%
-          );
-        }
-
-        .dialStack {
-          display: block;
-          will-change: transform;
-          transform: translateY(0%);
-        }
-
-        .dialStack.is-animating {
-          /* Smooth dial = one continuous motion */
-          transition-property: transform;
-          transition-duration: var(--dial-duration, 360ms);
-          transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1); /* fast-in, smooth-out */
-        }
-
-        .dialItem {
-          display: block;
-          height: 1.25em;
-          line-height: 1.25em;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .dialWindow {
-            -webkit-mask-image: none;
-            mask-image: none;
-          }
-          .dialStack.is-animating {
-            transition: none !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }
