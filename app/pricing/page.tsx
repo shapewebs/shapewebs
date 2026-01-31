@@ -293,6 +293,7 @@ export default function PricingPage() {
           .rollNumber {
             display: inline-flex;
             align-items: baseline;
+            transform: translateY(2px);
           }
 
           .rollDigit {
