@@ -113,7 +113,7 @@ export default function PricingPage() {
                   {plan.description}
                 </span>
                   <span className="typography__body__K4n7p bitC1">{plan.priceYearly}</span>
-                  <span className="typography__body__K4n7p">{plan.priceYearly === "Custom" ? "" : "/yr"}</span>
+                  <span className="typography__body__K4n7p">{plan.priceYearly === "Custom" ? "" : {plan.description}}</span>
                 </div>
                   <span className="typography__small__Q9j2p pricing__billing__C2d3e" style={{ margin: 0 }}>
                     {plan.priceYearly === "Custom" ? "Tailored yearly pricing" : "Billed yearly"}
