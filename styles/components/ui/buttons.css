@@ -80,14 +80,14 @@
 }
 
 .button__kind-secondary__R5j2s {
-  background: rgba(var(--color-text-quaternary), 1);
-  border: 0.5px solid rgba(var(--color-border-tertiary), 1);
+  background: rgba(var(--color-text-tertiary), 1);
+  border: 0.5px solid rgba(var(--color-border-secondary), 1);
   color: rgba(var(--color-text-primary), 1);
   box-shadow: var(--shadow-stack-low);
 }
 
 .button__kind-secondary__R5j2s:hover {
-  background: rgba(var(--color-bg-quinary), 1);
+  background: rgba(var(--color-bg-quarternary), 1);
 }
 
 .button__kind-tertiary__R5j2s {
