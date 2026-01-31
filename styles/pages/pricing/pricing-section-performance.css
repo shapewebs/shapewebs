@@ -22,75 +22,91 @@
   grid-template-columns: 1fr;
 }
 
-/* sticky header rowgroup */
+/* sticky header rowgroup (NO background color) */
 .performance__rowgroup--sticky__A1b2c {
   position: sticky;
   top: 0;
   z-index: 5;
-  background: rgba(var(--color-bg-primary), 1);
-  border-bottom: 1px solid rgba(var(--color-border-primary), 1);
 }
 
 /* each row is 4 equal columns */
 .performance__row__P5k8p {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  background: rgba(var(--color-bg-secondary), 1);
 }
 
-/* header row styling */
+/* header row styling (NO background color) */
 .performance__row--header__P5k8p {
-  background: rgba(var(--color-bg-primary), 1);
+  /* intentionally empty */
 }
 
 .performance__cell__C2d3e {
   padding: 14px 16px;
   border-left: 1px solid rgba(var(--color-border-primary), 1);
-  border-right: 0;
-  border-top: 0;
   border-bottom: 1px solid rgba(var(--color-border-primary), 1);
 }
 
-.performance__cell__C2d3e:first-child {
-  border-left: 1px solid rgba(var(--color-border-primary), 1);
-}
-
 .performance__cell--header__C2d3e {
-  padding-top: 16px;
-  padding-bottom: 16px;
   text-align: center;
   color: rgba(var(--color-text-primary), 1);
 }
 
-.performance__value__C2d3e {
-  text-align: center;
-}
-
-/* Row wrapper: allows a non-column label on the left */
+/* wrapper to allow a “label pill” that isn't a column */
 .performance__rowwrap__V2c3d {
   position: relative;
 }
 
-/* The “row label” that does NOT consume a column */
+/* row label pill (NO background color) */
 .performance__rowlabel__X1y2z {
   position: absolute;
   left: 0;
   top: 50%;
   transform: translate(-8px, -50%);
-  background: rgba(var(--color-bg-primary), 1);
   border: 1px solid rgba(var(--color-border-primary), 1);
   border-radius: 999px;
   padding: 6px 10px;
   box-shadow: var(--shadow-stack-low);
   max-width: min(260px, 60vw);
+  background: transparent; /* explicitly none */
 }
 
-/* Category rows a bit more subtle */
+/* category rows: no backgrounds */
 .performance__row--category__P5k8p .performance__cell__C2d3e {
-  background: rgba(var(--color-bg-tertiary), 1);
+  /* intentionally empty */
 }
 
-/* Tooltip-ish underline style for labels (matches your pricing feature tooltip affordance) */
+/* feature cell layout */
+.performance__cell--feature__C2d3e {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* icon wrapper */
+.performance__feature__Z3n7q {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+/* YES: text primary, icon blue */
+.performance__cell--yes__C2d3e {
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.performance__cell--yes__C2d3e .performance__feature__Z3n7q {
+  color: var(--color-blue);
+}
+
+/* NO: text tertiary (icon inherits currentColor -> tertiary too) */
+.performance__cell--no__C2d3e {
+  color: rgba(var(--color-text-tertiary), 1);
+}
+
+/* tooltip underline affordance */
 .performance__label--tooltip__W7m3k {
   cursor: help;
   text-decoration: underline;
@@ -104,7 +120,6 @@
   text-decoration-color: rgba(var(--color-text-tertiary), 1);
 }
 
-/* Responsive: keep columns, but reduce padding */
 @media (max-width: 768px) {
   .performance__cell__C2d3e {
     padding: 12px 10px;
