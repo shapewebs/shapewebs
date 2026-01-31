@@ -125,8 +125,14 @@ function RollingNumber({ value }: { value: number }) {
 }
 
 export default function PricingPage() {
-  // One toggle controls both Plus + Business
   const [isYearly, setIsYearly] = useState(true);
+
+  // “All X features, plus:” text per plan
+  const includedFeaturesLabel: Partial<Record<Plan["key"], string>> = {
+    plus: "All Hobby features, plus:",
+    business: "All Plus features, plus:",
+    enterprise: "All Business features, plus:",
+  };
 
   return (
     <section className="pricing__container__Q7j3s">
@@ -166,6 +172,8 @@ export default function PricingPage() {
                   : plan.monthlyAmount
                 : null;
 
+            const topLabel = includedFeaturesLabel[plan.key];
+
             return (
               <article
                 key={plan.key}
@@ -173,7 +181,10 @@ export default function PricingPage() {
                 data-highlighted={plan.highlighted ? "true" : "false"}
               >
                 <div className="pricing__card-top__A1b2c">
-                  <h4 className="typography__heading4__Z7p4s" style={{ margin: 0, paddingInline: 24 }}>
+                  <h4
+                    className="typography__heading4__Z7p4s"
+                    style={{ margin: 0, paddingInline: 24 }}
+                  >
                     {plan.name}
                   </h4>
 
@@ -194,10 +205,7 @@ export default function PricingPage() {
                           {plan.priceSuffix}
                         </>
                       ) : plan.priceHref ? (
-                        <a
-                          href={plan.priceHref}
-                          className="typography__link__B7s3m"
-                        >
+                        <a href={plan.priceHref} className="typography__link__B7s3m">
                           {plan.priceText}
                         </a>
                       ) : (
@@ -212,7 +220,10 @@ export default function PricingPage() {
 
                   <div className="pricing__billing__C2d3e">
                     {plan.showBillingToggle && (
-                      <div className="root__toggle-wrapper__T7g2m" style={{ scale: 0.7, margin: "0 2px 0 -6px"}}>
+                      <div
+                        className="root__toggle-wrapper__T7g2m"
+                        style={{ scale: 0.7, margin: "0 2px 0 -6px" }}
+                      >
                         <input
                           className="root__toggle__T7g2m root__toggle--ios__T7g2m"
                           id={`billingToggle-${plan.key}`}
@@ -237,6 +248,16 @@ export default function PricingPage() {
                   className="Spacer-module__root__NM019"
                   style={{ "--height": "20px" } as CSSProperties}
                 />
+
+                {/* NEW: label above features list */}
+                {topLabel && (
+                  <p
+                    className="typography__small__Q9j2p"
+                    style={{ margin: "0 0 10px 0", opacity: 0.9 }}
+                  >
+                    {topLabel}
+                  </p>
+                )}
 
                 <ul className="pricing__features__M93j8">
                   {plan.features.map((f) => (
