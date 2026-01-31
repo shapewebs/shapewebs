@@ -43,8 +43,8 @@ const plans: Plan[] = [
   {
     key: "plus",
     name: "Plus",
-    monthlyAmount: 12,
-    yearlyAmount: 10,
+    monthlyAmount: 20,
+    yearlyAmount: 24,
     priceSuffix: "/mo",
     description: "",
     description2: " + additional features",
@@ -65,8 +65,8 @@ const plans: Plan[] = [
   {
     key: "business",
     name: "Business",
-    monthlyAmount: 18,
-    yearlyAmount: 16,
+    monthlyAmount: 60,
+    yearlyAmount: 50,
     priceSuffix: "/mo",
     description: "",
     description2: " + advanced features",
