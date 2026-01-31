@@ -22,7 +22,7 @@ const plans: Plan[] = [
     priceYearly: "$0",
     description: "",
     description2: "",
-    billingLabel: "No maintenance price.",
+    billingLabel: "No maintenance price",
     features: ["Next.js + Vercel deployment", "Performance-focused build", "Basic SEO setup", "1–3 pages", "Email support"],
     cta: { label: "Get Started", href: "/get-started" },
   },
