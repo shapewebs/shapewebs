@@ -1,0 +1,40 @@
+/* Performance Grid Section */
+
+.pricing-performance__container__Q7j3s {
+  width: 100%;
+  padding: 4rem 2rem;
+  background-color: rgba(var(--color-bg-primary), 1);
+}
+
+.pricing-performance__wrapper__M8k5p {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pricing-performance__header__P5k8p {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.pricing-performance__header__P5k8p h2 {
+  margin-bottom: 1rem;
+  color: rgba(var(--color-text-primary), 1);
+}
+
+.pricing-performance__header__P5k8p p {
+  color: rgba(var(--color-text-secondary), 1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+  .pricing-performance__container__Q7j3s {
+    padding: 2rem 1rem;
+  }
+
+  .pricing-performance__header__P5k8p {
+    margin-bottom: 2rem;
+  }
+}
