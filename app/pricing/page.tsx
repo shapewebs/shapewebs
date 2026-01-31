@@ -232,7 +232,7 @@ export default function PricingPage() {
                       </div>
                     )}
 
-                    <span className="typography__small__Q9j2p pricing__billing__C2d3e">
+                    <span className="typography__small__Q9j2p">
                       {plan.billingLabelYearly}
                     </span>
                   </div>
