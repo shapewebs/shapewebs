@@ -19,17 +19,17 @@ const plans: Plan[] = [
     key: "hobby",
     name: "Hobby",
     priceYearly: "Free forever",
-    description: "Perfect for a simple, fast marketing site or landing page.",
-    description2: "+ aditional usage",
+    description: "The perfect starting place for your personal project.",
+    description2: "",
     features: ["Next.js + Vercel deployment", "Performance-focused build", "Basic SEO setup", "1–3 pages", "Email support"],
     cta: { label: "Get Started", href: "/get-started" },
   },
   {
     key: "plus",
     name: "Plus",
-    priceYearly: "$10/mo",
+    priceYearly: "$12/mo",
     description: "The best balance for growing brands that need more pages and polish.",
-    description2: "",
+    description2: "+ aditional usage",
     features: [
       "Everything in Hobby",
       "4–8 pages",
@@ -39,12 +39,12 @@ const plans: Plan[] = [
     ],
     highlighted: true,
     cta: { label: "Get Started", href: "/get-started" },
-    showAltSalesLink: true, // ✅ adds “or Talk to sales” under the button
+    showAltSalesLink: true, 
   },
   {
     key: "business",
     name: "Business",
-    priceYearly: "$5,999",
+    priceYearly: "$18/mo",
     description: "For companies that need advanced content, integrations, and scalability.",
     description2: "",
     features: [
