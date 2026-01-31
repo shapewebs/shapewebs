@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import "@/styles/pages/pricing/pricing-section-performanceModule.css";
+import "@/styles/pages/pricing/pricing-section-performance.css";
 import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
 type PlanKey = "hobby" | "plus" | "business" | "enterprise";
