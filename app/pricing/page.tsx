@@ -108,10 +108,6 @@ export default function PricingPage() {
                   <span className="pricing__price-suffix__T7g2m">{plan.priceYearly === "Custom" ? "" : "/yr"}</span>
                 </div>
 
-                <p className="typography__small__Q9j2p pricing__billing__C2d3e" style={{ margin: 0 }}>
-                  {plan.priceYearly === "Custom" ? "Tailored yearly pricing" : "Billed yearly"}
-                </p>
-
                 <div className="Spacer-module__root__NM019" style={{ "--height": "16px" } as React.CSSProperties} />
 
                 <p className="typography__body__K4n7p pricing__desc__K4n7p" style={{ margin: 0 }}>
