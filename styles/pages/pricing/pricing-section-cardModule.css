@@ -41,11 +41,7 @@
 .module__card__H5k8q[data-highlighted="true"] {
   z-index: 3;
   border-radius: 12px !important;
-  border: 1px solid rgba(0, 122, 255, 0.45) !important;
-  background:
-    linear-gradient(180deg, rgba(0, 122, 255, 0.08), rgba(0, 122, 255, 0.02)),
-    rgba(var(--color-bg-secondary), 1);
-  box-shadow: var(--shadow-stack-medium);
+  background: rgba(var(--color-bg-tertiary), 1);
   height: calc(100% + 48px);
   transform: translateY(-16px);
 }
