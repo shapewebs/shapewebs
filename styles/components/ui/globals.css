@@ -9,7 +9,6 @@
 @import url("./forms.css");
 @import url("../theme-toggle.css");
 @import url("./tooltip.css");
-@import url("./bento-grid.css");
 
 /* Tailwind layer directives after imports */
 @tailwind base;
