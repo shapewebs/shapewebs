@@ -1,16 +1,24 @@
 "use client";
 
-import { useId, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import type { CSSProperties } from "react";
 import "@/styles/pages/pricing/pricing-section-faq.css";
-import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
-type FaqItem = {
+/**
+ * Pricing FAQ — tailored for a website studio selling website builds + ongoing plans
+ * - Click question to expand/collapse
+ * - Chevron flips when open
+ * - Includes links to pages a typical site would have (docs/library, contact, etc.)
+ */
+
+type FAQItem = {
+  id: string;
   question: string;
   answer: JSX.Element;
+  defaultOpen?: boolean;
 };
 
-function ChevronIcon({ open }: { open: boolean }) {
+function Chevron({ open }: { open: boolean }) {
   return (
     <svg
       data-testid="geist-icon"
@@ -19,9 +27,9 @@ function ChevronIcon({ open }: { open: boolean }) {
       viewBox="0 0 16 16"
       width="16"
       style={{
-        color: "currentcolor",
+        color: "currentColor",
         transform: open ? "rotate(180deg)" : "rotate(0deg)",
-        transition: "transform 160ms var(--ease-out-quad)",
+        transition: "transform 180ms var(--ease-out-quad)",
       }}
       aria-hidden="true"
     >
@@ -35,190 +43,396 @@ function ChevronIcon({ open }: { open: boolean }) {
   );
 }
 
-export function PricingSectionFAQ() {
-  const sectionId = useId();
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+function FAQRow({
+  item,
+  open,
+  onToggle,
+}: {
+  item: FAQItem;
+  open: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <div className="faq__item__C2d3e" data-open={open ? "true" : "false"}>
+      <button
+        type="button"
+        className="faq__question__P5k8p"
+        onClick={onToggle}
+        aria-expanded={open}
+        aria-controls={`faq-panel-${item.id}`}
+      >
+        <span className="typography__heading6__H5j9s faq__questionText__H5j9s">
+          {item.question}
+        </span>
 
-  const faqs: FaqItem[] = useMemo(
+        <span className="faq__chevron__Z3n7q">
+          <Chevron open={open} />
+        </span>
+      </button>
+
+      <div
+        id={`faq-panel-${item.id}`}
+        className="faq__answer__Q9j2p"
+        role="region"
+        aria-label={item.question}
+        hidden={!open}
+      >
+        <div className="faq__answerInner__Q9j2p">{item.answer}</div>
+      </div>
+    </div>
+  );
+}
+
+export function PricingSectionFAQ() {
+  const items: FAQItem[] = useMemo(
     () => [
       {
-        question: "Which plan should I choose for a new website?",
+        id: "which-plan",
+        question: "Which plan is right for me?",
+        defaultOpen: true,
         answer: (
           <>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
-              If you’re validating an idea or need a simple brochure site,{" "}
-              <strong>Hobby</strong> is a great starting point. If you want ongoing insights,
-              conversion guidance, and stronger SEO/analytics, go with <strong>Plus</strong>. For
-              businesses that care about faster builds, performance budgets, and priority support,
-              <strong> Business</strong> is the sweet spot. <strong>Enterprise</strong> is for
-              organizations needing advanced security, compliance support, and custom SLAs.
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              <strong>Hobby</strong> is for personal projects and simple sites where you just need a
+              fast, secure launch and basic support.
+              <br />
+              <strong>Plus</strong> is for creators and small teams who want performance insights,
+              conversion guidance, and more flexibility for custom sections.
+              <br />
+              <strong>Business</strong> is best for companies who care about speed, reliability, and
+              ongoing optimization—things like prioritized builds, advanced caching/ISR, performance
+              budgets, and priority support.
+              <br />
+              <strong>Enterprise</strong> is for organizations that need compliance, SSO/RBAC, SLAs,
+              and dedicated onboarding.
             </p>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "12px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
               Not sure? Start with{" "}
               <a className="typography__link__B7s3m" href="/get-started">
                 Get started
               </a>{" "}
-              and we’ll recommend a setup based on your goals.
+              and we’ll recommend the best fit.
             </p>
           </>
         ),
       },
+
       {
-        question: "Do you build on Next.js, Vercel, or Shopify?",
+        id: "what-included",
+        question: "What do I actually get when I buy a website from you?",
         answer: (
           <>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
-              Yes — we primarily ship sites on <strong>Next.js + Vercel</strong> for performance and
-              flexibility. If you’re selling products, we can build on <strong>Shopify</strong> for
-              commerce and integrate custom sections and components.
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              You’re buying a website that’s built to ship fast and stay fast: modern stack, solid
+              SEO foundation, secure defaults, and a plan that matches how much ongoing support and
+              optimization you want.
             </p>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
-              If you want a quick overview of what we recommend for your case, see{" "}
-              <a className="typography__link__B7s3m" href="/docs/architecture">
-                Architecture & platform choices
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              If you want the details, check the{" "}
+              <a className="typography__link__B7s3m" href="/docs/website-delivery">
+                Website delivery overview
+              </a>{" "}
+              in our document library.
+            </p>
+          </>
+        ),
+      },
+
+      {
+        id: "commerce",
+        question: "Do you build Shopify sites too?",
+        answer: (
+          <>
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Yes. If your site is commerce-first, we can build on Shopify and still deliver fast
+              pages, strong SEO, and clean content structure. We’ll recommend the best setup based on
+              your products, integrations, and growth plans.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              See{" "}
+              <a className="typography__link__B7s3m" href="/docs/shopify-vs-nextjs">
+                Shopify vs Next.js
+              </a>{" "}
+              for guidance.
+            </p>
+          </>
+        ),
+      },
+
+      {
+        id: "timeline",
+        question: "How long does it take to launch?",
+        answer: (
+          <>
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Most sites launch in 1–3 weeks depending on content readiness and complexity. If you
+              already have copy, images, and brand assets ready, we can move faster.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Here’s what we need from you:{" "}
+              <a className="typography__link__B7s3m" href="/docs/launch-checklist">
+                Launch checklist
               </a>
               .
             </p>
           </>
         ),
       },
+
       {
-        question: "What’s included in the build and launch process?",
+        id: "custom-work",
+        question: "Can you add custom sections or components?",
         answer: (
           <>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
-              Every project includes a clear structure, reusable sections, and a deployment to your
-              hosting. Paid plans add more guidance and controls (like conversion feedback, SEO
-              improvements, performance budgets, and prioritized CI).
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Absolutely. <strong>Plus</strong> includes custom components/sections.{" "}
+              <strong>Business</strong> and <strong>Enterprise</strong> are ideal if you need deeper
+              performance work, more complex integrations, or ongoing iteration.
             </p>
-            <ul className="faq__bullets__M93j8">
-              <li className="typography__small__Q9j2p">
-                Page & content structure (navigation, hierarchy, and copy layout)
-              </li>
-              <li className="typography__small__Q9j2p">
-                Responsive UI and reusable components/sections
-              </li>
-              <li className="typography__small__Q9j2p">
-                Deployment setup + handoff (or we manage it for you)
-              </li>
-            </ul>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
-              For the full checklist, see{" "}
-              <a className="typography__link__B7s3m" href="/docs/delivery">
-                Delivery checklist
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Examples + patterns:{" "}
+              <a className="typography__link__B7s3m" href="/docs/components">
+                Component library
               </a>
               .
             </p>
           </>
         ),
       },
+
       {
-        question: "Can you migrate my existing site and keep SEO?",
+        id: "domains",
+        question: "Do you help with domains and DNS?",
         answer: (
           <>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
-              Yes. We handle redirects, rewrite rules, and structure improvements so you don’t lose
-              traffic. On Business and Enterprise, we’ll also help with technical SEO and performance
-              budgets (Core Web Vitals) to protect rankings over time.
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Yes—whether you’re buying a new domain, moving an existing one, or just need DNS set up
+              correctly. We’ll make sure SSL/HTTPS and redirects are configured properly so you don’t
+              lose SEO.
             </p>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
-              If you already have a URL map or sitemap, send it through{" "}
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Documentation:{" "}
+              <a className="typography__link__B7s3m" href="/docs/domains">
+                Domains & DNS
+              </a>
+              .
+            </p>
+          </>
+        ),
+      },
+
+      {
+        id: "seo",
+        question: "How do you handle SEO?",
+        answer: (
+          <>
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Every plan includes a solid SEO baseline (clean structure, meta, indexing, redirects).
+              <strong> Plus</strong> adds enhanced SEO + analytics. <strong>Business</strong> adds
+              technical SEO improvements and performance budgets focused on Core Web Vitals.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Read:{" "}
+              <a className="typography__link__B7s3m" href="/docs/seo">
+                SEO playbook
+              </a>{" "}
+              and{" "}
+              <a className="typography__link__B7s3m" href="/docs/core-web-vitals">
+                Core Web Vitals guide
+              </a>
+              .
+            </p>
+          </>
+        ),
+      },
+
+      {
+        id: "hosting",
+        question: "Where is my site hosted?",
+        answer: (
+          <>
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Typically on a modern edge platform (often Vercel for Next.js) to keep delivery fast
+              globally and deployments reliable. If you’re on Shopify, hosting is handled there for
+              commerce—while we optimize everything we can on the theme and storefront.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              See:{" "}
+              <a className="typography__link__B7s3m" href="/docs/hosting">
+                Hosting overview
+              </a>
+              .
+            </p>
+          </>
+        ),
+      },
+
+      {
+        id: "support",
+        question: "What support do you offer?",
+        answer: (
+          <>
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              <strong>Hobby</strong> includes email support. <strong>Business</strong> includes
+              priority support. <strong>Enterprise</strong> includes dedicated onboarding and a
+              dedicated support relationship.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              For support expectations, see{" "}
+              <a className="typography__link__B7s3m" href="/docs/support">
+                Support policy
+              </a>
+              .
+            </p>
+          </>
+        ),
+      },
+
+      {
+        id: "billing",
+        question: "Can you do yearly billing or invoices?",
+        answer: (
+          <>
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Yes—yearly billing is available on paid plans. For <strong>Enterprise</strong>, we can
+              provide custom invoicing and procurement-friendly terms.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              If you need invoices or vendor setup,{" "}
+              <a className="typography__link__B7s3m" href="/contact">
+                talk to sales
+              </a>
+              .
+            </p>
+          </>
+        ),
+      },
+
+      {
+        id: "changes",
+        question: "Can I change plans later?",
+        answer: (
+          <>
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Yep. Many clients start on <strong>Plus</strong> and move to <strong>Business</strong>{" "}
+              once traffic and iteration speed become important. If you need compliance, SSO, SLAs,
+              or onboarding, that’s usually when <strong>Enterprise</strong> makes sense.
+            </p>
+          </>
+        ),
+      },
+
+      {
+        id: "security",
+        question: "What about security?",
+        answer: (
+          <>
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              All sites ship with secure defaults (HTTPS/TLS, baseline WAF, sensible headers). Higher
+              tiers focus on stronger governance and enterprise controls like SSO/RBAC and compliance
+              support.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Learn more:{" "}
+              <a className="typography__link__B7s3m" href="/docs/security">
+                Security overview
+              </a>
+              .
+            </p>
+          </>
+        ),
+      },
+
+      {
+        id: "contact",
+        question: "Still have questions?",
+        answer: (
+          <>
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              If you’re unsure about the plan, timeline, or what you need technically, send us a
+              message and we’ll point you to the right option.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
               <a className="typography__link__B7s3m" href="/contact">
                 Contact
               </a>{" "}
-              to speed up the plan.
-            </p>
-          </>
-        ),
-      },
-      {
-        question: "Do you offer custom invoicing or contracts?",
-        answer: (
-          <>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
-              We can support custom invoicing and vendor-style paperwork for Enterprise engagements,
-              including custom SLAs and uptime guarantees when needed.
-            </p>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
-              Reach out via{" "}
-              <a className="typography__link__B7s3m" href="/contact">
-                Talk to sales
-              </a>{" "}
-              and tell us what your procurement team needs.
-            </p>
-          </>
-        ),
-      },
-      {
-        question: "What’s the difference between Plus and Business?",
-        answer: (
-          <>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
-              <strong>Plus</strong> focuses on growth: traffic & performance insights, content
-              structure + conversion guidance, enhanced SEO + analytics, and custom components.
-              <strong> Business</strong> is for production performance: cold start prevention,
-              prioritized CI (faster builds), advanced caching/ISR configuration, technical SEO
-              improvements, performance budgets (Core Web Vitals), and priority support.
-            </p>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
-              If you care about speed under load and faster iterations, choose Business.
-            </p>
-          </>
-        ),
-      },
-      {
-        question: "Can I upgrade later?",
-        answer: (
-          <>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
-              Absolutely. Most teams start with Hobby or Plus and move to Business once traffic
-              grows or the site becomes mission-critical. We keep the build compatible so upgrades
-              are smooth.
-            </p>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
-              See{" "}
-              <a className="typography__link__B7s3m" href="/docs/upgrades">
-                Upgrading your plan
-              </a>{" "}
-              for how it works.
-            </p>
-          </>
-        ),
-      },
-      {
-        question: "Do you provide support after launch?",
-        answer: (
-          <>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
-              Yes. Hobby includes email support, while Business adds priority support. Enterprise
-              can include dedicated onboarding and an account manager for ongoing improvements and
-              escalations.
-            </p>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
-              For common fixes and guides, check{" "}
+              or browse the{" "}
               <a className="typography__link__B7s3m" href="/docs">
-                Documentation
+                document library
               </a>
               .
-            </p>
-          </>
-        ),
-      },
-      {
-        question: "Can you connect my domain and email?",
-        answer: (
-          <>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
-              Yes — we can connect your domain, set up DNS correctly, and help you route email to
-              your provider. If you’re moving domains, we’ll also plan redirects so links keep
-              working.
-            </p>
-            <p className="typography__small__Q9j2p faq__answerText__Q9j2p">
-              See{" "}
-              <a className="typography__link__B7s3m" href="/docs/domains">
-                Domains & DNS
-              </a>{" "}
-              for the step-by-step.
             </p>
           </>
         ),
@@ -227,10 +441,15 @@ export function PricingSectionFAQ() {
     []
   );
 
+  const [openId, setOpenId] = useState<string | null>(() => {
+    const firstOpen = items.find((x) => x.defaultOpen)?.id;
+    return firstOpen ?? null;
+  });
+
   return (
     <section className="faq__container__Q7j3s">
       <div className="faq__content__K9j6q">
-        <h2 className="typography__heading2__T3m8s" style={{ margin: 0, textAlign: "center" }}>
+        <h2 className="typography__heading3__T3m8s" style={{ margin: 0, textAlign: "center" }}>
           Frequently asked questions
         </h2>
 
@@ -239,73 +458,24 @@ export function PricingSectionFAQ() {
           style={{ "--height": "24px" } as CSSProperties}
         />
 
-        <p className="typography__subtitle__R6m2x" style={{ margin: 0, textAlign: "center" }}>
-          Quick answers about plans, delivery, and what happens after launch.
-        </p>
+        <div className="faq__list__L7p3s" role="list">
+          {items.map((item) => {
+            const open = openId === item.id;
+            return (
+              <FAQRow
+                key={item.id}
+                item={item}
+                open={open}
+                onToggle={() => setOpenId((prev) => (prev === item.id ? null : item.id))}
+              />
+            );
+          })}
+        </div>
 
         <div
           className="Spacer-module__root__NM019"
-          style={{ "--height": "40px" } as CSSProperties}
+          style={{ "--height": "24px" } as CSSProperties}
         />
-
-        <TooltipProvider>
-          <div className="faq__list__L7p3s" role="list">
-            {faqs.map((item, i) => {
-              const open = openIndex === i;
-              const contentId = `${sectionId}-faq-${i}`;
-              return (
-                <div
-                  key={`${item.question}-${i}`}
-                  className="faq__item__H5k8q"
-                  data-open={open ? "true" : "false"}
-                  role="listitem"
-                >
-                  <button
-                    type="button"
-                    className="faq__trigger__A1b2c"
-                    aria-expanded={open}
-                    aria-controls={contentId}
-                    onClick={() => setOpenIndex(open ? null : i)}
-                  >
-                    <span className="typography__emphasize__M9J2o faq__question__M9J2o">
-                      {item.question}
-                    </span>
-                    <span className="faq__chevron__Z3n7q" aria-hidden="true">
-                      <ChevronIcon open={open} />
-                    </span>
-                  </button>
-
-                  <div
-                    id={contentId}
-                    className="faq__panel__P5k8p"
-                    data-open={open ? "true" : "false"}
-                    role="region"
-                    aria-label={item.question}
-                  >
-                    <div className="faq__panelInner__C2d3e">{item.answer}</div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </TooltipProvider>
-
-        <div
-          className="Spacer-module__root__NM019"
-          style={{ "--height": "28px" } as CSSProperties}
-        />
-
-        <p className="typography__small__Q9j2p" style={{ textAlign: "center", margin: 0 }}>
-          Still have questions?{" "}
-          <a className="typography__link__B7s3m" href="/contact">
-            Contact us
-          </a>{" "}
-          or browse{" "}
-          <a className="typography__link__B7s3m" href="/docs">
-            Documentation
-          </a>
-          .
-        </p>
       </div>
     </section>
   );
