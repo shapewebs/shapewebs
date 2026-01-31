@@ -152,3 +152,105 @@
   opacity: 0.95;
   padding-inline: 24px;
 }
+
+        .priceRoll {
+          position: relative;
+          display: inline-block;
+          overflow: hidden;
+          height: 1.25em;
+          line-height: 1.25em;
+          vertical-align: bottom;
+          min-width: 3.5ch;
+        }
+
+        .priceRollItem {
+          position: absolute;
+          left: 0;
+          top: 0;
+          white-space: nowrap;
+          will-change: transform, opacity;
+        }
+
+        .priceRollItem.current {
+          transform: translateY(0%);
+          opacity: 1;
+        }
+
+        .priceRollItem.next {
+          opacity: 1;
+        }
+
+        /* DOWN: old exits down, new enters from above */
+        .priceRoll.is-animating.dir-down .priceRollItem.current {
+          animation: rollDownCurrent 240ms ease-in forwards;
+        }
+        .priceRoll.is-animating.dir-down .priceRollItem.next {
+          transform: translateY(-110%);
+          animation: rollDownNext 240ms ease-in forwards;
+        }
+
+        /* UP: old exits up, new enters from below */
+        .priceRoll.is-animating.dir-up .priceRollItem.current {
+          animation: rollUpCurrent 240ms ease-in forwards;
+        }
+        .priceRoll.is-animating.dir-up .priceRollItem.next {
+          transform: translateY(110%);
+          animation: rollUpNext 240ms ease-in forwards;
+        }
+
+        @keyframes rollDownCurrent {
+          from {
+            transform: translateY(0%);
+            opacity: 1;
+          }
+          to {
+            transform: translateY(110%);
+            opacity: 0;
+          }
+        }
+        @keyframes rollDownNext {
+          from {
+            transform: translateY(-110%);
+            opacity: 0.9;
+          }
+          to {
+            transform: translateY(0%);
+            opacity: 1;
+          }
+        }
+
+        @keyframes rollUpCurrent {
+          from {
+            transform: translateY(0%);
+            opacity: 1;
+          }
+          to {
+            transform: translateY(-110%);
+            opacity: 0;
+          }
+        }
+        @keyframes rollUpNext {
+          from {
+            transform: translateY(110%);
+            opacity: 0.9;
+          }
+          to {
+            transform: translateY(0%);
+            opacity: 1;
+          }
+        }
+
+        /* Respect reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+          .priceRoll.is-animating .priceRollItem.current,
+          .priceRoll.is-animating .priceRollItem.next {
+            animation: none !important;
+          }
+          .priceRollItem {
+            position: static;
+          }
+          .priceRoll {
+            overflow: visible;
+            height: auto;
+          }
+        }
