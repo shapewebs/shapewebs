@@ -8,7 +8,7 @@ export default function PricingPage() {
   return (
     <>
       <PricingSectionCardModule />
-      <PricingSectionPerformane />
+      <PricingSectionPerformance />
     </>
   );
 }
