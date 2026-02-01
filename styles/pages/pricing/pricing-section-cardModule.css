@@ -28,12 +28,6 @@
   background: rgba(var(--color-bg-tertiary), 1);
 }
 
-@media (min-width: 641px) {
-  .pricing__grid__L7p3s {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
 @media (min-width: 1025px) {
   .pricing__grid__L7p3s {
     grid-template-columns: repeat(4, 1fr);
@@ -70,6 +64,15 @@
 
   .module__card__H5k8q:nth-child(4) {
     border-left: 0;
+  }
+}
+
+@media (max-width: 1024px) {
+  .pricing__grid__L7p3s {
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 12px;
+    overflow: hidden;
   }
 }
 
