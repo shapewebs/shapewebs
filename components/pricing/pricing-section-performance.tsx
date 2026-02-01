@@ -29,8 +29,40 @@ const FREE = { hobby: true, plus: true, business: true, enterprise: true } as co
 const PRO_ONLY = { hobby: false, plus: false, business: true, enterprise: true } as const;
 const ENT_ONLY = { hobby: false, plus: false, business: false, enterprise: true } as const;
 
+// CTA config (matches cards behavior)
+const planCtas: Record<
+  PlanKey,
+  {
+    href: string;
+    label: string;
+    // if true => primary button for highlighted plan
+    kind: "primary" | "secondary";
+    showAltSalesLink?: boolean;
+    altSalesHref?: string;
+    altSalesLabel?: string;
+  }
+> = {
+  hobby: { href: "/get-started", label: "Get Started", kind: "secondary" },
+  plus: { href: "/get-started", label: "Get Started", kind: "secondary" },
+  business: {
+    href: "/get-started",
+    label: "Get Started",
+    kind: "primary",
+    showAltSalesLink: true,
+    altSalesHref: "/contact",
+    altSalesLabel: "Contact sales",
+  },
+  enterprise: { href: "/contact", label: "Talk to sales", kind: "secondary" },
+};
+
 // Lots of rows, relevant to a Vercel-hosted website (Free vs Pro vs Enterprise add-ons)
 const rows: PerfRow[] = [
+  {
+    type: "category",
+    label: "Delivery network",
+    tooltip: "How your site is delivered globally: caching, routing, regions, and edge features.",
+  },
+
   {
     type: "feature",
     label: "Vercel Delivery Network",
@@ -161,7 +193,7 @@ const rows: PerfRow[] = [
 
   {
     type: "category",
-    label: "Optimization",
+    label: "Content, caching & optimization",
     tooltip: "How content is cached and optimized close to visitors (CDN, ISR, images).",
   },
 
@@ -364,7 +396,7 @@ const rows: PerfRow[] = [
 
   {
     type: "category",
-    label: "Compliance",
+    label: "Compliance & assurance",
     tooltip: "Security standards support and documentation readiness for larger orgs.",
   },
 
@@ -491,6 +523,33 @@ function FeatureCell({
   );
 }
 
+function PlanCtaCell({ planKey }: { planKey: PlanKey }) {
+  const cta = planCtas[planKey];
+  const kindClass =
+    cta.kind === "primary" ? "button__kind-primary__R5j2s" : "button__kind-secondary__R5j2s";
+
+  return (
+    <div className="performance__ctaCell__W9k2p">
+      <a
+        href={cta.href}
+        className={`button__root__ZxcvB ${kindClass} button__size-medium__L9d7h performance__ctaButton__X1y2z`}
+        style={{ width: "100%", justifyContent: "center" }}
+      >
+        <span>{cta.label}</span>
+      </a>
+
+      {cta.showAltSalesLink && cta.altSalesHref && (
+        <p className="typography__small__Q9j2p performance__ctaAlt__P5k8p" style={{ margin: 0 }}>
+          or{" "}
+          <a href={cta.altSalesHref} className="typography__link__B7s3m">
+            {cta.altSalesLabel ?? "Contact sales"}
+          </a>
+        </p>
+      )}
+    </div>
+  );
+}
+
 export function PricingSectionPerformance() {
   return (
     <TooltipProvider>
@@ -580,6 +639,20 @@ export function PricingSectionPerformance() {
                   </div>
                 );
               })}
+
+              {/* CTA row (bottom of table) */}
+              <div className="performance__row__P5k8p performance__row--cta__P5k8p" role="row">
+                {planOrder.map((p) => (
+                  <div
+                    key={`cta-${p.key}`}
+                    className="performance__cell__C2d3e performance__cell--cta__C2d3e"
+                    role="cell"
+                    data-highlighted={p.key === highlightedPlanKey ? "true" : "false"}
+                  >
+                    <PlanCtaCell planKey={p.key} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
