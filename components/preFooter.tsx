@@ -1,21 +1,30 @@
-<section class="pref-footer__section__K8d2P">
-  <div class="pref-footer__content__T4m9X">
-    
-    <div class="pref-footer__left__A1s3Q">
-      <h2 class="pref-footer__title__F7h2L">
-        Plan the present. Build the future.
-      </h2>
-    </div>
+// preFooter.tsx
+export default function PreFooter() {
+  return (
+    <section className="preFooter__root__Q7w3E">
+      <div className="preFooter__content__N4k2P">
+        <div className="preFooter__left__A1s9D">
+          <h2 className="preFooter__headline__V8m6T">
+            <strong>Plan the present. Build the future.</strong>
+          </h2>
+        </div>
 
-    <div class="pref-footer__right__M6p4D">
-      <button class="button__root__ZxcvB button__kind-secondary__R5j2s button__size-medium__L9d7h">
-        Contact sales
-      </button>
+        <div className="preFooter__right__H2j5L">
+          <button
+            type="button"
+            className="button__root__ZxcvB button__kind-secondary__R5j2s button__size-medium__L9d7h"
+          >
+            Contact sales
+          </button>
 
-      <button class="button__root__ZxcvB button__kind-primary__R5j2s button__size-medium__L9d7h">
-        Get started
-      </button>
-    </div>
-
-  </div>
-</section>
+          <button
+            type="button"
+            className="button__root__ZxcvB button__kind-primary__R5j2s button__size-medium__L9d7h"
+          >
+            Get started
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}

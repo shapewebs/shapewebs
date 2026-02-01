@@ -1,26 +1,28 @@
-.pref-footer__section__K8d2P {
+.preFooter__root__Q7w3E {
   width: 100%;
 }
 
-.pref-footer__content__T4m9X {
+.preFooter__content__N4k2P {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
 }
 
-.pref-footer__left__A1s3Q {
+.preFooter__left__A1s9D {
   display: flex;
   align-items: center;
+  min-width: 0;
 }
 
-.pref-footer__title__F7h2L {
-  font-weight: 700;
+.preFooter__headline__V8m6T {
   margin: 0;
+  font-weight: 700;
 }
 
-.pref-footer__right__M6p4D {
+.preFooter__right__H2j5L {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 12px; /* buttons next to each other */
+  flex-shrink: 0;
 }
