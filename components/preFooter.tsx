@@ -1,3 +1,9 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import type { CSSProperties } from "react";
+import "@/styles/pages/preFooter.css";
+
 export function PreFooter() {
   return (
     <section className="section__N4k2P">
