@@ -43,35 +43,7 @@ export function PricingSectionFAQ() {
     () => [
       {
         id: "what-you-get",
-        question: "What do I actually get when I buy a website from you?",
-        answer: (
-          <div className="faq__answer__K4n7p">
-            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              You get a complete, production-ready website—designed, built, and deployed—so you can start using it
-              immediately. That includes the actual site (pages + sections), responsive layout, performance setup, and a
-              clean handover so you can run it without being “locked in”.
-            </p>
-
-            <div
-              className="Spacer-module__root__NM019"
-              style={{ "--height": "10px" } as CSSProperties}
-            />
-
-            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              Most sites are built with Next.js and deployed on Vercel, because it’s fast and reliable. If you sell
-              products, we can pair the frontend with Shopify for commerce. If you want the technical breakdown, the{" "}
-              <a href="/docs/website-spec" className="typography__link__B7s3m">
-                Website spec
-              </a>{" "}
-              document shows what’s included in the build.
-            </p>
-          </div>
-        ),
-      },
-
-      {
-        id: "which-plan",
-        question: "Which plan should I choose if I just want it done right?",
+        question: "What plan is right for me?",
         answer: (
           <div className="faq__answer__K4n7p">
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
@@ -163,35 +135,8 @@ export function PricingSectionFAQ() {
       },
 
       {
-        id: "revisions",
-        question: "How do revisions work?",
-        answer: (
-          <div className="faq__answer__K4n7p">
-            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              We iterate in small, clear steps. You review a staging link, send feedback, and we implement. The goal is
-              to avoid endless back-and-forth by keeping feedback structured and visible.
-            </p>
-
-            <div
-              className="Spacer-module__root__NM019"
-              style={{ "--height": "10px" } as CSSProperties}
-            />
-
-            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              Plus and Business are built for ongoing improvements—new sections, conversion tweaks, performance work,
-              and technical SEO changes after launch. If you want a good way to send requests, the{" "}
-              <a href="/docs/support" className="typography__link__B7s3m">
-                Support & updates
-              </a>{" "}
-              doc shows the format that gets the fastest turnaround.
-            </p>
-          </div>
-        ),
-      },
-
-      {
         id: "seo",
-        question: "Will my site be SEO-friendly from day one?",
+        question: "Do you do SEO?",
         answer: (
           <div className="faq__answer__K4n7p">
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
@@ -273,7 +218,7 @@ export function PricingSectionFAQ() {
 
       {
         id: "ecommerce",
-        question: "Can you build an ecommerce website?",
+        question: "Do you build ecommerce websites?",
         answer: (
           <div className="faq__answer__K4n7p">
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
@@ -303,86 +248,6 @@ export function PricingSectionFAQ() {
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
               Yes—you own the website and the work delivered. If you want, we can also set it up so you control the
               hosting accounts and repos from day one.
-            </p>
-          </div>
-        ),
-      },
-
-      {
-        id: "support",
-        question: "What happens if something breaks or I need help later?",
-        answer: (
-          <div className="faq__answer__K4n7p">
-            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              You’ll always have a way to reach us. Hobby includes email support. Business includes priority support, and
-              Enterprise includes dedicated onboarding and more structured escalation paths.
-            </p>
-
-            <div
-              className="Spacer-module__root__NM019"
-              style={{ "--height": "10px" } as CSSProperties}
-            />
-
-            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              If your site is mission-critical, Business or Enterprise is the right place to be—because support is not
-              just “answers”, it’s keeping the site healthy, fast, and improving.
-            </p>
-          </div>
-        ),
-      },
-
-      {
-        id: "getting-started",
-        question: "What do you need from me to start?",
-        answer: (
-          <div className="faq__answer__K4n7p">
-            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              A link to your current site (if you have one), 2–3 examples of websites you like, and a short description
-              of what the website needs to achieve. If you already have a logo/brand kit, send it—if not, we’ll still
-              design something clean and consistent.
-            </p>
-
-            <div
-              className="Spacer-module__root__NM019"
-              style={{ "--height": "10px" } as CSSProperties}
-            />
-
-            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              The easiest way is to go through{" "}
-              <a href="/get-started" className="typography__link__B7s3m">
-                Get Started
-              </a>
-              .
-            </p>
-          </div>
-        ),
-      },
-
-      {
-        id: "pricing-clarity",
-        question: "Is the monthly price maintenance, or the full website build?",
-        answer: (
-          <div className="faq__answer__K4n7p">
-            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              The plans are structured as ongoing service tiers (maintenance + improvements). If you also want a one-time
-              “build only” project, we can do that too—and then you can decide later if you want ongoing support.
-            </p>
-
-            <div
-              className="Spacer-module__root__NM019"
-              style={{ "--height": "10px" } as CSSProperties}
-            />
-
-            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              If you want a clean breakdown, check{" "}
-              <a href="/docs/pricing-explained" className="typography__link__B7s3m">
-                Pricing explained
-              </a>{" "}
-              or{" "}
-              <a href="/contact" className="typography__link__B7s3m">
-                ask for a quote
-              </a>
-              .
             </p>
           </div>
         ),
