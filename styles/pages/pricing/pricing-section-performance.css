@@ -134,4 +134,5 @@
 .performance__row__P5k8p.performance__row--footer__P5k8p .performance__cell__C2d3e.performance__cell--footer__C2d3e {
     flex-direction: column;
     gap: 10px;
+    border-bottom: none;
 }
