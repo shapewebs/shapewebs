@@ -19,13 +19,9 @@
   flex-direction: column;
   height: 100%;
   background-color: rgba(var(--color-bg-secondary), 1);
-  border: 1px solid rgba(var(--color-border-primary), 1);
-  border-radius: 0;
   padding: 0;
   box-shadow: none;
   position: relative;
-  transition: transform 0.16s var(--ease-out-quad), box-shadow 0.16s var(--ease-out-quad),
-    border-color 0.16s var(--ease-out-quad), background 0.16s var(--ease-out-quad);
 }
 
 .module__card__H5k8q[data-highlighted="true"] {
@@ -52,6 +48,10 @@
 
   .module__card__H5k8q[data-highlighted="true"] .pricing__card-top__A1b2c {
     padding-top: 40px;
+  }
+
+  .module__card__H5k8q {
+    border: 1px solid rgba(var(--color-border-primary), 1);
   }
 
   .module__card__H5k8q:first-child {
