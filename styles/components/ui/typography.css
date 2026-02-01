@@ -53,6 +53,7 @@
   line-height: 1.2;
   margin-bottom: 0.75rem;
   color: rgba(var(--color-text-tertiary), 1);
+  text-wrap: balance;
 }
 
 .typography__emphasize__M9J2o {
