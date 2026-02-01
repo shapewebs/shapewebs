@@ -237,4 +237,7 @@
     border-right: none;
   }
 
+  .module__card__H5k8q:nth-child(3) {
+    border-bottom: 1px solid rgba(var(--color-border-primary), 1);
+  }
 }
