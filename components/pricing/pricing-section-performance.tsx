@@ -709,7 +709,6 @@ export function PricingSectionPerformance() {
               })}
             </div>
                 </div>
-              </div>
             {/* Footer CTA row */}
             <div>
               {/* Desktop footer (unchanged) */}
@@ -746,6 +745,8 @@ export function PricingSectionPerformance() {
             style={{ "--height": "24px" } as CSSProperties}
           />
         </div>
+                      </div>
+
                     </div>
           </div>
       </section>
