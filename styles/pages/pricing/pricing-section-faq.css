@@ -45,7 +45,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: rgba(var(--color-text-primary), 1);
+  color: rgba(var(--color-text-secondary), 1);
 }
 
 .faq__panel__P5k8p {
