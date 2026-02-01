@@ -17,26 +17,9 @@
 
 /* item shell */
 .faq__item__H5k8q {
-  background: rgba(var(--color-bg-secondary), 1);
-  border: 1px solid rgba(var(--color-border-primary), 1);
-  border-radius: 0;
   overflow: hidden;
 }
 
-/* connected edges */
-.faq__item__H5k8q + .faq__item__H5k8q {
-  border-top: 0;
-}
-
-/* rounded ends */
-.faq__item__H5k8q:first-child {
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-}
-.faq__item__H5k8q:last-child {
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-}
 
 .faq__trigger__A1b2c {
   width: 100%;
@@ -44,14 +27,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-
-  padding: 16px 18px;
-  background: transparent;
-  border: 0;
+  padding: 16px 0;
   cursor: pointer;
   text-align: left;
-
-  transition: background 0.16s var(--ease-out-quad);
 }
 
 .faq__chevron__Z3n7q {
@@ -61,7 +39,6 @@
   color: rgba(var(--color-text-tertiary), 1);
 }
 
-/* animated panel using grid row trick (no measuring needed) */
 .faq__panel__P5k8p {
   display: grid;
   grid-template-rows: 0fr;
@@ -70,7 +47,6 @@
 
 .faq__panelInner__C2d3e {
   overflow: hidden;
-  padding: 0 18px 0 18px;
   opacity: 0;
   transform: translateY(-2px);
   transition: opacity 180ms var(--ease-out-quad), transform 180ms var(--ease-out-quad),
@@ -83,20 +59,11 @@
 }
 
 .faq__item__H5k8q[data-open="true"] .faq__panelInner__C2d3e {
-  padding: 0 18px 16px 18px;
+  padding: 0 0 16px 0;
   opacity: 1;
   transform: translateY(0);
 }
 
 .faq__answer__K4n7p p + p {
   margin-top: 10px;
-}
-
-@media (max-width: 768px) {
-  .faq__trigger__A1b2c {
-    padding: 14px 14px;
-  }
-  .faq__item__H5k8q[data-open="true"] .faq__panelInner__C2d3e {
-    padding: 0 14px 14px 14px;
-  }
 }
