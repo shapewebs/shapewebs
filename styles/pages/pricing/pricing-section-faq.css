@@ -6,7 +6,7 @@
   max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
   margin: 0 auto;
   padding-inline: var(--system-padding);
-  padding-top: 192px;
+  padding-top: 224px;
 }
 
 .faq__list__L7p3s {
