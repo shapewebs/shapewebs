@@ -231,4 +231,10 @@
   .pricing__grid__L7p3s {
     grid-template-columns: 1fr;
   }
+
+  .module__card__H5k8q:nth-child(1),
+  .module__card__H5k8q:nth-child(3) {
+    border-right: none;
+  }
+
 }
