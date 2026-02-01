@@ -515,28 +515,35 @@ function PlanCtaCell({ planKey }: { planKey: PlanKey }) {
     : "button__kind-secondary__R5j2s";
 
   return (
-  <>
-    <a
-      href={cta.href}
-      className={`button__root__ZxcvB button__size-medium__L9d7h pricing__cta__X1y2z ${kindClass}`}
-      style={{ width: "100%", justifyContent: "center" }}
-    >
-      <span>{cta.label}</span>
-    </a>
+    <>
+      <a
+        href={cta.href}
+        className={`button__root__ZxcvB button__size-medium__L9d7h pricing__cta__X1y2z ${kindClass}`}
+        style={{ width: "100%", justifyContent: "center" }}
+      >
+        <span>{cta.label}</span>
+      </a>
 
-    {isHighlighted && cta.showAltSalesLink && (
-      <p className="typography__small__Q9j2p pricing__alt__P5k8p" style={{ margin: 0 }}>
-        or{" "}
-        <a href="/contact" className="typography__link__B7s3m">
-          Talk to sales
-        </a>
-      </p>
-    )}
-  </>
+      {isHighlighted && cta.showAltSalesLink && (
+        <p className="typography__small__Q9j2p pricing__alt__P5k8p" style={{ margin: 0 }}>
+          or{" "}
+          <a href="/contact" className="typography__link__B7s3m">
+            Talk to sales
+          </a>
+        </p>
+      )}
+    </>
   );
 }
 
 export function PricingSectionPerformance() {
+  // ✅ default to first column (Hobby)
+  const [selectedPlanKey, setSelectedPlanKey] = useState<PlanKey>(planOrder[0].key);
+
+  const selectedPlanName = useMemo(() => {
+    return planOrder.find((p) => p.key === selectedPlanKey)?.name ?? planOrder[0].name;
+  }, [selectedPlanKey]);
+
   return (
     <TooltipProvider>
       <section className="performance__container__Q7j3s">
@@ -547,6 +554,7 @@ export function PricingSectionPerformance() {
               className="performance__rowgroup__A1b2c performance__rowgroup--sticky__A1b2c"
               role="rowgroup"
             >
+              {/* Desktop header (unchanged) */}
               <div
                 className="performance__row__P5k8p performance__row--header__P5k8p hide-tablet"
                 role="row"
@@ -564,72 +572,154 @@ export function PricingSectionPerformance() {
                   </div>
                 ))}
               </div>
+
+              {/* ✅ Tablet/phone header (single column + select) */}
+              <div
+                className="performance__row__P5k8p performance__row--header__P5k8p performance__row--single__P5k8p show-tablet"
+                role="row"
+              >
+                <div
+                  className="performance__cell__C2d3e performance__cell--header__C2d3e"
+                  role="columnheader"
+                  data-highlighted={selectedPlanKey === highlightedPlanKey ? "true" : "false"}
+                >
+                  <div className="performance__cellInner__C2d3e" style={{ width: "100%" }}>
+                    <span className="typography__emphasize__M9J2o bitC1" style={{ margin: 0 }}>
+                      {selectedPlanName}
+                    </span>
+
+                    <select
+                      className="performance__select__C2d3e"
+                      value={selectedPlanKey}
+                      onChange={(e) => setSelectedPlanKey(e.target.value as PlanKey)}
+                      aria-label="Select plan"
+                      style={{ marginLeft: "auto" }}
+                    >
+                      {planOrder.map((p) => (
+                        <option key={p.key} value={p.key}>
+                          {p.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Rowgroup 2: body */}
             <div className="performance__rowgroup__A1b2c" role="rowgroup">
               {rows.map((r, idx) => {
+                // CATEGORY ROWS
                 if (r.type === "category") {
                   return (
-                    <div
-                      key={`cat-${idx}-${r.label}`}
-                      className="performance__row__P5k8p performance__row--category__P5k8p"
-                      role="row"
-                    >
-                      {planOrder.map((p, cellIdx) => {
-                        if (cellIdx === 0) {
+                    <div key={`cat-wrap-${idx}-${r.label}`}>
+                      {/* Desktop category row (unchanged) */}
+                      <div
+                        className="performance__row__P5k8p performance__row--category__P5k8p hide-tablet"
+                        role="row"
+                      >
+                        {planOrder.map((p, cellIdx) => {
+                          if (cellIdx === 0) {
+                            return (
+                              <div
+                                key={`cat-${idx}-${p.key}-label`}
+                                className="performance__cell__C2d3e"
+                                role="cell"
+                                data-highlighted={p.key === highlightedPlanKey ? "true" : "false"}
+                              >
+                                <span
+                                  className="typography__subtitle__R6m2x bitC1"
+                                  style={{ margin: 0, textAlign: "left" }}
+                                >
+                                  {r.label}
+                                </span>
+                              </div>
+                            );
+                          }
+
                           return (
                             <div
-                              key={`cat-${idx}-${p.key}-label`}
+                              key={`cat-${idx}-${p.key}-empty`}
                               className="performance__cell__C2d3e"
                               role="cell"
                               data-highlighted={p.key === highlightedPlanKey ? "true" : "false"}
-                            >
-                              <span className="typography__subtitle__R6m2x bitC1" style={{ margin: 0, textAlign: "left" }}>
-                                {r.label}
-                              </span>
-                            </div>
+                            />
                           );
-                        }
+                        })}
+                      </div>
 
-                        return (
-                          <div
-                            key={`cat-${idx}-${p.key}-empty`}
-                            className="performance__cell__C2d3e"
-                            role="cell"
-                            data-highlighted={p.key === highlightedPlanKey ? "true" : "false"}
-                          />
-                        );
-                      })}
+                      {/* ✅ Tablet/phone category row (single column) */}
+                      <div
+                        className="performance__row__P5k8p performance__row--category__P5k8p performance__row--single__P5k8p show-tablet"
+                        role="row"
+                      >
+                        <div
+                          className="performance__cell__C2d3e"
+                          role="cell"
+                          data-highlighted={selectedPlanKey === highlightedPlanKey ? "true" : "false"}
+                        >
+                          <span
+                            className="typography__subtitle__R6m2x bitC1"
+                            style={{ margin: 0, textAlign: "left" }}
+                          >
+                            {r.label}
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   );
                 }
 
+                // FEATURE ROWS
                 return (
-                  <div key={`feat-${idx}-${r.label}`} className="performance__row__P5k8p" role="row">
-                    {planOrder.map((p) => (
+                  <div key={`feat-wrap-${idx}-${r.label}`}>
+                    {/* Desktop feature row (unchanged) */}
+                    <div className="performance__row__P5k8p hide-tablet" role="row">
+                      {planOrder.map((p) => (
+                        <div
+                          key={`${r.label}-${p.key}`}
+                          className="performance__cell__C2d3e"
+                          role="cell"
+                          data-highlighted={p.key === highlightedPlanKey ? "true" : "false"}
+                        >
+                          <FeatureCell
+                            enabled={r.availability[p.key]}
+                            label={r.label}
+                            tooltip={r.tooltip}
+                          />
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* ✅ Tablet/phone feature row (single column based on select) */}
+                    <div
+                      className="performance__row__P5k8p performance__row--single__P5k8p show-tablet"
+                      role="row"
+                    >
                       <div
-                        key={`${r.label}-${p.key}`}
                         className="performance__cell__C2d3e"
                         role="cell"
-                        data-highlighted={p.key === highlightedPlanKey ? "true" : "false"}
+                        data-highlighted={selectedPlanKey === highlightedPlanKey ? "true" : "false"}
                       >
                         <FeatureCell
-                          enabled={r.availability[p.key]}
+                          enabled={r.availability[selectedPlanKey]}
                           label={r.label}
                           tooltip={r.tooltip}
                         />
                       </div>
-                    ))}
+                    </div>
                   </div>
                 );
               })}
-                          </div>
-              </div>
+            </div>
 
-
-              {/* Footer CTA row */}
-              <div className="performance__row__P5k8p performance__row--footer__P5k8p" role="row">
+            {/* Footer CTA row */}
+            <div>
+              {/* Desktop footer (unchanged) */}
+              <div
+                className="performance__row__P5k8p performance__row--footer__P5k8p hide-tablet"
+                role="row"
+              >
                 {planOrder.map((p) => (
                   <div
                     key={`footer-${p.key}`}
@@ -640,6 +730,22 @@ export function PricingSectionPerformance() {
                     <PlanCtaCell planKey={p.key} />
                   </div>
                 ))}
+              </div>
+
+              {/* ✅ Tablet/phone footer (single column based on select) */}
+              <div
+                className="performance__row__P5k8p performance__row--footer__P5k8p performance__row--single__P5k8p show-tablet"
+                role="row"
+              >
+                <div
+                  className="performance__cell__C2d3e performance__cell--footer__C2d3e"
+                  role="cell"
+                  data-highlighted={selectedPlanKey === highlightedPlanKey ? "true" : "false"}
+                >
+                  <PlanCtaCell planKey={selectedPlanKey} />
+                </div>
+              </div>
+            </div>
           </div>
 
           <div
