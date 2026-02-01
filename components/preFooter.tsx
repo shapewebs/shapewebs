@@ -10,7 +10,7 @@ export function PreFooter() {
       <div className="section__content__N4k2P">
         <div className="preFooter__root__Q7w3E">
           <h2 className="typography__heading3__V1c8r" style={{ lineHeight: "var(--font-size-title3)", margin: 0 }}>
-            Plan the present. Build the future.
+            Built for reliability. Designed for scale.
           </h2>
 
           <div className="preFooter__right__H2j5L">
