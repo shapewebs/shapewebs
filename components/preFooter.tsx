@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { CSSProperties } from "react";
-import "@/styles/pages/preFooter.css";
+import "@/styles/components/preFooter.css";
 
 export function PreFooter() {
   return (
