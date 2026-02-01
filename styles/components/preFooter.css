@@ -1,0 +1,17 @@
+.preFooter .content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.preFooter__title {
+  margin: 0;
+}
+
+.preFooter__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto; /* ensures it hugs the right side */
+}
