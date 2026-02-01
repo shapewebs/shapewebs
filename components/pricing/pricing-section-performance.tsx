@@ -521,22 +521,24 @@ function PlanCtaCell({ planKey }: { planKey: PlanKey }) {
     : "button__kind-secondary__R5j2s";
 
   return (
-      <a
-        href={cta.href}
-        className={`button__root__ZxcvB button__size-medium__L9d7h pricing__cta__X1y2z ${kindClass}`}
-        style={{ width: "100%", justifyContent: "center" }}
-      >
-        <span>{cta.label}</span>
-      </a>
+  <>
+    <a
+      href={cta.href}
+      className={`button__root__ZxcvB button__size-medium__L9d7h pricing__cta__X1y2z ${kindClass}`}
+      style={{ width: "100%", justifyContent: "center" }}
+    >
+      <span>{cta.label}</span>
+    </a>
 
-      {isHighlighted && cta.showAltSalesLink && (
-        <p className="typography__small__Q9j2p pricing__alt__P5k8p" style={{ margin: 0 }}>
-          or{" "}
-          <a href="/contact" className="typography__link__B7s3m">
-            Talk to sales
-          </a>
-        </p>
-      )}
+    {isHighlighted && cta.showAltSalesLink && (
+      <p className="typography__small__Q9j2p pricing__alt__P5k8p" style={{ margin: 0 }}>
+        or{" "}
+        <a href="/contact" className="typography__link__B7s3m">
+          Talk to sales
+        </a>
+      </p>
+    )}
+  </>
   );
 }
 
