@@ -8,7 +8,8 @@
   padding-inline: var(--system-padding);
   padding-top: 224px;
 }
-.faq__content__K9j6q:not(.faq__content__K9j6q:first-child) {
+
+.faq__content__K9j6q {
   border-top: 1px solid rgba(var(--color-border-primary), 1)
 }
 
