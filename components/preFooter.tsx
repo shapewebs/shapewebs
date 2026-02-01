@@ -9,7 +9,7 @@ export function PreFooter() {
     <section className="section__N4k2P">
       <div className="section__content__N4k2P">
         <div className="preFooter__root__Q7w3E">
-          <h2 className="preFooter__headline__V8m6T">
+          <h2 className="typography__heading3__V1c8r">
             Plan the present. Build the future.
           </h2>
 
