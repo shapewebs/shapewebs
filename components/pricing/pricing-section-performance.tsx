@@ -585,7 +585,7 @@ export function PricingSectionPerformance() {
                               role="cell"
                               data-highlighted={p.key === highlightedPlanKey ? "true" : "false"}
                             >
-                              <span className="typography__subtitle__R6m2x bitC1" style={{ margin: 0, padding: "0 24px" }}>
+                              <span className="typography__subtitle__R6m2x bitC1" style={{ margin: 0 }}>
                                 {r.label}
                               </span>
                             </div>
