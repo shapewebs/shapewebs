@@ -3,7 +3,7 @@
 }
 
 .faq__content__K9j6q {
-  max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
+  max-width: calc(768px + (var(--system-padding) * 2));
   margin: 0 auto;
   padding-inline: var(--system-padding);
   padding-top: 224px;
