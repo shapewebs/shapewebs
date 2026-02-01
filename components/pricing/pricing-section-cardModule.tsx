@@ -762,8 +762,15 @@ export function PricingSectionCardModule() {
           />
 
           <p
-            className="typography__subtitle__R6m2x hide"
+            className="typography__subtitle__R6m2x hide-tablet"
             style={{ margin: "0 auto", textAlign: "center", maxWidth: "75%" }}
+          >
+            Built on Next.js + Vercel or Shopify for commerce.
+            Upgrade to enable more insights, enhanced security and additional features.
+          </p>
+          <p
+            className="typography__subtitle__R6m2x show-tablet"
+            style={{ margin: "0 auto", textAlign: "center" }}
           >
             Built on Next.js + Vercel or Shopify for commerce.
             Upgrade to enable more insights, enhanced security and additional features.
