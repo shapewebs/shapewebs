@@ -28,13 +28,13 @@
   background: rgba(var(--color-bg-tertiary), 1);
 }
 
-@media (min-width: 640px) {
+@media (min-width: 641px) {
   .pricing__grid__L7p3s {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1025px) {
   .pricing__grid__L7p3s {
     grid-template-columns: repeat(4, 1fr);
   }
