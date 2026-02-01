@@ -112,23 +112,6 @@
   }
 }
 
-/* ✅ Highlight the Business column via data-highlighted="true" */
-.performance__cell__C2d3e[data-highlighted="true"] {
-  position: relative;
-  z-index: 1;
-  background: rgba(var(--color-bg-tertiary), 1);
-  border-left: 1px solid rgba(var(--color-border-primary), 1);
-  border-right: 1px solid rgba(var(--color-border-primary), 1);
-}
-
-/* ensure header highlighted cell uses bg-secondary (overrides header bg-primary rule) */
-.performance__row--header__P5k8p .performance__cell__C2d3e[data-highlighted="true"] {
-  background: rgba(var(--color-bg-tertiary), 1);
-  border-top: 1px solid rgba(var(--color-border-primary), 1);
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-}
-
 .performance__row__P5k8p.performance__row--footer__P5k8p .performance__cell__C2d3e.performance__cell--footer__C2d3e {
     flex-direction: column;
     gap: 10px;
@@ -139,4 +122,21 @@
     border-bottom: 1px solid rgba(var(--color-border-primary), 1);
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
+}
+
+@media (min-width: 769px) {
+  .performance__cell__C2d3e[data-highlighted="true"] {
+    position: relative;
+    z-index: 1;
+    background: rgba(var(--color-bg-tertiary), 1);
+    border-left: 1px solid rgba(var(--color-border-primary), 1);
+    border-right: 1px solid rgba(var(--color-border-primary), 1);
+  }
+
+  .performance__row--header__P5k8p .performance__cell__C2d3e[data-highlighted="true"] {
+    background: rgba(var(--color-bg-tertiary), 1);
+    border-top: 1px solid rgba(var(--color-border-primary), 1);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
 }

@@ -548,7 +548,7 @@ export function PricingSectionPerformance() {
               role="rowgroup"
             >
               <div
-                className="performance__row__P5k8p performance__row--header__P5k8p"
+                className="performance__row__P5k8p performance__row--header__P5k8p hide-tablet"
                 role="row"
               >
                 {planOrder.map((p) => (
