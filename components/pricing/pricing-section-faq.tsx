@@ -286,7 +286,7 @@ export function PricingSectionFAQ() {
                   aria-controls={contentId}
                   onClick={() => setOpenId((prev) => (prev === item.id ? null : item.id))}
                 >
-                  <span className="typography__heading5__J8d3k bitCO" style={{ margin: 0 }}>
+                  <span className="typography__heading5__J8d3k bitCO" style={{ margin: 0, paddingLeft: 16 }}>
                     {item.question}
                   </span>
                   <span className="faq__chevron__Z3n7q">
