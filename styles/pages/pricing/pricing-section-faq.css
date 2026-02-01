@@ -32,6 +32,10 @@
   text-align: left;
 }
 
+.faq__trigger__A1b2c:focus-visible {
+  outline: none;
+}
+
 .faq__chevron__Z3n7q {
   display: inline-flex;
   align-items: center;
