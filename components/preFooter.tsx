@@ -1,5 +1,4 @@
-// preFooter.tsx
-export default function PreFooter() {
+export function PreFooter() {
   return (
     <section className="preFooter__root__Q7w3E">
       <div className="preFooter__content__N4k2P">
