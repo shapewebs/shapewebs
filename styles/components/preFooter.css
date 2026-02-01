@@ -25,6 +25,7 @@
 @media (max-width: 640px) {
   .preFooter__root__Q7w3E {
     flex-direction: column; 
+    align-items: start;
   }
 
   .preFooter__right__H2j5L {
