@@ -708,7 +708,8 @@ export function PricingSectionPerformance() {
                 );
               })}
             </div>
-
+                </div>
+              </div>
             {/* Footer CTA row */}
             <div>
               {/* Desktop footer (unchanged) */}
@@ -726,8 +727,6 @@ export function PricingSectionPerformance() {
                     <PlanCtaCell planKey={p.key} />
                   </div>
                 ))}
-              </div>
-                </div>
               </div>
 
               {/* ✅ Tablet/phone footer (single column based on select) */}
