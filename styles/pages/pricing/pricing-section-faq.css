@@ -7,11 +7,6 @@
   margin: 0 auto;
   padding-inline: var(--system-padding);
   padding-top: 224px;
-  border-top: 1px solid rgba(var(--color-border-primary), 1)
-}
-
-.faq__content__K9j6q:last-child {
-  border-bottom: 1px solid rgba(var(--color-border-primary), 1)
 }
 
 .faq__list__L7p3s {
@@ -35,6 +30,11 @@
   padding: 16px 0;
   cursor: pointer;
   text-align: left;
+  border-top: 1px solid rgba(var(--color-border-primary), 1)
+}
+
+.faq__trigger__A1b2c:last-child {
+  border-bottom: 1px solid rgba(var(--color-border-primary), 1)
 }
 
 .faq__trigger__A1b2c:focus-visible {
