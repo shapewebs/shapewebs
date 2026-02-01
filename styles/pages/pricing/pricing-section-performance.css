@@ -45,8 +45,7 @@
 
 /* header cells */
 .performance__row--header__P5k8p .performance__cell__C2d3e {
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding: 28px 24px 20px;
   background: rgba(var(--color-bg-primary), 1);
 }
 
@@ -125,7 +124,6 @@
 /* ensure header highlighted cell uses bg-secondary (overrides header bg-primary rule) */
 .performance__row--header__P5k8p .performance__cell__C2d3e[data-highlighted="true"] {
   background: rgba(var(--color-bg-tertiary), 1);
-  padding: 28px 24px 20px;
   border-top: 1px solid rgba(var(--color-border-primary), 1);
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
