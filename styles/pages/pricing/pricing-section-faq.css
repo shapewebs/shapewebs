@@ -7,6 +7,7 @@
   margin: 0 auto;
   padding-inline: var(--system-padding);
   padding-top: 224px;
+  border-top: 1px solid rgba(var(--color-border-primary), 1)
 }
 
 .faq__content__K9j6q:last-child {
