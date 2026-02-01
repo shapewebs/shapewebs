@@ -124,6 +124,7 @@ body {
   overflow-x: hidden;
 }
 
+svg:focus-visible,
 select:focus-visible {
   outline: none;
 }

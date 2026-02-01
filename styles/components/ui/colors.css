@@ -6,26 +6,26 @@
 
 .light {
   --color-button-translucent: #00000008;
-  --color-bg-header: 242, 242, 242;
+  --color-bg-header: 255, 255, 255;
   --color-bg-header-active: 246, 246, 246;
   --color-border-header: 13, 13, 13, 0.08;
-  --color-bg-primary: 251, 251, 251;
-  --color-bg-secondary: 247, 247, 248;
-  --color-bg-tertiary: 243, 242, 243;
-  --color-bg-quaternary: 233, 232, 234;
-  --color-bg-quinary: 227, 229, 231;
+  --color-bg-primary: 255, 255, 255;
+  --color-bg-secondary: 249, 248, 249;
+  --color-bg-tertiary: 244, 243, 244;
+  --color-bg-quaternary: 238, 237, 239;
+  --color-bg-quinary: 233, 232, 234;
   --color-primary-inverted: 25, 25, 27;
   --color-secondary-inverted: 12, 12, 12;
-  --color-border-primary: 227, 229, 231;
-  --color-border-secondary: 216, 217, 219;
-  --color-border-tertiary: 212, 213, 215;
+  --color-border-primary: 233, 232, 234;
+  --color-border-secondary: 228, 227, 228;
+  --color-border-tertiary: 220, 219, 221;
   --color-toggle: 189, 192, 197;
   --color-text-primary: 40, 42, 48;
   --color-text-secondary: 84, 90, 99;
   --color-text-tertiary: 134, 132, 141;
   --color-text-quaternary: 89, 90, 92;
   --color-overlay-primary: 255, 255, 255, 0.6;
-  --color-link-primary: 0, 122, 255; 
+  --color-link-primary: 0, 122, 255;
   --color-link-hover: 66, 81, 222;
   --color-bg-brand: 100, 103, 197;
   --color-brand-text: 255, 255, 255;
