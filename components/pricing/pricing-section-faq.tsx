@@ -394,9 +394,9 @@ export function PricingSectionFAQ() {
   return (
     <section className="faq__container__Q7j3s">
       <div className="faq__content__K9j6q">
-        <h3 className="typography__heading3__V1c8r" style={{ margin: 0, textAlign: "center" }}>
-          Frequently asked questions
-        </h3>
+        <h2 className="typography__heading2__B5x9t" style={{ margin: 0, textAlign: "center" }}>
+          FAQ
+        </h2>
 
         <div className="Spacer-module__root__NM019" style={{ "--height": "20px" } as CSSProperties} />
 
