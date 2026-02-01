@@ -625,6 +625,7 @@ export function PricingSectionPerformance() {
                 );
               })}
                           </div>
+              </div>
 
 
               {/* Footer CTA row */}
@@ -639,7 +640,6 @@ export function PricingSectionPerformance() {
                     <PlanCtaCell planKey={p.key} />
                   </div>
                 ))}
-              </div>
           </div>
 
           <div
