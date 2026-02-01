@@ -176,7 +176,7 @@ const rows: PerfRow[] = [
 
   {
     type: "category",
-    label: "Content, caching & optimization",
+    label: "Optimization",
     tooltip: "How content is cached and optimized close to visitors (CDN, ISR, images).",
   },
 
