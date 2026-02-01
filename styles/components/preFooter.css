@@ -4,9 +4,8 @@
 
 .section__content__N4k2P {
   max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
-  padding-inline: var(--system-padding);
+  padding: 214px var(--system-padding) 32px;
   margin: 0 auto;
-  padding-top: 214px;
 }
 
 .preFooter__root__Q7w3E {
