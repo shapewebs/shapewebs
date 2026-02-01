@@ -106,12 +106,6 @@
   text-decoration-color: rgba(var(--color-text-tertiary), 1);
 }
 
-@media (max-width: 768px) {
-  .performance__cell__C2d3e {
-    padding: 12px 10px;
-  }
-}
-
 .performance__row__P5k8p.performance__row--footer__P5k8p .performance__cell__C2d3e.performance__cell--footer__C2d3e {
     flex-direction: column;
     gap: 10px;
