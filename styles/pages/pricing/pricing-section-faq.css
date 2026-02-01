@@ -54,15 +54,6 @@
   transition: background 0.16s var(--ease-out-quad);
 }
 
-.faq__trigger__A1b2c:hover {
-  background: rgba(var(--color-bg-tertiary), 1);
-}
-
-.faq__trigger__A1b2c:focus-visible {
-  outline: 2px solid rgba(var(--color-border-primary), 1);
-  outline-offset: 2px;
-}
-
 .faq__chevron__Z3n7q {
   display: inline-flex;
   align-items: center;
