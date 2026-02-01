@@ -307,7 +307,7 @@ export function PricingSectionFAQ() {
           })}
         </div>
 
-        <div className="Spacer-module__root__NM019" style={{ "--height": "24px" } as CSSProperties} />
+        <div className="Spacer-module__root__NM019" style={{ "--height": "32px" } as CSSProperties} />
 
         <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
           Prefer a quick chat?{" "}
