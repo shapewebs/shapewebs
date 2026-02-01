@@ -59,7 +59,7 @@
 }
 
 .faq__item__H5k8q[data-open="true"] .faq__panelInner__C2d3e {
-  padding: 0 0 16px 0;
+  padding-bottoms: 16px;
   opacity: 1;
   transform: translateY(0);
 }
