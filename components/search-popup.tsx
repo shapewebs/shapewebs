@@ -6,7 +6,7 @@ import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent }
 import { createPortal } from "react-dom"
 import "@/styles/components/search-popup.css"
 import { useTheme } from "next-themes"
-import { searchPageData } from "@/lib/search-data"
+import { searchablePages } from "@/lib/search-data"
 
 interface SearchItem {
   id: string
@@ -22,11 +22,8 @@ interface SearchItem {
   content?: string // Add content field for full-text search
 }
 
-// Empty array for recent searches - will populate from localStorage
-const recentSearches: SearchItem[] = []
-
-// Enhanced page data with content for searching - using real page data
-const pages: SearchItem[] = searchPageData.map((page) => ({
+// Convert searchable pages to SearchItem format
+const pages: SearchItem[] = searchablePages.map((page) => ({
   id: page.id,
   title: page.title,
   description: page.description,
@@ -66,9 +63,6 @@ const themeOptions: SearchItem[] = [
     content: "System theme automatic mode follow device settings system appearance system color scheme",
   },
 ]
-
-// Combine all items for search
-const allItems = [...pages]
 
 interface SearchPopupProps {
   isOpen: boolean

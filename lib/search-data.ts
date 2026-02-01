@@ -3,26 +3,26 @@ export interface SearchPageData {
   title: string
   description: string
   path: string
-  content: string
   iconType: string
+  content: string
 }
 
-export const searchPageData: SearchPageData[] = [
+export const searchablePages: SearchPageData[] = [
   {
     id: "home",
     title: "Home",
-    description: "Shapewebs - Magical Web Solutions",
+    description: "Main landing page and overview",
     path: "/",
     iconType: "home",
-    content: "Shapewebs magical web solutions development platform custom solutions business professional mastery programming languages development tools client-side server-side",
+    content: "Welcome to Shapewebs. Transform ideas into reality with expert web development. Modern, scalable solutions built with cutting-edge technology. Professional web applications tailored to your business needs.",
   },
   {
     id: "pricing",
     title: "Pricing",
-    description: "Plans and pricing for all sizes",
+    description: "View our pricing plans and features",
     path: "/pricing",
     iconType: "pricing",
-    content: "pricing plans subscription hobby plus business enterprise monthly yearly CI/CD deployment firewall DDoS mitigation SEO support cold start prevention traffic performance insights analytics conversion custom components ISR caching core web vitals SSO RBAC compliance SOC2 GDPR SLA uptime guarantees",
+    content: "Choose the perfect plan for your needs. Hobby plan includes Next.js Vercel deployment, automatic CI/CD, Web Application Firewall, DDoS Mitigation, Basic SEO, and email support. Plus plan adds cold start prevention, traffic and performance insights, content structure and conversion guidance, enhanced SEO and analytics, priority support, and custom components. Business plan includes faster builds with prioritized CI, advanced caching and ISR configuration, technical SEO improvements, and performance budgets with Core Web Vitals. Enterprise plan offers unlimited pages and components, advanced security with SSO and RBAC, compliance support for SOC 2 and GDPR, custom SLAs and uptime guarantees, and dedicated support with onboarding.",
   },
   {
     id: "contact",
@@ -30,14 +30,14 @@ export const searchPageData: SearchPageData[] = [
     description: "Get in touch with our team",
     path: "/contact",
     iconType: "message",
-    content: "contact get in touch team send message email phone office address hours support inquiry business name company size product interest website app",
+    content: "Get in touch with our team. Let's discuss your project. Send us a message and we'll get back to you as soon as possible. Contact us about your web development needs, custom solutions, or any questions you have about our services.",
   },
   {
     id: "docs",
-    title: "Docs",
-    description: "Documentation and guides",
+    title: "Documentation",
+    description: "Technical guides and documentation",
     path: "/docs",
     iconType: "docs",
-    content: "documentation guides getting started basics tutorials references CSS architecture UI components advanced concepts API integration troubleshooting",
+    content: "Comprehensive documentation and guides. Learn about our development process, technical stack, and best practices. Explore guides on Next.js, React, TypeScript, and modern web development.",
   },
 ]
