@@ -36,40 +36,20 @@ function ChevronIcon({ open }: { open: boolean }) {
   );
 }
 
-export function PricingSectionFAQ() {
+export function PricingSectionFaq() {
   const [openId, setOpenId] = useState<string | null>(null);
 
   const faqs: FaqItem[] = useMemo(
     () => [
       {
-        id: "which-plan",
-        question: "Which plan is right for me?",
+        id: "what-you-get",
+        question: "What do I actually get when I buy a website from you?",
         answer: (
           <div className="faq__answer__K4n7p">
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              <span className="bitC1">Hobby</span> is perfect for a simple brochure site or a personal project.
-              <br />
-              <span className="bitC1">Plus</span> is for teams that want ongoing improvements: traffic insights,
-              conversion guidance, and enhanced SEO + analytics.
-              <br />
-              <span className="bitC1">Business</span> is best when performance actually matters—prioritized builds,
-              advanced caching/ISR configuration, Core Web Vitals budgets, and priority support.
-              <br />
-              <span className="bitC1">Enterprise</span> is for organizations that need governance (SSO/RBAC), compliance
-              support, SLAs, and dedicated onboarding.
-            </p>
-          </div>
-        ),
-      },
-      {
-        id: "what-you-build",
-        question: "What do you actually deliver in a website project?",
-        answer: (
-          <div className="faq__answer__K4n7p">
-            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              A complete site you can run and iterate on—not a theme dump. We build your pages, components, and content
-              structure, ship it on a modern stack, and make sure the basics (SEO, performance, security) are handled
-              from day one.
+              You get a complete, production-ready website—designed, built, and deployed—so you can start using it
+              immediately. That includes the actual site (pages + sections), responsive layout, performance setup, and a
+              clean handover so you can run it without being “locked in”.
             </p>
 
             <div
@@ -78,20 +58,64 @@ export function PricingSectionFAQ() {
             />
 
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              If you’re selling products, we can also build on Shopify for commerce and connect it to a custom storefront.
+              Most sites are built with Next.js and deployed on Vercel, because it’s fast and reliable. If you sell
+              products, we can pair the frontend with Shopify for commerce. If you want the technical breakdown, the{" "}
+              <a href="/docs/website-spec" className="typography__link__B7s3m">
+                Website spec
+              </a>{" "}
+              document shows what’s included in the build.
             </p>
           </div>
         ),
       },
+
+      {
+        id: "which-plan",
+        question: "Which plan should I choose if I just want it done right?",
+        answer: (
+          <div className="faq__answer__K4n7p">
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              If you want a simple site that looks great and stays stable, <span className="bitC1">Hobby</span> is fine.
+              If you want to continuously improve your site (messaging, structure, conversions),{" "}
+              <span className="bitC1">Plus</span> is usually the sweet spot.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              If your website is a serious growth channel, choose <span className="bitC1">Business</span>. That’s where
+              we focus on performance budgets (Core Web Vitals), advanced caching/ISR configuration, technical SEO, and
+              priority support—so improvements ship faster and the site stays fast as you grow.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              <span className="bitC1">Enterprise</span> is for teams that need formal governance (SSO/RBAC), compliance
+              support, custom SLAs, and a tighter operating model. If you want help deciding,{" "}
+              <a href="/contact" className="typography__link__B7s3m">
+                contact us
+              </a>{" "}
+              and tell us what you’re trying to achieve.
+            </p>
+          </div>
+        ),
+      },
+
       {
         id: "timeline",
-        question: "How long does it take to launch?",
+        question: "How long does it take from start to launch?",
         answer: (
           <div className="faq__answer__K4n7p">
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              Most sites launch in <span className="bitC1">days to a couple of weeks</span>. The biggest variable is how
-              ready your content is (copy, images, brand assets) and whether we’re doing extras like integrations,
-              ecommerce setup, or advanced animations.
+              It depends mostly on content readiness. If you already have your copy, images, and a clear structure, we
+              can often launch in days. If content is still being written or approvals take time, it’s usually 1–3 weeks.
             </p>
 
             <div
@@ -100,48 +124,25 @@ export function PricingSectionFAQ() {
             />
 
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              If you want to move faster, follow our{" "}
+              We keep it simple: kickoff → first version → revisions → launch. If you want to prepare properly, the{" "}
               <a href="/docs/launch-checklist" className="typography__link__B7s3m">
                 launch checklist
               </a>{" "}
-              so everything’s ready before we start building.
+              outlines what we need (and what you’ll want ready).
             </p>
           </div>
         ),
       },
+
       {
-        id: "who-writes",
-        question: "Do you write the text and create the content?",
+        id: "content-writing",
+        question: "Do you write the text and choose images, or do I provide everything?",
         answer: (
           <div className="faq__answer__K4n7p">
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              We can work either way. Some clients come with final copy and images, and we focus on structure,
-              implementation, and polish. Others want help shaping the message—then we’ll propose section structure and
-              rewrite/trim text so it reads clean and converts.
-            </p>
-          </div>
-        ),
-      },
-      {
-        id: "changes-after-launch",
-        question: "Can I request changes after launch?",
-        answer: (
-          <div className="faq__answer__K4n7p">
-            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              Yes. Plus and Business are made for ongoing iteration: new sections, content updates, conversion tweaks,
-              and technical SEO improvements. Business also includes performance budgets and deeper performance tuning.
-            </p>
-          </div>
-        ),
-      },
-      {
-        id: "hosting-deploy",
-        question: "Do you handle hosting, deployment, and updates?",
-        answer: (
-          <div className="faq__answer__K4n7p">
-            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              Yes—your site is deployed on Vercel and configured with HTTPS, caching, and best-practice defaults. You
-              don’t need to “manage servers”.
+              You can do either. Many clients provide rough copy and we rewrite it into something web-friendly
+              (clearer, shorter, better structured). If you already have polished text, we’ll use it and optimize the
+              layout around it.
             </p>
 
             <div
@@ -150,7 +151,117 @@ export function PricingSectionFAQ() {
             />
 
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              If you’re curious how it works, we have a short overview in{" "}
+              For images, we can work with what you have, recommend what’s missing, or use high-quality stock as a
+              placeholder until you get a photoshoot done. If you want guidance on what converts, see{" "}
+              <a href="/docs/content-guide" className="typography__link__B7s3m">
+                Content guide
+              </a>
+              .
+            </p>
+          </div>
+        ),
+      },
+
+      {
+        id: "revisions",
+        question: "How do revisions work?",
+        answer: (
+          <div className="faq__answer__K4n7p">
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              We iterate in small, clear steps. You review a staging link, send feedback, and we implement. The goal is
+              to avoid endless back-and-forth by keeping feedback structured and visible.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Plus and Business are built for ongoing improvements—new sections, conversion tweaks, performance work,
+              and technical SEO changes after launch. If you want a good way to send requests, the{" "}
+              <a href="/docs/support" className="typography__link__B7s3m">
+                Support & updates
+              </a>{" "}
+              doc shows the format that gets the fastest turnaround.
+            </p>
+          </div>
+        ),
+      },
+
+      {
+        id: "seo",
+        question: "Will my site be SEO-friendly from day one?",
+        answer: (
+          <div className="faq__answer__K4n7p">
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Yes—every site ships with clean structure, performance-minded implementation, and baseline SEO. That means
+              proper headings, indexable pages, sensible metadata, and a setup that won’t fight search engines.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Business goes further with technical improvements and performance budgets (Core Web Vitals), because speed
+              and stability matter for rankings and conversion. If you care about SEO as a growth channel, you’ll get the
+              most value from ongoing iteration (content + structure + technical).
+            </p>
+          </div>
+        ),
+      },
+
+      {
+        id: "performance",
+        question: "What do you do to make the website fast?",
+        answer: (
+          <div className="faq__answer__K4n7p">
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Performance is not just a “score”—it’s load time, responsiveness, and stability on real devices. We build
+              with modern best practices (optimized images, smart loading, caching) and deploy to infrastructure that’s
+              designed for speed.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              On Business, we go deeper: performance budgets (Core Web Vitals), more advanced caching/ISR configuration,
+              and prioritized CI so improvements ship quickly. If you want the “what and why”, see{" "}
+              <a href="/docs/performance" className="typography__link__B7s3m">
+                Performance
+              </a>
+              .
+            </p>
+          </div>
+        ),
+      },
+
+      {
+        id: "hosting-domain",
+        question: "Do you handle hosting, domain, and SSL?",
+        answer: (
+          <div className="faq__answer__K4n7p">
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              Hosting and SSL (HTTPS) are included in the setup—your site is deployed and protected by default. For the
+              domain, we can connect what you already have or help you move it.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              If you want the step-by-step, check{" "}
+              <a href="/docs/domains" className="typography__link__B7s3m">
+                Domains
+              </a>{" "}
+              and{" "}
               <a href="/docs/hosting" className="typography__link__B7s3m">
                 Hosting & infrastructure
               </a>
@@ -159,28 +270,16 @@ export function PricingSectionFAQ() {
           </div>
         ),
       },
+
       {
-        id: "performance",
-        question: "Will my site be fast (Core Web Vitals)?",
+        id: "ecommerce",
+        question: "Can you build an ecommerce website?",
         answer: (
           <div className="faq__answer__K4n7p">
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              That’s the goal. We build for fast loading by default (clean components, optimized assets, sane
-              architecture). On <span className="bitC1">Business</span>, we also add performance budgets and more
-              advanced caching/ISR configuration so improvements stay consistent as you add content.
-            </p>
-          </div>
-        ),
-      },
-      {
-        id: "seo",
-        question: "Do you do SEO?",
-        answer: (
-          <div className="faq__answer__K4n7p">
-            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              We do the parts that directly affect your site: technical SEO foundations, structure, metadata, and
-              performance. Plus and Business also include enhanced SEO + analytics, and Business includes deeper
-              technical improvements.
+              Yes. If you need a solid store with great checkout and admin, Shopify is usually the best foundation. We
+              can build a high-performing frontend and connect it to Shopify so you get both speed and a proven commerce
+              backend.
             </p>
 
             <div
@@ -189,32 +288,34 @@ export function PricingSectionFAQ() {
             />
 
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              (We don’t sell “#1 on Google” promises. We focus on making your site easy to crawl, fast, and built for
-              conversion.)
+              If you already have Shopify, we can improve the storefront without forcing you to migrate everything. If
+              you don’t, we’ll recommend a setup based on your products, catalogue size, and shipping needs.
             </p>
           </div>
         ),
       },
+
       {
-        id: "domains-email",
-        question: "Can you help with domains and email?",
+        id: "ownership",
+        question: "Do I own the website when it’s done?",
         answer: (
           <div className="faq__answer__K4n7p">
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              Yep. We can connect an existing domain or help you buy one. Email is usually handled through Google
-              Workspace or Microsoft 365—we’ll guide the setup so it’s painless.
+              Yes—you own the website and the work delivered. If you want, we can also set it up so you control the
+              hosting accounts and repos from day one.
             </p>
           </div>
         ),
       },
+
       {
-        id: "billing",
-        question: "Do you offer custom invoicing or purchase orders?",
+        id: "support",
+        question: "What happens if something breaks or I need help later?",
         answer: (
           <div className="faq__answer__K4n7p">
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              For Enterprise (and some larger Business engagements), yes—custom invoicing and PO workflows are possible.
-              If you need a vendor form, W-8/W-9, or specific billing terms, just tell us up front.
+              You’ll always have a way to reach us. Hobby includes email support. Business includes priority support, and
+              Enterprise includes dedicated onboarding and more structured escalation paths.
             </p>
 
             <div
@@ -223,29 +324,71 @@ export function PricingSectionFAQ() {
             />
 
             <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              Best path is{" "}
-              <a href="/contact" className="typography__link__B7s3m">
-                contacting us
+              If your site is mission-critical, Business or Enterprise is the right place to be—because support is not
+              just “answers”, it’s keeping the site healthy, fast, and improving.
+            </p>
+          </div>
+        ),
+      },
+
+      {
+        id: "getting-started",
+        question: "What do you need from me to start?",
+        answer: (
+          <div className="faq__answer__K4n7p">
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              A link to your current site (if you have one), 2–3 examples of websites you like, and a short description
+              of what the website needs to achieve. If you already have a logo/brand kit, send it—if not, we’ll still
+              design something clean and consistent.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              The easiest way is to go through{" "}
+              <a href="/get-started" className="typography__link__B7s3m">
+                Get Started
+              </a>
+              .
+            </p>
+          </div>
+        ),
+      },
+
+      {
+        id: "pricing-clarity",
+        question: "Is the monthly price maintenance, or the full website build?",
+        answer: (
+          <div className="faq__answer__K4n7p">
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              The plans are structured as ongoing service tiers (maintenance + improvements). If you also want a one-time
+              “build only” project, we can do that too—and then you can decide later if you want ongoing support.
+            </p>
+
+            <div
+              className="Spacer-module__root__NM019"
+              style={{ "--height": "10px" } as CSSProperties}
+            />
+
+            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+              If you want a clean breakdown, check{" "}
+              <a href="/docs/pricing-explained" className="typography__link__B7s3m">
+                Pricing explained
               </a>{" "}
-              with what your finance team requires.
-            </p>
-          </div>
-        ),
-      },
-      {
-        id: "upgrade",
-        question: "Can I upgrade later?",
-        answer: (
-          <div className="faq__answer__K4n7p">
-            <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
-              Yes—many customers start smaller and upgrade when they want more iteration, better insights, or more
-              performance work. We’ll keep the site structure flexible so you’re not boxed in.
+              or{" "}
+              <a href="/contact" className="typography__link__B7s3m">
+                ask for a quote
+              </a>
+              .
             </p>
           </div>
         ),
       },
     ],
-    []
+    [/* stable */]
   );
 
   return (
@@ -302,7 +445,7 @@ export function PricingSectionFAQ() {
         <div className="Spacer-module__root__NM019" style={{ "--height": "24px" } as CSSProperties} />
 
         <p className="typography__small__Q9j2p" style={{ margin: 0, textAlign: "center" }}>
-          Still stuck?{" "}
+          Prefer a quick chat?{" "}
           <a href="/contact" className="typography__link__B7s3m">
             Contact us
           </a>
