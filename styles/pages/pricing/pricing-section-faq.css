@@ -9,8 +9,8 @@
   padding-top: 224px;
 }
 
-.faq__content__K9j6q {
-  border-top: 1px solid rgba(var(--color-border-primary), 1)
+.faq__content__K9j6q:last-child {
+  border-bottom: 1px solid rgba(var(--color-border-primary), 1)
 }
 
 .faq__list__L7p3s {
