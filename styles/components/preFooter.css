@@ -23,12 +23,17 @@
 }
 
 @media (max-width: 640px) {
-  .preFooter__root__Q7w3E,
+  .preFooter__root__Q7w3E {
+    flex-direction: column; 
+  }
+
   .preFooter__right__H2j5L {
     flex-direction: column; 
+    width: 100%
   }
 
   .preFooter__right__H2j5L button {
     width: 100%
+    text-align: center;
   }
 }
