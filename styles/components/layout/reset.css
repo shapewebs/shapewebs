@@ -124,6 +124,10 @@ body {
   overflow-x: hidden;
 }
 
+select:focus-visible {
+  outline: none;
+}
+
 html,
 body {
   margin: 0 !important;
