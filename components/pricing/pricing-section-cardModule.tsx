@@ -763,7 +763,7 @@ export function PricingSectionCardModule() {
 
           <p
             className="typography__subtitle__R6m2x hide"
-            style={{ margin: 0 "auto", textAlign: "center", maxWidth: "75%" }}
+            style={{ margin: "0 auto", textAlign: "center", maxWidth: "75%" }}
           >
             Built on Next.js + Vercel or Shopify for commerce.
             Upgrade to enable more insights, enhanced security and additional features.
