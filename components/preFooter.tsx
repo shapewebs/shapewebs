@@ -1,6 +1,6 @@
 export function PreFooter() {
   return (
-    <section className="">
+    <section className="section__N4k2P">
       <div className="section__content__N4k2P">
         <div className="preFooter__root__Q7w3E">
           <div className="preFooter__left__A1s9D">
