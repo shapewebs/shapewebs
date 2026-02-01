@@ -309,7 +309,7 @@ export function PricingSectionFAQ() {
 
         <div className="Spacer-module__root__NM019" style={{ "--height": "24px" } as CSSProperties} />
 
-        <p className="typography__small__Q9j2p" style={{ margin: 0, textAlign: "center" }}>
+        <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
           Prefer a quick chat?{" "}
           <a href="/contact" className="typography__link__B7s3m">
             Contact us
