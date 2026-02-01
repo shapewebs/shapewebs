@@ -286,7 +286,7 @@ export function PricingSectionFAQ() {
                   aria-controls={contentId}
                   onClick={() => setOpenId((prev) => (prev === item.id ? null : item.id))}
                 >
-                  <span className="typography__heading5__J8d3k bitCO" style={{ margin: 0, paddingLeft: 16 }}>
+                  <span className="typography__heading5__J8d3k bitCO" style={{ margin: 0 }}>
                     {item.question}
                   </span>
                   <span className="faq__chevron__Z3n7q">
@@ -309,7 +309,7 @@ export function PricingSectionFAQ() {
 
         <div className="Spacer-module__root__NM019" style={{ "--height": "32px" } as CSSProperties} />
 
-        <p className="typography__small__Q9j2p" style={{ margin: 0 }}>
+        <p className="typography__small__Q9j2p" style={{ margin: 0, paddingLeft: 16 }}>
           Prefer a quick chat?{" "}
           <a href="/contact" className="typography__link__B7s3m">
             Contact us
