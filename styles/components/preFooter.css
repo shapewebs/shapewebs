@@ -1,17 +1,26 @@
-.preFooter .content {
+.pref-footer__section__K8d2P {
+  width: 100%;
+}
+
+.pref-footer__content__T4m9X {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
 }
 
-.preFooter__title {
+.pref-footer__left__A1s3Q {
+  display: flex;
+  align-items: center;
+}
+
+.pref-footer__title__F7h2L {
+  font-weight: 700;
   margin: 0;
 }
 
-.preFooter__actions {
+.pref-footer__right__M6p4D {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-left: auto; /* ensures it hugs the right side */
 }
