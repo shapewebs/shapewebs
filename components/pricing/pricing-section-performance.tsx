@@ -729,6 +729,7 @@ export function PricingSectionPerformance() {
               </div>
                 </div>
               </div>
+            </div>
 
               {/* ✅ Tablet/phone footer (single column based on select) */}
               <div
@@ -742,7 +743,6 @@ export function PricingSectionPerformance() {
                 >
                   <PlanCtaCell planKey={selectedPlanKey} />
           </div>
-            </div>
 
           <div
             className="Spacer-module__root__NM019"
