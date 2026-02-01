@@ -6,6 +6,7 @@ import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent }
 import { createPortal } from "react-dom"
 import "@/styles/components/search-popup.css"
 import { useTheme } from "next-themes"
+import { searchPageData } from "@/lib/search-data"
 
 interface SearchItem {
   id: string
@@ -24,59 +25,16 @@ interface SearchItem {
 // Empty array for recent searches - will populate from localStorage
 const recentSearches: SearchItem[] = []
 
-// Enhanced page data with content for searching
-const pages: SearchItem[] = [
-  {
-    id: "page1",
-    title: "Home",
-    description: "Main dashboard and overview of the platform",
-    iconType: "home",
-    path: "/",
-    type: "page",
-    content:
-      "Welcome to Shapewebs. Our platform helps you create magical web solutions. Discover the platform where magical web solutions are developed. We deliver custom solutions, creating the perfect tool for your business. Professional mastery of programming languages and development tools for both client-side and server-side.",
-  },
-  {
-    id: "page2",
-    title: "Pricing",
-    description: "Pricing plans and subscription options",
-    iconType: "pricing",
-    path: "/pricing",
-    type: "page",
-    content:
-      "Choose the perfect plan for your needs. Our pricing plans include Basic, Professional, and Enterprise options with various features. Monthly and annual subscription options available. Discounts for startups and non-profits. Free trial for all plans.",
-  },
-  {
-    id: "page3",
-    title: "Method",
-    description: "Our approach and methodology",
-    iconType: "project",
-    path: "/method",
-    type: "page",
-    content:
-      "How we approach projects and deliver results. Our method includes Discovery, Strategy, Design, Development, Testing, and Launch & Support phases. We begin by understanding your goals, challenges, and requirements. This phase involves research, stakeholder interviews, and defining project scope.",
-  },
-  {
-    id: "page4",
-    title: "Docs",
-    description: "Documentation and guides",
-    iconType: "docs",
-    path: "/docs",
-    type: "page",
-    content:
-      "Comprehensive guides and references. Learn the basics and get up and running quickly. Understanding the custom CSS architecture. Explore the available UI components. Dive deeper into advanced concepts.",
-  },
-  {
-    id: "page5",
-    title: "Contact",
-    description: "Get in touch with our team",
-    iconType: "message",
-    path: "/contact",
-    type: "page",
-    content:
-      "Get in touch with our team. Send us a message. Contact Information: Email, Phone, Office, Hours. Monday - Friday: 9am - 5pm. Saturday - Sunday: Closed.",
-  },
-]
+// Enhanced page data with content for searching - using real page data
+const pages: SearchItem[] = searchPageData.map((page) => ({
+  id: page.id,
+  title: page.title,
+  description: page.description,
+  iconType: page.iconType,
+  path: page.path,
+  type: "page" as const,
+  content: page.content,
+}))
 
 // Theme options with enhanced content for better matching
 const themeOptions: SearchItem[] = [
