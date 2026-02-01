@@ -27,7 +27,6 @@
   font-size: 12px;
   line-height: 17px;
   font-weight: var(--font-weight-medium);
-  white-space: nowrap;
   max-width: 280px;
   box-shadow: var(--shadow-stack-low);
   display: flex;

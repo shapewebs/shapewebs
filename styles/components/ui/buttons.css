@@ -33,7 +33,6 @@
   fill: currentColor;
   width: var(--button-icon-size, var(--icon-size-default));
   height: var(--button-icon-size, var(--icon-size-default));
-  transform: translateY(0.5px);
   transition-property: color, opacity, transform;
 }
 
@@ -80,14 +79,14 @@
 }
 
 .button__kind-secondary__R5j2s {
-  background: rgba(var(--color-bg-quaternary), 1);
-  border: 0.5px solid rgba(var(--color-border-tertiary), 1);
+  background: rgba(var(--color-bg-tertiary), 1);
+  border: 0.5px solid rgba(var(--color-border-secondary), 1);
   color: rgba(var(--color-text-primary), 1);
   box-shadow: var(--shadow-stack-low);
 }
 
 .button__kind-secondary__R5j2s:hover {
-  background: rgba(var(--color-bg-quinary), 1);
+  background: rgba(var(--color-bg-quaternary), 1);
 }
 
 .button__kind-tertiary__R5j2s {
@@ -120,26 +119,26 @@
 }
 
 /* iOS toggle (consent) */
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m {
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m {
   display: none;
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m,
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m:after,
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m:before,
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m *,
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m *:after,
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m *:before,
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m {
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m,
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m:after,
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m:before,
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m *,
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m *:after,
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m *:before,
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m + .root__toggle-btn__T7g2m {
   box-sizing: border-box;
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m::selection,
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m::selection {
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m::selection,
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m + .root__toggle-btn__T7g2m::selection {
   background: none;
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m {
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m + .root__toggle-btn__T7g2m {
   outline: 0;
   display: block;
   width: 44px;
@@ -149,8 +148,8 @@
   user-select: none;
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m:after,
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m:before {
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m + .root__toggle-btn__T7g2m:after,
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m + .root__toggle-btn__T7g2m:before {
   position: relative;
   display: block;
   content: "";
@@ -158,39 +157,39 @@
   height: 100%;
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m:after {
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m + .root__toggle-btn__T7g2m:after {
   left: 0;
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m:before {
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m + .root__toggle-btn__T7g2m:before {
   display: none;
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m:checked + .contact__toggle-btn__T7g2m:after {
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m:checked + .root__toggle-btn__T7g2m:after {
   left: 50%;
 }
 
 /* iOS toggle (consent) */
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m {
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m {
   display: none;
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m,
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m:after,
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m:before,
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m *,
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m *:after,
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m *:before,
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m {
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m,
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m:after,
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m:before,
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m *,
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m *:after,
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m *:before,
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m + .root__toggle-btn__T7g2m {
   box-sizing: border-box;
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m::selection,
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m::selection {
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m::selection,
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m + .root__toggle-btn__T7g2m::selection {
   background: none;
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m {
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m + .root__toggle-btn__T7g2m {
   outline: 0;
   display: block;
   width: 44px;
@@ -200,8 +199,8 @@
   user-select: none;
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m:after,
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m:before {
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m + .root__toggle-btn__T7g2m:after,
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m + .root__toggle-btn__T7g2m:before {
   position: relative;
   display: block;
   content: "";
@@ -209,28 +208,28 @@
   height: 100%;
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m:after {
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m + .root__toggle-btn__T7g2m:after {
   left: 0;
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m + .contact__toggle-btn__T7g2m:before {
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m + .root__toggle-btn__T7g2m:before {
   display: none;
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle__T7g2m:checked + .contact__toggle-btn__T7g2m:after {
+.root__toggle-wrapper__T7g2m .root__toggle__T7g2m:checked + .root__toggle-btn__T7g2m:after {
   left: 50%;
 }
 
 /* iOS styling */
-.contact__toggle-wrapper__T7g2m .contact__toggle--ios__T7g2m + .contact__toggle-btn__T7g2m {
-  background: rgba(var(--color-bg-secondary), 1);
+.root__toggle-wrapper__T7g2m .root__toggle--ios__T7g2m + .root__toggle-btn__T7g2m {
+  background: rgba(var(--color-toggle), 1);
   border-radius: 999px;
   padding: 2px;
   transition: all 0.3s ease;
   border: 1px solid rgba(var(--color-border-secondary), 1);
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle--ios__T7g2m + .contact__toggle-btn__T7g2m:after {
+.root__toggle-wrapper__T7g2m .root__toggle--ios__T7g2m + .root__toggle-btn__T7g2m:after {
   border-radius: 999px;
   background: rgba(251, 251, 251, 1);
   transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
@@ -240,34 +239,34 @@
 }
 
 /* hover */
-.contact__toggle-wrapper__T7g2m .contact__toggle--ios__T7g2m + .contact__toggle-btn__T7g2m:hover:after {
+.root__toggle-wrapper__T7g2m .root__toggle--ios__T7g2m + .root__toggle-btn__T7g2m:hover:after {
   will-change: padding;
 }
 
 /* press */
-.contact__toggle-wrapper__T7g2m .contact__toggle--ios__T7g2m + .contact__toggle-btn__T7g2m:active {
+.root__toggle-wrapper__T7g2m .root__toggle--ios__T7g2m + .root__toggle-btn__T7g2m:active {
   box-shadow: inset 0 0 0 2em rgba(var(--color-border-secondary), 1);
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle--ios__T7g2m + .contact__toggle-btn__T7g2m:active:after {
+.root__toggle-wrapper__T7g2m .root__toggle--ios__T7g2m + .root__toggle-btn__T7g2m:active:after {
   padding-right: 10px;
 }
 
 /* checked */
-.contact__toggle-wrapper__T7g2m .contact__toggle--ios__T7g2m:checked + .contact__toggle-btn__T7g2m {
+.root__toggle-wrapper__T7g2m .root__toggle--ios__T7g2m:checked + .root__toggle-btn__T7g2m {
   background: var(--color-blue);
   border-color: var(--color-blue);
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle--ios__T7g2m:checked + .contact__toggle-btn__T7g2m:active {
+.root__toggle-wrapper__T7g2m .root__toggle--ios__T7g2m:checked + .root__toggle-btn__T7g2m:active {
   box-shadow: none;
 }
 
-.contact__toggle-wrapper__T7g2m .contact__toggle--ios__T7g2m:checked + .contact__toggle-btn__T7g2m:active:after {
+.root__toggle-wrapper__T7g2m .root__toggle--ios__T7g2m:checked + .root__toggle-btn__T7g2m:active:after {
   margin-left: -10px;
 }
 
 /* keyboard focus */
-.contact__toggle-wrapper__T7g2m .contact__toggle--ios__T7g2m:focus-visible + .contact__toggle-btn__T7g2m {
+.root__toggle-wrapper__T7g2m .root__toggle--ios__T7g2m:focus-visible + .root__toggle-btn__T7g2m {
   box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.25);
 }

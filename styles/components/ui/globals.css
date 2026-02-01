@@ -9,7 +9,6 @@
 @import url("./forms.css");
 @import url("../theme-toggle.css");
 @import url("./tooltip.css");
-@import url("./bento-grid.css");
 
 /* Tailwind layer directives after imports */
 @tailwind base;
@@ -70,6 +69,7 @@
   --font-size-regularPlus: clamp(0.875rem, calc(0.77083rem + 0.26042vw), 0.9375rem);
   --font-size-large: clamp(1rem, calc(0.79167rem + 0.52083vw), 1.125rem);
   --font-size-largePlus: clamp(1.125rem, calc(0.9375rem + 0.46875vw), 1.3125rem);
+  --font-size-title4: clamp(1rem, calc(0.75rem + 1.25vw), 1.5rem);
   --font-size-title3: clamp(1.5rem, calc(0.5rem + 3.125vw), 2.5rem);
   --font-size-title2: clamp(2rem, calc(-0.5rem + 6.25vw), 3.5rem);
   --font-size-title1: clamp(2.5rem, calc(-0.41667rem + 7.29167vw), 4.25rem);
