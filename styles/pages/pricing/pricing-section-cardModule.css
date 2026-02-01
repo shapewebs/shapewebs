@@ -74,6 +74,16 @@
     border-radius: 12px;
     overflow: hidden;
   }
+  .module__card__H5k8q:nth-child(1),
+  .module__card__H5k8q:nth-child(3) {
+    border-right: 1px solid rgba(var(--color-border-primary), 1);
+  }
+
+  .module__card__H5k8q:nth-child(1),
+  .module__card__H5k8q:nth-child(2) {
+    border-bottom: 1px solid rgba(var(--color-border-primary), 1);
+  }
+
 }
 
 .pricing__card-top__A1b2c {
