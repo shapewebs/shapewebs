@@ -263,7 +263,7 @@ export function PricingSectionFAQ() {
           FAQ
         </h2>
 
-        <div className="Spacer-module__root__NM019" style={{ "--height": "20px" } as CSSProperties} />
+        <div className="Spacer-module__root__NM019" style={{ "--height": "48px" } as CSSProperties} />
 
         <div className="faq__list__L7p3s" role="list">
           {faqs.map((item) => {
