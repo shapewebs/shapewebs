@@ -47,12 +47,6 @@ const planCtas: Record<
 // Lots of rows, relevant to a Vercel-hosted website (Free vs Pro vs Enterprise add-ons)
 const rows: PerfRow[] = [
   {
-    type: "category",
-    label: "Delivery network",
-    tooltip: "How your site is delivered globally: caching, routing, regions, and edge features.",
-  },
-
-  {
     type: "feature",
     label: "Vercel Delivery Network",
     tooltip: "Global delivery via Vercel’s edge network (fast + secure-by-default).",
