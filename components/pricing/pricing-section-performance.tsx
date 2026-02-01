@@ -624,6 +624,8 @@ export function PricingSectionPerformance() {
                   </div>
                 );
               })}
+                          </div>
+
 
               {/* Footer CTA row */}
               <div className="performance__row__P5k8p performance__row--footer__P5k8p" role="row">
@@ -638,7 +640,6 @@ export function PricingSectionPerformance() {
                   </div>
                 ))}
               </div>
-            </div>
           </div>
 
           <div
