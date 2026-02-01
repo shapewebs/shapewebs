@@ -521,7 +521,6 @@ function PlanCtaCell({ planKey }: { planKey: PlanKey }) {
     : "button__kind-secondary__R5j2s";
 
   return (
-    <div className="performance__ctaCell__W9k2p">
       <a
         href={cta.href}
         className={`button__root__ZxcvB button__size-medium__L9d7h pricing__cta__X1y2z ${kindClass}`}
@@ -538,7 +537,6 @@ function PlanCtaCell({ planKey }: { planKey: PlanKey }) {
           </a>
         </p>
       )}
-    </div>
   );
 }
 
