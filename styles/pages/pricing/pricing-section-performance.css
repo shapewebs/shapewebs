@@ -112,6 +112,11 @@
     border-bottom: none;
 }
 
+select.performance__select__C2d3e {
+    font-size: var(--font-size-largePlus);
+    font-weight: var(--font-weight-semibold);
+}
+
 @media (min-width: 769px) {
   .performance__cell__C2d3e[data-highlighted="true"] {
     position: relative;
