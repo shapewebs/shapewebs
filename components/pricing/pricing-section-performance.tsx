@@ -575,36 +575,31 @@ export function PricingSectionPerformance() {
               </div>
 
               {/* ✅ Tablet/phone header (single column + select) */}
-              <div
-                className="performance__row__P5k8p performance__row--header__P5k8p performance__row--single__P5k8p show-tablet"
-                role="row"
-              >
-                <div
-                  className="performance__cell__C2d3e performance__cell--header__C2d3e"
-                  role="columnheader"
-                  data-highlighted={selectedPlanKey === highlightedPlanKey ? "true" : "false"}
-                >
-                  <div className="performance__cellInner__C2d3e" style={{ width: "100%" }}>
-                    <span className="typography__emphasize__M9J2o bitC1" style={{ margin: 0 }}>
-                      {selectedPlanName}
-                    </span>
+<div
+  className="performance__row__P5k8p performance__row--header__P5k8p performance__row--single__P5k8p show-tablet"
+  role="row"
+>
+  <div
+    className="performance__cell__C2d3e performance__cell--header__C2d3e"
+    role="columnheader"
+    data-highlighted={selectedPlanKey === highlightedPlanKey ? "true" : "false"}
+  >
+    <select
+      className="performance__select__C2d3e"
+      value={selectedPlanKey}
+      onChange={(e) => setSelectedPlanKey(e.target.value as PlanKey)}
+      aria-label="Select plan"
+      style={{ width: "100%" }}
+    >
+      {planOrder.map((p) => (
+        <option key={p.key} value={p.key}>
+          {p.name}
+        </option>
+      ))}
+    </select>
+  </div>
+</div>
 
-                    <select
-                      className="performance__select__C2d3e"
-                      value={selectedPlanKey}
-                      onChange={(e) => setSelectedPlanKey(e.target.value as PlanKey)}
-                      aria-label="Select plan"
-                      style={{ marginLeft: "auto" }}
-                    >
-                      {planOrder.map((p) => (
-                        <option key={p.key} value={p.key}>
-                          {p.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Rowgroup 2: body */}
