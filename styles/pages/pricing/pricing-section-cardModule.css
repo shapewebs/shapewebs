@@ -228,7 +228,7 @@
 }
 
 @media (max-width: 640px) {
-  pricing__grid__L7p3s {
+  .pricing__grid__L7p3s {
     grid-template-columns: 1fr;
   }
 }
