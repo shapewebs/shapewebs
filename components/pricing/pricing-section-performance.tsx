@@ -729,8 +729,6 @@ export function PricingSectionPerformance() {
               </div>
                 </div>
               </div>
-            </div>
-          </div>
 
               {/* ✅ Tablet/phone footer (single column based on select) */}
               <div
@@ -749,6 +747,8 @@ export function PricingSectionPerformance() {
             style={{ "--height": "24px" } as CSSProperties}
           />
         </div>
+                    </div>
+          </div>
       </section>
     </TooltipProvider>
   );
