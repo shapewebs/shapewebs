@@ -52,6 +52,7 @@
 .faq__panelInner__C2d3e {
   overflow: hidden;
   opacity: 0;
+  padding: 0 16px;
   transform: translateY(-2px);
   transition: opacity 180ms var(--ease-out-quad), transform 180ms var(--ease-out-quad),
     padding 220ms var(--ease-out-quad);
