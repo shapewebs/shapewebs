@@ -2,12 +2,11 @@
 
 import type React from "react"
 
-import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react"
+import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, useMemo } from "react"
 import { createPortal } from "react-dom"
 import "@/styles/components/search-popup.css"
 import { useTheme } from "next-themes"
 
-// Update the interface for search items to include content for context searching
 interface SearchItem {
   id: string
   title: string
@@ -19,67 +18,28 @@ interface SearchItem {
   type: "recent" | "command" | "page" | "docs" | "theme"
   collaborators?: string[]
   timestamp?: number
-  content?: string // Add content field for full-text search
+  content?: string
 }
 
-// Empty array for recent searches - will populate from localStorage
-const recentSearches: SearchItem[] = []
+export interface SearchPageData {
+  id: string
+  title: string
+  description: string
+  path: string
+  iconType: string
+}
 
-// Enhanced page data with content for searching
-const pages: SearchItem[] = [
-  {
-    id: "page1",
-    title: "Home",
-    description: "Main dashboard and overview of the platform",
-    iconType: "home",
-    path: "/",
-    type: "page",
-    content:
-      "Welcome to Shapewebs. Our platform helps you create magical web solutions. Discover the platform where magical web solutions are developed. We deliver custom solutions, creating the perfect tool for your business. Professional mastery of programming languages and development tools for both client-side and server-side.",
-  },
-  {
-    id: "page2",
-    title: "Pricing",
-    description: "Pricing plans and subscription options",
-    iconType: "pricing",
-    path: "/pricing",
-    type: "page",
-    content:
-      "Choose the perfect plan for your needs. Our pricing plans include Basic, Professional, and Enterprise options with various features. Monthly and annual subscription options available. Discounts for startups and non-profits. Free trial for all plans.",
-  },
-  {
-    id: "page3",
-    title: "Method",
-    description: "Our approach and methodology",
-    iconType: "project",
-    path: "/method",
-    type: "page",
-    content:
-      "How we approach projects and deliver results. Our method includes Discovery, Strategy, Design, Development, Testing, and Launch & Support phases. We begin by understanding your goals, challenges, and requirements. This phase involves research, stakeholder interviews, and defining project scope.",
-  },
-  {
-    id: "page4",
-    title: "Docs",
-    description: "Documentation and guides",
-    iconType: "docs",
-    path: "/docs",
-    type: "page",
-    content:
-      "Comprehensive guides and references. Learn the basics and get up and running quickly. Understanding the custom CSS architecture. Explore the available UI components. Dive deeper into advanced concepts.",
-  },
-  {
-    id: "page5",
-    title: "Contact",
-    description: "Get in touch with our team",
-    iconType: "message",
-    path: "/contact",
-    type: "page",
-    content:
-      "Get in touch with our team. Send us a message. Contact Information: Email, Phone, Office, Hours. Monday - Friday: 9am - 5pm. Saturday - Sunday: Closed.",
-  },
+/**
+ * Only maintain metadata here.
+ * Actual searchable content is fetched from /api/search-index
+ */
+export const searchablePages: SearchPageData[] = [
+  { id: "home", title: "Home", description: "Main landing page and overview", path: "/", iconType: "home" },
+  { id: "pricing", title: "Pricing", description: "View our pricing plans and features", path: "/pricing", iconType: "pricing" },
+  { id: "contact", title: "Contact", description: "Get in touch with our team", path: "/contact", iconType: "message" },
+  { id: "docs", title: "Documentation", description: "Technical guides and documentation", path: "/docs", iconType: "docs" },
 ]
 
-// Theme options with enhanced content for better matching
 const themeOptions: SearchItem[] = [
   {
     id: "theme1",
@@ -87,7 +47,7 @@ const themeOptions: SearchItem[] = [
     description: "Switch to light mode",
     iconType: "light-theme",
     type: "theme",
-    action: () => {}, // Will be set in the component
+    action: () => { },
     content: "Light mode bright white theme day mode light appearance light color scheme",
   },
   {
@@ -96,7 +56,7 @@ const themeOptions: SearchItem[] = [
     description: "Switch to dark mode",
     iconType: "dark-theme",
     type: "theme",
-    action: () => {}, // Will be set in the component
+    action: () => { },
     content: "Dark mode night theme black dark appearance dark color scheme",
   },
   {
@@ -105,20 +65,17 @@ const themeOptions: SearchItem[] = [
     description: "Use your system preferences",
     iconType: "system-theme",
     type: "theme",
-    action: () => {}, // Will be set in the component
+    action: () => { },
     content: "System theme automatic mode follow device settings system appearance system color scheme",
   },
 ]
-
-// Combine all items for search
-const allItems = [...pages]
 
 interface SearchPopupProps {
   isOpen: boolean
   onClose: () => void
 }
 
-// Function to render icon based on iconType
+// Function to render icon based on iconType (unchanged)
 const renderIcon = (iconType: string) => {
   switch (iconType) {
     case "tag":
@@ -196,18 +153,6 @@ const renderIcon = (iconType: string) => {
           />
         </svg>
       )
-    case "about":
-      return (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M13 16H12V12H11M12 8H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      )
     case "pricing":
       return (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -239,56 +184,16 @@ const renderIcon = (iconType: string) => {
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-          <path
-            d="M15 6.5L17.5 9.5"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M17.5 14.5L15 17.5"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M9 17.5L6.5 14.5"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M6.5 9.5L9 6.5"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      )
-    case "project":
-      return (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M3 5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5Z"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          />
-          <path d="M3 9H21" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M9 21V9" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M15 6.5L17.5 9.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M17.5 14.5L15 17.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M9 17.5L6.5 14.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M6.5 9.5L9 6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       )
     case "light-theme":
       return (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          />
+          <path d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z" stroke="currentColor" strokeWidth="1.5" />
           <path d="M12 1V3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           <path d="M12 21V23" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           <path d="M4.22 4.22L5.64 5.64" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -342,22 +247,13 @@ const renderIcon = (iconType: string) => {
   }
 }
 
-// Helper function to highlight matched text
 const highlightMatch = (text: string, query: string) => {
   if (!query.trim()) return text
-
-  // Escape special regex characters in the query
   const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-
-  // Create a regex that's case insensitive
   const regex = new RegExp(`(${escapedQuery})`, "gi")
-
-  // Split the text by the regex
   const parts = text.split(regex)
 
-  // Return the text with highlighted parts
   return parts.map((part, i) => {
-    // Check if this part matches the query (case insensitive)
     if (part.toLowerCase() === query.toLowerCase()) {
       return (
         <span key={i} className="search-popup__highlight__H7j3s">
@@ -369,43 +265,38 @@ const highlightMatch = (text: string, query: string) => {
   })
 }
 
-// Function to extract context around a match
+// ✅ Context now operates on a SINGLE ELEMENT BLOCK string
 const extractContext = (text: string, query: string, contextLength = 50) => {
   if (!text || !query.trim()) return ""
 
   const lowerText = text.toLowerCase()
   const lowerQuery = query.toLowerCase()
   const index = lowerText.indexOf(lowerQuery)
-
   if (index === -1) return ""
 
-  // Calculate start and end positions for context
   let start = Math.max(0, index - contextLength)
   let end = Math.min(text.length, index + query.length + contextLength)
 
-  // Adjust to not cut words
   if (start > 0) {
-    // Find the first space before the start
     const spaceBeforeStart = text.lastIndexOf(" ", start)
-    if (spaceBeforeStart !== -1) {
-      start = spaceBeforeStart + 1
-    }
+    if (spaceBeforeStart !== -1) start = spaceBeforeStart + 1
   }
 
   if (end < text.length) {
-    // Find the first space after the end
     const spaceAfterEnd = text.indexOf(" ", end)
-    if (spaceAfterEnd !== -1) {
-      end = spaceAfterEnd
-    }
+    if (spaceAfterEnd !== -1) end = spaceAfterEnd
   }
 
-  // Add ellipsis if needed
   let result = text.substring(start, end)
   if (start > 0) result = "..." + result
   if (end < text.length) result = result + "..."
-
   return result
+}
+
+type ApiSearchIndexResponse = {
+  entries: { path: string; blocks: string[] }[]
+  cached?: boolean
+  error?: string
 }
 
 export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
@@ -415,16 +306,33 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
   const [searchResults, setSearchResults] = useState<SearchItem[]>([])
   const [selectedItemIndex, setSelectedItemIndex] = useState(0)
   const [recentSearchItems, setRecentSearchItems] = useState<SearchItem[]>([])
-  // Add a new state variable to track keyboard navigation mode
   const [keyboardNavActive, setKeyboardNavActive] = useState(false)
 
-  // Get theme functions
-  const { theme, setTheme } = useTheme()
+  // ✅ page blocks (element-level)
+  const [pageBlocksByPath, setPageBlocksByPath] = useState<Record<string, string[]>>({})
+
+  const { setTheme } = useTheme()
 
   const inputRef = useRef<HTMLInputElement>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
   const resultsRef = useRef<HTMLDivElement>(null)
   const selectedItemRef = useRef<HTMLDivElement>(null)
+
+  // Build pages list with content injected (joined blocks for matching)
+  const pages: SearchItem[] = useMemo(() => {
+    return searchablePages.map((page) => {
+      const blocks = pageBlocksByPath[page.path] ?? []
+      return {
+        id: page.id,
+        title: page.title,
+        description: page.description,
+        iconType: page.iconType,
+        path: page.path,
+        type: "page" as const,
+        content: blocks.join("\n"),
+      }
+    })
+  }, [pageBlocksByPath])
 
   // Load recent searches from localStorage on mount
   useEffect(() => {
@@ -433,7 +341,6 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
         const storedSearches = localStorage.getItem("recentSearches")
         if (storedSearches) {
           const parsedSearches = JSON.parse(storedSearches) as SearchItem[]
-          // Sort by timestamp (newest first) and limit to 3
           const sortedSearches = parsedSearches.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0)).slice(0, 3)
           setRecentSearchItems(sortedSearches)
         }
@@ -443,23 +350,43 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
     }
   }, [])
 
-  // Add a new function to save a search item to recent searches
-  const addToRecentSearches = (item: SearchItem) => {
-    // Create a copy with current timestamp
-    const itemWithTimestamp = {
-      ...item,
-      timestamp: Date.now(),
+  // Fetch blocks when popup opens
+  useEffect(() => {
+    if (!isOpen) return
+
+    let cancelled = false
+
+      ; (async () => {
+        try {
+          const res = await fetch("/api/search-index")
+          const data = (await res.json()) as ApiSearchIndexResponse
+
+          if (cancelled) return
+          if (!res.ok || data.error) {
+            console.error("Search index error:", data.error || res.statusText)
+            return
+          }
+
+          const map: Record<string, string[]> = {}
+          for (const entry of data.entries) {
+            map[entry.path] = entry.blocks
+          }
+          setPageBlocksByPath(map)
+        } catch (err) {
+          if (!cancelled) console.error("Failed to load search index:", err)
+        }
+      })()
+
+    return () => {
+      cancelled = true
     }
+  }, [isOpen])
 
-    // Filter out any existing item with the same id
+  const addToRecentSearches = (item: SearchItem) => {
+    const itemWithTimestamp = { ...item, timestamp: Date.now() }
     const filteredItems = recentSearchItems.filter((search) => search.id !== item.id)
-
-    // Add new item to the beginning, limit to 3 items
     const newRecentSearches = [itemWithTimestamp, ...filteredItems].slice(0, 3)
-
     setRecentSearchItems(newRecentSearches)
-
-    // Save to localStorage
     try {
       localStorage.setItem("recentSearches", JSON.stringify(newRecentSearches))
     } catch (error) {
@@ -467,7 +394,7 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
     }
   }
 
-  // Enhanced search functionality
+  // Search functionality (snippets from same block only)
   useEffect(() => {
     if (searchQuery.trim() === "") {
       setSearchResults([])
@@ -475,10 +402,8 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
       return
     }
 
-    // Simple search implementation
     const query = searchQuery.toLowerCase().trim()
 
-    // Create theme options with current theme functions
     const themeItems = themeOptions.map((item) => ({
       ...item,
       action: () => {
@@ -488,35 +413,32 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
       },
     }))
 
-    // Search in all content
     const results: SearchItem[] = []
 
-    // First check regular pages
     pages.forEach((item) => {
-      // Check title, description, and content
-      if (
-        item.title.toLowerCase().includes(query) ||
-        item.description.toLowerCase().includes(query) ||
-        (item.content && item.content.toLowerCase().includes(query))
-      ) {
-        // For pages, add context to the description if match is in content
-        if (item.content && item.content.toLowerCase().includes(query)) {
-          const context = extractContext(item.content, query)
-          if (context) {
-            // Create a copy with the context as description
-            results.push({
-              ...item,
-              description: context,
-            })
-            return
-          }
+      const titleHit = item.title.toLowerCase().includes(query)
+      const descHit = item.description.toLowerCase().includes(query)
+
+      // ✅ Find the FIRST matching block on that page
+      const blocks = item.path ? pageBlocksByPath[item.path] ?? [] : []
+      const matchingBlock = blocks.find((b) => b.toLowerCase().includes(query))
+
+      const contentHit = Boolean(matchingBlock)
+
+      if (titleHit || descHit || contentHit) {
+        if (matchingBlock) {
+          const context = extractContext(matchingBlock, query)
+          results.push({
+            ...item,
+            // ✅ snippet from within SAME element only
+            description: context || matchingBlock,
+          })
+        } else {
+          results.push(item)
         }
-        // If no content match or no context, add the original item
-        results.push(item)
       }
     })
 
-    // Then check theme options and add them at the end
     const matchingThemeItems = themeItems.filter((item) => {
       return (
         item.title.toLowerCase().includes(query) ||
@@ -525,48 +447,33 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
       )
     })
 
-    // Add matching theme items
     results.push(...matchingThemeItems)
 
     setSearchResults(results)
     setSelectedItemIndex(0)
-  }, [searchQuery, recentSearchItems, setTheme])
+  }, [searchQuery, recentSearchItems, setTheme, pages, pageBlocksByPath])
 
-  // Get all visible items based on the current state
   const getVisibleItems = () => {
-    if (searchQuery.trim() !== "") {
-      return searchResults
-    } else {
-      // When no search query, we show both recent searches and regular items
-      return [...recentSearchItems, ...pages]
-    }
+    if (searchQuery.trim() !== "") return searchResults
+    return [...recentSearchItems, ...pages]
   }
 
   const visibleItems = getVisibleItems()
 
-  // Update the useEffect to handle animation timing and reset selection
   useEffect(() => {
     setMounted(true)
 
-    // When the popup is opened, focus the input and reset animation state
     if (isOpen && inputRef.current) {
       setAnimatingOut(false)
       setSearchQuery("")
       setSelectedItemIndex(0)
 
-      // Small delay to ensure the animation completes before focusing
-      // This helps prevent issues with mobile keyboards appearing during animations
       setTimeout(() => {
-        // Only focus on desktop or larger tablets
-        // This prevents the mobile keyboard from automatically appearing on phones
         const isMobileDevice = window.innerWidth < 768 && "ontouchstart" in window
-        if (!isMobileDevice) {
-          inputRef.current?.focus()
-        }
+        if (!isMobileDevice) inputRef.current?.focus()
       }, 100)
     }
 
-    // Add escape key listener
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") handleClose()
     }
@@ -575,103 +482,75 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
     return () => window.removeEventListener("keydown", handleEscape)
   }, [isOpen, recentSearchItems.length])
 
-  // Scroll selected item into view when it changes
   useEffect(() => {
     if (selectedItemRef.current) {
-      selectedItemRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-      })
+      selectedItemRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" })
     }
   }, [selectedItemIndex])
 
-  // Create a handleClose function to manage the animation out
   const handleClose = () => {
     if (!animatingOut) {
       setAnimatingOut(true)
-      // Wait for animation to complete before actually closing
       setTimeout(() => {
         onClose()
         setAnimatingOut(false)
-      }, 300) // Match this to the animation duration
+      }, 300)
     }
   }
 
-  // Handle overlay click (to close)
   const handleOverlayClick = (e: React.MouseEvent) => {
-    // Make sure we're actually clicking the overlay and not a child element
     if (e.target === overlayRef.current) {
-      e.preventDefault() // Prevent any default behavior
+      e.preventDefault()
       handleClose()
     }
   }
 
-  // Handle input change
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value)
   }
 
-  // Fixed keyboard navigation
+  const regularResults = searchResults.filter((item) => item.type !== "theme")
+  const themeResults = searchResults.filter((item) => item.type === "theme")
+
   const handleKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
     const recentItemsCount = recentSearchItems.length
     const regularItemsCount = searchQuery.trim() === "" ? pages.length : regularResults.length
     const themeItemsCount = searchQuery.trim() === "" ? 0 : themeResults.length
     const totalItems = recentItemsCount + regularItemsCount + themeItemsCount
 
-    // Set keyboard navigation active when arrow keys are used
-    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-      setKeyboardNavActive(true)
-    }
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") setKeyboardNavActive(true)
 
     switch (e.key) {
       case "ArrowDown":
         e.preventDefault()
-        if (selectedItemIndex < totalItems - 1) {
-          setSelectedItemIndex(selectedItemIndex + 1)
-        }
-        // No else clause here - this prevents wrapping back to the top
+        if (selectedItemIndex < totalItems - 1) setSelectedItemIndex(selectedItemIndex + 1)
         break
-
       case "ArrowUp":
         e.preventDefault()
-        if (selectedItemIndex > 0) {
-          setSelectedItemIndex(selectedItemIndex - 1)
-        }
-        // No else clause here - this prevents wrapping to the bottom
+        if (selectedItemIndex > 0) setSelectedItemIndex(selectedItemIndex - 1)
         break
-
       case "Enter":
         e.preventDefault()
         if (visibleItems.length > 0) {
-          // Find the correct item based on the selected index
-          let selectedItem
+          let selectedItem: SearchItem | undefined
 
           if (searchQuery.trim() === "") {
-            // When showing recent searches + regular items
-            if (selectedItemIndex < recentItemsCount) {
-              selectedItem = recentSearchItems[selectedItemIndex]
-            } else {
-              selectedItem = pages[selectedItemIndex - recentItemsCount]
-            }
+            selectedItem =
+              selectedItemIndex < recentItemsCount
+                ? recentSearchItems[selectedItemIndex]
+                : pages[selectedItemIndex - recentItemsCount]
           } else {
-            // When showing search results
-            if (selectedItemIndex < regularResults.length) {
-              selectedItem = regularResults[selectedItemIndex]
-            } else {
-              selectedItem = themeResults[selectedItemIndex - regularResults.length]
-            }
+            selectedItem =
+              selectedItemIndex < regularResults.length
+                ? regularResults[selectedItemIndex]
+                : themeResults[selectedItemIndex - regularResults.length]
           }
 
           if (selectedItem) {
-            // Add to recent searches
             addToRecentSearches(selectedItem)
-
-            // Start closing animation first
             setAnimatingOut(true)
 
-            // For theme changes, ensure the action happens immediately
             if (selectedItem.type === "theme") {
-              // Execute theme change immediately
               if (selectedItem.action) {
                 try {
                   selectedItem.action()
@@ -679,20 +558,13 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
                   console.error("Error changing theme:", error)
                 }
               }
-
-              // Then handle closing
               setTimeout(() => {
                 onClose()
                 setAnimatingOut(false)
               }, 300)
             } else {
-              // For non-theme actions, handle normally
-              if (selectedItem.action) {
-                selectedItem.action()
-              } else if (selectedItem.path) {
-                window.location.href = selectedItem.path
-              }
-              // Complete the closing process
+              if (selectedItem.action) selectedItem.action()
+              else if (selectedItem.path) window.location.href = selectedItem.path
               setTimeout(() => {
                 onClose()
                 setAnimatingOut(false)
@@ -701,8 +573,6 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
           }
         }
         break
-
-      // Handle cmd+k for closing
       case "k":
         if (e.metaKey || e.ctrlKey) {
           e.preventDefault()
@@ -712,22 +582,15 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
     }
   }
 
-  // Add a function to handle mouse enter that disables keyboard navigation mode
   const handleMouseEnter = (index: number) => {
     setSelectedItemIndex(index)
     setKeyboardNavActive(false)
   }
 
-  // Update the early return condition to check for animatingOut
   if (!mounted || (!isOpen && !animatingOut)) return null
 
-  // Determine if we're showing Mac or Windows keyboard shortcuts
   const isMacOS = typeof navigator !== "undefined" ? navigator.platform.toUpperCase().indexOf("MAC") >= 0 : false
   const cmdKey = isMacOS ? "⌘" : "Ctrl+"
-
-  // Split items into regular results and theme results
-  const regularResults = searchResults.filter((item) => item.type !== "theme")
-  const themeResults = searchResults.filter((item) => item.type === "theme")
 
   return createPortal(
     <div
@@ -766,11 +629,9 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
 
         <div className="command-palette__divider__P5k8q"></div>
 
-        {/* Command palette content */}
         <div className="command-palette__content__Z3k7q" ref={resultsRef}>
           {searchQuery.trim() === "" ? (
             <>
-              {/* Only show recent searches section if there are items */}
               {recentSearchItems.length > 0 && (
                 <>
                   <div className="command-palette__section__P5k8q">
@@ -781,9 +642,8 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
                       {recentSearchItems.map((item, index) => (
                         <div
                           key={item.id}
-                          className={`command-palette__result-item__H5k8q ${
-                            selectedItemIndex === index ? "command-palette__result-selected__P9k6p" : ""
-                          } ${keyboardNavActive ? "keyboard-nav-active" : ""}`}
+                          className={`command-palette__result-item__H5k8q ${selectedItemIndex === index ? "command-palette__result-selected__P9k6p" : ""
+                            } ${keyboardNavActive ? "keyboard-nav-active" : ""}`}
                           onClick={() => {
                             if (item.action) item.action()
                             else if (item.path) window.location.href = item.path
@@ -815,9 +675,8 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
                     return (
                       <div
                         key={item.id}
-                        className={`command-palette__result-item__H5k8q ${
-                          selectedItemIndex === actualIndex ? "command-palette__result-selected__P9k6p" : ""
-                        } ${keyboardNavActive ? "keyboard-nav-active" : ""}`}
+                        className={`command-palette__result-item__H5k8q ${selectedItemIndex === actualIndex ? "command-palette__result-selected__P9k6p" : ""
+                          } ${keyboardNavActive ? "keyboard-nav-active" : ""}`}
                         onClick={() => {
                           if (item.path) window.location.href = item.path
                           handleClose()
@@ -838,27 +697,21 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
             </>
           ) : searchResults.length > 0 ? (
             <div className="command-palette__section__P5k8q">
-              {/* Show regular results first without a header */}
               {regularResults.length > 0 && (
                 <div className="command-palette__results-list__Q7p3s">
                   {regularResults.map((item, index) => (
                     <div
                       key={item.id}
-                      className={`command-palette__result-item__H5k8q ${
-                        selectedItemIndex === index ? "command-palette__result-selected__P9k6p" : ""
-                      } ${keyboardNavActive ? "keyboard-nav-active" : ""}`}
+                      className={`command-palette__result-item__H5k8q ${selectedItemIndex === index ? "command-palette__result-selected__P9k6p" : ""
+                        } ${keyboardNavActive ? "keyboard-nav-active" : ""}`}
                       onClick={() => {
                         addToRecentSearches(item)
-                        // Start closing animation first
                         setAnimatingOut(true)
 
                         setTimeout(() => {
-                          if (item.action) {
-                            item.action()
-                          } else if (item.path) {
-                            window.location.href = item.path
-                          }
-                          // Complete the closing process
+                          if (item.action) item.action()
+                          else if (item.path) window.location.href = item.path
+
                           setTimeout(() => {
                             onClose()
                             setAnimatingOut(false)
@@ -882,12 +735,10 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
                 </div>
               )}
 
-              {/* Add divider if we have both regular results and theme results */}
               {regularResults.length > 0 && themeResults.length > 0 && (
                 <div className="command-palette__divider__P5k8q" style={{ margin: "8px 0" }}></div>
               )}
 
-              {/* Show theme results below with a header */}
               {themeResults.length > 0 && (
                 <>
                   <div className="command-palette__section-header__L7j3s">
@@ -899,14 +750,11 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
                       return (
                         <div
                           key={item.id}
-                          className={`command-palette__result-item__H5k8q ${
-                            selectedItemIndex === actualIndex ? "command-palette__result-selected__P9k6p" : ""
-                          } ${keyboardNavActive ? "keyboard-nav-active" : ""}`}
+                          className={`command-palette__result-item__H5k8q ${selectedItemIndex === actualIndex ? "command-palette__result-selected__P9k6p" : ""
+                            } ${keyboardNavActive ? "keyboard-nav-active" : ""}`}
                           onClick={() => {
-                            // First add to recent searches
                             addToRecentSearches(item)
 
-                            // Execute the theme change immediately to ensure it happens
                             if (item.action) {
                               try {
                                 item.action()
@@ -915,10 +763,7 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
                               }
                             }
 
-                            // Then start the animation out
                             setAnimatingOut(true)
-
-                            // Complete the closing process after animation
                             setTimeout(() => {
                               onClose()
                               setAnimatingOut(false)
@@ -983,38 +828,14 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
           <div className="command-palette__footer-item-up__L9k6p">
             <div className="command-palette__footer-icon__B7j3s">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M12 19L12 5"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M5 12L12 5L19 12"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+                <path d="M12 19L12 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M5 12L12 5L19 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
             <div className="command-palette__footer-icon__B7j3s">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M12 5L12 19"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M19 12L12 19L5 12"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+                <path d="M12 5L12 19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M19 12L12 19L5 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
             <div className="command-palette__footer-text__P5k8q">navigate</div>
@@ -1022,13 +843,7 @@ export function SearchPopup({ isOpen, onClose }: SearchPopupProps) {
           <div className="command-palette__footer-item-open__Z7j3s">
             <div className="command-palette__footer-badge__Z7j3s">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M9 10L4 15L9 20"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+                <path d="M9 10L4 15L9 20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 <path
                   d="M4 15H16C18.7614 15 21 12.7614 21 10C21 7.23858 18.7614 5 16 5H11"
                   stroke="currentColor"

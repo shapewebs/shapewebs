@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     icon: "/favicon.svg",   // modern browsers
     apple: "/favicon.png",  // iOS devices
   },
-    generator: 'v0.app'
+  generator: 'v0.app'
 }
 
 export default function RootLayout({
@@ -32,7 +32,7 @@ export default function RootLayout({
           <div className="Fixed__mask__root__w0Cpa" aria-hidden="true"></div>
           <div className="layout__wrapper__H9k4s">
             <Header />
-            <main className="layout__main__Z7j3p">
+            <main className="layout__main__Z7j3p" data-search-scope>
               {children}
             </main>
             <Footer />

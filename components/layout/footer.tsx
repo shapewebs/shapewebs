@@ -233,14 +233,6 @@ export function Footer() {
             <ul className="footer__list__Z3n7q">
               <li className="footer__list-item__P5j8s">
                 <Link
-                  href="/api"
-                  className={`footer__link__L9k4r ${isActive("/api") ? "footer__link-active__K3n7q" : ""}`}
-                >
-                  API
-                </Link>
-              </li>
-              <li className="footer__list-item__P5j8s">
-                <Link
                   href="/status"
                   className={`footer__link__L9k4r ${isActive("/status") ? "footer__link-active__K3n7q" : ""}`}
                 >
