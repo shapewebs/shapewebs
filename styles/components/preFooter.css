@@ -18,7 +18,7 @@
 .preFooter__right__H2j5L {
   display: flex;
   align-items: center;
-  gap: 12px; /* buttons next to each other */
+  gap: 12px; 
   flex-shrink: 0;
 }
 
