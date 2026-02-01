@@ -134,3 +134,7 @@
     border-bottom-right-radius: 12px;
   }
 }
+
+.performance__row--single__P5k8p {
+  grid-template-columns: 1fr;
+}
