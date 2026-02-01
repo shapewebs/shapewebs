@@ -29,30 +29,19 @@ const FREE = { hobby: true, plus: true, business: true, enterprise: true } as co
 const PRO_ONLY = { hobby: false, plus: false, business: true, enterprise: true } as const;
 const ENT_ONLY = { hobby: false, plus: false, business: false, enterprise: true } as const;
 
-// CTA config (matches cards behavior)
+// CTA config
 const planCtas: Record<
   PlanKey,
   {
     href: string;
     label: string;
-    // if true => primary button for highlighted plan
-    kind: "primary" | "secondary";
     showAltSalesLink?: boolean;
-    altSalesHref?: string;
-    altSalesLabel?: string;
   }
 > = {
-  hobby: { href: "/get-started", label: "Get Started", kind: "secondary" },
-  plus: { href: "/get-started", label: "Get Started", kind: "secondary" },
-  business: {
-    href: "/get-started",
-    label: "Get Started",
-    kind: "primary",
-    showAltSalesLink: true,
-    altSalesHref: "/contact",
-    altSalesLabel: "Contact sales",
-  },
-  enterprise: { href: "/contact", label: "Talk to sales", kind: "secondary" },
+  hobby: { href: "/get-started", label: "Get Started" },
+  plus: { href: "/get-started", label: "Get Started" },
+  business: { href: "/get-started", label: "Get Started", showAltSalesLink: true },
+  enterprise: { href: "/contact", label: "Talk to sales" },
 };
 
 // Lots of rows, relevant to a Vercel-hosted website (Free vs Pro vs Enterprise add-ons)
@@ -525,24 +514,27 @@ function FeatureCell({
 
 function PlanCtaCell({ planKey }: { planKey: PlanKey }) {
   const cta = planCtas[planKey];
-  const kindClass =
-    cta.kind === "primary" ? "button__kind-primary__R5j2s" : "button__kind-secondary__R5j2s";
+  const isHighlighted = planKey === highlightedPlanKey;
+
+  const kindClass = isHighlighted
+    ? "button__kind-primary__R5j2s"
+    : "button__kind-secondary__R5j2s";
 
   return (
     <div className="performance__ctaCell__W9k2p">
       <a
         href={cta.href}
-        className={`button__root__ZxcvB ${kindClass} button__size-medium__L9d7h performance__ctaButton__X1y2z`}
+        className={`button__root__ZxcvB button__size-medium__L9d7h pricing__cta__X1y2z ${kindClass}`}
         style={{ width: "100%", justifyContent: "center" }}
       >
         <span>{cta.label}</span>
       </a>
 
-      {cta.showAltSalesLink && cta.altSalesHref && (
-        <p className="typography__small__Q9j2p performance__ctaAlt__P5k8p" style={{ margin: 0 }}>
+      {isHighlighted && cta.showAltSalesLink && (
+        <p className="typography__small__Q9j2p pricing__alt__P5k8p" style={{ margin: 0 }}>
           or{" "}
-          <a href={cta.altSalesHref} className="typography__link__B7s3m">
-            {cta.altSalesLabel ?? "Contact sales"}
+          <a href="/contact" className="typography__link__B7s3m">
+            Talk to sales
           </a>
         </p>
       )}
@@ -591,7 +583,6 @@ export function PricingSectionPerformance() {
                       role="row"
                     >
                       {planOrder.map((p, cellIdx) => {
-                        // Category label lives in the first column; the rest are empty cells
                         if (cellIdx === 0) {
                           return (
                             <div
@@ -640,12 +631,12 @@ export function PricingSectionPerformance() {
                 );
               })}
 
-              {/* CTA row (bottom of table) */}
-              <div className="performance__row__P5k8p performance__row--cta__P5k8p" role="row">
+              {/* Footer CTA row */}
+              <div className="performance__row__P5k8p performance__row--footer__P5k8p" role="row">
                 {planOrder.map((p) => (
                   <div
-                    key={`cta-${p.key}`}
-                    className="performance__cell__C2d3e performance__cell--cta__C2d3e"
+                    key={`footer-${p.key}`}
+                    className="performance__cell__C2d3e performance__cell--footer__C2d3e"
                     role="cell"
                     data-highlighted={p.key === highlightedPlanKey ? "true" : "false"}
                   >
