@@ -7,7 +7,6 @@ import { createPortal } from "react-dom"
 import "@/styles/components/search-popup.css"
 import { useTheme } from "next-themes"
 
-// Update the interface for search items to include content for context searching
 interface SearchItem {
   id: string
   title: string
