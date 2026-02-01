@@ -21,3 +21,14 @@
   gap: 12px; /* buttons next to each other */
   flex-shrink: 0;
 }
+
+@media (max-width: 640px) {
+  .preFooter__root__Q7w3E,
+  .preFooter__right__H2j5L {
+    flex-direction: column; 
+  }
+
+  .preFooter__right__H2j5L button {
+    width: 100%
+  }
+}
