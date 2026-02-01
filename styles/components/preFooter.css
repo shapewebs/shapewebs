@@ -1,12 +1,15 @@
-.preFooter__root__Q7w3E {
-  width: 100%;
+.section__content__N4k2P {
+  max-width: calc(var(--system-max-width) + (var(--system-padding) * 2));
+  padding-inline: var(--system-padding);
+  margin: 0 auto;
+  padding-top: 214px;
 }
 
-.preFooter__content__N4k2P {
-  display: flex;
+.preFooter__root__Q7w3E {
+    display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 24px;  
 }
 
 .preFooter__left__A1s9D {
